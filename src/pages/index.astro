@@ -1,55 +1,110 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Card from "../components/Card.astro";
-import { Image } from 'astro:assets';
-import myImportedImage from '../images/customised_pattern.png';
+import StarTrekText from "../components/StarTrekText.astro";
+import { Image } from "astro:assets";
+import myImportedImage from "../images/customised_pattern.png";
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout>
 	<main>
-		<svg
+		<!--<svg
 			width="128"
 			height="128"
 			viewBox="0 0 128 128"
 			fill="none"
 			xmlns="http://www.w3.org/2000/svg"
 		>
-			<rect width="128" height="128" fill="black"></rect>
 			<path
 				d="M11.2158 97.8293L83.5018 29.1888C84.0264 28.6978 84.8321 29.2454 84.6072 29.9063L73.1217 62.2909C72.9531 62.7631 73.309 63.2541 73.7963 63.2541L117.321 63.103C118.033 63.103 118.258 64.0473 117.64 64.3871L81.9654 83.3459C81.4221 83.6291 81.4782 84.4221 82.0215 84.6488L113.911 97.6782C114.605 97.9614 114.399 98.9811 113.649 98.9811L11.6842 99C11.0659 99 10.7661 98.2636 11.2158 97.8293Z"
 				fill="#FC1447"></path>
-		</svg>
+		</svg> -->
 
-		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
-		<p class="instructions">
-			To get started, open the directory <code>src/pages</code> in your project.<br
-			/>
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message
-			above.
-		</p>
-		<ul role="list" class="link-card-grid">
+		<StarTrekText as="h1" class="bg-h1">
+			Primego
+		</StarTrekText>
+
+		<article>
+			<h1>
+				<StarTrekText as="h1">
+					H1. <br />
+					Вертикальные отступы
+				</StarTrekText>
+			</h1>
+			<blockquote>
+				<h5>H5. Закон Хика</h5>
+				<h5>H5. Закон Хика</h5>
+			</blockquote>
+			<p>
+				Если разобрать макет или страницу сайта по элементам
+				и посмотреть на вертикальные отступы между ними, вырисовываются
+				закономерности. Разных по высоте вертикальных отступов не так
+				уж и много на отдельно взятом сайте. Например, на главной
+				Яндекса их всего 4. На странице продукта Apple — 8.
+			</p>
+			<button>Label</button>
+			<h2>H2. Как устроена система</h2>
+			<p>
+				Все элементы страницы группируются в блоки. Блоки выстраиваются
+				по правилам, которые придумал дизайнер. Вертикальные отступы
+				разделены по уровням. Первый уровень — самый невысокий отступ.
+				Пример: Отступ вторго уровня(16px), ставлю между двумя кнопками
+				или заголовком h3 и параграфом. Отступ шестого уровня(48px)
+				отбивает два таких блока. И так далее.
+			</p>
+			<button>Label</button><button>+ Label</button>
+			<h3>
+				H3. Закон Хика и геометрическая прогрессия для определения
+				расстояний
+			</h3>
+			<p>
+				Чем больше количество вариантов, тем сложнее сделать выбор. –
+				Закон Хика
+			</p>
+			<ul>
+				<li>
+					Чтобы создать устойчивую систему, которая упрощает выбор,
+					нужно использовать минимально необходимое количество
+					вариантов.
+				</li>
+				<li>
+					Все расстояния должны быть кратны базовому числу сетки,
+					например, в моём случае, 8. Значит, я могу выбрать любые
+					значения из этого ряда: 2, 4, 8, 12, 16, 20, 24, 28...
+				</li>
+				<li>
+					Обычно 4–5 вариантов будет достаточно даже для сложных
+					продуктов. Но если вам действительно нужно, то можно выбрать
+					дополнительные значения.
+				</li>
+				<li>
+					Я решила выбрать первые три значения, полученные с помощью
+					геометрической прогрессии. Итак, я получила следующие цифры:
+					2, 4, 8
+				</li>
+			</ul>
+			<img src="https://placehold.co/588x396" alt="" />
+			<h4>H4. Закон Хика</h4>
+			<p>
+				Чем больше количество вариантов, тем сложнее сделать выбор.
+				Чтобы создать устойчивую систему, которая упрощает выбор, нужно
+				использовать минимально необходимое количество вариантов.
+			</p>
+			<h5>H5. Закон Хика</h5>
+			<p>
+				Чем больше количество вариантов, тем сложнее сделать выбор.
+				Чтобы создать устойчивую систему, которая упрощает выбор, нужно
+				использовать минимально необходимое количество вариантов.
+			</p>
+		</article>
+		<!-- <ul role="list" class="link-card-grid">
 			<Card
 				href="https://docs.astro.build/"
 				title="Documentation"
 				body="Learn how Astro works and explore the official API docs."
 			/>
-			<Card
-				href="https://astro.build/integrations/"
-				title="Integrations"
-				body="Supercharge your project with new frameworks and libraries."
-			/>
-			<Card
-				href="https://astro.build/themes/"
-				title="Themes"
-				body="Explore a galaxy of community-built starter themes."
-			/>
-			<Card
-				href="https://astro.build/chat/"
-				title="Community"
-				body="Come say hi to our amazing Discord community. ❤️"
-			/>
-		</ul>
-		<svg
+		</ul> -->
+		<!-- <svg
 			width="859"
 			height="610"
 			viewBox="0 0 859 610"
@@ -165,68 +220,33 @@ import myImportedImage from '../images/customised_pattern.png';
 			width="1030"
 			height="596" 
 			src={myImportedImage} 
-			alt="descriptive text" />
+			alt="descriptive text" /> -->
 	</main>
 </Layout>
 
 <style>
-	main {
-		margin: auto;
-		padding: 1rem;
-		width: 800px;
-		max-width: calc(100% - 2rem);
-		color: white;
-		font-size: 20px;
-		line-height: 1.6;
-	}
-	.astro-a {
+	.bg-h1 {
+		font-size: 53vw;
+		margin: 0;
 		position: absolute;
-		top: -32px;
-		left: 50%;
-		transform: translatex(-50%);
-		width: 220px;
-		height: auto;
-		z-index: -1;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100vh;
+		overflow: hidden;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+        mix-blend-mode: color;
 	}
-	h1 {
-		font-size: 4rem;
-		font-weight: 700;
-		line-height: 1;
-		text-align: center;
-		margin-bottom: 1em;
+
+	main {
+		max-width: 1920px;
+		margin: 0 auto;
 	}
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-	.instructions {
-		margin-bottom: 2rem;
-		border: 1px solid rgba(var(--accent-light), 25%);
-		background: linear-gradient(
-			rgba(var(--accent-dark), 66%),
-			rgba(var(--accent-dark), 33%)
-		);
-		padding: 1.5rem;
-		border-radius: 8px;
-	}
-	.instructions code {
-		font-size: 0.8em;
-		font-weight: bold;
-		background: rgba(var(--accent-light), 12%);
-		color: rgb(var(--accent-light));
-		border-radius: 4px;
-		padding: 0.3em 0.4em;
-	}
-	.instructions strong {
-		color: rgb(var(--accent-light));
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 2rem;
-		padding: 0;
+	article {
+		max-width: calc(1200px + 24px *2);
+		margin: 0 auto;
+		padding: 0 24px;
 	}
 </style>

@@ -1,0 +1,21 @@
+---
+const {
+  as: Element = "div",
+  class: providedProps,
+  ...props
+} = Astro.props;
+---
+
+<Element {...props} class:list={["font_star-trek", providedProps]}>
+  <slot />
+</Element>
+
+<style>
+	.font_star-trek {
+		font-family: 'Star TrekLab', 'Star TrekLab Fallback', serif;
+		letter-spacing: 0.03em;
+        text-transform: uppercase;
+		line-height: 70%;
+		color: var(--text-product);
+	}
+</style>

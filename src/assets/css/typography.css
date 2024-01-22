@@ -1,0 +1,133 @@
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5 {
+    color: var(--text-product);
+    font-weight: 700;
+}
+h1, .h1 {
+    font-size: var(--heading-1);
+    margin: var(--size-6) 0 var(--size-4);
+
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+h2, .h2 {
+    font-size: var(--heading-2);
+    line-height: var(--header-line-height);
+    margin: var(--size-4) 0;
+}
+
+h3, .h3 {
+    font-size: var(--heading-3);
+    line-height: var(--header-line-height);
+    margin: var(--size-4) 0;
+}
+
+h4, .h4 {
+    font-size: var(--heading-3);
+    line-height: var(--header-line-height);
+    margin: var(--size-3) 0 var(--size-2);
+}
+
+h5, .h5 {
+    font-size: var(--heading-5);
+    line-height: var(--header-line-height);
+    margin: var(--size-6) 0 var(--size-2);
+    color: var(--text-color);
+}
+
+p, ul, ol, table {
+    margin: 0 0 var(--size-5);  
+}
+
+p:has(+ p), 
+p:has(+ ul),
+p:has(+ ol) {
+    margin-bottom: var(--size-2); 
+}
+
+ul, ol {
+    padding-left: var(--size-1);
+}
+ul > li {
+    list-style-type: disc;
+    margin-bottom: var(--size-1);
+}
+
+
+blockquote {
+    border-left: 1px solid var(--color-product);
+    margin: var(--size-4) 0;
+    padding-left: var(--size-3);  
+}
+
+blockquote h1,
+blockquote h2,
+blockquote h3,
+blockquote h4,
+blockquote h5 {
+    color: var(--text-color);
+    margin: 0 0 var(--size-2);
+}
+blockquote p {
+    margin: 0 0 var(--size-2);
+}
+
+.small {
+    font-size: var(--small-font-size);
+}
+
+.lead {
+    font-size: var(--lead-font-size);
+    line-height: 1.4;
+}
+
+h1 + .lead,
+h2 + .lead,
+.h1 + .lead,
+.h2 + .lead {
+    margin-top: -1.8em;
+    margin-bottom: var(--size-5);
+    text-align: center;
+}
+
+
+@media screen and (width < 1024px) {
+    h1, .h1 {
+        margin: var(--size-4) 0 var(--size-3);
+    }
+    h2, .h2 {
+        margin: var(--size-3) 0;
+    }
+    h3, .h3 {
+        margin: var(--size-3) 0 var(--size-2);
+    }
+    h4, .h4 {
+        margin: var(--size-3) 0 var(--size-2);
+    }
+    h5, .h5 {
+        margin: var(--size-5) 0 var(--size-2);
+    }
+}
+
+@media screen and (width < 768px) {
+    h1, .h1 {
+        margin: var(--size-4) 0 var(--size-3);
+    }
+    h2, .h2 {
+        margin: var(--size-3) 0;
+    }
+    h3, .h3 {
+        margin: var(--size-3) 0 var(--size-2);
+    }
+    h4, .h4 {
+        margin: var(--size-2) 0 var(--size-1);
+    }
+    h5, .h5 {
+        margin: var(--size-4) 0 var(--size-1);
+    }
+}
