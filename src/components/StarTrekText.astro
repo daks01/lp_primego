@@ -11,6 +11,23 @@ const {
 </Element>
 
 <style>
+	@font-face {
+		font-family: 'Star TrekLab';
+		src: url('/fonts/StarTrekFuente/startrekfuentecyrillic-regilar-webfont.woff2') format('woff2'),
+			url('/fonts/StarTrekFuente/startrekfuentecyrillic-regilar-webfont.woff') format('woff');
+		font-weight: normal;
+		font-style: normal;
+	}
+	@font-face {
+		font-family: "Star TrekLab Fallback";
+		src: local(Arial Bold);
+		font-weight: 400;
+		size-adjust: 44%;
+		ascent-override: 75%;
+		descent-override: 0%;
+		line-gap-override: 158%;
+		font-display: swap;
+	}
 	.font_star-trek {
 		font-family: 'Star TrekLab', 'Star TrekLab Fallback', serif;
 		letter-spacing: 0.03em;

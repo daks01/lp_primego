@@ -1,10 +1,5 @@
 ---
-import 'modern-normalize/modern-normalize.css';
-import '../assets/fonts/Montserrat/stylesheet.css'
-import '../assets/fonts/Star-Trek/stylesheet.css'
-import '../assets/css/variables.css'
-import '../assets/css/common.css'
-import '../assets/css/typography.css'
+import Head from '../components/Head.astro';
 ---
 
 <!doctype html>
@@ -30,6 +25,7 @@ import '../assets/css/typography.css'
 		<meta property="og:image" content="" />
 		<meta property="og:type" content="" />
 		<meta property="vk:image" content="" />
+		<Head />
 	</head>
 	<body>
 		<slot />

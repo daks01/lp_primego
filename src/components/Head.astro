@@ -1,0 +1,59 @@
+---
+import "../assets/css/index.scss";
+---
+
+<!-- Animation On Scroll -->
+<style is:global>
+    [data-animate] {
+        opacity: 1;
+        transform: none;
+        transition:
+            transform 1s,
+            opacity 1s;
+
+        &.will-animate {
+            will-change: transform, opacity;
+            transform: translateY(var(--size-3));
+            opacity: 0.5;
+        }
+    }
+</style>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        initScrollAnimations();
+    });
+
+    function initScrollAnimations() {
+        if ((!"IntersectionObserver") in window) {
+            return;
+        }
+
+        const observerElements = document.querySelectorAll("[data-animate]");
+        const observerOptions = {
+            root: null,
+            rootMargin: "0px 0px",
+            threshold: 0,
+        };
+        const observer = new IntersectionObserver(
+            observerCallback,
+            observerOptions,
+        );
+
+        [].forEach.call(observerElements, (element) =>
+            observer.observe(element),
+        );
+
+        function observerCallback(entries) {
+            entries?.forEach((entry) => {
+                const animateEl = entry.target;
+
+                if (entry.intersectionRatio > 0) {
+                    animateEl?.classList.remove("will-animate");
+                    observer.unobserve(entry.target);
+                    return;
+                }
+                animateEl?.classList.add("will-animate");
+            });
+        }
+    }
+</script>

@@ -1,0 +1,16 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'a'>;
+const { ...props } = Astro.props;
+---
+<div class="container" {...props}>
+	<slot />
+</div>
+<style>
+	.container {
+		max-width: var(--container-width);
+		padding: 0.02px var(--size-4);
+		margin: 0 auto;
+	}
+</style>
