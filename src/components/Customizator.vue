@@ -1,18 +1,19 @@
 <script>
 export default {
-	data() {
-		return {
-			count: 0
-		}
-	},
 	methods: {
-		increment() {
-			this.count++
-		}
+		customize() {
+			const svg = this.$refs.colorfull;
+			const tiles = svg.querySelectorAll('path');
+			this.get_random(tiles).style.fill = `#${this.randomColor()}`;
+			console.log(tiles,  this.randomColor())
+		},
+		get_random(list) {
+			return list[Math.floor((Math.random()*list.length))];
+		},
+		randomColor() {
+			return Math.floor(Math.random()*16777215).toString(16);
+		},
 	},
-	mounted() {
-		console.log(`The initial count is ${this.count}.`)
-	}
 }
 </script>
 
@@ -20,11 +21,11 @@ export default {
 	<div style="text-align: center;">
 		<br>
 		<br>
-		<button @click="increment" class="button">Count is: {{ count }}</button>
+		<button @click="customize" class="button">Click to Customize</button>
 		<br>
 		<br>
 
-		<svg width="859" height="610" viewBox="0 0 859 610" fill="none" xmlns="http://www.w3.org/2000/svg"
+		<svg ref="colorfull" width="859" height="610" viewBox="0 0 859 610" fill="none" xmlns="http://www.w3.org/2000/svg"
 			xmlns:xlink="http://www.w3.org/1999/xlink">
 			<g>
 				<rect width="792.298" height="542.204"
