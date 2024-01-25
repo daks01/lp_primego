@@ -1,16 +1,19 @@
 ---
-import type { HTMLAttributes } from 'astro/types';
-
-type Props = HTMLAttributes<'a'>;
-const { ...props } = Astro.props;
+const { 
+  width,
+  ...props
+} = Astro.props;
 ---
-<div class="container" {...props}>
+<div class="container" {...props} >
 	<slot />
 </div>
-<style>
+
+<style define:vars={{ width }}>
 	.container {
-		max-width: var(--container-width);
-		padding: 0.02px var(--size-4);
+		width: calc(var(--adaptive-pixel) * var(--width, --container-width));
+		max-width: 100%;
+		padding: 0.02px var(--gutter);
 		margin: 0 auto;
 	}
 </style>
+

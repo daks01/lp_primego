@@ -1,14 +1,14 @@
 
 :root {
-    --container-width: 1920px;
+    --container-width: 1920;
+    --container-width-in-px: 1920px;
     /* 
         адаптивная переменная в зависимости от размера экрана
         равна 1px на экранах 1920px и больше
         и пропорционально скелится на меньших экранах
     */
-    --adaptive-pixel: min(.052085vw, var(--container-width) / 100 * .052085);
-    --gutter: calc(var(--adaptive-pixel) * 24);
-    --section-x-gutter: var(--gutter);
+    --adaptive-pixel: min(.052085vw, var(--container-width-in-px) / 100 * .052085);
+    --gutter: calc(var(--adaptive-pixel) * 90);
 
     --module: calc(var(--adaptive-pixel) * 15);    /* 15 */
 
@@ -41,18 +41,24 @@
 
 @media screen and (width < 1024px) {
     :root {
-        --heading-1: 74px;
-        --heading-2: 20px;
-        --heading-3: 18px;
-        --heading-4: 16px;
-        --heading-5: 14px;
-        --text-font-size: 16px;
-        --small-font-size: 14px;
+        --container-width: 640;
+        --container-width-in-px: 640px;
+        --adaptive-pixel: 0.157vw;
+        --gutter: calc(var(--adaptive-pixel) * 24);
+    
+        --heading-1: calc(var(--adaptive-pixel) * 74);
+        --heading-2: calc(var(--adaptive-pixel) * 20);
+        --heading-3: calc(var(--adaptive-pixel) * 18);
+        --heading-4: calc(var(--adaptive-pixel) * 16);
+        --heading-5: calc(var(--adaptive-pixel) * 14);
+        --text-font-size: calc(var(--adaptive-pixel) * 16);
+        --small-font-size: calc(var(--adaptive-pixel) * 14);
     }
 }
 
-@media screen and (width < 768px) {
+@media screen and (width < 640px) {
     :root {
+        --container-width-in-px: 320px;
         --heading-1: 100px;
         --heading-2: 32px;
         --heading-3: 24px;

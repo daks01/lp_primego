@@ -2,7 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import Container from "../components/Container.astro";
+import Section from "../components/Section.astro";
 import HeroSlider from "../components/HeroSlider.astro";
 import StarTrekText from "../components/StarTrekText.astro";
 import Button from "../components/Button.astro";
@@ -25,21 +25,20 @@ import backgroundCustomizer from "../assets/img/section-bg/customizer.webp";
 	<Header />
 	<main>
 		<!-- Hero -->
-		<section
+		<Section
 			class="section"
 			style={{ backgroundImage: `url(${backgroundHero.src})` }}
 		>
-			<Container>
-				<div class="hero">
-					<StarTrekText
-						as="span"
-						class="text-on-background"
-						aria-hidden="true"
-					>
-						Primego
-					</StarTrekText>
-					<StarTrekText as="h1">Primego</StarTrekText>
-					<div>
+			<div class="hero">
+				<StarTrekText
+					as="span"
+					class="text-on-background"
+					aria-hidden="true"
+				>
+					Primego
+				</StarTrekText>
+				<StarTrekText as="h1">Primego</StarTrekText>
+				<div>
 					<p class="lead">Ipsum consectetur</p>
 					<p>
 						Lorem ipsum dolor sit amet consectetur. Viverra quis eu
@@ -47,15 +46,14 @@ import backgroundCustomizer from "../assets/img/section-bg/customizer.webp";
 					</p>
 					<Button as="a" href="#customizer">Make Your Model</Button>
 				</div>
-				</div>
-				<div class="heroSlider-wrapper">
-					<HeroSlider />
-				</div>
-			</Container>
+			</div>
+			<div class="heroSlider-wrapper">
+				<HeroSlider />
+			</div>
 
 			<style lang="scss">
 				.text-on-background {
-					font-size:  min(53vw, var(--container-width) / 100 * 53);
+					font-size: min(53vw, var(--container-width-in-px) / 100 * 53);
 					margin: 0;
 					position: absolute;
 					top: var(--size-5);
@@ -78,46 +76,48 @@ import backgroundCustomizer from "../assets/img/section-bg/customizer.webp";
 					justify-content: flex-end;
 					margin: calc(var(--adaptive-pixel) * 460 * -1) 0 0;
 				}
+				@media screen and (width < 1024px) {
+					.text-on-background {
+						font-size: 53vw;
+					}
+				}
 			</style>
-		</section>
+		</Section>
 		<!-- НАНО ТЕКСТИЛЬ -->
-		<section
+		<Section
 			class="section"
 			style={{ backgroundImage: `url(${backgroundNano.src})` }}
 		>
-			<Container>
-				<header>
-					<StarTrekText as="h1">
-						НАНО <br />ТЕКСТИЛЬ
-					</StarTrekText>
-				</header>
-				<blockquote>
-					<p>
-						Гидрофобная структура нити, не задерживает влагу,
-						предотвращая развитие бактерий
-					</p>
-					<p>
-						Из натуральных волокон, антибактериальные и гидрофобные
-						свойства, идеально для кроссовок
-					</p>
-					<p>Технологичный и инновационный для спортивной обуви</p>
-				</blockquote>
-				<!-- <Image
+			<header>
+				<StarTrekText as="h1">
+					НАНО <br />ТЕКСТИЛЬ
+				</StarTrekText>
+			</header>
+			<blockquote>
+				<p>
+					Гидрофобная структура нити, не задерживает влагу,
+					предотвращая развитие бактерий
+				</p>
+				<p>
+					Из натуральных волокон, антибактериальные и гидрофобные
+					свойства, идеально для кроссовок
+				</p>
+				<p>Технологичный и инновационный для спортивной обуви</p>
+			</blockquote>
+			<!-- <Image
 					width="1030"
 					height="596"
 					src={myImportedImage}
 					alt=""
 					loading="lazy"
 				/> -->
-			</Container>
-		</section>
+		</Section>
 		<!-- Конвекция -->
-		<section
+		<Section
 			class="section"
 			style={{ backgroundImage: `url(${backgroundConvection.src})` }}
 		>
-			<Container>
-				<!-- <div style="display: flex; justify-content: space-between">
+			<!-- <div style="display: flex; justify-content: space-between">
 					<div class="">
 						<div>
 							<span class="h4">Обычная подкладка</span><br />
@@ -145,51 +145,47 @@ import backgroundCustomizer from "../assets/img/section-bg/customizer.webp";
 						/>
 					</div>
 				</div> -->
-				<header>
-					<StarTrekText as="h1">Конвекция</StarTrekText>
-				</header>
-				<blockquote>
-					<p>Капилярная конвекция для максимального комфорта</p>
-					<p>
-						Проницаемая трехмерная капиллярная мембрана,
-						естественная терморегуляция
-					</p>
-					<p>
-						Теплорегулирующая подкладка, обеспечивает вентиляцию,
-						предотвращает перегрев
-					</p>
-				</blockquote>
-				<!-- <Image
+			<header>
+				<StarTrekText as="h1">Конвекция</StarTrekText>
+			</header>
+			<blockquote>
+				<p>Капилярная конвекция для максимального комфорта</p>
+				<p>
+					Проницаемая трехмерная капиллярная мембрана, естественная
+					терморегуляция
+				</p>
+				<p>
+					Теплорегулирующая подкладка, обеспечивает вентиляцию,
+					предотвращает перегрев
+				</p>
+			</blockquote>
+			<!-- <Image
 					width="1030"
 					height="596"
 					src={myImportedImage}
 					alt=""
 					loading="lazy"
 				/> -->
-			</Container>
-		</section>
+		</Section>
 
 		<!-- Форма стопы -->
-		<section
+		<Section
 			class="section"
 			style={{ backgroundImage: `url(${backgroundForm.src})` }}
 		>
-			<Container>
-				<header>
-					<StarTrekText as="h1">
-						Форма стопы
-					</StarTrekText>
-				</header>
-				<blockquote>
-					<p>
-						Трехмерное термическое формование, учет индвидуальной
-						формы стопы
-					</p>
-					<p>Подошва учитывает форму стопы, не деформирует ногу</p>
-					<p>Адаптация подошвы к стопе для здоровых ног</p>
-				</blockquote>
+			<header>
+				<StarTrekText as="h1">Форма стопы</StarTrekText>
+			</header>
+			<blockquote>
+				<p>
+					Трехмерное термическое формование, учет индвидуальной формы
+					стопы
+				</p>
+				<p>Подошва учитывает форму стопы, не деформирует ногу</p>
+				<p>Адаптация подошвы к стопе для здоровых ног</p>
+			</blockquote>
 
-				<!-- <Image
+			<!-- <Image
 					width="208"
 					height="208"
 					src={myImportedImage}
@@ -203,35 +199,31 @@ import backgroundCustomizer from "../assets/img/section-bg/customizer.webp";
 					alt=""
 					loading="lazy"
 				/> -->
-			</Container>
-		</section>
+		</Section>
 		<!-- Кастомизация -->
-		<section
+		<Section
 			class="section"
 			style={{ backgroundImage: `url(${backgroundCustom.src})` }}
 		>
-			<Container>
-				<header>
-					<StarTrekText as="h1">
-						Кастомизация
-					</StarTrekText>
-				</header>
-				<blockquote>
-					<p>
-						Возможность создания уникальной пары кроссовок с
-						индивидуальным цветовым решением и материалом
-					</p>
-					<p>
-						Неповторимые кроссовоки, отражают личность владельца,
-						легко адаптируется под стиль одежды
-					</p>
-					<p>
-						Твои идеи для твоей индивидуальности через выбор цвета и
-						материала обуви
-					</p>
-				</blockquote>
+			<header>
+				<StarTrekText as="h1">Кастомизация</StarTrekText>
+			</header>
+			<blockquote>
+				<p>
+					Возможность создания уникальной пары кроссовок с
+					индивидуальным цветовым решением и материалом
+				</p>
+				<p>
+					Неповторимые кроссовоки, отражают личность владельца, легко
+					адаптируется под стиль одежды
+				</p>
+				<p>
+					Твои идеи для твоей индивидуальности через выбор цвета и
+					материала обуви
+				</p>
+			</blockquote>
 
-				<!-- <Image
+			<!-- <Image
 					width="208"
 					height="208"
 					src={myImportedImage}
@@ -245,15 +237,13 @@ import backgroundCustomizer from "../assets/img/section-bg/customizer.webp";
 					alt=""
 					loading="lazy"
 				/> -->
-			</Container>
-		</section>
+		</Section>
 		<!-- Инновационные -->
-		<section
+		<Section
 			class="section"
 			style={{ backgroundImage: `url(${backgroundInnovation.src})` }}
 		>
-			<Container>
-				<!-- <div style="display: flex; justify-content: space-between">
+			<!-- <div style="display: flex; justify-content: space-between">
 					<div class="">
 						<div>
 							<span class="h4">Антибактериальные</span>
@@ -303,69 +293,58 @@ import backgroundCustomizer from "../assets/img/section-bg/customizer.webp";
 						/>
 					</div>
 				</div> -->
-				<header>
-					<StarTrekText as="h1">
-						Инновационные
-					</StarTrekText>
-				</header>
-				<blockquote>
-					<p>
-						Искусственный интеллект в процессе разработки и
-						производства позволяет создавать уникальные и передовые
-						решения
-					</p>
-					<p>
-						Инновационные технологий для кроссовок нового поколения,
-						обеспечивающих высокий уровень комфорта и
-						функциональности
-					</p>
-					<p>
-						Кроссовки, которые задают новые стандарты.Твои стандарты
-					</p>
-				</blockquote>
+			<header>
+				<StarTrekText as="h1">Инновационные</StarTrekText>
+			</header>
+			<blockquote>
+				<p>
+					Искусственный интеллект в процессе разработки и производства
+					позволяет создавать уникальные и передовые решения
+				</p>
+				<p>
+					Инновационные технологий для кроссовок нового поколения,
+					обеспечивающих высокий уровень комфорта и функциональности
+				</p>
+				<p>Кроссовки, которые задают новые стандарты.Твои стандарты</p>
+			</blockquote>
 
-				<!-- <Image
+			<!-- <Image
 					width="1030"
 					height="596"
 					src={myImportedImage}
 					alt=""
 					loading="lazy"
 				/> -->
-			</Container>
-		</section>
+		</Section>
 		<!-- Сделано в России -->
-		<section
+		<Section
 			class="section"
 			style={{ backgroundImage: `url(${backgroundMadeIn.src})` }}
 		>
-			<Container>
-				<header>
-					<StarTrekText as="h1">
-						Сделано в России
-					</StarTrekText>
-				</header>
-				<blockquote>
-					<p>Произведено в России</p>
-					<p>Разработано в России</p>
-					<p>Из российских материалов и технологий</p>
-				</blockquote>
-				<!-- <Image
+			<header>
+				<StarTrekText as="h1">Сделано в России</StarTrekText>
+			</header>
+			<blockquote>
+				<p>Произведено в России</p>
+				<p>Разработано в России</p>
+				<p>Из российских материалов и технологий</p>
+			</blockquote>
+			<!-- <Image
 					width="1030"
 					height="596"
 					src={myImportedImage}
 					alt=""
 					loading="lazy"
 				/> -->
-			</Container>
-		</section>
+		</Section>
 
-		<section
+		<Section
 			class="section"
 			id="customizer"
 			style={{ backgroundImage: `url(${backgroundCustomizer.src})` }}
 		>
-			<Customizator client:load data-animate/>
-		</section>
+			<Customizator client:load data-animate />
+		</Section>
 	</main>
 	<Footer />
 </Layout>

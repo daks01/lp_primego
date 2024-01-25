@@ -1,7 +1,6 @@
 ---
-import Container from "../components/Container.astro";
-import StarTrekText from "../components/StarTrekText.astro";
-import Button from "../components/Button.astro";
+import Section from "../components/Section.astro";
+import FooterForm from "../components/FooterForm.astro";
 
 import backgroundFooter from "../assets/img/section-bg/footer.webp";
 
@@ -9,49 +8,15 @@ const today = new Date();
 const currentYear = today.getFullYear();
 ---
 
-<footer
-	class="footer section"
+<Section
+	as="footer"
+	class="footer"
+	width="1440"
 	style={{ backgroundImage: `url(${backgroundFooter.src})` }}
 >
-	<Container>
-		<form action="" class="form">
-			<StarTrekText as="h2" class="form__title">Contact Us</StarTrekText>
-			<p>
-				Lorem ipsum dolor sit amet consectetur. <br />
-				Viverra quis eu turpis faucibus nec id.
-			</p>
-			<div>
-				<label for="form-name" class="sr-only">Name</label>
-				<input
-					id="form-name"
-					type="text"
-					placeholder="Name"
-					aria-invalid="false"
-					aria-errormessage="name-error"
-				/>
-				<p
-					class="error-message"
-					id="name-error"
-					aria-live="polite"
-					hidden
-				>
-					Поле Файл обязательно для заполнения
-				</p>
-			</div>
-			<div>
-				<label for="form-name" class="sr-only">Email</label>
-				<input id="form-email" type="email" placeholder="email" />
-			</div>
-			<div>
-				<label for="form-question" class="sr-only">Your question</label>
-				<textarea id="form-question" placeholder="Your question"
-				></textarea>
-			</div>
-			<div>
-				<Button type="submit" data-animate>Send</Button>
-			</div>
-		</form>
-		<div class="footer__copyright">
+	<FooterForm />
+	<div class="footer__copyright">
+		<div class="footer__item">
 			<svg
 				class="logo"
 				role="presentation"
@@ -83,6 +48,8 @@ const currentYear = today.getFullYear();
 					d="M73.1259 5.45471C75.5122 5.45471 77.5151 6.17915 78.8787 7.56409C80.3702 9.05557 81.1372 11.2715 81.1372 14.1053V25.2061H75.0648V14.9362C75.0648 13.5726 74.7878 12.5286 74.2338 11.8255C73.6798 11.1223 72.8489 10.7601 71.7622 10.7601C69.2693 10.7601 67.8844 12.422 67.8844 15.405V25.1848H61.8333V14.9149C61.8333 13.5087 61.5776 12.486 61.0236 11.8042C60.4696 11.101 59.6387 10.7601 58.552 10.7601C56.0804 10.7601 54.6955 12.422 54.6955 15.405V25.1848H48.623V5.7104H54.4398V7.18057V7.43626L54.6316 7.26579C56.0378 6.0513 57.9341 5.41211 60.0648 5.41211C62.6642 5.41211 64.8588 6.39222 66.2225 8.18199L66.3077 8.28853L66.3929 8.18199C68.0122 6.45614 70.4625 5.45471 73.1259 5.45471Z"
 					fill="#FEFEFE"></path>
 			</svg>
+		</div>
+		<div class="footer__item footer__item_center">
 			<svg
 				class="logo-icon"
 				role="presentation"
@@ -96,10 +63,12 @@ const currentYear = today.getFullYear();
 					d="M0.124293 39.331L41.7537 0.107864C42.0558 -0.172687 42.5198 0.140235 42.3903 0.517899L35.7758 19.0234C35.6787 19.2932 35.8837 19.5738 36.1643 19.5738L61.2304 19.4874C61.6404 19.4874 61.7699 20.027 61.4138 20.2212L40.8689 31.0548C40.556 31.2166 40.5883 31.6698 40.9012 31.7993L59.2665 39.2447C59.6658 39.4065 59.5471 39.9892 59.1154 39.9892L0.394053 40C0.0379693 40 -0.134677 39.5792 0.124293 39.331Z"
 					fill="#FC1447"></path>
 			</svg>
+		</div>
+		<div class="footer__item footer__item_right">
 			<span>&copy; Все права защищены | PRIMEGO {currentYear}</span>
 		</div>
-	</Container>
-</footer>
+	</div>
+</Section>
 <style>
 	.footer {
 		background-position: top center;
@@ -107,19 +76,20 @@ const currentYear = today.getFullYear();
 		background-repeat: no-repeat;
 		/* min-height: calc(var(--adaptive-pixel) * 1080); */
 	}
+	.footer__item {
+		flex: 1 1 0px;
+		display: flex;
+	}
+	.footer__item_center {
+		justify-content: center;
+	}
+	.footer__item_right {
+		justify-content: flex-end;
+	}
 	.footer__copyright {
 		display: flex;
 		justify-content: space-around;
 		align-items: center;
 		margin: var(--size-5) 0;
-	}
-	.form {
-		text-align: center;
-		margin-bottom: var(--size-5);
-	}
-	.form__title {
-		font-size: calc(var(--adaptive-pixel) * 80);
-		line-height: 1.1;
-		margin-bottom: var(--size-1);
 	}
 </style>

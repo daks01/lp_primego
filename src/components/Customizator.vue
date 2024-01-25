@@ -1,11 +1,16 @@
 <script>
+import image from '../assets/img/customised_pattern.png';
 export default {
+	data: function () {
+		return {
+			image: image
+		}
+	},
 	methods: {
 		customize() {
 			const svg = this.$refs.colorfull;
 			const tiles = svg.querySelectorAll('path');
 			this.get_random(tiles).style.fill = `#${this.randomColor()}`;
-			console.log(tiles,  this.randomColor())
 		},
 		get_random(list) {
 			return list[Math.floor((Math.random()*list.length))];
@@ -68,7 +73,8 @@ export default {
 			</g>
 			<defs>
 				<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-					<use xlink:href="#image0_164_98" transform="matrix(0.00114823 0 0 0.00167785 -0.091337 0)"></use>
+					<use xlink:href="#image0_164_98"></use>
+					<!-- <use xlink:href="#image0_164_98" transform="matrix(0.00114823 0 0 0.00167785 -0.091337 0)"></use> -->
 				</pattern>
 				<filter id="filter0_d_164_98" x="-0.0078125" y="408.396" width="859.015" height="200.762"
 					filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -83,8 +89,8 @@ export default {
 					<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_164_98"></feBlend>
 					<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_164_98" result="shape"></feBlend>
 				</filter>
-				<!-- <image id="image0_164_98" decoding="async" width="1030" height="596"
-				href="../assets/img/customised_pattern.png" /> -->
+				<image id="image0_164_98" decoding="async" width="1030" height="596"
+				    :href="image.src" />
 			</defs>
 		</svg>
 		<!-- <img width="859" height="610" src="../assets/img/customised_pattern.png" alt="descriptive text" loading="lazy" /> -->
@@ -95,5 +101,8 @@ export default {
 .button {
 	background: var(--color-product);
 	color: var(--text-color);
+}
+svg {
+	max-width: 100%;
 }
 </style>
