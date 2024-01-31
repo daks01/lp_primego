@@ -1,55 +1,66 @@
-# Astro Starter Kit: Blog
+# Readme
 
-```sh
-npm create astro@latest -- --template blog
-```
+> Сайт собран с помощью Astro.Build 
+- [Blog](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
+- [Documentation](https://docs.astro.build) 
+- [Discord server](https://astro.build/chat)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/blog)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/blog)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/blog/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![blog](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
-
-Features:
-
-- ✅ Minimal styling (make it your own!)
+Фичи:
 - ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+- ✅ SEO-friendly
+- ✅ Sitemap
+- ✅ JSX в качестве шаблонизатора
+- ✅ генерация статичного сайта
+- ✅ возможность писать компоненты на любом фреймворке: react, vue, svelte etc
+- ✅ и встраивать их в статичный сайт как интерактивные острова
 
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## 🚀 Структура
 
 ```text
 ├── public/
 ├── src/
 │   ├── components/
-│   ├── content/
+│   │   ├── ui/
+│   │   ├── layout/
+│   │   ├── content/
 │   ├── layouts/
 │   └── pages/
 ├── astro.config.mjs
 ├── README.md
-├── package.json
-└── tsconfig.json
+└── package.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+В папке `/layout` лежит шаблон для всех страниц
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Файлы `*.astro` в папке `src/pages/` - это страницы сайта.
+Роуты строятся на основе имен этих файлов
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+В папке `src/components/` в подпахках лежат:
+- ui-компоненты (кнопка, контейнер итп)
+- layout-компоненты (шапка, подвал)
+- переиспользуемые блоки (секции) с контентом
+  из которых собраны страницы
 
-Any static assets, like images, can be placed in the `public/` directory.
+Статика:
+- фавиконки, шрифты и картинки лежат в `public/`
+- глобальные стили в `/assets/css`
+- некоторые картинк `/assets/images`
 
-## 🧞 Commands
 
-All commands are run from the root of the project, from a terminal:
+## 🧞 Как какать 
+для локальной разработки и билда статичного сайта нужно:
+- поставить Node.js (lts) https://nodejs.org/en
+- терминале перейти в корнь проекта 
+- и поставить зависимости
+  `npm i`
+- для старта локального девсервера выполнить
+  `npm run dev`
+- для получения билда статичного сайта (готового к деплою)
+  `npm run build`
+- собранный сайт будет лежать в папке `/dist`
+- ее содержимое останется перенести на сервер
 
+Список команд:
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
 | `npm install`             | Installs dependencies                            |
@@ -58,11 +69,3 @@ All commands are run from the root of the project, from a terminal:
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).

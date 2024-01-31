@@ -1,5 +1,7 @@
 ---
-import Head from '../components/Head.astro';
+import Head from './Head.astro';
+
+const { title = "Primego" } = Astro.props;
 ---
 
 <!doctype html>
@@ -11,8 +13,7 @@ import Head from '../components/Head.astro';
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 
-		<!-- ToDo заполнить-->
-		<title>Primego</title>
+		<title>{title}</title>
 
 		<!-- ToDo заполнить-->
 		<meta name="description" content="" />
@@ -20,11 +21,12 @@ import Head from '../components/Head.astro';
 
 		<!-- ToDo заполнить-->
 		<meta property="og:url" content="" />
-		<meta property="og:title" content="" />
+		<meta property="og:title" content={title} />
 		<meta property="og:description" content="" />
 		<meta property="og:image" content="" />
 		<meta property="og:type" content="" />
 		<meta property="vk:image" content="" />
+		
 		<Head />
 	</head>
 	<body>

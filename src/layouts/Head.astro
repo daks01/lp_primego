@@ -1,5 +1,5 @@
 ---
-import "../assets/css/index.scss";
+import "/src/assets/css/index.scss";
 ---
 
 <!-- Animation On Scroll -->
@@ -24,7 +24,7 @@ import "../assets/css/index.scss";
     });
 
     function initScrollAnimations() {
-        if ((!"IntersectionObserver") in window) {
+        if (!"IntersectionObserver" in window) {
             return;
         }
 

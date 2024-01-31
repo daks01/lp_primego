@@ -33,6 +33,45 @@ body {
     clip-path: inset(50%);
     border: 0;
 }
+
 img {
     max-width: 100%;
 }
+
+
+
+.display-none {
+    display: none;
+}
+.display-block {
+    display: block;
+}
+.display-flex {
+    display: flex;
+}
+
+@media screen and (width < 1024px) {
+    .display-lg-none {
+        display: none;
+    }
+    .display-lg-block {
+        display: block;
+    }
+    .display-lg-flex {
+        display: flex;
+    }
+}
+
+@media screen and (width < 640px) {
+    .display-sm-none {
+        display: none;
+    }
+    .display-sm-block {
+        display: block;
+    }
+    .display-sm-flex {
+        display: flex;
+    }
+}
+
+

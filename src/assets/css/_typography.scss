@@ -5,6 +5,7 @@ h4, .h4,
 h5, .h5 {
     color: var(--text-product);
     font-weight: 700;
+    text-wrap: balance;
 }
 h1, .h1 {
     font-size: var(--heading-1);
@@ -40,12 +41,14 @@ p, ul, ol, table {
     margin: 0 0 var(--size-5);  
 }
 
+p {
+    text-wrap: balance;
+}
 p:has(+ p), 
 p:has(+ ul),
 p:has(+ ol) {
     margin-bottom: var(--size-2); 
 }
-
 p:has(+ a),
 p:has(+ button) {
     margin-bottom: var(--size-3); 
@@ -64,8 +67,8 @@ blockquote {
     border-left: 1px solid var(--color-product);
     margin: var(--size-4) 0;
     padding-left: var(--size-3);  
+    text-wrap: balance;
 }
-
 blockquote h1,
 blockquote h2,
 blockquote h3,
@@ -85,6 +88,7 @@ blockquote p {
 .lead {
     font-size: var(--lead-font-size);
     line-height: 1.4;
+    font-weight: 500;
 }
 
 h1 + .lead,

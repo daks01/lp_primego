@@ -1,8 +1,8 @@
 ---
-import Section from "../components/Section.astro";
-import FooterForm from "../components/FooterForm.astro";
+import Section from "../ui/Section.astro";
+import FooterForm from "./FooterForm.astro";
 
-import backgroundFooter from "../assets/img/section-bg/footer.webp";
+import backgroundFooter from "/src/assets/img/section-bg/footer.webp";
 
 const today = new Date();
 const currentYear = today.getFullYear();
@@ -61,7 +61,7 @@ const currentYear = today.getFullYear();
 			>
 				<path
 					d="M0.124293 39.331L41.7537 0.107864C42.0558 -0.172687 42.5198 0.140235 42.3903 0.517899L35.7758 19.0234C35.6787 19.2932 35.8837 19.5738 36.1643 19.5738L61.2304 19.4874C61.6404 19.4874 61.7699 20.027 61.4138 20.2212L40.8689 31.0548C40.556 31.2166 40.5883 31.6698 40.9012 31.7993L59.2665 39.2447C59.6658 39.4065 59.5471 39.9892 59.1154 39.9892L0.394053 40C0.0379693 40 -0.134677 39.5792 0.124293 39.331Z"
-					fill="#FC1447"></path>
+					fill="currentColor"></path>
 			</svg>
 		</div>
 		<div class="footer__item footer__item_right">

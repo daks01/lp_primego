@@ -25,6 +25,7 @@
     --heading-3: calc(var(--adaptive-pixel) * 32);
     --heading-4: calc(var(--adaptive-pixel) * 24);
     --heading-5: calc(var(--adaptive-pixel) * 18);
+    --lead-font-size: calc(var(--adaptive-pixel) * 60);
     --text-font-size: calc(var(--adaptive-pixel) * 18);
     --small-font-size: calc(var(--adaptive-pixel) * 16);
     --header-line-height: 1.2;
@@ -32,8 +33,10 @@
 
     --color-white: #FFFFFF;
     --color-lightgray: #FEFEFE;
-    --color-black: #010000;;
+    --color-black: #010000;
     --color-product: #FC1447;
+    --color-product-royal: #FFF;
+    --color-product-empire: #FFCD01;
 
     --text-color: var(--color-white);
     --text-product: var(--color-product);
@@ -51,6 +54,7 @@
         --heading-3: calc(var(--adaptive-pixel) * 18);
         --heading-4: calc(var(--adaptive-pixel) * 16);
         --heading-5: calc(var(--adaptive-pixel) * 14);
+        --lead-font-size: calc(var(--adaptive-pixel) * 50);
         --text-font-size: calc(var(--adaptive-pixel) * 16);
         --small-font-size: calc(var(--adaptive-pixel) * 14);
     }
@@ -64,6 +68,7 @@
         --heading-3: 24px;
         --heading-4: 18px;
         --heading-5: 16px;
+        --lead-font-size: calc(var(--adaptive-pixel) * 40);
         --text-font-size: 16px;
         --small-font-size: 14px;
     }

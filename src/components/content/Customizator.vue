@@ -1,5 +1,5 @@
 <script>
-import image from '../assets/img/customised_pattern.png';
+import image from '/src/assets/img/customised_pattern.png';
 export default {
 	data: function () {
 		return {
@@ -93,7 +93,7 @@ export default {
 				    :href="image.src" />
 			</defs>
 		</svg>
-		<!-- <img width="859" height="610" src="../assets/img/customised_pattern.png" alt="descriptive text" loading="lazy" /> -->
+		<!-- <img width="859" height="610" src="/src/assets/img/customised_pattern.png" alt="descriptive text" loading="lazy" /> -->
 	</div>
 </template>
 

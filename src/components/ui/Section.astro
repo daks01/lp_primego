@@ -1,0 +1,27 @@
+---
+import Container from "./Container.astro";
+
+const { 
+  as: Element = "section",
+  width,
+  class: className,
+  ...props
+} = Astro.props;
+---
+<Element {...props} class:list={["section", className]}>
+	<Container width={width}>
+		<slot />
+	</Container>
+</Element>
+
+<style>
+	.section {
+		background-position: top center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		position: relative;
+		z-index: 1;
+		overflow: hidden;
+	  /* min-height: calc(var(--adaptive-pixel) * 1080); */
+	}
+</style>

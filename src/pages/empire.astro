@@ -1,0 +1,41 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/layout/Header.astro";
+import Footer from "../components/layout/Footer.astro";
+
+import { Image } from "astro:assets";
+import myImportedImage from "/src/assets/img/customised_pattern.png";
+import backgroundHero from "/src/assets/img/section-bg/hero.webp";
+import backgroundNano from "/src/assets/img/section-bg/nano.webp";
+import backgroundConvection from "/src/assets/img/section-bg/convection.webp";
+import backgroundForm from "/src/assets/img/section-bg/form.webp";
+import backgroundCustom from "/src/assets/img/section-bg/custom.webp";
+import backgroundInnovation from "/src/assets/img/section-bg/innovation.webp";
+import backgroundMadeIn from "/src/assets/img/section-bg/made-in.webp";
+import backgroundCustomizer from "/src/assets/img/section-bg/customizer.webp";
+---
+
+<style is:global>
+	:root {
+		--color-product: var(--color-product-empire);
+	}
+</style>
+
+<Layout title="Империя">
+	<Header/>
+	<main>
+		<!-- HERO -->
+		<!-- НАНО ТЕКСТИЛЬ -->
+		<!-- КОНВЕКЦИЯ -->
+		<!-- ФОРМА СТОПЫ -->
+		<!-- КАСТОМИЗАЦИЯ -->
+		<!-- ИННОВАЦИОННЫЕ -->
+		<!-- СДЕЛАНО В РОССИИ -->
+		<!-- КОНСТРУКТОР -->
+	</main>
+	<Footer />
+</Layout>
+
+<style></style>
+
+<script></script>

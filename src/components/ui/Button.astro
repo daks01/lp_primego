@@ -22,7 +22,7 @@ const {
 	border-radius: 100px;
     padding: calc(var(--adaptive-pixel) * 14) calc(var(--adaptive-pixel) * 20);
     background: var(--color-product);
-    color: var(--color-white);
+    color: var(--button-text-color, --color-white);
     font-weight: 700;
 	font-size: calc(var(--adaptive-pixel) * 20);
     font-family: inherit;
@@ -37,6 +37,23 @@ const {
     &:active {
         filter: brightness(97%);
     }
+}
+
+.button_ticket {
+    border-radius: 4px;
+    clip-path: polygon(
+        0 0, 
+        47% 0, 
+        50% 17%, 
+        53% 0, 
+        100% 0, 
+        100% 100%, 
+        53% 100%, 
+        50% 83%, 
+        47% 100%, 
+        0 100%
+    );
+    padding: calc(var(--adaptive-pixel) * 20) calc(var(--adaptive-pixel) * 32);
 }
 
 
