@@ -1,0 +1,30 @@
+---
+import Section from "../ui/Section.astro";
+import StarTrekText from "../ui/StarTrekText.astro";
+
+const { backgroundImage, invert = false } = Astro.props;
+
+---
+<Section backgroundImage={backgroundImage} invert={invert}>
+	<header>
+		<StarTrekText as="h1">
+            Приложение-
+            сканер
+        </StarTrekText>
+	</header>
+	<blockquote>
+		<p>Учет индивидуальной формы стопы, улучшает посадку обуви, дарит комфорт</p>
+		<p>Алгоритмы искусственного интеллекта, виртуальное моделирование формы стопы</p>
+		<p>Компьютерные технологии для идеального результата</p>
+	</blockquote>
+	<!-- <Image
+			width="1030"
+			height="596"
+			src={myImportedImage}
+			alt=""
+			loading="lazy"
+		/> -->
+</Section>
+
+<style lang="scss">
+</style>

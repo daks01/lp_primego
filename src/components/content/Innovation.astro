@@ -1,0 +1,84 @@
+---
+import Section from "../ui/Section.astro";
+import StarTrekText from "../ui/StarTrekText.astro";
+
+const { backgroundImage } = Astro.props;
+
+---
+<Section backgroundImage={backgroundImage}>
+	<!-- <div style="display: flex; justify-content: space-between">
+			<div class="">
+				<div>
+					<span class="h4">Антибактериальные</span>
+				</div>
+				<Image
+					width="180"
+					height="180"
+					src={myImportedImage}
+					alt=""
+					loading="lazy"
+				/>
+			</div>
+			<div class="">
+				<div>
+					<span class="h4">Мягкие</span>
+				</div>
+				<Image
+					width="180"
+					height="180"
+					src={myImportedImage}
+					alt=""
+					loading="lazy"
+				/>
+			</div>
+			<div class="">
+				<div>
+					<span class="h4">Воздухопроницаемые</span>
+				</div>
+				<Image
+					width="180"
+					height="180"
+					src={myImportedImage}
+					alt=""
+					loading="lazy"
+				/>
+			</div>
+			<div class="">
+				<div>
+					<span class="h4">Упругие</span>
+				</div>
+				<Image
+					width="180"
+					height="180"
+					src={myImportedImage}
+					alt=""
+					loading="lazy"
+				/>
+			</div>
+		</div> -->
+	<header>
+		<StarTrekText as="h1">Инновационные</StarTrekText>
+	</header>
+	<blockquote>
+		<p>
+			Искусственный интеллект в процессе разработки и производства
+			позволяет создавать уникальные и передовые решения
+		</p>
+		<p>
+			Инновационные технологий для кроссовок нового поколения,
+			обеспечивающих высокий уровень комфорта и функциональности
+		</p>
+		<p>Кроссовки, которые задают новые стандарты.Твои стандарты</p>
+	</blockquote>
+
+	<!-- <Image
+			width="1030"
+			height="596"
+			src={myImportedImage}
+			alt=""
+			loading="lazy"
+		/> -->
+</Section>
+
+<style lang="scss">
+</style>

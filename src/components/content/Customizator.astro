@@ -1,0 +1,13 @@
+---
+import Section from "../ui/Section.astro";
+import CustomizatorApp from "../islands/CustomizatorApp.vue";
+
+const { backgroundImage } = Astro.props;
+
+---
+<Section id="customizer" backgroundImage={backgroundImage}>
+	<CustomizatorApp client:load data-animate />
+</Section>
+
+<style lang="scss">
+</style>

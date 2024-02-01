@@ -3,40 +3,46 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
 
-import { Image } from "astro:assets";
-import myImportedImage from "/src/assets/img/customised_pattern.png";
-import backgroundHero from "/src/assets/img/section-bg/hero.webp";
-import backgroundNano from "/src/assets/img/section-bg/nano.webp";
-import backgroundConvection from "/src/assets/img/section-bg/convection.webp";
-import backgroundForm from "/src/assets/img/section-bg/form.webp";
-import backgroundCustom from "/src/assets/img/section-bg/custom.webp";
-import backgroundInnovation from "/src/assets/img/section-bg/innovation.webp";
-import backgroundMadeIn from "/src/assets/img/section-bg/made-in.webp";
-import backgroundCustomizer from "/src/assets/img/section-bg/customizer.webp";
+import HeroRoyal from "../components/content/HeroRoyal.astro";
+import NanoTextiles from "../components/content/NanoTextiles.astro";
+import Convection from "../components/content/Convection.astro";
+import FootShape from "../components/content/FootShape.astro";
+import MobileApp from "../components/content/MobileApp.astro";
+import Customization from "../components/content/Customization.astro";
+import Innovation from "../components/content/Innovation.astro";
+import MadeInRussia from "../components/content/MadeInRussia.astro";
+
+import backgroundHero from "/src/assets/img/bg/FFFFFF/1.jpg";
+import backgroundNano from "/src/assets/img/bg/FFFFFF/2.jpg";
+import backgroundConvection from "/src/assets/img/bg/FFFFFF/3.jpg";
+import backgroundShape from "/src/assets/img/bg/FFFFFF/4.jpg";
+import backgroundMobileApp from "/src/assets/img/bg/FFFFFF/5.jpg";
+import backgroundCustom from "/src/assets/img/bg/FFFFFF/6.jpg";
+import backgroundInnovation from "/src/assets/img/bg/FFFFFF/7.jpg";
+import backgroundMadeIn from "/src/assets/img/bg/FFFFFF/8.jpg";
+import backgroundFooter from "/src/assets/img/bg/FFFFFF/10.jpg";
 ---
 
 <style is:global>
 	:root {
 		--color-product: var(--color-product-royal);
-		--button-text-color: #000;
+		--button-text-color: var(--color-black);
 	}
 </style>
 
 <Layout title="Рояль">
 	<Header/>
 	<main>
-		<!-- HERO -->
-		<!-- НАНО ТЕКСТИЛЬ -->
-		<!-- КОНВЕКЦИЯ -->
-		<!-- ФОРМА СТОПЫ -->
-		<!-- КАСТОМИЗАЦИЯ -->
-		<!-- ИННОВАЦИОННЫЕ -->
-		<!-- СДЕЛАНО В РОССИИ -->
-		<!-- КОНСТРУКТОР -->
+		<HeroRoyal backgroundImage={backgroundHero}/>
+		<NanoTextiles backgroundImage={backgroundNano} invert={true}/>
+		<Convection backgroundImage={backgroundConvection}/>
+		<FootShape backgroundImage={backgroundShape}/>
+		<MobileApp backgroundImage={backgroundMobileApp} invert={true}/>
+		<Customization backgroundImage={backgroundCustom}/>
+		<Innovation backgroundImage={backgroundInnovation}/>
+		<MadeInRussia backgroundImage={backgroundMadeIn}/>
 	</main>
-	<Footer />
+	<Footer backgroundImage={backgroundFooter}/>
 </Layout>
-
-<style></style>
 
 <script></script>

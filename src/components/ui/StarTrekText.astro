@@ -1,12 +1,12 @@
 ---
 const {
   as: Element = "div",
-  class: providedProps,
+  class: className,
   ...props
 } = Astro.props;
 ---
 
-<Element {...props} class:list={["font_star-trek", providedProps]}>
+<Element {...props} class:list={["font_star-trek", className]}>
   <slot />
 </Element>
 

@@ -34,9 +34,12 @@
     --color-white: #FFFFFF;
     --color-lightgray: #FEFEFE;
     --color-black: #010000;
-    --color-product: #FC1447;
+
+    --color-product-primego: #FC1447;
     --color-product-royal: #FFF;
     --color-product-empire: #FFCD01;
+
+    --color-product: var(--color-product-primego); // default, но перебивается на страницах
 
     --text-color: var(--color-white);
     --text-product: var(--color-product);

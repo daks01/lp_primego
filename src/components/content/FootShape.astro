@@ -1,0 +1,38 @@
+---
+import Section from "../ui/Section.astro";
+import StarTrekText from "../ui/StarTrekText.astro";
+
+const { backgroundImage } = Astro.props;
+
+---
+<Section backgroundImage={backgroundImage}>
+	<header>
+		<StarTrekText as="h1">Форма стопы</StarTrekText>
+	</header>
+	<blockquote>
+		<p>
+			Трехмерное термическое формование, учет индвидуальной формы
+			стопы
+		</p>
+		<p>Подошва учитывает форму стопы, не деформирует ногу</p>
+		<p>Адаптация подошвы к стопе для здоровых ног</p>
+	</blockquote>
+
+	<!-- <Image
+			width="208"
+			height="208"
+			src={myImportedImage}
+			alt=""
+			loading="lazy"
+		/>
+		<Image
+			width="1030"
+			height="596"
+			src={myImportedImage}
+			alt=""
+			loading="lazy"
+		/> -->
+</Section>
+
+<style lang="scss">
+</style>

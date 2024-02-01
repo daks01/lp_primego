@@ -1,8 +1,8 @@
 ---
 import Section from "../ui/Section.astro";
-import FooterForm from "./FooterForm.astro";
+import FooterForm from "../content/FooterForm.astro";
 
-import backgroundFooter from "/src/assets/img/section-bg/footer.webp";
+const { backgroundImage } = Astro.props;
 
 const today = new Date();
 const currentYear = today.getFullYear();
@@ -12,7 +12,7 @@ const currentYear = today.getFullYear();
 	as="footer"
 	class="footer"
 	width="1440"
-	style={{ backgroundImage: `url(${backgroundFooter.src})` }}
+	backgroundImage={backgroundImage}
 >
 	<FooterForm />
 	<div class="footer__copyright">

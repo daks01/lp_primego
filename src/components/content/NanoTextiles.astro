@@ -1,0 +1,35 @@
+---
+import Section from "../ui/Section.astro";
+import StarTrekText from "../ui/StarTrekText.astro";
+
+const { backgroundImage, invert = false } = Astro.props;
+
+---
+<Section backgroundImage={backgroundImage} invert={invert}>
+	<header>
+		<StarTrekText as="h1">
+			НАНО <br />ТЕКСТИЛЬ
+		</StarTrekText>
+	</header>
+	<blockquote>
+		<p>
+			Гидрофобная структура нити, не задерживает влагу,
+			предотвращая развитие бактерий
+		</p>
+		<p>
+			Из натуральных волокон, антибактериальные и гидрофобные
+			свойства, идеально для кроссовок
+		</p>
+		<p>Технологичный и инновационный для спортивной обуви</p>
+	</blockquote>
+	<!-- <Image
+			width="1030"
+			height="596"
+			src={myImportedImage}
+			alt=""
+			loading="lazy"
+		/> -->
+</Section>
+
+<style lang="scss">
+</style>

@@ -1,0 +1,27 @@
+---
+import Section from "../ui/Section.astro";
+import StarTrekText from "../ui/StarTrekText.astro";
+
+const { backgroundImage } = Astro.props;
+
+---
+<Section backgroundImage={backgroundImage}>
+	<header>
+		<StarTrekText as="h1">Сделано в России</StarTrekText>
+	</header>
+	<blockquote>
+		<p>Произведено в России</p>
+		<p>Разработано в России</p>
+		<p>Из российских материалов и технологий</p>
+	</blockquote>
+	<!-- <Image
+			width="1030"
+			height="596"
+			src={myImportedImage}
+			alt=""
+			loading="lazy"
+		/> -->
+</Section>
+
+<style lang="scss">
+</style>

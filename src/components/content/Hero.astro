@@ -1,0 +1,69 @@
+---
+import Section from "../ui/Section.astro";
+import HeroSlider from "./HeroSlider.astro";
+import StarTrekText from "../ui/StarTrekText.astro";
+import Button from "../ui/Button.astro";
+
+const { backgroundImage } = Astro.props;
+---
+
+<Section backgroundImage={backgroundImage}>
+	<div class="hero">
+		<StarTrekText as="span" class="text-on-background" aria-hidden="true">
+			Primego
+		</StarTrekText>
+		<StarTrekText as="h1">Primego</StarTrekText>
+		<div>
+			<p class="lead">Ipsum consectetur</p>
+			<p>
+				Lorem ipsum dolor sit amet consectetur. Viverra quis eu turpis
+				faucibus nec id.
+			</p>
+			<Button as="a" href="#customizer" class="button_ticket">
+				Создай свой образ
+			</Button>
+		</div>
+	</div>
+	<div class="heroSlider-wrapper">
+		<HeroSlider />
+	</div>
+</Section>
+
+<style lang="scss">
+	@keyframes slideInFromLeft {
+		0% {
+			transform: scale(1.1);
+			opacity: 0;
+		}
+	}
+	.text-on-background {
+		font-size: min(60vw, var(--container-width-in-px) / 100 * 60);
+		margin: 0;
+		position: absolute;
+		top: var(--size-5);
+		left: 0;
+		width: 100%;
+		height: 100vh;
+		overflow: hidden;
+		display: flex;
+		justify-content: center;
+		opacity: 0.15;
+		z-index: -1;
+		user-select: none;
+		animation: 2s ease-out 0s 1 slideInFromLeft;
+	}
+	.hero {
+		padding-left: calc(var(--adaptive-pixel) * 200);
+		width: 50%;
+	}
+	.heroSlider-wrapper {
+		display: flex;
+		justify-content: flex-end;
+		margin: calc(var(--adaptive-pixel) * 460 * -1) 0 0;
+	}
+	@media screen and (width < 1024px) {
+		.text-on-background {
+			font-size: 53vw;
+		}
+	}
+</style>

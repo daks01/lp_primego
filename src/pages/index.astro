@@ -2,454 +2,51 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
-import Section from "../components/ui/Section.astro";
-import HeroSlider from "../components/content/HeroSlider.astro";
-import StarTrekText from "../components/ui/StarTrekText.astro";
-import Button from "../components/ui/Button.astro";
 
-import Customizator from "../components/content/Customizator.vue";
+import Hero from "../components/content/Hero.astro";
+import LimitCollection from "../components/content/LimitCollection.astro";
+import NanoTextiles from "../components/content/NanoTextiles.astro";
+import Convection from "../components/content/Convection.astro";
+import FootShape from "../components/content/FootShape.astro";
+import MobileApp from "../components/content/MobileApp.astro";
+import Customization from "../components/content/Customization.astro";
+import Innovation from "../components/content/Innovation.astro";
+import MadeInRussia from "../components/content/MadeInRussia.astro";
+import Customizator from "../components/content/Customizator.astro";
 
-import { Image } from "astro:assets";
-import myImportedImage from "/src/assets/img/customised_pattern.png";
-import backgroundHero from "/src/assets/img/section-bg/hero.webp";
-import backgroundNano from "/src/assets/img/section-bg/nano.webp";
-import backgroundConvection from "/src/assets/img/section-bg/convection.webp";
-import backgroundForm from "/src/assets/img/section-bg/form.webp";
-import backgroundCustom from "/src/assets/img/section-bg/custom.webp";
-import backgroundInnovation from "/src/assets/img/section-bg/innovation.webp";
-import backgroundMadeIn from "/src/assets/img/section-bg/made-in.webp";
-import backgroundCustomizer from "/src/assets/img/section-bg/customizer.webp";
+import backgroundHero from "/src/assets/img/bg/FC1447/1.jpg";
+import backgroundNano from "/src/assets/img/bg/FC1447/2.jpg";
+import backgroundConvection from "/src/assets/img/bg/FC1447/3.jpg";
+import backgroundShape from "/src/assets/img/bg/FC1447/4.jpg";
+import backgroundMobileApp from "/src/assets/img/bg/FC1447/5.jpg";
+import backgroundCustom from "/src/assets/img/bg/FC1447/6.jpg";
+import backgroundInnovation from "/src/assets/img/bg/FC1447/7.jpg";
+import backgroundMadeIn from "/src/assets/img/bg/FC1447/8.jpg";
+import backgroundCustomizer from "/src/assets/img/bg/FC1447/9.jpg";
+import backgroundFooter from "/src/assets/img/bg/FC1447/10.jpg";
 ---
+
+<style is:global>
+	:root {
+		--color-product: var(--color-product-primego);
+	}
+</style>
 
 <Layout title="Primego">
 	<Header hideBuyButton="true"/>
 	<main>
-		<!-- Hero -->
-		<Section
-			class="section"
-			style={{ backgroundImage: `url(${backgroundHero.src})` }}
-		>
-			<div class="hero">
-				<StarTrekText
-					as="span"
-					class="text-on-background"
-					aria-hidden="true"
-				>
-					Primego
-				</StarTrekText>
-				<StarTrekText as="h1">Primego</StarTrekText>
-				<div>
-					<p class="lead">Ipsum consectetur</p>
-					<p>
-						Lorem ipsum dolor sit amet consectetur. Viverra quis eu
-						turpis faucibus nec id.
-					</p>
-					<Button as="a" href="#customizer" class="button_ticket">Создай свой образ</Button>
-				</div>
-			</div>
-			<div class="heroSlider-wrapper">
-				<HeroSlider />
-			</div>
-
-			<style lang="scss">
-				@keyframes slideInFromLeft {
-					0% {
-						transform: scale(1.1);
-						opacity: 0;
-					}	
-				}
-				.text-on-background {
-					font-size: min(60vw, var(--container-width-in-px) / 100 * 60);
-					margin: 0;
-					position: absolute;
-					top: var(--size-5);
-					left: 0;
-					width: 100%;
-					height: 100vh;
-					overflow: hidden;
-					display: flex;
-					justify-content: center;
-					opacity: 0.15;
-					z-index: -1;
-					user-select: none;
-					animation: 2s ease-out 0s 1 slideInFromLeft;
-				}
-				.hero {
-					padding-left: calc(var(--adaptive-pixel) * 200);
-					width: 50%;
-				}
-				.heroSlider-wrapper {
-					display: flex;
-					justify-content: flex-end;
-					margin: calc(var(--adaptive-pixel) * 460 * -1) 0 0;
-				}
-				@media screen and (width < 1024px) {
-					.text-on-background {
-						font-size: 53vw;
-					}
-				}
-			</style>
-		</Section>
-		<!-- ЛИМИТКА -->
-		<Section>
-			<header class="limit-header">
-				<StarTrekText as="h4" class="limit-header__title">
-					лимитированные коллекции
-				</StarTrekText>
-				<p>Уникальный стиль под уникальных людей</p>
-			</header>
-			<nav>
-				<ul class="menu">
-					<li class="menu__item">
-						<a href="/empire" class="menu__link">
-							<div class="card">
-								<StarTrekText class="card__title" as="span" style="color: var(--color-product-empire)">
-									ИМПЕРИЯ
-									<sup>
-										<svg width="63" height="41" viewBox="0 0 63 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M0.789332 40.061L42.4187 0.837844C42.7209 0.557294 43.1848 0.870216 43.0554 1.24788L36.4408 19.7534C36.3437 20.0232 36.5487 20.3037 36.8293 20.3037L61.8954 20.2174C62.3054 20.2174 62.4349 20.7569 62.0788 20.9512L41.5339 31.7847C41.221 31.9466 41.2534 32.3998 41.5663 32.5293L59.9316 39.9747C60.3308 40.1365 60.2121 40.7192 59.7805 40.7192L1.05909 40.73C0.703008 40.73 0.530362 40.3092 0.789332 40.061Z" 
-											fill="currentColor)"/>
-										</svg>
-									</sup>
-								</StarTrekText>
-								<br>
-								<span>Непобедимый стиль</span>
-							</div>
-							<div>
-								<img src="" alt="" role="presentation">
-								<span class="card__price">27&thinsp;700&thinsp;₽</span>
-							</div>
-						</a>
-					</li>
-					<li class="menu__item">
-						<a href="/royal" class="menu__link">
-							<div class="card">
-								<StarTrekText div class="card__title" as="span h3" style="color: var(--color-product-royal)">
-									Рояль
-									<sup>
-										<svg width="63" height="41" viewBox="0 0 63 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-											<path d="M0.789332 40.061L42.4187 0.837844C42.7209 0.557294 43.1848 0.870216 43.0554 1.24788L36.4408 19.7534C36.3437 20.0232 36.5487 20.3037 36.8293 20.3037L61.8954 20.2174C62.3054 20.2174 62.4349 20.7569 62.0788 20.9512L41.5339 31.7847C41.221 31.9466 41.2534 32.3998 41.5663 32.5293L59.9316 39.9747C60.3308 40.1365 60.2121 40.7192 59.7805 40.7192L1.05909 40.73C0.703008 40.73 0.530362 40.3092 0.789332 40.061Z" 
-											fill="currentColor"/>
-										</svg>
-									</sup>
-								</StarTrekText>
-								<br>
-								<span>Уникальный стиль</span>
-							</div>
-							<div>
-								<img src="" alt="" role="presentation">
-								<span class="card__price">27&thinsp;700&thinsp;₽</span>
-							</div>
-						</a>
-					</li>
-				</ul>
-			</nav>
-			<style>
-				.limit-header {
-					text-align: center;
-				}
-				.limit-header__title {
-					font-size: calc(var(--adaptive-pixel) * 80);
-				}
-				.menu {
-					margin: 0;
-					padding: 0;
-					display: flex;
-					justify-content: space-between;
-				}
-				.menu__item {
-					list-style-type: none;
-					padding: 0;
-					margin: 0;
-					flex-basis: 45%;
-				}
-				.menu__link {
-					display: block;
-					text-decoration: none;
-					display: flex;
-					align-items: flex-end;
-					justify-content: space-between;
-					gap: calc(var(--adaptive-pixel) * 70);
-					color: var(--text-color)
-				}
-				.card {}
-				.card__title {
-					font-size: calc(var(--adaptive-pixel) * 128);
-				}
-				.card__price {
-					font-weight: 700;
-					font-size: calc(var(--adaptive-pixel) * 36);
-					padding: calc(var(--adaptive-pixel) * 113) calc(var(--adaptive-pixel) * 15) calc(var(--adaptive-pixel) * 25);
-					color: var(--text-color);
-					background-color: var(--color-product);
-					white-space: nowrap;
-				}
-			</style>
-		</Section>
-		<!-- НАНО ТЕКСТИЛЬ -->
-		<Section
-			class="section"
-			style={{ backgroundImage: `url(${backgroundNano.src})` }}
-		>
-			<header>
-				<StarTrekText as="h1">
-					НАНО <br />ТЕКСТИЛЬ
-				</StarTrekText>
-			</header>
-			<blockquote>
-				<p>
-					Гидрофобная структура нити, не задерживает влагу,
-					предотвращая развитие бактерий
-				</p>
-				<p>
-					Из натуральных волокон, антибактериальные и гидрофобные
-					свойства, идеально для кроссовок
-				</p>
-				<p>Технологичный и инновационный для спортивной обуви</p>
-			</blockquote>
-			<!-- <Image
-					width="1030"
-					height="596"
-					src={myImportedImage}
-					alt=""
-					loading="lazy"
-				/> -->
-		</Section>
-		<!-- Конвекция -->
-		<Section
-			class="section"
-			style={{ backgroundImage: `url(${backgroundConvection.src})` }}
-		>
-			<!-- <div style="display: flex; justify-content: space-between">
-					<div class="">
-						<div>
-							<span class="h4">Обычная подкладка</span><br />
-							воздух НЕ проходит
-						</div>
-						<Image
-							width="208"
-							height="208"
-							src={myImportedImage}
-							alt=""
-							loading="lazy"
-						/>
-					</div>
-					<div class="">
-						<div>
-							<span class="h4">Капиллярная мембрана</span><br />
-							воздух циркулирует
-						</div>
-						<Image
-							width="208"
-							height="208"
-							src={myImportedImage}
-							alt=""
-							loading="lazy"
-						/>
-					</div>
-				</div> -->
-			<header>
-				<StarTrekText as="h1">Конвекция</StarTrekText>
-			</header>
-			<blockquote>
-				<p>Капилярная конвекция для максимального комфорта</p>
-				<p>
-					Проницаемая трехмерная капиллярная мембрана, естественная
-					терморегуляция
-				</p>
-				<p>
-					Теплорегулирующая подкладка, обеспечивает вентиляцию,
-					предотвращает перегрев
-				</p>
-			</blockquote>
-			<!-- <Image
-					width="1030"
-					height="596"
-					src={myImportedImage}
-					alt=""
-					loading="lazy"
-				/> -->
-		</Section>
-
-		<!-- Форма стопы -->
-		<Section
-			class="section"
-			style={{ backgroundImage: `url(${backgroundForm.src})` }}
-		>
-			<header>
-				<StarTrekText as="h1">Форма стопы</StarTrekText>
-			</header>
-			<blockquote>
-				<p>
-					Трехмерное термическое формование, учет индвидуальной формы
-					стопы
-				</p>
-				<p>Подошва учитывает форму стопы, не деформирует ногу</p>
-				<p>Адаптация подошвы к стопе для здоровых ног</p>
-			</blockquote>
-
-			<!-- <Image
-					width="208"
-					height="208"
-					src={myImportedImage}
-					alt=""
-					loading="lazy"
-				/>
-				<Image
-					width="1030"
-					height="596"
-					src={myImportedImage}
-					alt=""
-					loading="lazy"
-				/> -->
-		</Section>
-		<!-- Кастомизация -->
-		<Section
-			class="section"
-			style={{ backgroundImage: `url(${backgroundCustom.src})` }}
-		>
-			<header>
-				<StarTrekText as="h1">Кастомизация</StarTrekText>
-			</header>
-			<blockquote>
-				<p>
-					Возможность создания уникальной пары кроссовок с
-					индивидуальным цветовым решением и материалом
-				</p>
-				<p>
-					Неповторимые кроссовоки, отражают личность владельца, легко
-					адаптируется под стиль одежды
-				</p>
-				<p>
-					Твои идеи для твоей индивидуальности через выбор цвета и
-					материала обуви
-				</p>
-			</blockquote>
-
-			<!-- <Image
-					width="208"
-					height="208"
-					src={myImportedImage}
-					alt=""
-					loading="lazy"
-				/>
-				<Image
-					width="1030"
-					height="596"
-					src={myImportedImage}
-					alt=""
-					loading="lazy"
-				/> -->
-		</Section>
-		<!-- Инновационные -->
-		<Section
-			class="section"
-			style={{ backgroundImage: `url(${backgroundInnovation.src})` }}
-		>
-			<!-- <div style="display: flex; justify-content: space-between">
-					<div class="">
-						<div>
-							<span class="h4">Антибактериальные</span>
-						</div>
-						<Image
-							width="180"
-							height="180"
-							src={myImportedImage}
-							alt=""
-							loading="lazy"
-						/>
-					</div>
-					<div class="">
-						<div>
-							<span class="h4">Мягкие</span>
-						</div>
-						<Image
-							width="180"
-							height="180"
-							src={myImportedImage}
-							alt=""
-							loading="lazy"
-						/>
-					</div>
-					<div class="">
-						<div>
-							<span class="h4">Воздухопроницаемые</span>
-						</div>
-						<Image
-							width="180"
-							height="180"
-							src={myImportedImage}
-							alt=""
-							loading="lazy"
-						/>
-					</div>
-					<div class="">
-						<div>
-							<span class="h4">Упругие</span>
-						</div>
-						<Image
-							width="180"
-							height="180"
-							src={myImportedImage}
-							alt=""
-							loading="lazy"
-						/>
-					</div>
-				</div> -->
-			<header>
-				<StarTrekText as="h1">Инновационные</StarTrekText>
-			</header>
-			<blockquote>
-				<p>
-					Искусственный интеллект в процессе разработки и производства
-					позволяет создавать уникальные и передовые решения
-				</p>
-				<p>
-					Инновационные технологий для кроссовок нового поколения,
-					обеспечивающих высокий уровень комфорта и функциональности
-				</p>
-				<p>Кроссовки, которые задают новые стандарты.Твои стандарты</p>
-			</blockquote>
-
-			<!-- <Image
-					width="1030"
-					height="596"
-					src={myImportedImage}
-					alt=""
-					loading="lazy"
-				/> -->
-		</Section>
-		<!-- Сделано в России -->
-		<Section
-			class="section"
-			style={{ backgroundImage: `url(${backgroundMadeIn.src})` }}
-		>
-			<header>
-				<StarTrekText as="h1">Сделано в России</StarTrekText>
-			</header>
-			<blockquote>
-				<p>Произведено в России</p>
-				<p>Разработано в России</p>
-				<p>Из российских материалов и технологий</p>
-			</blockquote>
-			<!-- <Image
-					width="1030"
-					height="596"
-					src={myImportedImage}
-					alt=""
-					loading="lazy"
-				/> -->
-		</Section>
-
-		<Section
-			class="section"
-			id="customizer"
-			style={{ backgroundImage: `url(${backgroundCustomizer.src})` }}
-		>
-			<Customizator client:load data-animate />
-		</Section>
+		<Hero backgroundImage={backgroundHero}/>
+		<LimitCollection/>
+		<NanoTextiles backgroundImage={backgroundNano}/>
+		<Convection backgroundImage={backgroundConvection}/>
+		<FootShape backgroundImage={backgroundShape}/>
+		<MobileApp backgroundImage={backgroundMobileApp}/>
+		<Customization backgroundImage={backgroundCustom}/>
+		<Innovation backgroundImage={backgroundInnovation}/>
+		<MadeInRussia backgroundImage={backgroundMadeIn}/>
+		<Customizator backgroundImage={backgroundCustomizer}/>
 	</main>
-	<Footer />
+	<Footer backgroundImage={backgroundFooter}/>
 </Layout>
 
 <script></script>

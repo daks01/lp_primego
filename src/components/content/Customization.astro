@@ -1,0 +1,44 @@
+---
+import Section from "../ui/Section.astro";
+import StarTrekText from "../ui/StarTrekText.astro";
+
+const { backgroundImage } = Astro.props;
+
+---
+<Section backgroundImage={backgroundImage}>
+	<header>
+		<StarTrekText as="h1">Кастомизация</StarTrekText>
+	</header>
+	<blockquote>
+		<p>
+			Возможность создания уникальной пары кроссовок с
+			индивидуальным цветовым решением и материалом
+		</p>
+		<p>
+			Неповторимые кроссовоки, отражают личность владельца, легко
+			адаптируется под стиль одежды
+		</p>
+		<p>
+			Твои идеи для твоей индивидуальности через выбор цвета и
+			материала обуви
+		</p>
+	</blockquote>
+
+	<!-- <Image
+			width="208"
+			height="208"
+			src={myImportedImage}
+			alt=""
+			loading="lazy"
+		/>
+		<Image
+			width="1030"
+			height="596"
+			src={myImportedImage}
+			alt=""
+			loading="lazy"
+		/> -->
+</Section>
+
+<style lang="scss">
+</style>

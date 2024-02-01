@@ -1,0 +1,61 @@
+---
+import Section from "../ui/Section.astro";
+import StarTrekText from "../ui/StarTrekText.astro";
+
+const { backgroundImage } = Astro.props;
+
+---
+<Section backgroundImage={backgroundImage}>
+	<!-- <div style="display: flex; justify-content: space-between">
+			<div class="">
+				<div>
+					<span class="h4">Обычная подкладка</span><br />
+					воздух НЕ проходит
+				</div>
+				<Image
+					width="208"
+					height="208"
+					src={myImportedImage}
+					alt=""
+					loading="lazy"
+				/>
+			</div>
+			<div class="">
+				<div>
+					<span class="h4">Капиллярная мембрана</span><br />
+					воздух циркулирует
+				</div>
+				<Image
+					width="208"
+					height="208"
+					src={myImportedImage}
+					alt=""
+					loading="lazy"
+				/>
+			</div>
+		</div> -->
+	<header>
+		<StarTrekText as="h1">Конвекция</StarTrekText>
+	</header>
+	<blockquote>
+		<p>Капилярная конвекция для максимального комфорта</p>
+		<p>
+			Проницаемая трехмерная капиллярная мембрана, естественная
+			терморегуляция
+		</p>
+		<p>
+			Теплорегулирующая подкладка, обеспечивает вентиляцию,
+			предотвращает перегрев
+		</p>
+	</blockquote>
+	<!-- <Image
+			width="1030"
+			height="596"
+			src={myImportedImage}
+			alt=""
+			loading="lazy"
+		/> -->
+</Section>
+
+<style lang="scss">
+</style>

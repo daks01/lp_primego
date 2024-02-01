@@ -1,0 +1,100 @@
+---
+import Section from "../ui/Section.astro";
+import StarTrekText from "../ui/StarTrekText.astro";
+
+---
+<Section>
+	<header class="limit-header">
+		<StarTrekText as="h4" class="limit-header__title">
+			лимитированные коллекции
+		</StarTrekText>
+		<p>Уникальный стиль под уникальных людей</p>
+	</header>
+	<nav>
+		<ul class="menu">
+			<li class="menu__item">
+				<a href="/empire" class="menu__link">
+					<div class="card">
+						<StarTrekText class="card__title" as="span" style="color: var(--color-product-empire)">
+							ИМПЕРИЯ
+							<sup>
+								<svg width="63" height="41" viewBox="0 0 63 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M0.789332 40.061L42.4187 0.837844C42.7209 0.557294 43.1848 0.870216 43.0554 1.24788L36.4408 19.7534C36.3437 20.0232 36.5487 20.3037 36.8293 20.3037L61.8954 20.2174C62.3054 20.2174 62.4349 20.7569 62.0788 20.9512L41.5339 31.7847C41.221 31.9466 41.2534 32.3998 41.5663 32.5293L59.9316 39.9747C60.3308 40.1365 60.2121 40.7192 59.7805 40.7192L1.05909 40.73C0.703008 40.73 0.530362 40.3092 0.789332 40.061Z" 
+									fill="currentColor)"/>
+								</svg>
+							</sup>
+						</StarTrekText>
+						<br>
+						<span>Непобедимый стиль</span>
+					</div>
+					<div>
+						<img src="" alt="" role="presentation">
+						<span class="card__price">27&thinsp;700&thinsp;₽</span>
+					</div>
+				</a>
+			</li>
+			<li class="menu__item">
+				<a href="/royal" class="menu__link">
+					<div class="card">
+						<StarTrekText div class="card__title" as="span h3" style="color: var(--color-product-royal)">
+							Рояль
+							<sup>
+								<svg width="63" height="41" viewBox="0 0 63 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M0.789332 40.061L42.4187 0.837844C42.7209 0.557294 43.1848 0.870216 43.0554 1.24788L36.4408 19.7534C36.3437 20.0232 36.5487 20.3037 36.8293 20.3037L61.8954 20.2174C62.3054 20.2174 62.4349 20.7569 62.0788 20.9512L41.5339 31.7847C41.221 31.9466 41.2534 32.3998 41.5663 32.5293L59.9316 39.9747C60.3308 40.1365 60.2121 40.7192 59.7805 40.7192L1.05909 40.73C0.703008 40.73 0.530362 40.3092 0.789332 40.061Z" 
+									fill="currentColor"/>
+								</svg>
+							</sup>
+						</StarTrekText>
+						<br>
+						<span>Уникальный стиль</span>
+					</div>
+					<div>
+						<img src="" alt="" role="presentation">
+						<span class="card__price">27&thinsp;700&thinsp;₽</span>
+					</div>
+				</a>
+			</li>
+		</ul>
+	</nav>
+	<style>
+		.limit-header {
+			text-align: center;
+		}
+		.limit-header__title {
+			font-size: calc(var(--adaptive-pixel) * 80);
+		}
+		.menu {
+			margin: 0;
+			padding: 0;
+			display: flex;
+			justify-content: space-between;
+		}
+		.menu__item {
+			list-style-type: none;
+			padding: 0;
+			margin: 0;
+			flex-basis: 45%;
+		}
+		.menu__link {
+			display: block;
+			text-decoration: none;
+			display: flex;
+			align-items: flex-end;
+			justify-content: space-between;
+			gap: calc(var(--adaptive-pixel) * 70);
+			color: var(--text-color)
+		}
+		.card {}
+		.card__title {
+			font-size: calc(var(--adaptive-pixel) * 128);
+		}
+		.card__price {
+			font-weight: 700;
+			font-size: calc(var(--adaptive-pixel) * 36);
+			padding: calc(var(--adaptive-pixel) * 113) calc(var(--adaptive-pixel) * 15) calc(var(--adaptive-pixel) * 25);
+			color: var(--text-color);
+			background-color: var(--color-product);
+			white-space: nowrap;
+		}
+	</style>
+</Section>
