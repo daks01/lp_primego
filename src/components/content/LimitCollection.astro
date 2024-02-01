@@ -20,7 +20,7 @@ import StarTrekText from "../ui/StarTrekText.astro";
 							<sup>
 								<svg width="63" height="41" viewBox="0 0 63 41" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path d="M0.789332 40.061L42.4187 0.837844C42.7209 0.557294 43.1848 0.870216 43.0554 1.24788L36.4408 19.7534C36.3437 20.0232 36.5487 20.3037 36.8293 20.3037L61.8954 20.2174C62.3054 20.2174 62.4349 20.7569 62.0788 20.9512L41.5339 31.7847C41.221 31.9466 41.2534 32.3998 41.5663 32.5293L59.9316 39.9747C60.3308 40.1365 60.2121 40.7192 59.7805 40.7192L1.05909 40.73C0.703008 40.73 0.530362 40.3092 0.789332 40.061Z" 
-									fill="currentColor)"/>
+									fill="currentColor"/>
 								</svg>
 							</sup>
 						</StarTrekText>
@@ -67,7 +67,7 @@ import StarTrekText from "../ui/StarTrekText.astro";
 			margin: 0;
 			padding: 0;
 			display: flex;
-			justify-content: space-between;
+			justify-content: center;
 		}
 		.menu__item {
 			list-style-type: none;
@@ -78,8 +78,8 @@ import StarTrekText from "../ui/StarTrekText.astro";
 		.menu__link {
 			display: block;
 			text-decoration: none;
-			display: flex;
-			align-items: flex-end;
+			display: inline-flex;
+			align-items: flex-start;
 			justify-content: space-between;
 			gap: calc(var(--adaptive-pixel) * 70);
 			color: var(--text-color)
