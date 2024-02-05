@@ -1,3 +1,12 @@
+> [!IMPORTANT]
+> перед деплоем в прод
+> нужно ОБЯЗАТЕЛЬНО указать site url и og:meta-tags в файлах:
+> ├── [astro.config.mjs](astro.config.mjs)
+> ├── src/
+> │   ├── layouts/
+> │   │   ├── [Layout.astro](src/layouts/Layout.astro)
+
+
 # Readme
 
 > Сайт собран с помощью Astro.Build 

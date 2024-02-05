@@ -1,6 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import StarTrekText from "../components/ui/StarTrekText.astro";
+import Button from "../components/ui/Button.astro";
 ---
 
 <Layout>
@@ -26,7 +27,7 @@ import StarTrekText from "../components/ui/StarTrekText.astro";
 				уж и много на отдельно взятом сайте. Например, на главной
 				Яндекса их всего 4. На странице продукта Apple — 8.
 			</p>
-			<button>Label</button>
+			<Button>Label</Button>
 			<h2>H2. Как устроена система</h2>
 			<p>
 				Все элементы страницы группируются в блоки. Блоки выстраиваются
@@ -36,7 +37,19 @@ import StarTrekText from "../components/ui/StarTrekText.astro";
 				или заголовком h3 и параграфом. Отступ шестого уровня(48px)
 				отбивает два таких блока. И так далее.
 			</p>
-			<button>Label</button><button>+ Label</button>
+			<Button>Label</Button>
+			<br>
+			<br>
+			<Button class="button_ticket">
+				&emsp;&emsp;
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M12 5V19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+				&thinsp;
+				Label
+				&emsp;&emsp;
+			</Button>
 			<h3>
 				H3. Закон Хика и геометрическая прогрессия для определения
 				расстояний

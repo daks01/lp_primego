@@ -3,15 +3,16 @@ import Section from "../ui/Section.astro";
 import HeroSlider from "./HeroSlider.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
 import Button from "../ui/Button.astro";
+import LimitCollection from "./LimitCollection.astro";
 
 const { backgroundImage } = Astro.props;
 ---
 
 <Section backgroundImage={backgroundImage}>
+	<StarTrekText as="span" class="text-on-background" aria-hidden="true">
+		Primego
+	</StarTrekText>
 	<div class="hero">
-		<StarTrekText as="span" class="text-on-background" aria-hidden="true">
-			Primego
-		</StarTrekText>
 		<StarTrekText as="h1">Primego</StarTrekText>
 		<div>
 			<p class="lead">Ipsum consectetur</p>
@@ -27,6 +28,7 @@ const { backgroundImage } = Astro.props;
 	<div class="heroSlider-wrapper">
 		<HeroSlider />
 	</div>
+	<LimitCollection/>
 </Section>
 
 <style lang="scss">
@@ -53,7 +55,6 @@ const { backgroundImage } = Astro.props;
 		animation: 2s ease-out 0s 1 slideInFromLeft;
 	}
 	.hero {
-		padding-left: calc(var(--adaptive-pixel) * 200);
 		width: 50%;
 	}
 	.heroSlider-wrapper {

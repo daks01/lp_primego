@@ -1,20 +1,19 @@
 ---
-import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
 
 ---
-<Section>
-	<header class="limit-header">
-		<StarTrekText as="h4" class="limit-header__title">
+<div class="limit">
+	<div class="limit-header">
+		<StarTrekText as="h4" class="limit-header__title" id="nav-title">
 			лимитированные коллекции
 		</StarTrekText>
 		<p>Уникальный стиль под уникальных людей</p>
-	</header>
-	<nav>
+	</div>
+	<nav aria-labeledby="nav-title">
 		<ul class="menu">
 			<li class="menu__item">
-				<a href="/empire" class="menu__link">
-					<div class="card">
+				<a href="/empire" class="menu__link card">
+					<div class="card__left">
 						<StarTrekText class="card__title" as="span" style="color: var(--color-product-empire)">
 							ИМПЕРИЯ
 							<sup>
@@ -24,18 +23,17 @@ import StarTrekText from "../ui/StarTrekText.astro";
 								</svg>
 							</sup>
 						</StarTrekText>
-						<br>
 						<span>Непобедимый стиль</span>
 					</div>
-					<div>
+					<div class="card__right">
 						<img src="" alt="" role="presentation">
 						<span class="card__price">27&thinsp;700&thinsp;₽</span>
 					</div>
 				</a>
 			</li>
 			<li class="menu__item">
-				<a href="/royal" class="menu__link">
-					<div class="card">
+				<a href="/royal" class="menu__link card">
+					<div class="card__left">
 						<StarTrekText div class="card__title" as="span h3" style="color: var(--color-product-royal)">
 							Рояль
 							<sup>
@@ -45,10 +43,9 @@ import StarTrekText from "../ui/StarTrekText.astro";
 								</svg>
 							</sup>
 						</StarTrekText>
-						<br>
 						<span>Уникальный стиль</span>
 					</div>
-					<div>
+					<div class="card__right">
 						<img src="" alt="" role="presentation">
 						<span class="card__price">27&thinsp;700&thinsp;₽</span>
 					</div>
@@ -56,45 +53,72 @@ import StarTrekText from "../ui/StarTrekText.astro";
 			</li>
 		</ul>
 	</nav>
-	<style>
-		.limit-header {
-			text-align: center;
-		}
-		.limit-header__title {
-			font-size: calc(var(--adaptive-pixel) * 80);
-		}
-		.menu {
-			margin: 0;
-			padding: 0;
-			display: flex;
-			justify-content: center;
-		}
-		.menu__item {
-			list-style-type: none;
-			padding: 0;
-			margin: 0;
-			flex-basis: 45%;
-		}
-		.menu__link {
-			display: block;
-			text-decoration: none;
-			display: inline-flex;
-			align-items: flex-start;
-			justify-content: space-between;
-			gap: calc(var(--adaptive-pixel) * 70);
-			color: var(--text-color)
-		}
-		.card {}
-		.card__title {
-			font-size: calc(var(--adaptive-pixel) * 128);
-		}
-		.card__price {
-			font-weight: 700;
-			font-size: calc(var(--adaptive-pixel) * 36);
-			padding: calc(var(--adaptive-pixel) * 113) calc(var(--adaptive-pixel) * 15) calc(var(--adaptive-pixel) * 25);
-			color: var(--text-color);
-			background-color: var(--color-product);
-			white-space: nowrap;
-		}
-	</style>
-</Section>
+</div>
+
+
+<style>
+	.limit {
+		margin-top: calc(var(--adaptive-pixel) * 90 * -1);
+		margin-bottom: calc(var(--adaptive-pixel) * 160);
+	}
+	.limit-header {
+		text-align: center;
+	}
+	.limit-header__title {
+		font-size: calc(var(--adaptive-pixel) * 80);
+	}
+	.menu {
+		margin: 0;
+		padding: 0;
+		display: flex;
+		justify-content: center;
+	}
+	.menu__item {
+		list-style-type: none;
+		padding: 0;
+		margin: 0;
+		flex-basis: 45%;
+	}
+	.menu__link {
+		text-decoration: none;
+		color: var(--text-color);
+	}
+	.card {
+		display: flex;
+		justify-content: space-between;
+		margin-right: calc(var(--adaptive-pixel) * 44);
+		background: linear-gradient(267.46deg, #8C1630 1.33%, var(--color-black) 97.51%);
+		padding: calc(var(--adaptive-pixel) * 40) calc(var(--adaptive-pixel) * 50) calc(var(--adaptive-pixel) * 25);
+	}
+	.card:hover, 
+	.card:focus-visible {
+		background: linear-gradient(267.46deg, #8C1630 15.33%, var(--color-black) 100%);
+	}
+	.card__left {
+		font-size: var(--heading-4);
+	}
+	.card__right {
+		color: var(--text-color);
+		background-color: var(--color-product);
+	}
+	.card__title {
+		font-size: calc(var(--adaptive-pixel) * 128);
+		margin-bottom: var(--size-2);
+		display: block;
+	}
+	.card__title sup {
+		top: -0.9em;
+	}
+	.card__price {
+		display: flex;
+		align-items: flex-end;
+		font-weight: 700;
+		font-size: calc(var(--adaptive-pixel) * 36);
+		padding: calc(var(--adaptive-pixel) * 25) calc(var(--adaptive-pixel) * 15);
+	
+		color: var(--text-color);
+		white-space: nowrap;
+		min-width: calc(var(--adaptive-pixel) * 190);
+		min-height: calc(var(--adaptive-pixel) * 180);
+	}
+</style>
