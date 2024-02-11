@@ -15,10 +15,12 @@ import Customizator from "../components/content/Customizator.astro";
 
 import backgroundHero from "/src/assets/img/bg/FC1447/1.jpg";
 import backgroundNano from "/src/assets/img/bg/FC1447/2.jpg";
+import imageNano from '/src/assets/img/nano-textiles/FC1447.png';
 import backgroundConvection from "/src/assets/img/bg/FC1447/3.jpg";
 import backgroundShape from "/src/assets/img/bg/FC1447/4.jpg";
 import backgroundMobileApp from "/src/assets/img/bg/FC1447/5.jpg";
 import backgroundCustom from "/src/assets/img/bg/FC1447/6.jpg";
+import imageCustomSneaker from '/src/assets/img/customization/Sneaker-FC1447.png';
 import backgroundInnovation from "/src/assets/img/bg/FC1447/7.jpg";
 import backgroundMadeIn from "/src/assets/img/bg/FC1447/8.jpg";
 import backgroundCustomizer from "/src/assets/img/bg/FC1447/9.jpg";
@@ -35,11 +37,11 @@ import backgroundFooter from "/src/assets/img/bg/FC1447/10.jpg";
 	<Header hideBuyButton="true"/>
 	<main>
 		<Hero backgroundImage={backgroundHero}/>
-		<NanoTextiles backgroundImage={backgroundNano}/>
+		<NanoTextiles backgroundImage={backgroundNano} mainImage={imageNano}/>
 		<Convection backgroundImage={backgroundConvection}/>
 		<FootShape backgroundImage={backgroundShape}/>
 		<MobileApp backgroundImage={backgroundMobileApp}/>
-		<Customization backgroundImage={backgroundCustom}/>
+		<Customization backgroundImage={backgroundCustom} mainImage={imageCustomSneaker}/>
 		<Innovation backgroundImage={backgroundInnovation}/>
 		<MadeInRussia backgroundImage={backgroundMadeIn}/>
 		<Customizator backgroundImage={backgroundCustomizer}/>

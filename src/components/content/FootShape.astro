@@ -1,38 +1,66 @@
 ---
+import { Image } from 'astro:assets';
 import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
+import imageSneaker from '../../assets/img/foot-shape/Sneaker.png';
+import imageScheme from '../../assets/img/foot-shape/scheme.svg?raw';
 
 const { backgroundImage } = Astro.props;
 
 ---
 <Section backgroundImage={backgroundImage}>
-	<header>
-		<StarTrekText as="h1">Форма стопы</StarTrekText>
-	</header>
-	<blockquote>
-		<p>
-			Трехмерное термическое формование, учет индвидуальной формы
-			стопы
-		</p>
-		<p>Подошва учитывает форму стопы, не деформирует ногу</p>
-		<p>Адаптация подошвы к стопе для здоровых ног</p>
-	</blockquote>
-
-	<!-- <Image
-			width="208"
-			height="208"
-			src={myImportedImage}
-			alt=""
-			loading="lazy"
-		/>
+	<div class="layout">
+		<header>
+			<StarTrekText as="h2" class="h1 title">
+				Форма<br/>
+				стопы
+			</StarTrekText>
+		</header>
+		<blockquote class="blockquote">
+			<p>
+				Трехмерное термическое формование, учет индвидуальной формы
+				стопы
+			</p>
+			<p>Подошва учитывает форму стопы, не деформирует ногу</p>
+			<p>Адаптация подошвы к стопе для здоровых ног</p>
+		</blockquote>
 		<Image
 			width="1030"
 			height="596"
-			src={myImportedImage}
+			src={imageSneaker}
 			alt=""
 			loading="lazy"
-		/> -->
+			class="bg-img"
+		/>
+		<div set:html={imageScheme} style="color: var(--color-product)" class="scheme"/>
+	</div>
 </Section>
 
 <style lang="scss">
+	.section {
+		padding: calc(var(--adaptive-pixel) * 50) 0 calc(var(--adaptive-pixel) * 40);
+	}
+	.layout {
+		padding-left: calc(var(--adaptive-pixel) * 150)
+	}
+	.title {
+		margin-top: 0;
+		display: flex;
+		text-align: right;
+	}
+	.blockquote {
+		max-width: calc(var(--adaptive-pixel) * 500);
+	}
+	.bg-img {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: auto;
+		height: calc(var(--adaptive-pixel) * 1120);
+		max-height: 100%;
+		z-index: -1;
+	}
+	.scheme {
+		width: calc(var(--adaptive-pixel) * 446);
+	}
 </style>

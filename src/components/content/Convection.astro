@@ -1,61 +1,108 @@
 ---
+import { Image } from 'astro:assets';
 import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
+import imageSneaker from '../../assets/img/convection/sneaker.svg?raw';
+import imageScheme1 from '../../assets/img/convection/scheme1.png';
+import imageScheme2 from '../../assets/img/convection/scheme2.png';
 
 const { backgroundImage } = Astro.props;
 
 ---
-<Section backgroundImage={backgroundImage}>
-	<!-- <div style="display: flex; justify-content: space-between">
-			<div class="">
-				<div>
-					<span class="h4">Обычная подкладка</span><br />
-					воздух НЕ проходит
-				</div>
+<Section backgroundImage={backgroundImage} class="section">
+	<div class="layout">
+		<ul class="list">
+			<li class="list-item">
+				<span class="h5 list-item__title">
+					Обычная<br>
+					подкладка
+				</span>
+				<span>воздух НЕ проходит</span>
 				<Image
-					width="208"
-					height="208"
-					src={myImportedImage}
+					width="180"
+					height="180"
+					src={imageScheme1}
 					alt=""
 					loading="lazy"
 				/>
-			</div>
-			<div class="">
-				<div>
-					<span class="h4">Капиллярная мембрана</span><br />
-					воздух циркулирует
-				</div>
+			</li>
+			<li class="list-item">
+				<span class="h5 list-item__title ">
+					Капиллярная<br>
+					мембрана
+				</span>
+				<span>воздух циркулирует</span>
 				<Image
-					width="208"
-					height="208"
-					src={myImportedImage}
+					width="180"
+					height="180"
+					src={imageScheme2}
 					alt=""
 					loading="lazy"
 				/>
-			</div>
-		</div> -->
-	<header>
-		<StarTrekText as="h1">Конвекция</StarTrekText>
-	</header>
-	<blockquote>
-		<p>Капилярная конвекция для максимального комфорта</p>
-		<p>
-			Проницаемая трехмерная капиллярная мембрана, естественная
-			терморегуляция
-		</p>
-		<p>
-			Теплорегулирующая подкладка, обеспечивает вентиляцию,
-			предотвращает перегрев
-		</p>
-	</blockquote>
-	<!-- <Image
-			width="1030"
-			height="596"
-			src={myImportedImage}
-			alt=""
-			loading="lazy"
-		/> -->
+			</li>
+		</ul>
+		<header>
+			<StarTrekText as="h2" class="h1 title">Конвекция</StarTrekText>
+		</header>
+		<blockquote class="blockquote">
+			<p>Капилярная конвекция для максимального комфорта</p>
+			<p>
+				Проницаемая трехмерная капиллярная мембрана, естественная
+				терморегуляция
+			</p>
+			<p>
+				Теплорегулирующая подкладка, обеспечивает вентиляцию,
+				предотвращает перегрев
+			</p>
+		</blockquote>
+	</div>
+	<div set:html={imageSneaker} style="color: var(--color-product)" class="bg-img"/>
 </Section>
 
 <style lang="scss">
+	.section {
+		padding: calc(var(--adaptive-pixel) * 80) 0 0;
+	}
+	.layout {
+		float: right;
+	}
+	.title {
+		margin-top: 0;
+		text-align: right;
+	}
+	.blockquote {
+		max-width: calc(var(--adaptive-pixel) * 590);
+	}
+	.bg-img :global(svg){
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: auto;
+		height: calc(var(--adaptive-pixel) * 970);
+		max-height: 100%;
+		z-index: -1;
+	}
+
+	.list {
+		display: flex;
+		gap: calc(var(--adaptive-pixel) * 90);
+		margin: 0 0 calc(var(--adaptive-pixel) * 30);
+		padding: 0;
+	}
+	.list-item {
+		padding: 0;
+		margin: 0;
+		list-style-type: none;
+		display: flex;
+		flex-direction: column;
+	}
+	.list-item__title {
+		margin-top: 0;
+		color: var(--color-product);
+	}
+	.list-item img {
+		margin-top: calc(var(--adaptive-pixel) * 15);
+		width: calc(var(--adaptive-pixel) * 208);
+		height: calc(var(--adaptive-pixel) * 208);
+	}
 </style>

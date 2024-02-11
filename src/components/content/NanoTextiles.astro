@@ -1,17 +1,18 @@
 ---
+import { Image } from 'astro:assets';
 import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
 
-const { backgroundImage, invert = false } = Astro.props;
+const { backgroundImage, mainImage, invert = false } = Astro.props;
 
 ---
-<Section backgroundImage={backgroundImage} invert={invert}>
+<Section backgroundImage={backgroundImage} invert={invert} class="section">
 	<header>
-		<StarTrekText as="h1">
+		<StarTrekText as="h2" class="h1 title">
 			НАНО <br />ТЕКСТИЛЬ
 		</StarTrekText>
 	</header>
-	<blockquote>
+	<blockquote class="blockquote">
 		<p>
 			Гидрофобная структура нити, не задерживает влагу,
 			предотвращая развитие бактерий
@@ -22,14 +23,35 @@ const { backgroundImage, invert = false } = Astro.props;
 		</p>
 		<p>Технологичный и инновационный для спортивной обуви</p>
 	</blockquote>
-	<!-- <Image
-			width="1030"
-			height="596"
-			src={myImportedImage}
-			alt=""
-			loading="lazy"
-		/> -->
+	<Image
+		width="1030"
+		height="596"
+		src={mainImage}
+		alt=""
+		loading="lazy"
+		class="bg-img"
+	/>
 </Section>
 
 <style lang="scss">
+	.section {
+		padding: calc(var(--adaptive-pixel) * 35) 0 calc(var(--adaptive-pixel) * 150);
+	}
+	.title {
+		display: flex;
+    	text-align: right;
+		margin-top: 0;
+	}
+	.blockquote {
+		max-width: calc(var(--adaptive-pixel) * 590);
+	}
+	.bg-img {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		width: auto;
+		height: calc(var(--adaptive-pixel) * 1024);
+		max-height: 100%;
+		z-index: -1;
+	}
 </style>

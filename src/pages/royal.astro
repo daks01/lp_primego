@@ -14,10 +14,12 @@ import MadeInRussia from "../components/content/MadeInRussia.astro";
 
 import backgroundHero from "/src/assets/img/bg/FFFFFF/1.jpg";
 import backgroundNano from "/src/assets/img/bg/FFFFFF/2.jpg";
+import imageNano from '/src/assets/img/nano-textiles/FFFFFF.png';
 import backgroundConvection from "/src/assets/img/bg/FFFFFF/3.jpg";
 import backgroundShape from "/src/assets/img/bg/FFFFFF/4.jpg";
 import backgroundMobileApp from "/src/assets/img/bg/FFFFFF/5.jpg";
 import backgroundCustom from "/src/assets/img/bg/FFFFFF/6.jpg";
+import imageCustomSneaker from '/src/assets/img/customization/Sneaker-FFFFFF.png';
 import backgroundInnovation from "/src/assets/img/bg/FFFFFF/7.jpg";
 import backgroundMadeIn from "/src/assets/img/bg/FFFFFF/8.jpg";
 import backgroundFooter from "/src/assets/img/bg/FFFFFF/10.jpg";
@@ -34,11 +36,11 @@ import backgroundFooter from "/src/assets/img/bg/FFFFFF/10.jpg";
 	<Header/>
 	<main>
 		<HeroRoyal backgroundImage={backgroundHero}/>
-		<NanoTextiles backgroundImage={backgroundNano} invert={true}/>
+		<NanoTextiles backgroundImage={backgroundNano} mainImage={imageNano} invert={true}/>
 		<Convection backgroundImage={backgroundConvection}/>
 		<FootShape backgroundImage={backgroundShape}/>
-		<MobileApp backgroundImage={backgroundMobileApp} invert={true}/>
-		<Customization backgroundImage={backgroundCustom}/>
+		<MobileApp backgroundImage={backgroundMobileApp} color="FFFFFF" invert={true}/>
+		<Customization backgroundImage={backgroundCustom} mainImage={imageCustomSneaker}/>
 		<Innovation backgroundImage={backgroundInnovation}/>
 		<MadeInRussia backgroundImage={backgroundMadeIn}/>
 	</main>

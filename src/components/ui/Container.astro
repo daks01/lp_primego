@@ -1,6 +1,6 @@
 ---
 const { 
-  width,
+  width = 1920,
   ...props
 } = Astro.props;
 ---
@@ -10,7 +10,7 @@ const {
 
 <style define:vars={{ width }}>
 	.container {
-		width: calc(var(--adaptive-pixel) * var(--width, --container-width));
+		width: calc(var(--adaptive-pixel) * var(--width));
 		max-width: 100%;
 		padding: 0.02px var(--gutter);
 		margin: 0 auto;

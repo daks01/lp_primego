@@ -2,11 +2,12 @@
 import StarTrekText from "../ui/StarTrekText.astro";
 import Button from "../ui/Button.astro";
 ---
-    <!-- 
-		ToDo сделать отправку типа такой
-		https://rameezimdad.blogspot.com/2023/09/conatct-form-data-to-google-sheet-and.html 
-	-->
-	<StarTrekText as="h2" class="title" id="form-title">Contact Us</StarTrekText>
+<!-- 
+	ToDo сделать отправку типа такой
+	https://rameezimdad.blogspot.com/2023/09/conatct-form-data-to-google-sheet-and.html 
+-->
+<div data-animate>
+	<StarTrekText as="h2" class="h1 title" id="form-title">Contact Us</StarTrekText>
 	<p class="subtitle" id="form-subtitle">
 		Lorem ipsum dolor sit amet consectetur. <br />
 		Viverra quis eu turpis faucibus nec id.
@@ -30,9 +31,10 @@ import Button from "../ui/Button.astro";
 			</div>
 		</div>
 	</form>
-	<div role="alert" aria-live="polite" class="form" >
+	<div role="alert" aria-live="polite" class="form" hidden>
 		<span class="h5">Success</div>
 	</div>
+</div>
 <style>
 	.title {
 		text-align: center;

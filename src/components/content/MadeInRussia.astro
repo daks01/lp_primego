@@ -1,27 +1,56 @@
 ---
+import { Image } from 'astro:assets';
 import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
+import bg2Image from '../../assets/img/made-in-russia/bg.svg';
+import bg2MobileImage from '../../assets/img/made-in-russia/bg_mobile.svg';
 
 const { backgroundImage } = Astro.props;
 
 ---
-<Section backgroundImage={backgroundImage}>
+<Section backgroundImage={backgroundImage} class="section">
 	<header>
-		<StarTrekText as="h1">Сделано в России</StarTrekText>
+		<StarTrekText as="h2" class="h1 title">Сделано в России</StarTrekText>
 	</header>
-	<blockquote>
+	<blockquote class="blockquote">
 		<p>Произведено в России</p>
 		<p>Разработано в России</p>
 		<p>Из российских материалов и технологий</p>
 	</blockquote>
-	<!-- <Image
+	<picture class="bg-img">
+		<source media="(min-width: 768px)" srcset={bg2Image.src}>
+		<source media="(max-width: 767px)" srcset={bg2MobileImage.src}>
+		<Image
 			width="1030"
 			height="596"
-			src={myImportedImage}
+			src={bg2Image}
 			alt=""
 			loading="lazy"
-		/> -->
+		/>
+	</picture>
 </Section>
 
 <style lang="scss">
+	.section {
+		padding: calc(var(--adaptive-pixel) * 200) 0 calc(var(--adaptive-pixel) * 120);
+	}
+	.title {
+		text-align: center;
+	}
+	.blockquote {
+		margin-left: 55%;
+	}
+	.bg-img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+	}
+	.bg-img img {
+		object-fit: contain;
+		width: 100%;
+		height: 100%;
+	}
 </style>

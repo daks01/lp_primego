@@ -1,12 +1,18 @@
 <script>
-import image from '/src/assets/img/customised_pattern.png';
+import image from '/src/assets/img/customised_pattern.webp';
+
 export default {
 	data: function () {
 		return {
-			image: image
+			image: image,
+			intervalId: null,
 		}
 	},
 	methods: {
+		clickHandler() {
+			clearInterval(this.intervalId);
+			this.customize();
+		},
 		customize() {
 			const svg = this.$refs.colorfull;
 			const tiles = svg.querySelectorAll('path');
@@ -19,6 +25,11 @@ export default {
 			return Math.floor(Math.random()*16777215).toString(16);
 		},
 	},
+	mounted() {
+		this.intervalId = setInterval(() => {
+			this.customize();
+		}, 350);
+	},
 }
 </script>
 
@@ -26,7 +37,7 @@ export default {
 	<div style="text-align: center;">
 		<br>
 		<br>
-		<button @click="customize" class="button">Click to Customize</button>
+		<button @click="clickHandler" class="button">Click to Customize</button>
 		<br>
 		<br>
 
@@ -73,8 +84,8 @@ export default {
 			</g>
 			<defs>
 				<pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-					<use xlink:href="#image0_164_98"></use>
-					<!-- <use xlink:href="#image0_164_98" transform="matrix(0.00114823 0 0 0.00167785 -0.091337 0)"></use> -->
+					<!-- <use xlink:href="#image0_164_98"></use> -->
+					<use xlink:href="#image0_164_98" transform="matrix(0.00114823 0 0 0.00167785 -0.091337 0)"></use>
 				</pattern>
 				<filter id="filter0_d_164_98" x="-0.0078125" y="408.396" width="859.015" height="200.762"
 					filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
@@ -90,7 +101,11 @@ export default {
 					<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_164_98" result="shape"></feBlend>
 				</filter>
 				<image id="image0_164_98" decoding="async" width="1030" height="596"
-				    :href="image.src" />
+				    :href="image.src" 
+					style="
+						transform: scalex(-1) translate(-122%, -33px) rotate(1deg) scale(1.07);
+					"
+				/>
 			</defs>
 		</svg>
 		<!-- <img width="859" height="610" src="/src/assets/img/customised_pattern.png" alt="descriptive text" loading="lazy" /> -->

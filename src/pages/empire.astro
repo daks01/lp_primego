@@ -14,10 +14,12 @@ import MadeInRussia from "../components/content/MadeInRussia.astro";
 
 import backgroundHero from "/src/assets/img/bg/FFCD01/1.jpg";
 import backgroundNano from "/src/assets/img/bg/FFCD01/2.jpg";
+import imageNano from '/src/assets/img/nano-textiles/FFCD01.png';
 import backgroundConvection from "/src/assets/img/bg/FFCD01/3.jpg";
 import backgroundShape from "/src/assets/img/bg/FFCD01/4.jpg";
 import backgroundMobileApp from "/src/assets/img/bg/FFCD01/5.jpg";
 import backgroundCustom from "/src/assets/img/bg/FFCD01/6.jpg";
+import imageCustomSneaker from '/src/assets/img/customization/Sneaker-FFCD01.png';
 import backgroundInnovation from "/src/assets/img/bg/FFCD01/7.jpg";
 import backgroundMadeIn from "/src/assets/img/bg/FFCD01/8.jpg";
 import backgroundFooter from "/src/assets/img/bg/FFCD01/10.jpg";
@@ -26,6 +28,7 @@ import backgroundFooter from "/src/assets/img/bg/FFCD01/10.jpg";
 <style is:global>
 	:root {
 		--color-product: var(--color-product-empire);
+		--button-text-color: var(--color-black);
 	}
 </style>
 
@@ -33,11 +36,11 @@ import backgroundFooter from "/src/assets/img/bg/FFCD01/10.jpg";
 	<Header/>
 	<main>
 		<HeroEmpire backgroundImage={backgroundHero}/>
-		<NanoTextiles backgroundImage={backgroundNano}/>
+		<NanoTextiles backgroundImage={backgroundNano} mainImage={imageNano}/>
 		<Convection backgroundImage={backgroundConvection}/>
 		<FootShape backgroundImage={backgroundShape}/>
 		<MobileApp backgroundImage={backgroundMobileApp}/>
-		<Customization backgroundImage={backgroundCustom}/>
+		<Customization backgroundImage={backgroundCustom} mainImage={imageCustomSneaker}/>
 		<Innovation backgroundImage={backgroundInnovation}/>
 		<MadeInRussia backgroundImage={backgroundMadeIn}/>
 	</main>

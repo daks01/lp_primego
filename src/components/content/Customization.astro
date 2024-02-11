@@ -1,44 +1,72 @@
 ---
+import { Image } from 'astro:assets';
 import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
+import imageScheme from '../../assets/img/customization/Scheme.svg?raw';
 
-const { backgroundImage } = Astro.props;
+const { backgroundImage, mainImage } = Astro.props;
 
 ---
-<Section backgroundImage={backgroundImage}>
-	<header>
-		<StarTrekText as="h1">Кастомизация</StarTrekText>
-	</header>
-	<blockquote>
-		<p>
-			Возможность создания уникальной пары кроссовок с
-			индивидуальным цветовым решением и материалом
-		</p>
-		<p>
-			Неповторимые кроссовоки, отражают личность владельца, легко
-			адаптируется под стиль одежды
-		</p>
-		<p>
-			Твои идеи для твоей индивидуальности через выбор цвета и
-			материала обуви
-		</p>
-	</blockquote>
-
-	<!-- <Image
-			width="208"
-			height="208"
-			src={myImportedImage}
-			alt=""
-			loading="lazy"
-		/>
-		<Image
-			width="1030"
-			height="596"
-			src={myImportedImage}
-			alt=""
-			loading="lazy"
-		/> -->
+<Section backgroundImage={backgroundImage} class="section">
+	<div class="layout">
+		<div style="color: var(--color-product)" class="scheme">
+			<Fragment set:html={imageScheme} />
+		</div>
+		<div>
+			<header>
+				<StarTrekText as="h2" class="h1 title">Кастомизация</StarTrekText>
+			</header>
+			<blockquote class="blockquote">
+				<p>
+					Возможность создания уникальной пары кроссовок с
+					индивидуальным цветовым решением и материалом
+				</p>
+				<p>
+					Неповторимые кроссовоки, отражают личность владельца, легко
+					адаптируется под стиль одежды
+				</p>
+				<p>
+					Твои идеи для твоей индивидуальности через выбор цвета и
+					материала обуви
+				</p>
+			</blockquote>
+		
+			<Image
+				width="1378"
+				height="1080"
+				src={mainImage}
+				alt=""
+				loading="lazy"
+				class="bg-img"
+			/>
+		</div>
+	</div>
 </Section>
 
 <style lang="scss">
+	.section {
+		padding: calc(var(--adaptive-pixel) * 65);
+	}
+	.layout {
+		display: flex;
+		gap: calc(var(--adaptive-pixel) * 150);
+	}
+	.title {
+		margin-top: 0;
+	}
+	.blockquote {
+		max-width: calc(var(--adaptive-pixel) * 730);
+	}
+	.bg-img {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+		width: auto;
+		height: calc(var(--adaptive-pixel) * 1080);
+		max-height: 100%;
+		// z-index: -1;
+	}
+	.scheme {
+		width: calc(var(--adaptive-pixel) * 203);
+	}
 </style>
