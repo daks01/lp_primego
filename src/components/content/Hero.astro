@@ -88,7 +88,7 @@ const { backgroundImage } = Astro.props;
 	.heroSlider-wrapper {
 		display: flex;
     	align-self: flex-end;
-		margin-left: calc(var(--adaptive-pixel) * 90 * -1);
+		margin-left: calc(var(--adaptive-pixel) * 60 * -1);
 	}
 	@media screen and (width < 1024px) {
 		.text-on-background {
@@ -115,7 +115,6 @@ const { backgroundImage } = Astro.props;
 
 <style lang="scss">
     .splide {
-        margin-left: calc(var(--adaptive-pixel) * 35);
         & :global(.splide__arrows) {
             position: absolute;
             bottom: calc(var(--adaptive-pixel) * 200);
@@ -128,6 +127,9 @@ const { backgroundImage } = Astro.props;
             background: none;
             border: none;
             cursor: pointer;
+        }
+        & :global(.splide__track) {
+            margin: 0 calc(var(--adaptive-pixel) * 60);
         }
 
         & :global(svg) {
