@@ -23,6 +23,9 @@ const optimizedBackgroundImage = backgroundImage
 	<Container width={width}>
 		<slot />
 	</Container>
+	<Container>
+		<slot name="after-footer" />
+	</Container>
 </Element>
 
 <style>
@@ -33,7 +36,10 @@ const optimizedBackgroundImage = backgroundImage
 		position: relative;
 		z-index: 1;
 		overflow: hidden;
-	  /* min-height: calc(var(--adaptive-pixel) * 1080); */
+	    min-height: var(--section-height);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
 	}
 	.section_invert {
 		background-color: var(--color-white);

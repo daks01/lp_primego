@@ -14,7 +14,7 @@ const { backgroundImage } = Astro.props;
 <Section backgroundImage={backgroundImage} class="section">
 	<ul class="list">
 		<li class="list-item">
-			<span class="h5 list-item__title">Антибактериальные</span>
+			<span class="list-item__title">Антибактериальные</span>
 			<Image
 				width="180"
 				height="180"
@@ -24,7 +24,7 @@ const { backgroundImage } = Astro.props;
 			/>
 		</li>
 		<li class="list-item">
-			<span class="h5 list-item__title ">Мягкие</span>
+			<span class="list-item__title">Мягкие</span>
 			<Image
 				width="180"
 				height="180"
@@ -34,7 +34,7 @@ const { backgroundImage } = Astro.props;
 			/>
 		</li>
 		<li class="list-item">
-			<span class="h5 list-item__title ">Воздухопроницаемые</span>
+			<span class="list-item__title">Воздухопроницаемые</span>
 			<Image
 				width="180"
 				height="180"
@@ -44,7 +44,7 @@ const { backgroundImage } = Astro.props;
 			/>
 		</li>
 		<li class="list-item">
-			<span class="h5 list-item__title ">Упругие</span>
+			<span class="list-item__title">Упругие</span>
 			<Image
 				width="180"
 				height="180"
@@ -58,15 +58,9 @@ const { backgroundImage } = Astro.props;
 		<StarTrekText as="h2" class="h1 title">Инновационные</StarTrekText>
 	</header>
 	<blockquote class="blockquote">
-		<p>
-			Искусственный интеллект в процессе разработки и производства
-			позволяет создавать уникальные и передовые решения
-		</p>
-		<p>
-			Инновационные технологий для кроссовок нового поколения,
-			обеспечивающих высокий уровень комфорта и функциональности
-		</p>
-		<p>Кроссовки, которые задают новые стандарты.Твои стандарты</p>
+		<p>Искусственный интеллект в&nbsp;процессе разработки <br>и&nbsp;производства позволяет создавать уникальные <br>и&nbsp;передовые решения</p>
+		<p>Инновационные технологий для&nbsp;кроссовок нового поколения,<br> обеспечивающих высокий уровень комфорта и&nbsp;функциональности</p>
+		<p>Кроссовки, которые задают<br> новые стандарты.<br> Твои стандарты</p>
 	</blockquote>
 
 	<Image
@@ -81,19 +75,19 @@ const { backgroundImage } = Astro.props;
 
 <style lang="scss">
 	.section {
-		padding: calc(var(--adaptive-pixel) * 90) 0 calc(var(--adaptive-pixel) * 15);
+		padding: var(--size-90) 0 var(--size-15);
 	}
 	.title {
 		text-align: right;
-		margin-top: calc(var(--adaptive-pixel) * 90);
+		margin-top: var(--size-60);
 	}
 	.blockquote {
-		margin-left: 55%;
+		margin-left: 50%;
 	}
 	.bg-img {
 		position: absolute;
-		bottom: calc(var(--adaptive-pixel) * 75);
-		left: 0;
+		bottom: var(--size-15);
+		right: 63%;
 		width: auto;
 		height: calc(var(--adaptive-pixel) * 430);
 		max-height: 100%;
@@ -101,8 +95,8 @@ const { backgroundImage } = Astro.props;
 	}
 	.list {
 		display: flex;
-		gap: calc(var(--adaptive-pixel) * 30);
-		margin: 0;
+		gap: var(--size-30);
+		margin: var(--size-200) 0 0;
 		padding: 0;
 		justify-content: space-between;
 	}
@@ -118,8 +112,10 @@ const { backgroundImage } = Astro.props;
     	flex-basis: 0;
 	}
 	.list-item__title {
-		margin-top: 0;
+		margin-bottom: var(--size-30);
 		color: var(--color-product);
+		font-size: calc(var(--adaptive-pixel) * 24);
+		font-weight: 500;
 	}
 	.list-item img {
 		width: calc(var(--adaptive-pixel) * 180);

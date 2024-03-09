@@ -1,0 +1,43 @@
+---
+import StarTrekText from './StarTrekText.astro';
+
+const {
+  class: className,
+  ...props
+} = Astro.props;
+---
+
+<StarTrekText as="span" class:list={["text-on-background", className]} aria-hidden="true" {...props}>
+    <slot />
+</StarTrekText>
+
+<style>
+	@keyframes slideInFromLeft {
+		0% {
+			transform: scale(1.1);
+			opacity: 0;
+		}
+	}
+	.text-on-background {
+		font-size: min(60.5vw, var(--container-width-in-px) / 100 * 60.5);
+		transform: scale(1);
+		margin: 0;
+		position: absolute;
+		top: var(--size-30);
+		left: 0;
+		width: 100%;
+		height: auto;
+		overflow: hidden;
+		display: flex;
+		justify-content: center;
+		opacity: 0.15;
+		z-index: -1;
+		user-select: none;
+		animation: 2s ease-out 0s 1 slideInFromLeft;
+	}
+	@media screen and (width < 1024px) {
+		.text-on-background {
+			font-size: 53vw;
+		}
+	}
+</style>

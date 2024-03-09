@@ -1,82 +1,95 @@
 ---
 import StarTrekText from "../ui/StarTrekText.astro";
+import { Image } from "astro:assets";
+import imgImperial from "/src/assets/img/limit-collection/imperial.png";
+import imgRoyal from "/src/assets/img/limit-collection/royal.png";
+import Section from "../ui/Section.astro";
 
 ---
-<div class="limit">
-	<div class="limit-header">
-		<StarTrekText as="h4" class="limit-header__title" id="nav-title">
-			лимитированные коллекции
-		</StarTrekText>
-		<p>Уникальный стиль под уникальных людей</p>
+<Section>
+	<div class="limit">
+		<div class="limit-header">
+			<StarTrekText as="h4" class="limit-header__title" id="nav-title">
+				лимитированные коллекции
+			</StarTrekText>
+			<p>Уникальный стиль под уникальных людей</p>
+		</div>
+		<nav aria-labeledby="nav-title">
+			<ul class="menu">
+				<li class="menu__item">
+					<a href="empire" class="menu__link card">
+						<div class="card__left">
+							<StarTrekText title="Империя" class="card__title" as="span" style="color: var(--color-product-empire)">
+								ИМПЕРИЯ
+							</StarTrekText>
+							<span>Непобедимый стиль</span>
+						</div>
+						<div class="card__right">
+							<Image
+								src={imgImperial}
+								class="splide__slide"
+								alt=""
+								role="presentation"
+								loading="lazy"
+								class="card__img"
+							/>
+							<span class="card__price">27&thinsp;700&thinsp;₽</span>
+						</div>
+					</a>
+				</li>
+				<li class="menu__item">
+					<a href="royal" class="menu__link card">
+						<div class="card__left">
+							<StarTrekText title="Рояль" class="card__title" as="span" style="color: var(--color-product-royal)">
+								Рояль
+							</StarTrekText>
+							<span>Уникальный стиль</span>
+						</div>
+						<div class="card__right">
+							<Image
+								src={imgRoyal}
+								class="splide__slide"
+								alt=""
+								role="presentation"
+								loading="lazy"
+								class="card__img"
+							/>
+							<span class="card__price">27&thinsp;700&thinsp;₽</span>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</nav>
 	</div>
-	<nav aria-labeledby="nav-title">
-		<ul class="menu">
-			<li class="menu__item">
-				<a href="empire" class="menu__link card">
-					<div class="card__left">
-						<StarTrekText class="card__title" as="span" style="color: var(--color-product-empire)">
-							ИМПЕРИЯ
-							<sup>
-								<svg width="63" height="41" viewBox="0 0 63 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M0.789332 40.061L42.4187 0.837844C42.7209 0.557294 43.1848 0.870216 43.0554 1.24788L36.4408 19.7534C36.3437 20.0232 36.5487 20.3037 36.8293 20.3037L61.8954 20.2174C62.3054 20.2174 62.4349 20.7569 62.0788 20.9512L41.5339 31.7847C41.221 31.9466 41.2534 32.3998 41.5663 32.5293L59.9316 39.9747C60.3308 40.1365 60.2121 40.7192 59.7805 40.7192L1.05909 40.73C0.703008 40.73 0.530362 40.3092 0.789332 40.061Z" 
-									fill="currentColor"/>
-								</svg>
-							</sup>
-						</StarTrekText>
-						<span>Непобедимый стиль</span>
-					</div>
-					<div class="card__right">
-						<img src="" alt="" role="presentation">
-						<span class="card__price">27&thinsp;700&thinsp;₽</span>
-					</div>
-				</a>
-			</li>
-			<li class="menu__item">
-				<a href="royal" class="menu__link card">
-					<div class="card__left">
-						<StarTrekText div class="card__title" as="span h3" style="color: var(--color-product-royal)">
-							Рояль
-							<sup>
-								<svg width="63" height="41" viewBox="0 0 63 41" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M0.789332 40.061L42.4187 0.837844C42.7209 0.557294 43.1848 0.870216 43.0554 1.24788L36.4408 19.7534C36.3437 20.0232 36.5487 20.3037 36.8293 20.3037L61.8954 20.2174C62.3054 20.2174 62.4349 20.7569 62.0788 20.9512L41.5339 31.7847C41.221 31.9466 41.2534 32.3998 41.5663 32.5293L59.9316 39.9747C60.3308 40.1365 60.2121 40.7192 59.7805 40.7192L1.05909 40.73C0.703008 40.73 0.530362 40.3092 0.789332 40.061Z" 
-									fill="currentColor"/>
-								</svg>
-							</sup>
-						</StarTrekText>
-						<span>Уникальный стиль</span>
-					</div>
-					<div class="card__right">
-						<img src="" alt="" role="presentation">
-						<span class="card__price">27&thinsp;700&thinsp;₽</span>
-					</div>
-				</a>
-			</li>
-		</ul>
-	</nav>
-</div>
-
+</Section>
 
 <style>
+	.section {
+		background-color: #0E0205;
+		min-height: auto;
+	}
 	.limit {
-		margin-bottom: calc(var(--adaptive-pixel) * 160);
+		margin-bottom: var(--size-90);
 	}
 	.limit-header {
 		text-align: center;
+		margin-top: 0;
 	}
 	.limit-header__title {
 		font-size: calc(var(--adaptive-pixel) * 80);
+		margin-top: 0;
 	}
 	.menu {
-		margin: 0;
+		margin: calc(var(--size-30) * -1) 0 0;
 		padding: 0;
 		display: flex;
-		justify-content: center;
+		justify-content: space-around;
 	}
 	.menu__item {
 		list-style-type: none;
 		padding: 0;
-		margin: 0;
-		flex-basis: 45%;
+		margin: 0 0 var(--size-90);
+		flex-basis: 36%;
 	}
 	.menu__link {
 		text-decoration: none;
@@ -85,13 +98,43 @@ import StarTrekText from "../ui/StarTrekText.astro";
 	.card {
 		display: flex;
 		justify-content: space-between;
-		margin-right: calc(var(--adaptive-pixel) * 44);
-		background: linear-gradient(267.46deg, #8C1630 1.33%, var(--color-black) 97.51%);
-		padding: calc(var(--adaptive-pixel) * 40) calc(var(--adaptive-pixel) * 50) calc(var(--adaptive-pixel) * 25);
-	}
-	.card:hover, 
-	.card:focus-visible {
-		background: linear-gradient(267.46deg, #8C1630 15.33%, var(--color-black) 100%);
+		padding: calc(var(--adaptive-pixel) * 20) 0 calc(var(--adaptive-pixel) * 25) calc(var(--adaptive-pixel) * 50);
+		position: relative;
+		z-index: 1;
+		&:before,
+		&:after {
+			content: '';
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+		}
+		&::before {
+			background: linear-gradient(267.46deg, #8C1630 1.33%, var(--color-black) 97.51%);
+			clip-path: polygon(6% 0, 100% 0%, 100% 100%, 0 100%, 0 13%);
+			z-index: -1;
+		}	
+		&::after {
+			border-radius: 100%;
+			transform: rotate(-13.75deg);
+			background: transparent;
+			mix-blend-mode: hard-light;
+			filter: blur(100px);
+			z-index: -2;
+			transition: background-color ease .5s;
+		}
+		&:hover {
+			&::after {
+				background-color: rgba(252, 20, 71, 0.35);
+			}
+			.card__title:after {
+				opacity: .15;
+			}
+			.card__img {
+				transform: rotate(-4deg) scale(1.1);
+			}
+		}	
 	}
 	.card__left {
 		font-size: var(--heading-4);
@@ -99,11 +142,39 @@ import StarTrekText from "../ui/StarTrekText.astro";
 	.card__right {
 		color: var(--text-color);
 		background-color: var(--color-product);
+		transform: translate(var(--size-30), var(--size-45));
+		margin-bottom: calc(var(--size-45)* -1);
+		position: relative;
+	}
+
+	.card__img {
+		position: absolute;
+		bottom: var(--size-90);
+		left: calc(var(--size-15) * -1);
+		width: calc(var(--adaptive-pixel) * 270);
+		max-width: none;
+		transition: transform ease .5s;
 	}
 	.card__title {
 		font-size: calc(var(--adaptive-pixel) * 128);
-		margin-bottom: var(--size-2);
+		margin-bottom: calc(var(--adaptive-pixel) * 20);
 		display: block;
+		&::after {
+			content: attr(title);
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			font-size: calc(var(--adaptive-pixel)* 370);
+			line-height: 0.55;
+			color: var(--color-product);
+			clip-path: polygon(6% 0, 100% 0%, 100% 100%, 0 100%, 0 13%);
+			opacity: 0;
+			z-index: -1;
+			pointer-events: none;
+			transition: opacity ease .5s;
+		}
 	}
 	.card__title sup {
 		top: -0.9em;
@@ -111,9 +182,9 @@ import StarTrekText from "../ui/StarTrekText.astro";
 	.card__price {
 		display: flex;
 		align-items: flex-end;
-		font-weight: 700;
-		font-size: calc(var(--adaptive-pixel) * 36);
-		padding: calc(var(--adaptive-pixel) * 25) calc(var(--adaptive-pixel) * 15);
+		font-weight: 500;
+		font-size: calc(var(--adaptive-pixel) * 32);
+		padding: calc(var(--adaptive-pixel) * 25) var(--size-15);
 	
 		color: var(--text-color);
 		white-space: nowrap;

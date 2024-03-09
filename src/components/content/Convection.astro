@@ -17,7 +17,7 @@ const { backgroundImage } = Astro.props;
 					Обычная<br>
 					подкладка
 				</span>
-				<span>воздух НЕ проходит</span>
+				<span>воздух НЕ&nbsp;проходит</span>
 				<Image
 					width="180"
 					height="180"
@@ -45,15 +45,9 @@ const { backgroundImage } = Astro.props;
 			<StarTrekText as="h2" class="h1 title">Конвекция</StarTrekText>
 		</header>
 		<blockquote class="blockquote">
-			<p>Капилярная конвекция для максимального комфорта</p>
-			<p>
-				Проницаемая трехмерная капиллярная мембрана, естественная
-				терморегуляция
-			</p>
-			<p>
-				Теплорегулирующая подкладка, обеспечивает вентиляцию,
-				предотвращает перегрев
-			</p>
+			<p>Капилярная конвекция для&nbsp;максимального<br> комфорта</p>
+			<p>Проницаемая трехмерная капиллярная мембрана, естественная терморегуляция</p>
+			<p>Теплорегулирующая подкладка, обеспечивает вентиляцию, предотвращает перегрев</p>
 		</blockquote>
 	</div>
 	<div set:html={imageSneaker} style="color: var(--color-product)" class="bg-img"/>
@@ -61,32 +55,37 @@ const { backgroundImage } = Astro.props;
 
 <style lang="scss">
 	.section {
-		padding: calc(var(--adaptive-pixel) * 80) 0 0;
+		//padding: calc(var(--adaptive-pixel) * 80) 0 0;
 	}
 	.layout {
 		float: right;
+		margin-top: var(--size-120);
 	}
 	.title {
-		margin-top: 0;
+		margin-top: var(--size-60);
 		text-align: right;
 	}
 	.blockquote {
 		max-width: calc(var(--adaptive-pixel) * 590);
+
+		//костыль
+		margin-bottom: calc(var(--adaptive-pixel) * 75);
 	}
 	.bg-img :global(svg){
 		position: absolute;
-		bottom: 0;
-		left: 0;
+		top: var(--size-60);
+		right: 46%;
 		width: auto;
-		height: calc(var(--adaptive-pixel) * 970);
+		height: calc(var(--adaptive-pixel) * 880);
 		max-height: 100%;
 		z-index: -1;
 	}
 
 	.list {
 		display: flex;
-		gap: calc(var(--adaptive-pixel) * 90);
-		margin: 0 0 calc(var(--adaptive-pixel) * 30);
+		justify-content: center;
+		gap: var(--size-90);
+		margin: 0 0 var(--size-30);
 		padding: 0;
 	}
 	.list-item {
@@ -101,7 +100,7 @@ const { backgroundImage } = Astro.props;
 		color: var(--color-product);
 	}
 	.list-item img {
-		margin-top: calc(var(--adaptive-pixel) * 15);
+		margin-top: var(--size-15);
 		width: calc(var(--adaptive-pixel) * 208);
 		height: calc(var(--adaptive-pixel) * 208);
 	}

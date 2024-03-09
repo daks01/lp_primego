@@ -17,18 +17,9 @@ const { backgroundImage, mainImage } = Astro.props;
 				<StarTrekText as="h2" class="h1 title">Кастомизация</StarTrekText>
 			</header>
 			<blockquote class="blockquote">
-				<p>
-					Возможность создания уникальной пары кроссовок с
-					индивидуальным цветовым решением и материалом
-				</p>
-				<p>
-					Неповторимые кроссовоки, отражают личность владельца, легко
-					адаптируется под стиль одежды
-				</p>
-				<p>
-					Твои идеи для твоей индивидуальности через выбор цвета и
-					материала обуви
-				</p>
+				<p>Возможность создания уникальной пары кроссовок с&nbsp;индивидуальным цветовым решением и&nbsp;материалом</p>
+				<p>Неповторимые кроссовоки, отражают личность<br> владельца, легко адаптируется под&nbsp;стиль одежды</p>
+				<p>Твои идеи для&nbsp;твоей индивидуальности через выбор цвета и&nbsp;материала обуви</p>
 			</blockquote>
 		
 			<Image
@@ -45,28 +36,29 @@ const { backgroundImage, mainImage } = Astro.props;
 
 <style lang="scss">
 	.section {
-		padding: calc(var(--adaptive-pixel) * 65);
+		// padding: calc(var(--adaptive-pixel) * 65);
 	}
 	.layout {
 		display: flex;
-		gap: calc(var(--adaptive-pixel) * 150);
+		gap: calc(var(--adaptive-pixel) * 180);
 	}
 	.title {
-		margin-top: 0;
+		// margin-top: 0;
 	}
 	.blockquote {
 		max-width: calc(var(--adaptive-pixel) * 730);
 	}
 	.bg-img {
 		position: absolute;
-		bottom: 0;
-		right: 0;
+		top: var(--size-120);
+		left: 47%;
 		width: auto;
-		height: calc(var(--adaptive-pixel) * 1080);
+		height: calc(var(--section-height) - var(--size-120));
 		max-height: 100%;
-		// z-index: -1;
+		z-index: -1;
 	}
 	.scheme {
 		width: calc(var(--adaptive-pixel) * 203);
+		margin-top: var(--size-120);
 	}
 </style>

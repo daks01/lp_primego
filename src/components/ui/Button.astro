@@ -19,8 +19,8 @@ const {
     margin: 0;
     transition: filter .1s;
     border: none;
-	border-radius: 100px;
-    padding: calc(var(--adaptive-pixel) * 14) calc(var(--adaptive-pixel) * 20);
+	border-radius: calc(var(--adaptive-pixel) * 4);
+    padding: calc(var(--adaptive-pixel) * 16) calc(var(--adaptive-pixel) * 30);
     background: var(--color-product);
     color: var(--button-text-color, --color-white);
     font-weight: 700;
@@ -39,22 +39,12 @@ const {
     }
 }
 
-.button_ticket {
-    min-width: calc(var(--adaptive-pixel) * 250);
-    border-radius: 4px;
-    clip-path: polygon(
-        0 0, 
-        47% 0, 
-        50% 17%, 
-        53% 0, 
-        100% 0, 
-        100% 100%, 
-        53% 100%, 
-        50% 83%, 
-        47% 100%, 
-        0 100%
-    );
-    padding: calc(var(--adaptive-pixel) * 20) calc(var(--adaptive-pixel) * 32);
+.button_secondary {
+    padding: calc(var(--adaptive-pixel) * 16);
+}
+
+.button_icon {
+    
 }
 
 

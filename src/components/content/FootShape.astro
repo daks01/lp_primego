@@ -17,12 +17,9 @@ const { backgroundImage } = Astro.props;
 			</StarTrekText>
 		</header>
 		<blockquote class="blockquote">
-			<p>
-				Трехмерное термическое формование, учет индвидуальной формы
-				стопы
-			</p>
-			<p>Подошва учитывает форму стопы, не деформирует ногу</p>
-			<p>Адаптация подошвы к стопе для здоровых ног</p>
+			<p>Трехмерное термическое формование, учет индвидуальной формы стопы</p>
+			<p>Подошва учитывает форму стопы, не&nbsp;деформирует ногу</p>
+			<p>Адаптация подошвы к&nbsp;стопе для&nbsp;здоровых ног</p>
 		</blockquote>
 		<Image
 			width="1030"
@@ -38,13 +35,12 @@ const { backgroundImage } = Astro.props;
 
 <style lang="scss">
 	.section {
-		padding: calc(var(--adaptive-pixel) * 50) 0 calc(var(--adaptive-pixel) * 40);
+		padding: 0;
 	}
 	.layout {
-		padding-left: calc(var(--adaptive-pixel) * 150)
+		// padding-left: calc(var(--adaptive-pixel) * 150)
 	}
 	.title {
-		margin-top: 0;
 		display: flex;
 		text-align: right;
 	}
@@ -52,15 +48,17 @@ const { backgroundImage } = Astro.props;
 		max-width: calc(var(--adaptive-pixel) * 500);
 	}
 	.bg-img {
-		position: absolute;
-		top: 0;
-		right: 0;
-		width: auto;
-		height: calc(var(--adaptive-pixel) * 1120);
+		height: calc(var(--adaptive-pixel)* 900);
 		max-height: 100%;
+		position: absolute;
+		left: 41%;
+		top: var(--size-30);
+		width: auto;
 		z-index: -1;
 	}
 	.scheme {
 		width: calc(var(--adaptive-pixel) * 446);
+		margin-top: calc(var(--adaptive-pixel)* -280);
+		float: right;
 	}
 </style>

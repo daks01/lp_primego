@@ -4,7 +4,6 @@ import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
 import imagePhone from '../../assets/img/app/Phone.png';
 import imageScheme from '../../assets/img/app/Scheme.svg?raw';
-import imageSchemeFFFFFF from '../../assets/img/app/Scheme_FFFFFF.svg?raw';
 
 const { backgroundImage, invert = false } = Astro.props;
 ---
@@ -18,7 +17,7 @@ const { backgroundImage, invert = false } = Astro.props;
 	<blockquote class="blockquote">
 		<p>Учет индивидуальной формы стопы, улучшает посадку обуви, дарит комфорт</p>
 		<p>Алгоритмы искусственного интеллекта, виртуальное моделирование формы стопы</p>
-		<p>Компьютерные технологии для идеального результата</p>
+		<p>Компьютерные технологии для&nbsp;идеального результата</p>
 	</blockquote>
 	<Image
 		width="917"
@@ -29,16 +28,13 @@ const { backgroundImage, invert = false } = Astro.props;
 		class="bg-img"
 	/>
 	<div style="color: var(--color-product)" class="scheme">
-		{invert 
-			? <Fragment set:html={imageSchemeFFFFFF} /> 
-			: <Fragment set:html={imageScheme} />
-		}
+		<Fragment set:html={imageScheme} />
 	</div>
 </Section>
 
 <style lang="scss">
 	.section {
-		padding: calc(var(--adaptive-pixel) * 65) 0 calc(var(--adaptive-pixel) * 40);
+		padding: 0;
 	}
 	.layout {
 		display: flex;
@@ -47,7 +43,6 @@ const { backgroundImage, invert = false } = Astro.props;
 	}
 	.title {
 		text-align: right;
-		margin-top: 0;
 	}
 	.blockquote {
 		max-width: calc(var(--adaptive-pixel) * 490);
@@ -55,15 +50,16 @@ const { backgroundImage, invert = false } = Astro.props;
 	}
 	.bg-img {
 		position: absolute;
-		top: calc(var(--adaptive-pixel) * 30);
-		left: 0;
+		top: var(--size-90);
+		right: 60%;
 		width: auto;
-		height: calc(var(--adaptive-pixel) * 1100);
+		height: calc(var(--adaptive-pixel) * 870);
 		max-height: 100%;
 		z-index: -1;
 	}
 	.scheme {
 		width: calc(var(--adaptive-pixel) * 725);
-		margin-left: auto;
+		margin: calc(var(--size-200)* -1) auto 0 var(--size-200);
+		float: left;
 	}
 </style>

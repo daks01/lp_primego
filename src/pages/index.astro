@@ -11,7 +11,8 @@ import MobileApp from "../components/content/MobileApp.astro";
 import Customization from "../components/content/Customization.astro";
 import Innovation from "../components/content/Innovation.astro";
 import MadeInRussia from "../components/content/MadeInRussia.astro";
-import Customizator from "../components/content/Customizator.astro";
+import LimitCollection from "../components/content/LimitCollection.astro";
+// import Customizator from "../components/content/Customizator.astro";
 
 import backgroundHero from "/src/assets/img/bg/FC1447/1.jpg";
 import backgroundNano from "/src/assets/img/bg/FC1447/2.jpg";
@@ -23,7 +24,7 @@ import backgroundCustom from "/src/assets/img/bg/FC1447/6.jpg";
 import imageCustomSneaker from '/src/assets/img/customization/Sneaker-FC1447.png';
 import backgroundInnovation from "/src/assets/img/bg/FC1447/7.jpg";
 import backgroundMadeIn from "/src/assets/img/bg/FC1447/8.jpg";
-import backgroundCustomizer from "/src/assets/img/bg/FC1447/9.jpg";
+// import backgroundCustomizer from "/src/assets/img/bg/FC1447/9.jpg";
 import backgroundFooter from "/src/assets/img/bg/FC1447/10.jpg";
 ---
 
@@ -34,9 +35,10 @@ import backgroundFooter from "/src/assets/img/bg/FC1447/10.jpg";
 </style>
 
 <Layout title="Primego">
-	<Header hideBuyButton="true"/>
+	<Header/>
 	<main>
 		<Hero backgroundImage={backgroundHero}/>
+		<LimitCollection />
 		<NanoTextiles backgroundImage={backgroundNano} mainImage={imageNano}/>
 		<Convection backgroundImage={backgroundConvection}/>
 		<FootShape backgroundImage={backgroundShape}/>
@@ -44,7 +46,7 @@ import backgroundFooter from "/src/assets/img/bg/FC1447/10.jpg";
 		<Customization backgroundImage={backgroundCustom} mainImage={imageCustomSneaker}/>
 		<Innovation backgroundImage={backgroundInnovation}/>
 		<MadeInRussia backgroundImage={backgroundMadeIn}/>
-		<Customizator backgroundImage={backgroundCustomizer}/>
+		<!-- <Customizator backgroundImage={backgroundCustomizer}/> -->
 	</main>
 	<Footer backgroundImage={backgroundFooter}/>
 </Layout>
