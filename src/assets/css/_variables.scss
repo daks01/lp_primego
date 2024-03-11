@@ -53,7 +53,7 @@
 
 }
 
-// @media screen and (width < 1024px) {
+// @media screen and (max-width: 1023px) {
 //     :root {
 //         --container-width: 640;
 //         --container-width-in-px: 640px;
@@ -71,7 +71,7 @@
 //     }
 // }
 
-@media screen and (width < 1024px) {
+@media screen and (max-width: 1023px) {
     :root {
         --container-width: 320;
         --container-width-in-px: 320px;

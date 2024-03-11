@@ -48,7 +48,7 @@ const { backgroundImage, mainImage, invert = false } = Astro.props;
 		max-height: 100%;
 		z-index: -1;
 	}
-	@media screen and (width < 1024px) {
+	@media screen and (max-width: 1023px) {
 		.title {
 			margin-top: var(--size-45);
 		}
