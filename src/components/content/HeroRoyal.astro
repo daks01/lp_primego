@@ -22,10 +22,13 @@ const { backgroundImage } = Astro.props;
 					Эти кроссовки сочетают в&nbsp;себе изысканный дизайн с&nbsp;выдающейся комфортностью, 
 					обеспечивая вам непревзойденный опыт носки.
 				</p>
-				<p>
+				<p class="display-mobile-none">
 					<span class="h3 price">27&thinsp;700&thinsp;₽</span>
 				</p>
-				<Button as="button" onclick="alert('disabled')">
+				<Button as="button" class="display-none display-mobile-flex" onclick="alert('disabled')">
+					Купить 	от 27&thinsp;700&thinsp;₽
+				</Button>
+				<Button as="button" class="display-mobile-none" onclick="alert('disabled')">
 					Купить сейчас
 				</Button>
 			</div>
