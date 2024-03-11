@@ -23,9 +23,12 @@ const { backgroundImage } = Astro.props;
 					обеспечивая вам непревзойденный опыт носки.
 				</p>
 				<p>
-					<span class="h3 price">27&thinsp;700&thinsp;₽</span>
+					<span class="h3 price display-mobile-none">27&thinsp;700&thinsp;₽</span>
 				</p>
-				<Button as="button" onclick="alert('disabled')">
+				<Button as="button" class="display-none display-mobile-flex" onclick="alert('disabled')">
+					Купить 	от 27&thinsp;700&thinsp;₽
+				</Button>
+				<Button as="button" class="display-mobile-none" onclick="alert('disabled')">
 					Купить сейчас
 				</Button>
 			</div>
@@ -56,5 +59,24 @@ const { backgroundImage } = Astro.props;
 	}
 	.price {
 		color: var(--text-color);
+	}
+
+	@media screen and (width < 1024px) {
+		.hero {
+			min-width: auto;
+			text-align: center;
+		}
+		.hero-layout {
+			margin-bottom: calc(var(--adaptive-pixel) * 60);
+			flex-direction: column;
+		}
+		.page-title {
+			font-size: calc(var(--adaptive-pixel) * 128);
+			margin-top: calc(var(--adaptive-pixel) * 36);
+			margin-bottom: var(--size-30);
+		}
+		.hero__image {
+			margin: var(--size-30) 0 0;
+		}
 	}
 </style>

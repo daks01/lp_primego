@@ -37,41 +37,41 @@ body {
 img, svg {
     max-width: 100%;
     height: auto;
+    flex-shrink: 0;
 }
-
 
 
 .display-none {
-    display: none;
+    display: none !important;
 }
 .display-block {
-    display: block;
+    display: block !important;
 }
 .display-flex {
-    display: flex;
+    display: flex !important;
 }
+
+// @media screen and (width < 1024px) {
+//     .display-lg-none {
+//         display: none;
+//     }
+//     .display-lg-block {
+//         display: block;
+//     }
+//     .display-lg-flex {
+//         display: flex;
+//     }
+// }
 
 @media screen and (width < 1024px) {
-    .display-lg-none {
-        display: none;
+    .display-mobile-none {
+        display: none !important;
     }
-    .display-lg-block {
-        display: block;
+    .display-mobile-block {
+        display: block !important;
     }
-    .display-lg-flex {
-        display: flex;
-    }
-}
-
-@media screen and (width < 640px) {
-    .display-sm-none {
-        display: none;
-    }
-    .display-sm-block {
-        display: block;
-    }
-    .display-sm-flex {
-        display: flex;
+    .display-mobile-flex {
+        display: flex !important;
     }
 }
 

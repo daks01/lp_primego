@@ -103,43 +103,57 @@ h1 + .lead,
     font-weight: 500;
     line-height: 110%;
     color: var(--text-color);
-    margin-top: calc(var(--adaptive-pixel) * 45 * -1);
+    margin-top: calc(var(--size-45) * -1);
     margin-bottom: calc(var(--adaptive-pixel) * 20);
 }
 
 
+// @media screen and (width < 1024px) {
+//     h1, .h1 {
+//         margin: var(--size-90) 0 var(--size-60);
+//     }
+//     h2, .h2 {
+//         margin: var(--size-60) 0;
+//     }
+//     h3, .h3 {
+//         margin: var(--size-60) 0 var(--size-30);
+//     }
+//     h4, .h4 {
+//         margin: var(--size-60) 0 var(--size-30);
+//     }
+//     h5, .h5 {
+//         margin: var(--size-120) 0 var(--size-30);
+//     }
+// }
+
 @media screen and (width < 1024px) {
     h1, .h1 {
-        margin: var(--size-90) 0 var(--size-60);
+        margin: var(--size-90) 0 var(--size-30);
     }
     h2, .h2 {
-        margin: var(--size-60) 0;
+        margin: var(--size-60) 0 var(--size-30);
     }
     h3, .h3 {
         margin: var(--size-60) 0 var(--size-30);
     }
     h4, .h4 {
-        margin: var(--size-60) 0 var(--size-30);
-    }
-    h5, .h5 {
-        margin: var(--size-120) 0 var(--size-30);
-    }
-}
-
-@media screen and (width < 768px) {
-    h1, .h1 {
-        margin: var(--size-90) 0 var(--size-60);
-    }
-    h2, .h2 {
-        margin: var(--size-60) 0;
-    }
-    h3, .h3 {
-        margin: var(--size-60) 0 var(--size-30);
-    }
-    h4, .h4 {
-        margin: var(--size-30) 0 var(--size-15);
+        margin: var(--size-30) 0 var(--size-30);
     }
     h5, .h5 {
         margin: var(--size-90) 0 var(--size-15);
+    }
+    p, ul, ol, table {
+        margin: 0 0 var(--size-30);  
+    }
+    p:has(+ a),
+    p:has(+ button) {
+        margin-bottom: var(--size-30); 
+    }
+    blockquote {
+        margin: var(--size-30) 0;
+        padding-left: var(--size-30);
+    }
+    blockquote p {
+        margin: 0 0 var(--size-30);
     }
 }

@@ -121,4 +121,41 @@ const { backgroundImage } = Astro.props;
 		width: calc(var(--adaptive-pixel) * 180);
 		height: calc(var(--adaptive-pixel) * 180);
 	}
+	@media screen and (width < 1024px) {
+		.section {
+			padding: var(--size-30) 0;
+		}
+		.title {
+			margin-top: var(--size-60);
+			text-align: center;
+		}
+		.list {
+			flex-direction: column;
+			gap: var(--size-30);
+			margin-top: var(--size-30);
+		}
+		.list-item__title {
+			font-size: var(--text-font-size);
+			font-weight: 600;
+			margin-bottom: var(--size-15);
+		}
+		.list-item img {
+			height: calc(var(--adaptive-pixel)* 150);
+			width: calc(var(--adaptive-pixel)* 150);
+		}
+		.blockquote {
+			margin-left: 0;
+		}
+		.bg-img {
+			position: static;
+			width: auto;
+			height: auto;
+		}
+		.scheme {
+			float: none;
+			margin: var(--size-30) 0;
+			max-width: var(--size-120);
+			margin: 0 auto;
+		}
+	}
 </style>

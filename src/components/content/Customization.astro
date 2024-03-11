@@ -61,4 +61,25 @@ const { backgroundImage, mainImage } = Astro.props;
 		width: calc(var(--adaptive-pixel) * 203);
 		margin-top: var(--size-120);
 	}
+	
+	@media screen and (width < 1024px) {
+		.layout {
+			gap: 0;
+			flex-direction: column-reverse;
+		}
+		.title {
+			margin-top: var(--size-60);
+		}
+		.bg-img {
+			position: static;
+			width: auto;
+			height: auto;
+		}
+		.scheme {
+			float: none;
+			margin: var(--size-30) 0;
+			max-width: var(--size-120);
+			margin: 0 auto;
+		}
+	}
 </style>

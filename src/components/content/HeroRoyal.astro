@@ -57,4 +57,23 @@ const { backgroundImage } = Astro.props;
 	.price {
 		color: var(--text-color);
 	}
+
+	@media screen and (width < 1024px) {
+		.hero {
+			min-width: auto;
+			text-align: center;
+		}
+		.hero-layout {
+			margin-bottom: calc(var(--adaptive-pixel) * 60);
+			flex-direction: column;
+		}
+		.page-title {
+			font-size: calc(var(--adaptive-pixel) * 128);
+			margin-top: calc(var(--adaptive-pixel) * 36);
+			margin-bottom: var(--size-30);
+		}
+		.hero__image {
+			margin: var(--size-30) 0 0;
+		}
+	}
 </style>

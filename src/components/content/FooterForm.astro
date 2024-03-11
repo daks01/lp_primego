@@ -8,14 +8,13 @@ import Button from "../ui/Button.astro";
 -->
 <div data-animate>
 	<StarTrekText as="h2" class="h1 title" id="form-title">
-		Связаться с&nbsp;нами
+		Связаться с нами
 	</StarTrekText>
 	<p class="subtitle" id="form-subtitle">
 		Мы можем вам помочь с&nbsp;выбором модели <br />
 		и&nbsp;оформлением заказа
 	</p>
 	<form action="/order.php" data-contact-form class="form" aria-labelledby="form-title" aria-describedby="form-subtitle" novalidate>
-		<p role="alert" aria-live="polite" data-form-msg class="form_submit-message"></p>
 		<div class="form__layout">
 			<div class="form__row form__row_half">
 				<label for="form-name" class="sr-only">Имя</label>
@@ -44,6 +43,7 @@ import Button from "../ui/Button.astro";
 			</div>
 			<div class="form__row form__row_submit">
 				<Button type="submit" data-animate>Отправить</Button>
+				<p role="alert" aria-live="polite" data-form-msg class="form_submit-message"></p>
 			</div>
 		</div>
 	</form>
@@ -157,7 +157,7 @@ import Button from "../ui/Button.astro";
 	}
 	.form_submit-message {
 		text-align: center;
-		margin: 0 0 var(--size-30);
+		margin: var(--size-30) 0;
 		&:empty {
 			display: none;
 		}
@@ -218,12 +218,39 @@ import Button from "../ui/Button.astro";
     	gap: 0.3em;
 		color: #AAAAAA;
 		font-size: var(--extra-small-font-size);
-		margin-top: calc(var(--adaptive-pixel) * 8);
+		margin-top: var(--size-8);
 		&:empty {
 			display: none;
 		}
 		& :global(svg) {
 			min-width: calc(var(--adaptive-pixel) * 16);
 		}
+	}
+	@media screen and (width < 1024px) {
+		.title {
+			font-size: var(--heading-1);
+			margin-top: var(--size-60);
+			margin-bottom: var(--size-30);
+			line-height: .72;
+		}
+		.subtitle {
+			margin-bottom: var(--size-30);
+		}
+		.form {
+			margin: var(--size-30) auto var(--size-90);
+		}
+		.form__layout {
+			flex-direction: column;
+		}
+		.form__row {
+			margin-bottom: var(--size-15);
+		}
+		.form__row_half {
+			width: 100%;
+		}
+		.form__row_submit {
+			margin-top: var(--size-15);
+		}
+
 	}
 </style>

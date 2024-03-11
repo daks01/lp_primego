@@ -10,7 +10,7 @@ const { backgroundImage } = Astro.props;
 ---
 <Section backgroundImage={backgroundImage} class="section">
 	<header>
-		<StarTrekText as="h2" class="h1 title">Сделано в&nbsp;России</StarTrekText>
+		<StarTrekText as="h2" class="h1 title">Сделано в России</StarTrekText>
 	</header>
 	<blockquote class="blockquote">
 		<p>Произведено в&nbsp;России</p>
@@ -53,5 +53,21 @@ const { backgroundImage } = Astro.props;
 		object-fit: contain;
 		width: 100%;
 		height: 100%;
+	}
+	@media screen and (width < 1024px) {
+		.title {
+			margin-top: calc(var(--adaptive-pixel) * 256);
+			margin-bottom: var(--size-60);
+			text-align: right;
+		}
+		.bg-img {
+			width: 100%;
+			height: auto;
+			top: var(--size-45);
+			left: 0;
+		}
+		.blockquote {
+			margin-left: 0;
+		}
 	}
 </style>

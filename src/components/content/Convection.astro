@@ -104,4 +104,32 @@ const { backgroundImage } = Astro.props;
 		width: calc(var(--adaptive-pixel) * 208);
 		height: calc(var(--adaptive-pixel) * 208);
 	}
+	@media screen and (width < 1024px) {
+		.layout {
+			float: none;
+			margin-top: var(--size-60);
+		}
+		.title {
+			margin-top: var(--size-45);
+			text-align: left;
+		}
+		.bg-img {
+			position: static;
+			width: auto;
+			height: auto;
+		}
+		.bg-img :global(svg){
+			position: static;
+			width: auto;
+			height: auto;
+		}
+		.list {
+			gap: var(--size-30);
+			margin: 0 0 var(--size-60);
+		}
+		.list-item img {
+			height: auto;
+			width: auto;
+		}
+	}
 </style>

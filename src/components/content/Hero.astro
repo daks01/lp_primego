@@ -96,6 +96,8 @@ const { backgroundImage } = Astro.props;
 	.section {
 		min-height: calc(var(--section-height) - var(--header-height));
 	}
+</style>
+<style lang="scss" is:global>
 	.page-title {
 		margin-bottom: var(--size-90);
 		font-size: var(--heading-1);
@@ -122,6 +124,29 @@ const { backgroundImage } = Astro.props;
 		svg {
 			height: 100%;
 			transform: translate(32%, -15%);
+		}
+	}
+
+	@media screen and (width < 1024px) {
+		.hero {
+			min-width: auto;
+			text-align: center;
+		}
+		.hero-layout {
+			margin-bottom: calc(var(--adaptive-pixel) * 90);
+			flex-direction: column;
+		}
+		.page-title {
+			font-size: calc(var(--adaptive-pixel) * 128);
+			margin-top: calc(var(--adaptive-pixel) * 36);
+			margin-bottom: var(--size-30);
+		}
+		.heroSlider-wrapper {
+			margin: var(--size-30) 0;
+		}
+		.heroSlider__dots {
+			top: -46%;
+			transform: rotate(86deg);
 		}
 	}
 </style>
@@ -190,4 +215,13 @@ const { backgroundImage } = Astro.props;
 		& :global(.splide__arrow--next) {
 		}
 	}
+
+	@media screen and (width < 1024px) {
+		.splide {
+			& :global(.splide__track) {
+				margin: 0;
+			}
+		}
+	}
+
 </style>

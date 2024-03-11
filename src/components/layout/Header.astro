@@ -2,16 +2,23 @@
 import Section from "../ui/Section.astro";
 import TopBar from "./TopBar.astro";
 
-const { as: tag = "header" } = Astro.props;
+const { 
+	as: tag = "header",
+	isHome = false,
+} = Astro.props;
 ---
 
 <Section as={tag} class="header">
-	<TopBar>
+	<TopBar isHome={isHome}>
 		<div class="action-panel">
-			<button class="button-login" type="button" onclick="alert('disabled')">
-				Войти на сайт
+			<button class="button-login" type="button" aria-describedby="profile-btn-title" onclick="alert('disabled')">
+				<span class="button-login__title">Войти на сайт</span>
+				<svg role="presentation" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M13.3337 14V12.6667C13.3337 11.9594 13.0527 11.2811 12.5526 10.781C12.0525 10.281 11.3742 10 10.667 10H5.33366C4.62641 10 3.94814 10.281 3.44804 10.781C2.94794 11.2811 2.66699 11.9594 2.66699 12.6667V14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M7.99967 7.33333C9.47243 7.33333 10.6663 6.13943 10.6663 4.66667C10.6663 3.19391 9.47243 2 7.99967 2C6.52692 2 5.33301 3.19391 5.33301 4.66667C5.33301 6.13943 6.52692 7.33333 7.99967 7.33333Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
 			</button>
-			<button class="button-card" type="button" onclick="alert('disabled')">
+			<button class="button-basket" type="button" onclick="alert('disabled')">
 				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					<path d="M3 6H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -38,14 +45,14 @@ const { as: tag = "header" } = Astro.props;
 		padding: calc(var(--adaptive-pixel) * 12) var(--size-15);
 		display: flex;
 		gap: var(--size-30);
-		border-radius: 0 0 calc(var(--adaptive-pixel) * 4) calc(var(--adaptive-pixel) * 4);
+		border-radius: 0 0 var(--size-4) var(--size-4);
         font-family: inherit;
 		transition: transform 0.5s ease;
 		&:focus-within,
 		&:hover {
 			background-color: var(--color-product);
 			box-shadow: 0 calc(var(--adaptive-pixel) * -8) 0 0 var(--color-product);
-			transform: translate(0, calc(var(--adaptive-pixel) * 8));
+			transform: translate(0, var(--size-8));
 			& > * {
 				transform: translate(0, calc(var(--adaptive-pixel) * -4));
 			}
@@ -58,10 +65,10 @@ const { as: tag = "header" } = Astro.props;
 	// ToDo :hover
 	.button-login {
 		color: currentColor;
-		padding: calc(var(--adaptive-pixel) * 8) calc(var(--adaptive-pixel) * 24);
+		padding: var(--size-8) calc(var(--adaptive-pixel) * 24);
 		border: none;
 		background-color: rgba(#AFAFAF, .13);
-		border-radius: calc(var(--adaptive-pixel) * 4);
+		border-radius: var(--size-4);
 		cursor: pointer;
         font-family: inherit;
 		font-size: var(--extra-small-font-size);
@@ -69,8 +76,13 @@ const { as: tag = "header" } = Astro.props;
 		&:hover {
 			background: rgba(0, 0, 0, .2);
 		}
+		svg {
+			display: none;
+			width: calc(var(--adaptive-pixel) * 16);
+			height: calc(var(--adaptive-pixel) * 16);
+		}
 	}
-	.button-card {
+	.button-basket {
 		color: currentColor;
 		padding: 0;
 		background-color: transparent;
@@ -87,6 +99,23 @@ const { as: tag = "header" } = Astro.props;
 		}
 	}
 	@media screen and (width < 1024px) {
-		
+		.action-panel {
+			padding: var(--size-8) calc(var(--adaptive-pixel) * 16);
+			gap: var(--size-15);
+		}
+		.button-login {
+			background-color: #050611;
+			padding: var(--size-8);
+			span {
+				display: none;
+			}
+			svg {
+				display: block;
+			}
+		}
+		.button-basket {
+			gap: calc(var(--adaptive-pixel) * 5);
+			font-size: calc(var(--adaptive-pixel) * 24);
+		}
 	}
 </style>

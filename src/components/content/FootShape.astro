@@ -61,4 +61,17 @@ const { backgroundImage } = Astro.props;
 		margin-top: calc(var(--adaptive-pixel)* -280);
 		float: right;
 	}
+
+	@media screen and (width < 1024px) {
+		.bg-img {
+			position: static;
+			width: auto;
+			height: auto;
+		}
+		.scheme {
+			float: none;
+			margin: var(--size-30) 0;
+			width: auto;
+		}
+	}
 </style>

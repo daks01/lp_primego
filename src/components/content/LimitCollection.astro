@@ -22,7 +22,8 @@ import Section from "../ui/Section.astro";
 							<StarTrekText title="Империя" class="card__title" as="span" style="color: var(--color-product-empire)">
 								ИМПЕРИЯ
 							</StarTrekText>
-							<span>Непобедимый стиль</span>
+							<span class="subtitle">Непобедимый стиль</span>
+							<button class="read-more">Подробнее</button>
 						</div>
 						<div class="card__right">
 							<Image
@@ -43,7 +44,8 @@ import Section from "../ui/Section.astro";
 							<StarTrekText title="Рояль" class="card__title" as="span" style="color: var(--color-product-royal)">
 								Рояль
 							</StarTrekText>
-							<span>Уникальный стиль</span>
+							<span class="subtitle">Уникальный стиль</span>
+							<button class="read-more">Подробнее</button>
 						</div>
 						<div class="card__right">
 							<Image
@@ -141,7 +143,6 @@ import Section from "../ui/Section.astro";
 	}
 	.card__right {
 		color: var(--text-color);
-		background-color: var(--color-product);
 		transform: translate(var(--size-30), var(--size-45));
 		margin-bottom: calc(var(--size-45)* -1);
 		position: relative;
@@ -185,10 +186,67 @@ import Section from "../ui/Section.astro";
 		font-weight: 500;
 		font-size: calc(var(--adaptive-pixel) * 32);
 		padding: calc(var(--adaptive-pixel) * 25) var(--size-15);
+		background-color: var(--color-product);
 	
 		color: var(--text-color);
 		white-space: nowrap;
 		min-width: calc(var(--adaptive-pixel) * 190);
 		min-height: calc(var(--adaptive-pixel) * 180);
+	}
+
+	@media screen and (width < 1024px) {
+		.limit {
+			margin-bottom: 0;
+		}
+		.limit-header__title {
+			font-size: var(--heading-1);
+			line-height: .72;;
+		}
+		.menu {
+			flex-direction: column;
+			margin: 0 calc(var(--gutter) * -1);
+		}
+		.menu__item {
+			margin: 0 0 var(--size-60);
+			flex-basis: 100%;
+		}
+		.card {
+			padding: calc(var(--adaptive-pixel)* 10) var(--gutter);
+		}
+		.card__title {
+			font-size: calc(var(--adaptive-pixel)* 48);
+			margin-bottom: var(--size-15);
+		}
+		.card__right {
+			margin-bottom: 0;
+			transform: translate(0, var(--size-30));
+		}
+		.card__img {
+			bottom: var(--size-45);
+			left: auto;
+			right: calc(var(--adaptive-pixel)* -20);
+			width: calc(var(--adaptive-pixel)* 140);
+		}
+		.card__price {
+			font-size: var(--text-font-size);
+			font-weight: 600;
+			min-height: calc(var(--adaptive-pixel)* 90);
+			min-width: calc(var(--adaptive-pixel)* 90);
+			padding: var(--size-15) var(--size-8);
+			border-radius: var(--size-4);
+		}
+		.subtitle {
+			display: none;
+		}
+		.read-more {
+			background-color: rgba(175,175,175,.13);
+			border: none;
+			padding: var(--size-8) calc(var(--adaptive-pixel)* 24);
+			color: var(--color-product);
+			font-weight: 500;
+			font-size: var(--small-font-size);
+			border-radius: var(--size-4);
+		}
+
 	}
 </style>

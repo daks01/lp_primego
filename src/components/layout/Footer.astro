@@ -17,7 +17,7 @@ const currentYear = today.getFullYear();
 >
 	<FooterForm/>
 	<Fragment slot="after-footer">
-		<TopBar class="top-bar_margin-bottom">
+		<TopBar class="top-bar_in-footer">
 			<div class="footer__copyright">
 				<span>©&nbsp;Все права защищены | PRIMEGO {currentYear}</span>
 			</div>
@@ -35,5 +35,11 @@ const currentYear = today.getFullYear();
 		opacity: .8;
 		color: var(--color-white);
 		margin-top: var(--size-30);
+	}
+	@media screen and (width < 1024px) {
+		.footer__copyright {
+			margin: 0;
+			text-align: center;
+		}
 	}
 </style>

@@ -62,4 +62,20 @@ const { backgroundImage, invert = false } = Astro.props;
 		margin: calc(var(--size-200)* -1) auto 0 var(--size-200);
 		float: left;
 	}
+
+	@media screen and (width < 1024px) {
+		.title {
+			margin-top: var(--size-45);
+		}
+		.bg-img {
+			position: static;
+			width: auto;
+			height: auto;
+		}
+		.scheme {
+			float: none;
+			margin: var(--size-30) 0;
+			width: auto;
+		}
+	}
 </style>

@@ -34,7 +34,7 @@ const { backgroundImage, mainImage, invert = false } = Astro.props;
 	.title {
 		display: flex;
     	text-align: right;
-		margin-top: var(--size-90);;
+		margin-top: var(--size-90);
 	}
 	.blockquote {
 		max-width: calc(var(--adaptive-pixel) * 590);
@@ -47,5 +47,16 @@ const { backgroundImage, mainImage, invert = false } = Astro.props;
     	height: calc(var(--adaptive-pixel)* 949);
 		max-height: 100%;
 		z-index: -1;
+	}
+	@media screen and (width < 1024px) {
+		.title {
+			margin-top: var(--size-45);
+		}
+
+		.bg-img {
+			position: static;
+			width: auto;
+			height: auto;
+		}
 	}
 </style>

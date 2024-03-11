@@ -19,7 +19,7 @@ const {
     margin: 0;
     transition: filter .1s;
     border: none;
-	border-radius: calc(var(--adaptive-pixel) * 4);
+	border-radius: var(--size-4);
     padding: calc(var(--adaptive-pixel) * 16) calc(var(--adaptive-pixel) * 30);
     background: var(--color-product);
     color: var(--button-text-color, --color-white);
@@ -51,6 +51,8 @@ const {
 @media screen and (width < 768px) {
     .button {
         width: 100%;
+        font-size: calc(var(--adaptive-pixel)* 16);
+        padding: calc(var(--adaptive-pixel)* 14);
     }
 }
 </style>
