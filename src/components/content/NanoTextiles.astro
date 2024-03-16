@@ -18,8 +18,8 @@ const { backgroundImage, mainImage, invert = false } = Astro.props;
 		<p>Технологичный и&nbsp;инновационный для&nbsp;спортивной обуви</p>
 	</blockquote>
 	<Image
-		width="1030"
-		height="596"
+		width="1226"
+		height="912"
 		src={mainImage}
 		alt=""
 		loading="lazy"
@@ -40,12 +40,12 @@ const { backgroundImage, mainImage, invert = false } = Astro.props;
 		max-width: calc(var(--adaptive-pixel) * 590);
 	}
 	.bg-img {
-		position: absolute;
-		bottom: var(--size-60);
-		left: 31%;
-		width: auto;
-    	height: calc(var(--adaptive-pixel)* 949);
+		bottom: var(--size-45);
+		height: calc(var(--adaptive-pixel)* 912);
+		left: 35.5%;
 		max-height: 100%;
+		position: absolute;
+		width: auto;
 		z-index: -1;
 	}
 	@media screen and (max-width: 1023px) {

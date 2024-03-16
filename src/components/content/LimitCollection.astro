@@ -22,7 +22,7 @@ import Section from "../ui/Section.astro";
 							<StarTrekText title="Империя" class="card__title" as="span" style="color: var(--color-product-empire)">
 								ИМПЕРИЯ
 							</StarTrekText>
-							<span class="subtitle">Непобедимый стиль</span>
+							<span class="card__subtitle">Непобедимый стиль</span>
 							<button class="read-more">Подробнее</button>
 						</div>
 						<div class="card__right">
@@ -44,7 +44,7 @@ import Section from "../ui/Section.astro";
 							<StarTrekText title="Рояль" class="card__title" as="span" style="color: var(--color-product-royal)">
 								Рояль
 							</StarTrekText>
-							<span class="subtitle">Уникальный стиль</span>
+							<span class="card__subtitle">Уникальный стиль</span>
 							<button class="read-more">Подробнее</button>
 						</div>
 						<div class="card__right">
@@ -177,12 +177,13 @@ import Section from "../ui/Section.astro";
 			transition: opacity ease .5s;
 		}
 	}
-	.card__title sup {
-		top: -0.9em;
+	.card__subtitle {
+		font-weight: 600;
 	}
 	.card__price {
 		display: flex;
 		align-items: flex-end;
+		justify-content: center;
 		font-weight: 500;
 		font-size: calc(var(--adaptive-pixel) * 32);
 		padding: calc(var(--adaptive-pixel) * 25) var(--size-15);
@@ -245,7 +246,7 @@ import Section from "../ui/Section.astro";
 			padding: var(--size-15) var(--size-8);
 			border-radius: var(--size-4);
 		}
-		.subtitle {
+		.card__subtitle {
 			display: none;
 		}
 		.read-more {

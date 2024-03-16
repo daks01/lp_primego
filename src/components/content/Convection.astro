@@ -6,7 +6,7 @@ import imageSneaker from '../../assets/img/convection/sneaker.svg?raw';
 import imageScheme1 from '../../assets/img/convection/scheme1.png';
 import imageScheme2 from '../../assets/img/convection/scheme2.png';
 
-const { backgroundImage } = Astro.props;
+const { backgroundImage, mainImage } = Astro.props;
 
 ---
 <Section backgroundImage={backgroundImage} class="section">
@@ -50,7 +50,14 @@ const { backgroundImage } = Astro.props;
 			<p>Теплорегулирующая подкладка, обеспечивает вентиляцию, предотвращает перегрев</p>
 		</blockquote>
 	</div>
-	<div set:html={imageSneaker} style="color: var(--color-product)" class="bg-img"/>
+	<Image
+		width="990"
+		height="860"
+		src={mainImage}
+		alt=""
+		loading="lazy"
+		class="bg-img"
+	/>
 </Section>
 
 <style lang="scss">
@@ -71,7 +78,7 @@ const { backgroundImage } = Astro.props;
 		//костыль
 		margin-bottom: calc(var(--adaptive-pixel) * 75);
 	}
-	.bg-img :global(svg){
+	.bg-img {
 		position: absolute;
 		top: var(--size-60);
 		right: 46%;
@@ -96,7 +103,7 @@ const { backgroundImage } = Astro.props;
 		flex-direction: column;
 	}
 	.list-item__title {
-		margin-top: 0;
+		margin: 0 0 var(--size-15);
 		color: var(--color-product);
 	}
 	.list-item img {
@@ -114,11 +121,6 @@ const { backgroundImage } = Astro.props;
 			text-align: left;
 		}
 		.bg-img {
-			position: static;
-			width: auto;
-			height: auto;
-		}
-		.bg-img :global(svg){
 			position: static;
 			width: auto;
 			height: auto;

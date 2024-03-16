@@ -121,6 +121,7 @@ const { backgroundImage } = Astro.props;
 		right: 0;
 		top: -20%;
 		transform: rotate(6deg);
+		pointer-events: none;
 		svg {
 			height: 100%;
 			transform: translate(32%, -15%);
@@ -174,10 +175,31 @@ const { backgroundImage } = Astro.props;
 		});
 		splide.mount();
 
-		splide.on('move', function () {
+		splide.on('move', () => {
 			pagination?.unpauseAnimations();
 			setTimeout(()=>pagination?.pauseAnimations(), 500);
 		});
+
+		splide.on('click', throttle(() => {
+			const nexSlideIndex = splide.Components.Controller.getNext(true);
+			splide.go(nexSlideIndex);
+		}, 2000 / 4));
+
+		function throttle(func, delay) {
+			let wait = false;
+
+			return (...args) => {
+				if (wait) {
+					return;
+				}
+
+				func(...args);
+				wait = true;
+				setTimeout(() => {
+				wait = false;
+				}, delay);
+			}
+		}
 	});
 </script>
 
