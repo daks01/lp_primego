@@ -21,7 +21,7 @@ const {
     border: none;
 	border-radius: var(--size-4);
     padding: calc(var(--adaptive-pixel) * 16) calc(var(--adaptive-pixel) * 30);
-    background: var(--color-product);
+    background-color: var(--color-product);
     color: var(--button-text-color, --color-white);
     font-weight: 600;
 	font-size: calc(var(--adaptive-pixel) * 20);
@@ -30,12 +30,13 @@ const {
     white-space: nowrap;
     cursor: pointer;
     user-select: none;
+    transition: background-color 0.15s ease;
 
     &:hover {
-        filter: brightness(105%);
+        background-color: var(--color-product-hover);
     }
     &:active {
-        filter: brightness(97%);
+        background-color: var(--color-product-active);
     }
 }
 

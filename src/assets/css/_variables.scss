@@ -41,35 +41,31 @@
     --color-white: #FFFFFF;
     --color-bg-disabled: #25282B;
     --color-black: #010000;
+    --color-gray: #C5C0DB;
 
+    // цвета для страниц
     --color-product-primego: #FC1447;
-    --color-product-royal: #FFF;
-    --color-product-empire: #FFCD01;
+    --color-product-primego-hover: #CD022E;
+    --color-product-primego-active: #CD022E;
 
-    --color-product: var(--color-product-primego); // default, но перебивается на страницах
+    --color-product-royal: #FFF;
+    --color-product-royal-hover: #CCCCCC;
+    --color-product-royal-active: #F4F3FE;
+
+    --color-product-empire: #FFCD01;
+    --color-product-empire-hover: #FFDE58;
+    --color-product-empire-active: #E1BA1B;
+
+    // default, но перебивается на страницах
+    --color-product: var(--color-product-primego);
+    --color-product-hover: var(--color-product-primego-hover);
+    --color-product-active: var(--color-product-primego-active);
 
     --text-color: var(--color-white);
     --text-product: var(--color-product);
+    --text-lead: var(--color-white);
 
 }
-
-// @media screen and (max-width: 1023px) {
-//     :root {
-//         --container-width: 640;
-//         --container-width-in-px: 640px;
-//         --adaptive-pixel: 0.157vw;
-//         --gutter: calc(var(--adaptive-pixel) * 24);
-    
-//         --heading-1: calc(var(--adaptive-pixel) * 74);
-//         --heading-2: calc(var(--adaptive-pixel) * 20);
-//         --heading-3: calc(var(--adaptive-pixel) * 18);
-//         --heading-4: calc(var(--adaptive-pixel) * 16);
-//         --heading-5: calc(var(--adaptive-pixel) * 14);
-//         --lead-font-size: calc(var(--adaptive-pixel) * 50);
-//         --text-font-size: calc(var(--adaptive-pixel) * 16);
-//         --small-font-size: calc(var(--adaptive-pixel) * 14);
-//     }
-// }
 
 @media screen and (max-width: 1023px) {
     :root {

@@ -70,7 +70,7 @@ blockquote {
     margin: var(--size-90) 0;
     padding-left: var(--size-60);  
     text-wrap: balance;
-    font-weight: 500;
+    font-weight: 600;
     font-size: var(--text-font-size);
     line-height: 1.2;;
 }
@@ -94,13 +94,14 @@ blockquote p {
     font-size: var(--lead-font-size);
     line-height: 1.2;
     font-weight: 600;
+    color: var(--text-lead);
 }
 
 h1 + .lead,
 .h1 + .lead {
     font-size: var(--size-60);
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 110%;
     color: var(--text-color);
     margin-top: calc(var(--size-45) * -1);
