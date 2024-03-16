@@ -12,31 +12,23 @@ const { backgroundImage } = Astro.props;
 
 <Section backgroundImage={backgroundImage}>
 	<BackgroundText>Primego</BackgroundText>
-	<div class="hero-layout">
-		<div class="hero">
-			<BackButton href="./../"></BackButton>
-			<StarTrekText as="h1" class="page-title">Рояль</StarTrekText>
-			<div>
-				<p class="lead">Твой элегантный стиль</p>
-				<p>
-					Эти кроссовки сочетают в&nbsp;себе изысканный дизайн с&nbsp;выдающейся комфортностью, 
-					обеспечивая вам непревзойденный опыт носки.
-				</p>
-				<p class="display-mobile-none">
-					<span class="h3 price">27&thinsp;700&thinsp;₽</span>
-				</p>
-				<Button as="button" class="display-none display-mobile-flex" onclick="alert('disabled')">
-					Купить 	от 27&thinsp;700&thinsp;₽
-				</Button>
-				<Button as="button" class="display-mobile-none" onclick="alert('disabled')">
-					Купить сейчас
-				</Button>
-			</div>
-		</div>
-		<div class="hero__image">
-			<div>
-				<Image src={imageRoyalSneakers} alt="" role="presentation"/>
-			</div>
+	<div class="hero">
+		<BackButton href="./../"></BackButton>
+		<StarTrekText as="h1" class="page-title">Рояль</StarTrekText>
+		<div>
+			<p class="lead">Твой элегантный стиль</p>
+			<p>
+				Эти кроссовки сочетают в&nbsp;себе изысканный дизайн с&nbsp;выдающейся комфортностью, 
+				обеспечивая вам непревзойденный опыт носки.
+			</p>
+			<p class="display-mobile-none price">
+				<span class="h3">27&thinsp;700&thinsp;₽</span>
+			</p>
+			<Image src={imageRoyalSneakers} alt="" role="presentation" class="hero__image" loading="lazy" />
+			<Button as="button" onclick="alert('disabled')">
+				<span class="display-none display-mobile-block">Купить от 27&thinsp;700&thinsp;₽</span>
+				<span class="display-mobile-none">Купить сейчас</span>
+			</Button>
 		</div>
 	</div>
 </Section>
@@ -46,29 +38,25 @@ const { backgroundImage } = Astro.props;
 		margin-bottom: var(--size-90);
 		font-size: var(--heading-1);
 	}
-	.hero-layout {
-		display: flex;
+	.hero {
+		max-width: calc(var(--adaptive-pixel) * 720);
 		margin-bottom: calc(var(--adaptive-pixel) * 150);
 	}
-	.hero {
-		min-width: 40%;
-	}
 	.hero__image {
-		margin-bottom: calc(var(--adaptive-pixel) * 120 * -1);
-    	align-self: flex-end;
+		bottom: calc(var(--adaptive-pixel)* 270);
+		position: absolute;
+		width: calc(var(--adaptive-pixel)* 785);
+		left: 50%;
 	}
 	.price {
 		color: var(--text-color);
+		margin-bottom: var(--size-45);
 	}
 
 	@media screen and (max-width: 1023px) {
 		.hero {
-			min-width: auto;
 			text-align: center;
-		}
-		.hero-layout {
 			margin-bottom: calc(var(--adaptive-pixel) * 60);
-			flex-direction: column;
 		}
 		.page-title {
 			font-size: calc(var(--adaptive-pixel) * 128);
@@ -76,7 +64,8 @@ const { backgroundImage } = Astro.props;
 			margin-bottom: var(--size-30);
 		}
 		.hero__image {
-			margin: var(--size-30) 0 0;
+			position: static;
+			margin-bottom: calc(var(--adaptive-pixel) * 30);
 		}
 	}
 </style>

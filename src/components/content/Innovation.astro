@@ -12,65 +12,69 @@ const { backgroundImage } = Astro.props;
 
 ---
 <Section backgroundImage={backgroundImage} class="section">
-	<ul class="list">
-		<li class="list-item">
-			<span class="list-item__title">Антибактериальные</span>
-			<Image
-				width="180"
-				height="180"
-				src={imageScheme1}
-				alt=""
-				loading="lazy"
-			/>
-		</li>
-		<li class="list-item">
-			<span class="list-item__title">Мягкие</span>
-			<Image
-				width="180"
-				height="180"
-				src={imageScheme2}
-				alt=""
-				loading="lazy"
-			/>
-		</li>
-		<li class="list-item">
-			<span class="list-item__title">Воздухопроницаемые</span>
-			<Image
-				width="180"
-				height="180"
-				src={imageScheme3}
-				alt=""
-				loading="lazy"
-			/>
-		</li>
-		<li class="list-item">
-			<span class="list-item__title">Упругие</span>
-			<Image
-				width="180"
-				height="180"
-				src={imageScheme4}
-				alt=""
-				loading="lazy"
-			/>
-		</li>
-	</ul>
-	<header>
-		<StarTrekText as="h2" class="h1 title">Инновационные</StarTrekText>
-	</header>
-	<blockquote class="blockquote">
-		<p>Искусственный интеллект в&nbsp;процессе разработки <br>и&nbsp;производства позволяет создавать уникальные <br>и&nbsp;передовые решения</p>
-		<p>Инновационные технологий для&nbsp;кроссовок нового поколения,<br> обеспечивающих высокий уровень комфорта и&nbsp;функциональности</p>
-		<p>Кроссовки, которые задают<br> новые стандарты.<br> Твои стандарты</p>
-	</blockquote>
+	<div class="layout">	
+		<ul class="list">
+			<li class="list-item">
+				<span class="list-item__title">Антибактериальные</span>
+				<Image
+					width="180"
+					height="180"
+					src={imageScheme1}
+					alt=""
+					loading="lazy"
+				/>
+			</li>
+			<li class="list-item">
+				<span class="list-item__title">Мягкие</span>
+				<Image
+					width="180"
+					height="180"
+					src={imageScheme2}
+					alt=""
+					loading="lazy"
+				/>
+			</li>
+			<li class="list-item">
+				<span class="list-item__title">Воздухопроницаемые</span>
+				<Image
+					width="180"
+					height="180"
+					src={imageScheme3}
+					alt=""
+					loading="lazy"
+				/>
+			</li>
+			<li class="list-item">
+				<span class="list-item__title">Упругие</span>
+				<Image
+					width="180"
+					height="180"
+					src={imageScheme4}
+					alt=""
+					loading="lazy"
+				/>
+			</li>
+		</ul>
+		<header class="section__header">
+			<StarTrekText as="h2" class="h1 title">Инновационные</StarTrekText>
+		</header>
+		<Image
+			width="704"
+			height="430"
+			src={imageAI}
+			alt=""
+			loading="lazy"
+			class="bg-img"
+		/>
+		<div class="blockquote-wrapper">
+			<blockquote class="blockquote">
+				<p>Искусственный интеллект в&nbsp;процессе разработки <br>и&nbsp;производства позволяет создавать уникальные <br>и&nbsp;передовые решения</p>
+				<p>Инновационные технологий для&nbsp;кроссовок нового поколения,<br> обеспечивающих высокий уровень комфорта и&nbsp;функциональности</p>
+				<p>Кроссовки, которые задают<br> новые стандарты.<br> Твои стандарты</p>
+			</blockquote>
+		</div>
+	</div>
 
-	<Image
-		width="704"
-		height="430"
-		src={imageAI}
-		alt=""
-		loading="lazy"
-		class="bg-img"
-	/>
 </Section>
 
 <style lang="scss">
@@ -125,14 +129,22 @@ const { backgroundImage } = Astro.props;
 		.section {
 			padding: var(--size-30) 0;
 		}
+		.layout {
+  			display: flex;
+  			flex-direction: column;
+		}
+		.section__header {
+			order: 1;
+		}
 		.title {
-			margin-top: var(--size-60);
+			margin-top: var(--size-45);
 			text-align: center;
 		}
 		.list {
 			flex-direction: column;
 			gap: var(--size-30);
-			margin-top: var(--size-30);
+			margin: var(--size-60) 0 var(--size-30);
+			order: 3;
 		}
 		.list-item__title {
 			font-size: var(--text-font-size);
@@ -143,6 +155,9 @@ const { backgroundImage } = Astro.props;
 			height: calc(var(--adaptive-pixel)* 120);
 			width: calc(var(--adaptive-pixel)* 120);
 		}
+		.blockquote-wrapper {
+			order: 4;
+		}
 		.blockquote {
 			margin-left: 0;
 		}
@@ -150,12 +165,8 @@ const { backgroundImage } = Astro.props;
 			position: static;
 			width: auto;
 			height: auto;
-		}
-		.scheme {
-			float: none;
-			margin: var(--size-30) 0;
-			max-width: var(--size-120);
-			margin: 0 auto;
+			margin-left: calc(var(--gutter) * -1);
+			order: 2;
 		}
 	}
 </style>

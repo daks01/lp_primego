@@ -16,12 +16,6 @@ const { backgroundImage, mainImage } = Astro.props;
 			<header>
 				<StarTrekText as="h2" class="h1 title">Кастомизация</StarTrekText>
 			</header>
-			<blockquote class="blockquote">
-				<p>Возможность создания уникальной пары кроссовок с&nbsp;индивидуальным цветовым решением и&nbsp;материалом</p>
-				<p>Неповторимые кроссовоки, отражают личность<br> владельца, легко адаптируется под&nbsp;стиль одежды</p>
-				<p>Твои идеи для&nbsp;твоей индивидуальности через выбор цвета и&nbsp;материала обуви</p>
-			</blockquote>
-		
 			<Image
 				width="1378"
 				height="1080"
@@ -30,6 +24,11 @@ const { backgroundImage, mainImage } = Astro.props;
 				loading="lazy"
 				class="bg-img"
 			/>
+			<blockquote class="blockquote">
+				<p>Возможность создания уникальной пары кроссовок с&nbsp;индивидуальным цветовым решением и&nbsp;материалом</p>
+				<p>Неповторимые кроссовоки, отражают личность<br> владельца, легко адаптируется под&nbsp;стиль одежды</p>
+				<p>Твои идеи для&nbsp;твоей индивидуальности через выбор цвета и&nbsp;материала обуви</p>
+			</blockquote>
 		</div>
 	</div>
 </Section>
@@ -71,15 +70,24 @@ const { backgroundImage, mainImage } = Astro.props;
 			margin-top: var(--size-60);
 		}
 		.bg-img {
-			position: static;
-			width: auto;
 			height: auto;
+			z-index: -1;
+			position: relative;
+			margin-top: calc(var(--size-120) * -1);
+			top: auto;
+			right: calc(var(--size-15) * -1);
+			left: auto;
+			width: 130%;
+			max-height: none;
+			max-width: max-content;
 		}
 		.scheme {
 			float: none;
-			margin: var(--size-30) 0;
+			margin: var(--size-15) auto 0;
 			max-width: var(--size-120);
-			margin: 0 auto;
+			& :global(svg) {
+				width: 100%;
+			}
 		}
 	}
 </style>

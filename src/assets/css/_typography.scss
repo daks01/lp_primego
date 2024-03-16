@@ -109,24 +109,6 @@ h1 + .lead,
 }
 
 
-// @media screen and (max-width: 1023px) {
-//     h1, .h1 {
-//         margin: var(--size-90) 0 var(--size-60);
-//     }
-//     h2, .h2 {
-//         margin: var(--size-60) 0;
-//     }
-//     h3, .h3 {
-//         margin: var(--size-60) 0 var(--size-30);
-//     }
-//     h4, .h4 {
-//         margin: var(--size-60) 0 var(--size-30);
-//     }
-//     h5, .h5 {
-//         margin: var(--size-120) 0 var(--size-30);
-//     }
-// }
-
 @media screen and (max-width: 1023px) {
     h1, .h1 {
         margin: var(--size-90) 0 var(--size-30);
@@ -153,6 +135,7 @@ h1 + .lead,
     blockquote {
         margin: var(--size-30) 0;
         padding-left: var(--size-30);
+        font-weight: 400;
     }
     blockquote p {
         margin: 0 0 var(--size-30);

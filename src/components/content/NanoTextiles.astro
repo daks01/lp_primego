@@ -12,11 +12,6 @@ const { backgroundImage, mainImage, invert = false } = Astro.props;
 			НАНО <br />ТЕКСТИЛЬ
 		</StarTrekText>
 	</header>
-	<blockquote class="blockquote">
-		<p>Гидрофобная структура нити, не&nbsp;задерживает влагу, предотвращая развитие бактерий</p>
-		<p>Из&nbsp;натуральных волокон, антибактериальные и&nbsp;гидрофобные свойства, идеально для&nbsp;кроссовок</p>
-		<p>Технологичный и&nbsp;инновационный для&nbsp;спортивной обуви</p>
-	</blockquote>
 	<Image
 		width="1226"
 		height="912"
@@ -25,6 +20,11 @@ const { backgroundImage, mainImage, invert = false } = Astro.props;
 		loading="lazy"
 		class="bg-img"
 	/>
+	<blockquote class="blockquote">
+		<p>Гидрофобная структура нити, не&nbsp;задерживает влагу, предотвращая развитие бактерий</p>
+		<p>Из&nbsp;натуральных волокон, антибактериальные и&nbsp;гидрофобные свойства, идеально для&nbsp;кроссовок</p>
+		<p>Технологичный и&nbsp;инновационный для&nbsp;спортивной обуви</p>
+	</blockquote>
 </Section>
 
 <style lang="scss">
@@ -54,9 +54,11 @@ const { backgroundImage, mainImage, invert = false } = Astro.props;
 		}
 
 		.bg-img {
-			position: static;
+    		position: static;
 			width: auto;
 			height: auto;
+			max-width: calc(100% + var(--gutter) + var(--gutter));
+			margin: calc(var(--adaptive-pixel) * 75 * -1) calc(var(--gutter) * -1) var(--size-30);
 		}
 	}
 </style>

@@ -16,11 +16,6 @@ const { backgroundImage } = Astro.props;
 				стопы
 			</StarTrekText>
 		</header>
-		<blockquote class="blockquote">
-			<p>Трехмерное термическое формование, учет индвидуальной формы стопы</p>
-			<p>Подошва учитывает форму стопы, не&nbsp;деформирует ногу</p>
-			<p>Адаптация подошвы к&nbsp;стопе для&nbsp;здоровых ног</p>
-		</blockquote>
 		<Image
 			width="1030"
 			height="596"
@@ -30,6 +25,11 @@ const { backgroundImage } = Astro.props;
 			class="bg-img"
 		/>
 		<div set:html={imageScheme} style="color: var(--color-product)" class="scheme"/>
+		<blockquote class="blockquote">
+			<p>Трехмерное термическое формование, учет индвидуальной формы стопы</p>
+			<p>Подошва учитывает форму стопы, не&nbsp;деформирует ногу</p>
+			<p>Адаптация подошвы к&nbsp;стопе для&nbsp;здоровых ног</p>
+		</blockquote>
 	</div>
 </Section>
 
@@ -58,20 +58,24 @@ const { backgroundImage } = Astro.props;
 	}
 	.scheme {
 		width: calc(var(--adaptive-pixel) * 446);
-		margin-top: calc(var(--adaptive-pixel)* -280);
 		float: right;
 	}
 
 	@media screen and (max-width: 1023px) {
+		.title {
+			margin-top: 0;
+		}
 		.bg-img {
 			position: static;
 			width: auto;
 			height: auto;
+			margin: calc(var(--size-45) * -1) 0 0;
 		}
 		.scheme {
 			float: none;
-			margin: var(--size-30) 0;
+			margin: var(--size-60) 0;
 			width: auto;
+			text-align: center;
 		}
 	}
 </style>

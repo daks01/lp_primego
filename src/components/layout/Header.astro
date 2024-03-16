@@ -48,18 +48,23 @@ const {
 		border-radius: 0 0 var(--size-4) var(--size-4);
         font-family: inherit;
 		transition: transform 0.5s ease;
-		&:focus-within,
-		&:hover {
-			background-color: var(--color-product);
-			box-shadow: 0 calc(var(--adaptive-pixel) * -8) 0 0 var(--color-product);
-			transform: translate(0, var(--size-8));
-			& > * {
-				transform: translate(0, calc(var(--adaptive-pixel) * -4));
-			}
-		}
-
-		& > * {
+	}
+	@media screen and (min-width: 1024px) {
+		.action-panel {
 			transition: transform 0.5s ease;
+			&:focus-within,
+			&:hover {
+				background-color: var(--color-product);
+				box-shadow: 0 calc(var(--adaptive-pixel) * -8) 0 0 var(--color-product);
+				transform: translate(0, var(--size-8));
+				& > * {
+					transform: translate(0, calc(var(--adaptive-pixel) * -4));
+				}
+			}
+
+			& > * {
+				transition: transform 0.5s ease;
+			}
 		}
 	}
 	// ToDo :hover

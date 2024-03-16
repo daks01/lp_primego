@@ -41,6 +41,14 @@ const { backgroundImage, mainImage } = Astro.props;
 				/>
 			</li>
 		</ul>
+		<Image
+			width="990"
+			height="860"
+			src={mainImage}
+			alt=""
+			loading="lazy"
+			class="bg-img"
+		/>
 		<header>
 			<StarTrekText as="h2" class="h1 title">Конвекция</StarTrekText>
 		</header>
@@ -50,14 +58,6 @@ const { backgroundImage, mainImage } = Astro.props;
 			<p>Теплорегулирующая подкладка, обеспечивает вентиляцию, предотвращает перегрев</p>
 		</blockquote>
 	</div>
-	<Image
-		width="990"
-		height="860"
-		src={mainImage}
-		alt=""
-		loading="lazy"
-		class="bg-img"
-	/>
 </Section>
 
 <style lang="scss">
@@ -121,13 +121,17 @@ const { backgroundImage, mainImage } = Astro.props;
 			text-align: left;
 		}
 		.bg-img {
-			position: static;
+    		position: static;
 			width: auto;
 			height: auto;
+			margin: calc(var(--size-8) * -1) 0 calc(var(--size-15) * -1);
 		}
 		.list {
 			gap: var(--size-30);
 			margin: 0 0 var(--size-60);
+		}
+		.list-item {
+			text-align: center;
 		}
 		.list-item img {
 			height: auto;
