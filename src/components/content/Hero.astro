@@ -166,9 +166,9 @@ const { backgroundImage } = Astro.props;
 		var splide = new Splide(".splide", {
 			type: "fade",
 			rewind: true,
-   			pauseOnHover: true,
 			lazyLoad: "nearby",
 			autoplay: true,
+   			pauseOnHover: false,
 			interval: 5000,
 			pagination: false,
 			arrows: false
@@ -181,8 +181,12 @@ const { backgroundImage } = Astro.props;
 		});
 
 		splide.on('click', throttle(() => {
+			const autoplay = splide.Components.Autoplay;
 			const nexSlideIndex = splide.Components.Controller.getNext(true);
+
+			autoplay.pause();
 			splide.go(nexSlideIndex);
+			autoplay.play();
 		}, 2000 / 4));
 
 		function throttle(func, delay) {
