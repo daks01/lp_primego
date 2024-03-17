@@ -25,7 +25,7 @@ const { backgroundImage } = Astro.props;
 				<span class="h3">27&thinsp;700&thinsp;₽</span>
 			</p>
 			<Image src={imageEmpireSneakers} alt="" role="presentation" class="hero__image" loading="lazy" />
-			<Button as="button" onclick="alert('disabled')">
+			<Button as="button" onclick={`window["dialog-basket"]?.showModal()`}>
 				<span class="display-none display-mobile-block">Купить от 27&thinsp;700&thinsp;₽</span>
 				<span class="display-mobile-none">Купить сейчас</span>
 			</Button>

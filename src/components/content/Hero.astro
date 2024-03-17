@@ -26,7 +26,7 @@ const { backgroundImage } = Astro.props;
 					Наша обувь способна вдохновлять и&nbsp;очаровывать аудиторию по&nbsp;всему миру. 
 					Создай свой образ с&nbsp;помощью констуктора
 				</p>
-				<Button as="button" onclick="alert('disabled')">
+				<Button as="button" onclick={`window["dialog-basket"]?.showModal()`}>
 					Создать образ
 				</Button>
 			</div>

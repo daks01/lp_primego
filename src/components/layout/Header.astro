@@ -1,5 +1,7 @@
 ---
 import Section from "../ui/Section.astro";
+import Dialog from "../ui/Dialog.astro";
+import Button from "../ui/Button.astro";
 import TopBar from "./TopBar.astro";
 
 const { 
@@ -11,14 +13,27 @@ const {
 <Section as={tag} class="header">
 	<TopBar isHome={isHome}>
 		<div class="action-panel">
-			<button class="button-login" type="button" aria-describedby="profile-btn-title" onclick="alert('disabled')">
+			<button 
+				class="button-login" 
+				type="button" 
+				aria-describedby="profile-btn-title" 
+				onclick={`window["dialog-login"]?.showModal()`}
+			>
 				<span class="button-login__title">Войти на сайт</span>
 				<svg role="presentation" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M13.3337 14V12.6667C13.3337 11.9594 13.0527 11.2811 12.5526 10.781C12.0525 10.281 11.3742 10 10.667 10H5.33366C4.62641 10 3.94814 10.281 3.44804 10.781C2.94794 11.2811 2.66699 11.9594 2.66699 12.6667V14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					<path d="M7.99967 7.33333C9.47243 7.33333 10.6663 6.13943 10.6663 4.66667C10.6663 3.19391 9.47243 2 7.99967 2C6.52692 2 5.33301 3.19391 5.33301 4.66667C5.33301 6.13943 6.52692 7.33333 7.99967 7.33333Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>
 			</button>
-			<button class="button-basket" type="button" onclick="alert('disabled')">
+			<Dialog id="dialog-login" title="Войти или зарегистрироваться" >
+				<div style="background: rgba(0,0,0,.2); height: 20vh;"></div><br>
+				<Button>Войти</Button>
+			</Dialog>
+			<button
+				class="button-basket"
+				type="button"
+				onclick={`window["dialog-basket"]?.showModal()`}
+			>
 				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					<path d="M3 6H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -26,6 +41,19 @@ const {
 				</svg>
 				0
 			</button>
+			<Dialog id="dialog-basket" title="Оформление заказа">
+				<div style="background: rgba(0,0,0,.2); height: 10vh;"></div><br>
+				<div style="background: rgba(0,0,0,.2); height: 10vh;"></div><br>
+				<div style="background: rgba(0,0,0,.2); height: 10vh;"></div><br>
+				<div style="background: rgba(0,0,0,.2); height: 10vh;"></div><br>
+				<div style="background: rgba(0,0,0,.2); height: 10vh;"></div><br>
+				<div style="background: rgba(0,0,0,.2); height: 10vh;"></div><br>
+				<div style="background: rgba(0,0,0,.2); height: 10vh;"></div><br>
+				<div style="background: rgba(0,0,0,.2); height: 10vh;"></div><br>
+				<div style="background: rgba(0,0,0,.2); height: 10vh;"></div><br>
+				<div style="background: rgba(0,0,0,.2); height: 10vh;"></div><br>
+				<Button>Оплатить</Button>
+			</Dialog>
 		</div>
 	</TopBar>
 </Section>

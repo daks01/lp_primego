@@ -1,0 +1,150 @@
+---
+const {id, title} = Astro.props;
+---
+
+<!-- How to open -->
+<!-- <button onclick={`window.${id}?.showModal()`}>Открыть</button> -->
+
+<dialog 
+    id={id}
+    class="dialog"
+    role="dialog" 
+    aria-modal="true"
+    aria-labelledby={`dialog-${id}-title`}
+>
+    <header class="dialog__header">
+        <span class="dialog__title h3" id={`dialog-${id}-title`}>{title}</span>
+        <form method="dialog">
+            <button 
+                type="submit"
+                class="button-close" 
+                aria-label="Закрыть"
+            >
+                <svg role="presentation" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </button>
+        </form>
+    </header>
+    <div class="dialog__body">
+        <slot />
+    </div>
+</dialog>
+
+<script>
+    import dialogPolyfill from 'dialog-polyfill';
+    
+    document.addEventListener("DOMContentLoaded", () => {
+        init();
+    });
+
+    function init() {
+        const dialogList = document.querySelectorAll('dialog');
+        const isOutsideClick = (element, event) => {
+            const rect = element.getBoundingClientRect();
+            const result = (event.clientY < rect.top
+                || event.clientY > rect.bottom
+                || event.clientX < rect.left
+                || event.clientX > rect.right);
+            return result;
+        }
+
+        if (!dialogList.length) {
+            return;
+        }
+
+        [...dialogList].forEach((dialog) => {
+            dialogPolyfill.registerDialog(dialog);
+
+            dialog.addEventListener('click', (event) => {
+                if (isOutsideClick(dialog, event)){
+                    dialog.close();
+                }
+            });
+        });
+    }
+</script>
+
+<style lang="scss">
+    :root {
+        --dialog-gutter: var(--size-60);
+    }
+    @keyframes animate-top {
+        from {
+            transform: translate(0, -5vh);
+            opacity:0
+        } 
+        to {
+            transform: translate(0, 0);
+            opacity:1
+        }
+    }
+    .dialog {
+        position: fixed;
+        overflow: auto;
+        display: block;
+        left: 0;
+        right: 0;
+        height: fit-content;
+        max-height: 90vh;
+        width: fit-content; 
+        max-width: calc(var(--adaptive-pixel) * 945);
+        margin: 10vh auto auto;
+        padding: 0;
+        background-color: var(--color-bg-disabled);
+        box-shadow: 0px 8px 16px -7px var(--color-product);
+        border: none;
+        animation-name: animate-top;
+        animation-duration: 0.4s;
+
+        &:not([open]) {
+            display: none
+        }
+
+        &::backdrop,
+        & + .backdrop {
+            position: fixed;
+            top: 0px;
+            right: 0px;
+            bottom: 0px;
+            left: 0px;
+            background: linear-gradient(267.46deg, var(--color-product) 1.33%, rgb(0, 0, 0) 97.51%);
+            opacity: .65;
+            filter: saturate(0.7);
+        }
+    }
+    body:has(dialog[open]) {
+        overflow: hidden;
+    }
+    .dialog__header {
+        padding: var(--dialog-gutter) var(--dialog-gutter) var(--size-45);
+        position: relative;
+        background-color: var(--color-bg-disabled);
+        position: sticky;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+    .dialog__body {
+        margin: 0 var(--dialog-gutter) var(--dialog-gutter);
+    }
+    .dialog__title {
+        padding-right: var(--size-45);
+        margin: 0;
+    }
+    .button-close {
+        color: #C9C8D3;
+        padding: var(--size-30) var(--dialog-gutter) var(--size-30) var(--size-30);
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: color 0.15s ease;
+        margin: calc(var(--dialog-gutter)* -1) calc(var(--dialog-gutter)* -1) 0 0;
+        
+        &:hover {
+            color: var(--color-product);
+        }
+    }
+</style>
