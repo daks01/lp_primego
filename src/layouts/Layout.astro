@@ -1,7 +1,15 @@
 ---
+import { getImage } from "astro:assets"
 import Head from './Head.astro';
 
-const { title = "Primego" } = Astro.props;
+const {
+	title = "Primego",
+	backgroundImage
+} = Astro.props;
+
+const optimizedBackgroundImage = backgroundImage 
+	? await getImage({ src: backgroundImage, quality: '95' }) 
+	: {src:''};
 ---
 
 <!doctype html>
@@ -29,7 +37,18 @@ const { title = "Primego" } = Astro.props;
 		
 		<Head />
 	</head>
-	<body>
+	<body style={backgroundImage ? `background-image: url(${optimizedBackgroundImage?.src})` : ''}>
 		<slot />
 	</body>
 </html>
+
+<style>
+html, body {
+	min-height: 100%;
+	height: 100%;
+}
+body {
+	background-position: top center;
+	background-size: cover;
+}
+</style>

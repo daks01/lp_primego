@@ -1,0 +1,24 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/layout/Header.astro";
+import Section from "../components/ui/Section.astro";
+
+import backgroundFooter from "/src/assets/img/bg/FC1447/10.jpg";
+---
+
+<Layout title="Корзина" backgroundImage={backgroundFooter}>
+	<Header/>
+	<main>
+		<Section width="985">
+			<h1 class="h3">Корзина</h1>
+		</Section>
+	</main>
+</Layout>
+
+<script></script>
+
+<style>
+	.section {
+		min-height: auto;
+	}
+</style>
