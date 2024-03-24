@@ -80,6 +80,17 @@ const {id, title} = Astro.props;
             opacity:1
         }
     }
+    .dialog, 
+    .dialog {
+        --color-product: var(--color-product-primego);
+        --color-product-hover: var(--color-product-primego-hover);
+        --color-product-active: var(--color-product-primego-active);
+        --button-text-color: var(--color-white);
+
+        --text-color: var(--color-white);
+        --text-product: var(--color-product);
+        --text-lead: var(--color-white);
+    }
     .dialog {
         position: fixed;
         overflow: auto;
@@ -88,13 +99,14 @@ const {id, title} = Astro.props;
         left: 0;
         right: 0;
         height: fit-content;
-        max-height: 90vh;
+        max-height: calc(100vh - var(--size-90));
         width: fit-content; 
         max-width: calc(var(--adaptive-pixel) * 945);
-        margin: 10vh auto auto;
+        margin: var(--size-90) auto auto;
         padding: 0;
         background-color: var(--color-bg-disabled);
-        box-shadow: 0px 8px 16px -7px var(--color-product);
+        //box-shadow: 0px 8px 16px -7px var(--color-product);
+        box-shadow: 0px 8px 16px -7px rgba(252,20,71,.45);
         border: none;
         animation-name: animate-top;
         animation-duration: 0.4s;
@@ -110,9 +122,10 @@ const {id, title} = Astro.props;
             right: 0px;
             bottom: 0px;
             left: 0px;
-            background: linear-gradient(267.46deg, var(--color-product) 1.33%, rgb(0, 0, 0) 97.51%);
+            // background: linear-gradient(267.46deg, var(--color-product) 1.33%, rgb(0, 0, 0) 97.51%);
+            // filter: saturate(0.7);
+            background: linear-gradient(267.46deg, #8C1630 1.33%, #000 97.51%);
             opacity: .65;
-            filter: saturate(0.7);
         }
     }
     body:has(dialog[open]) {
@@ -134,6 +147,7 @@ const {id, title} = Astro.props;
     .dialog__title {
         padding-right: var(--size-45);
         margin: 0;
+        color: var(--color-product);
     }
     .dialog__close-form {
         flex-shrink: 0;
