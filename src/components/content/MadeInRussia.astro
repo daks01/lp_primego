@@ -32,21 +32,21 @@ const { backgroundImage } = Astro.props;
 
 <style lang="scss">
 	.section {
-		//padding: var(--size-200) 0 var(--size-120);
+		//padding: var(--200px) 0 var(--120px);
 	}
 	.title {
 		text-align: center;
-		margin-top: calc(var(--adaptive-pixel) * 505);
+		margin-top: calc(var(--1px) * 505);
 	}
 	.blockquote {
 		margin-left: 62%;
 	}
 	.bg-img {
 		position: absolute;
-		top: var(--size-90);
+		top: var(--90px);
 		left: 0;
 		width: 100%;
-		height: calc(100% - var(--size-90));
+		height: calc(100% - var(--90px));
 		z-index: -1;
 	}
 	.bg-img img {
@@ -56,14 +56,14 @@ const { backgroundImage } = Astro.props;
 	}
 	@media screen and (max-width: 1023px) {
 		.title {
-			margin-top: calc(var(--adaptive-pixel) * 230);
-			margin-bottom: var(--size-60);
+			margin-top: calc(var(--1px) * 230);
+			margin-bottom: var(--60px);
 			text-align: right;
 		}
 		.bg-img {
 			width: 100%;
 			height: auto;
-			top: var(--size-30);
+			top: var(--30px);
 			left: 0;
 		}
 		.blockquote {

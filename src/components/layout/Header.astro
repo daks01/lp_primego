@@ -66,12 +66,12 @@ const {
 	}
 	.action-panel {
 		background-color: var(--color-bg-disabled);
-		box-shadow: 0 calc(var(--adaptive-pixel) * -8) 0 0 var(--color-bg-disabled);
+		box-shadow: 0 calc(var(--1px) * -8) 0 0 var(--color-bg-disabled);
 		color: var(--color-white);
-		padding: calc(var(--adaptive-pixel) * 12) var(--size-15);
+		padding: calc(var(--1px) * 12) var(--15px);
 		display: flex;
-		gap: var(--size-30);
-		border-radius: 0 0 var(--size-4) var(--size-4);
+		gap: var(--30px);
+		border-radius: 0 0 var(--4px) var(--4px);
         font-family: inherit;
 		transition: transform 0.5s ease;
 	}
@@ -81,10 +81,10 @@ const {
 			&:focus-within,
 			&:hover {
 				background-color: var(--color-product);
-				box-shadow: 0 calc(var(--adaptive-pixel) * -8) 0 0 var(--color-product);
-				transform: translate(0, var(--size-8));
+				box-shadow: 0 calc(var(--1px) * -8) 0 0 var(--color-product);
+				transform: translate(0, var(--8px));
 				& > * {
-					transform: translate(0, calc(var(--adaptive-pixel) * -4));
+					transform: translate(0, calc(var(--1px) * -4));
 				}
 			}
 
@@ -96,10 +96,10 @@ const {
 	// ToDo :hover
 	.button-login {
 		color: currentColor;
-		padding: var(--size-8) calc(var(--adaptive-pixel) * 24);
+		padding: var(--8px) calc(var(--1px) * 24);
 		border: none;
 		background-color: rgba(#AFAFAF, .13);
-		border-radius: var(--size-4);
+		border-radius: var(--4px);
 		cursor: pointer;
         font-family: inherit;
 		font-size: var(--extra-small-font-size);
@@ -109,8 +109,8 @@ const {
 		}
 		svg {
 			display: none;
-			width: calc(var(--adaptive-pixel) * 16);
-			height: calc(var(--adaptive-pixel) * 16);
+			width: calc(var(--1px) * 16);
+			height: calc(var(--1px) * 16);
 		}
 	}
 	.button-basket {
@@ -121,22 +121,23 @@ const {
 		display: flex;
 		align-items: center;
 		cursor: pointer;
-		gap: calc(var(--adaptive-pixel) * 10);
-		font-size: calc(var(--adaptive-pixel) * 20);
+		gap: calc(var(--1px) * 10);
+		font-size: calc(var(--1px) * 20);
 		font-weight: 600;
+		min-width: var(--45px);
 		svg {
-			width: calc(var(--adaptive-pixel) * 24);
-			height: calc(var(--adaptive-pixel) * 24);
+			width: calc(var(--1px) * 24);
+			height: calc(var(--1px) * 24);
 		}
 	}
 	@media screen and (max-width: 1023px) {
 		.action-panel {
-			padding: var(--size-8) calc(var(--adaptive-pixel) * 16);
-			gap: var(--size-15);
+			padding: var(--8px) calc(var(--1px) * 16);
+			gap: var(--15px);
 		}
 		.button-login {
 			background-color: #050611;
-			padding: var(--size-8);
+			padding: var(--8px);
 			span {
 				display: none;
 			}
@@ -145,8 +146,8 @@ const {
 			}
 		}
 		.button-basket {
-			gap: calc(var(--adaptive-pixel) * 5);
-			font-size: calc(var(--adaptive-pixel) * 24);
+			gap: calc(var(--1px) * 5);
+			font-size: calc(var(--1px) * 24);
 		}
 	}
 </style>

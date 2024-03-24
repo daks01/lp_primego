@@ -68,7 +68,7 @@ const {id, title} = Astro.props;
 
 <style lang="scss">
     :root {
-        --dialog-gutter: var(--size-60);
+        --dialog-gutter: var(--60px);
     }
     @keyframes animate-top {
         from {
@@ -99,10 +99,10 @@ const {id, title} = Astro.props;
         left: 0;
         right: 0;
         height: fit-content;
-        max-height: calc(100vh - var(--size-90));
+        max-height: calc(100vh - var(--90px));
         width: fit-content; 
-        max-width: calc(var(--adaptive-pixel) * 945);
-        margin: var(--size-90) auto auto;
+        max-width: calc(var(--1px) * 945);
+        margin: var(--90px) auto auto;
         padding: 0;
         background-color: var(--color-bg-disabled);
         //box-shadow: 0px 8px 16px -7px var(--color-product);
@@ -132,7 +132,7 @@ const {id, title} = Astro.props;
         overflow: hidden;
     }
     .dialog__header {
-        padding: var(--dialog-gutter) var(--dialog-gutter) var(--size-45);
+        padding: var(--dialog-gutter) var(--dialog-gutter) var(--45px);
         position: relative;
         background-color: var(--color-bg-disabled);
         position: sticky;
@@ -145,7 +145,7 @@ const {id, title} = Astro.props;
         margin: 0 var(--dialog-gutter) var(--dialog-gutter);
     }
     .dialog__title {
-        padding-right: var(--size-45);
+        padding-right: var(--45px);
         margin: 0;
         color: var(--color-product);
     }
@@ -154,7 +154,7 @@ const {id, title} = Astro.props;
     }
     .button-close {
         color: #C9C8D3;
-        padding: var(--size-30) var(--dialog-gutter) var(--size-30) var(--size-30);
+        padding: var(--30px) var(--dialog-gutter) var(--30px) var(--30px);
         background: none;
         border: none;
         cursor: pointer;
@@ -167,7 +167,7 @@ const {id, title} = Astro.props;
     }
     @media screen and (max-width: 1023px) {
         :root {
-            --dialog-gutter: var(--size-30);
+            --dialog-gutter: var(--30px);
         }
 		.dialog {
 		    max-width: 100vw;
@@ -176,10 +176,10 @@ const {id, title} = Astro.props;
             word-break: break-word;
         }
         .button-close {
-            padding: var(--size-15);
+            padding: var(--15px);
             & :global(svg) {
-                width: var(--size-30);
-                height: var(--size-30);
+                width: var(--30px);
+                height: var(--30px);
             }
         }
 	}

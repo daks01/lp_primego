@@ -35,37 +35,37 @@ const { backgroundImage } = Astro.props;
 
 <style lang="scss">
 	.page-title {
-		margin-bottom: var(--size-90);
+		margin-bottom: var(--90px);
 		font-size: var(--heading-1);
 	}
 	.hero {
-		max-width: calc(var(--adaptive-pixel) * 720);
-		margin-bottom: calc(var(--adaptive-pixel) * 150);
+		max-width: calc(var(--1px) * 720);
+		margin-bottom: calc(var(--1px) * 150);
 	}
 	.hero__image {
-		bottom: calc(var(--adaptive-pixel)* 270);
+		bottom: calc(var(--1px)* 270);
 		position: absolute;
-		width: calc(var(--adaptive-pixel)* 785);
+		width: calc(var(--1px)* 785);
 		left: 50%;
 	}
 	.price {
 		color: var(--text-color);
-		margin-bottom: var(--size-45);
+		margin-bottom: var(--45px);
 	}
 
 	@media screen and (max-width: 1023px) {
 		.hero {
 			text-align: center;
-			margin-bottom: calc(var(--adaptive-pixel) * 60);
+			margin-bottom: calc(var(--1px) * 60);
 		}
 		.page-title {
-			font-size: calc(var(--adaptive-pixel) * 128);
-			margin-top: calc(var(--adaptive-pixel) * 36);
-			margin-bottom: var(--size-30);
+			font-size: calc(var(--1px) * 128);
+			margin-top: calc(var(--1px) * 36);
+			margin-bottom: var(--30px);
 		}
 		.hero__image {
 			position: static;
-			margin-bottom: calc(var(--adaptive-pixel) * 30);
+			margin-bottom: calc(var(--1px) * 30);
 		}
 	}
 </style>

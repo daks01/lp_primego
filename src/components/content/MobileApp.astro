@@ -45,38 +45,38 @@ const { backgroundImage, invert = false } = Astro.props;
 		text-align: right;
 	}
 	.blockquote {
-		max-width: calc(var(--adaptive-pixel) * 490);
+		max-width: calc(var(--1px) * 490);
 		margin-left: auto;
 	}
 	.bg-img {
 		position: absolute;
-		top: var(--size-90);
+		top: var(--90px);
 		right: 60%;
 		width: auto;
-		height: calc(var(--adaptive-pixel) * 870);
+		height: calc(var(--1px) * 870);
 		max-height: 100%;
 		z-index: -1;
 	}
 	.scheme {
-		width: calc(var(--adaptive-pixel) * 725);
-		margin: calc(var(--size-200)* -1) auto 0 var(--size-200);
+		width: calc(var(--1px) * 725);
+		margin: calc(var(--200px)* -1) auto 0 var(--200px);
 		float: left;
 	}
 
 	@media screen and (max-width: 1023px) {
 		.title {
-			margin-top: var(--size-45);
+			margin-top: var(--45px);
 		}
 		.bg-img {
 			position: static;
 			width: auto;
 			max-width: 95%;
 			height: auto;
-			margin: calc(var(--size-120) * -1) 0 calc(var(--size-45) * -1) calc(var(--size-120) * -1);
+			margin: calc(var(--120px) * -1) 0 calc(var(--45px) * -1) calc(var(--120px) * -1);
 		}
 		.scheme {
 			float: none;
-			margin: var(--size-60) 0 var(--size-15);
+			margin: var(--60px) 0 var(--15px);
 			width: auto;
 		}
 	}

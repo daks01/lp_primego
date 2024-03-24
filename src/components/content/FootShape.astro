@@ -38,26 +38,26 @@ const { backgroundImage } = Astro.props;
 		padding: 0;
 	}
 	.layout {
-		// padding-left: calc(var(--adaptive-pixel) * 150)
+		// padding-left: calc(var(--1px) * 150)
 	}
 	.title {
 		display: flex;
 		text-align: right;
 	}
 	.blockquote {
-		max-width: calc(var(--adaptive-pixel) * 500);
+		max-width: calc(var(--1px) * 500);
 	}
 	.bg-img {
-		height: calc(var(--adaptive-pixel)* 900);
+		height: calc(var(--1px)* 900);
 		max-height: 100%;
 		position: absolute;
 		left: 41%;
-		top: var(--size-30);
+		top: var(--30px);
 		width: auto;
 		z-index: -1;
 	}
 	.scheme {
-		width: calc(var(--adaptive-pixel) * 446);
+		width: calc(var(--1px) * 446);
 		float: right;
 	}
 
@@ -69,11 +69,11 @@ const { backgroundImage } = Astro.props;
 			position: static;
 			width: auto;
 			height: auto;
-			margin: calc(var(--size-45) * -1) 0 0;
+			margin: calc(var(--45px) * -1) 0 0;
 		}
 		.scheme {
 			float: none;
-			margin: var(--size-60) 0;
+			margin: var(--60px) 0;
 			width: auto;
 			text-align: center;
 		}

@@ -71,18 +71,18 @@ import Section from "../ui/Section.astro";
 		min-height: auto;
 	}
 	.limit {
-		margin-bottom: var(--size-90);
+		margin-bottom: var(--90px);
 	}
 	.limit-header {
 		text-align: center;
 		margin-top: 0;
 	}
 	.limit-header__title {
-		font-size: calc(var(--adaptive-pixel) * 80);
+		font-size: calc(var(--1px) * 80);
 		margin-top: 0;
 	}
 	.menu {
-		margin: calc(var(--size-30) * -1) 0 0;
+		margin: calc(var(--30px) * -1) 0 0;
 		padding: 0;
 		display: flex;
 		justify-content: space-around;
@@ -90,7 +90,7 @@ import Section from "../ui/Section.astro";
 	.menu__item {
 		list-style-type: none;
 		padding: 0;
-		margin: 0 0 var(--size-90);
+		margin: 0 0 var(--90px);
 		flex-basis: 36%;
 	}
 	.menu__link {
@@ -100,7 +100,7 @@ import Section from "../ui/Section.astro";
 	.card {
 		display: flex;
 		justify-content: space-between;
-		padding: calc(var(--adaptive-pixel) * 20) 0 calc(var(--adaptive-pixel) * 25) calc(var(--adaptive-pixel) * 50);
+		padding: calc(var(--1px) * 20) 0 calc(var(--1px) * 25) calc(var(--1px) * 50);
 		position: relative;
 		z-index: 1;
 		&:before,
@@ -143,22 +143,22 @@ import Section from "../ui/Section.astro";
 	}
 	.card__right {
 		color: var(--text-color);
-		transform: translate(var(--size-30), var(--size-45));
-		margin-bottom: calc(var(--size-45)* -1);
+		transform: translate(var(--30px), var(--45px));
+		margin-bottom: calc(var(--45px)* -1);
 		position: relative;
 	}
 
 	.card__img {
 		position: absolute;
-		bottom: var(--size-90);
-		left: calc(var(--size-15) * -1);
-		width: calc(var(--adaptive-pixel) * 270);
+		bottom: var(--90px);
+		left: calc(var(--15px) * -1);
+		width: calc(var(--1px) * 270);
 		max-width: none;
 		transition: transform ease .5s;
 	}
 	.card__title {
-		font-size: calc(var(--adaptive-pixel) * 128);
-		margin-bottom: calc(var(--adaptive-pixel) * 20);
+		font-size: calc(var(--1px) * 128);
+		margin-bottom: calc(var(--1px) * 20);
 		display: block;
 		&::after {
 			content: attr(title);
@@ -167,7 +167,7 @@ import Section from "../ui/Section.astro";
 			left: 0;
 			width: 100%;
 			height: 100%;
-			font-size: calc(var(--adaptive-pixel)* 370);
+			font-size: calc(var(--1px)* 370);
 			line-height: 0.55;
 			color: var(--color-product);
 			clip-path: polygon(6% 0, 100% 0%, 100% 100%, 0 100%, 0 13%);
@@ -185,23 +185,23 @@ import Section from "../ui/Section.astro";
 		align-items: flex-end;
 		justify-content: center;
 		font-weight: 600;
-		font-size: calc(var(--adaptive-pixel) * 32);
-		padding: calc(var(--adaptive-pixel) * 25) var(--size-15);
+		font-size: calc(var(--1px) * 32);
+		padding: calc(var(--1px) * 25) var(--15px);
 		background-color: var(--color-product);
 	
 		color: var(--text-color);
 		white-space: nowrap;
-		min-width: calc(var(--adaptive-pixel) * 190);
-		min-height: calc(var(--adaptive-pixel) * 180);
+		min-width: calc(var(--1px) * 190);
+		min-height: calc(var(--1px) * 180);
 	}
 	.read-more {
 		background-color: rgba(175,175,175,.13);
 		border: none;
-		padding: var(--size-8) calc(var(--adaptive-pixel)* 24);
+		padding: var(--8px) calc(var(--1px)* 24);
 		color: var(--color-product);
 		font-weight: 600;
 		font-size: var(--small-font-size);
-		border-radius: var(--size-4);
+		border-radius: var(--4px);
 		display: none;
 	}
 
@@ -218,33 +218,33 @@ import Section from "../ui/Section.astro";
 			margin: 0 calc(var(--gutter) * -1);
 		}
 		.menu__item {
-			margin: 0 0 var(--size-60);
+			margin: 0 0 var(--60px);
 			flex-basis: 100%;
 		}
 		.card {
-			padding: calc(var(--adaptive-pixel)* 10) var(--gutter);
+			padding: calc(var(--1px)* 10) var(--gutter);
 		}
 		.card__title {
-			font-size: calc(var(--adaptive-pixel)* 48);
-			margin-bottom: var(--size-15);
+			font-size: calc(var(--1px)* 48);
+			margin-bottom: var(--15px);
 		}
 		.card__right {
 			margin-bottom: 0;
-			transform: translate(0, var(--size-30));
+			transform: translate(0, var(--30px));
 		}
 		.card__img {
-			bottom: var(--size-45);
+			bottom: var(--45px);
 			left: auto;
-			right: calc(var(--adaptive-pixel)* -20);
-			width: calc(var(--adaptive-pixel)* 140);
+			right: calc(var(--1px)* -20);
+			width: calc(var(--1px)* 140);
 		}
 		.card__price {
 			font-size: var(--text-font-size);
 			font-weight: 600;
-			min-height: calc(var(--adaptive-pixel)* 90);
-			min-width: calc(var(--adaptive-pixel)* 90);
-			padding: var(--size-15) var(--size-8);
-			border-radius: var(--size-4);
+			min-height: calc(var(--1px)* 90);
+			min-width: calc(var(--1px)* 90);
+			padding: var(--15px) var(--8px);
+			border-radius: var(--4px);
 		}
 		.card__subtitle {
 			display: none;

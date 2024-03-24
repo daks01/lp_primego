@@ -35,30 +35,30 @@ const { backgroundImage, mainImage } = Astro.props;
 
 <style lang="scss">
 	.section {
-		// padding: calc(var(--adaptive-pixel) * 65);
+		// padding: calc(var(--1px) * 65);
 	}
 	.layout {
 		display: flex;
-		gap: calc(var(--adaptive-pixel) * 180);
+		gap: calc(var(--1px) * 180);
 	}
 	.title {
 		// margin-top: 0;
 	}
 	.blockquote {
-		max-width: calc(var(--adaptive-pixel) * 730);
+		max-width: calc(var(--1px) * 730);
 	}
 	.bg-img {
 		position: absolute;
-		top: var(--size-120);
+		top: var(--120px);
 		left: 47%;
 		width: auto;
-		height: calc(var(--section-height) - var(--size-120));
+		height: calc(var(--section-height) - var(--120px));
 		max-height: 100%;
 		z-index: -1;
 	}
 	.scheme {
-		width: calc(var(--adaptive-pixel) * 203);
-		margin-top: var(--size-120);
+		width: calc(var(--1px) * 203);
+		margin-top: var(--120px);
 	}
 	
 	@media screen and (max-width: 1023px) {
@@ -67,15 +67,15 @@ const { backgroundImage, mainImage } = Astro.props;
 			flex-direction: column-reverse;
 		}
 		.title {
-			margin-top: var(--size-60);
+			margin-top: var(--60px);
 		}
 		.bg-img {
 			height: auto;
 			z-index: -1;
 			position: relative;
-			margin-top: calc(var(--size-120) * -1);
+			margin-top: calc(var(--120px) * -1);
 			top: auto;
-			right: calc(var(--size-15) * -1);
+			right: calc(var(--15px) * -1);
 			left: auto;
 			width: 130%;
 			max-height: none;
@@ -83,8 +83,8 @@ const { backgroundImage, mainImage } = Astro.props;
 		}
 		.scheme {
 			float: none;
-			margin: var(--size-15) auto 0;
-			max-width: var(--size-120);
+			margin: var(--15px) auto 0;
+			max-width: var(--120px);
 			& :global(svg) {
 				width: 100%;
 			}

@@ -9,36 +9,36 @@ h5, .h5 {
 }
 h1, .h1 {
     font-size: var(--heading-1);
-    margin: var(--size-200) 0 var(--size-90);
+    margin: var(--200px) 0 var(--90px);
 }
 
 h2, .h2 {
     font-size: var(--heading-2);
     line-height: var(--header-line-height);
-    margin: var(--size-90) 0;
+    margin: var(--90px) 0;
 }
 
 h3, .h3 {
     font-size: var(--heading-3);
     line-height: var(--header-line-height);
-    margin: var(--size-90) 0;
+    margin: var(--90px) 0;
 }
 
 h4, .h4 {
     font-size: var(--heading-3);
     line-height: var(--header-line-height);
-    margin: var(--size-60) 0 var(--size-30);
+    margin: var(--60px) 0 var(--30px);
 }
 
 h5, .h5 {
     font-size: var(--heading-5);
     line-height: var(--header-line-height);
-    margin: var(--size-200) 0 var(--size-30);
+    margin: var(--200px) 0 var(--30px);
     color: var(--text-color);
 }
 
 p, ul, ol, table {
-    margin: 0 0 var(--size-120);  
+    margin: 0 0 var(--120px);  
 }
 
 p {
@@ -49,26 +49,26 @@ p:has(+ ul),
 p:has(+ ol),
 p:has(+ a),
 p:has(+ button) {
-    margin-bottom: var(--size-30); 
+    margin-bottom: var(--30px); 
 }
 p:has(+ a),
 p:has(+ button) {
-    margin-bottom: var(--size-45); 
+    margin-bottom: var(--45px); 
 }
 
 ul, ol {
-    padding-left: var(--size-15);
+    padding-left: var(--15px);
 }
 ul > li {
     list-style-type: disc;
-    margin-bottom: var(--size-15);
+    margin-bottom: var(--15px);
 }
 
 
 blockquote {
     border-left: 1px solid var(--color-product);
-    margin: var(--size-90) 0;
-    padding-left: var(--size-60);  
+    margin: var(--90px) 0;
+    padding-left: var(--60px);  
     text-wrap: balance;
     font-weight: 600;
     font-size: var(--text-font-size);
@@ -80,10 +80,10 @@ blockquote h3,
 blockquote h4,
 blockquote h5 {
     color: var(--text-color);
-    margin: 0 0 var(--size-30);
+    margin: 0 0 var(--30px);
 }
 blockquote p {
-    margin: 0 0 var(--size-30);
+    margin: 0 0 var(--30px);
 }
 
 .small {
@@ -99,45 +99,45 @@ blockquote p {
 
 h1 + .lead,
 .h1 + .lead {
-    font-size: var(--size-60);
+    font-size: var(--60px);
     font-style: normal;
     font-weight: 600;
     line-height: 110%;
     color: var(--text-color);
-    margin-top: calc(var(--size-45) * -1);
-    margin-bottom: calc(var(--adaptive-pixel) * 20);
+    margin-top: calc(var(--45px) * -1);
+    margin-bottom: calc(var(--1px) * 20);
 }
 
 
 @media screen and (max-width: 1023px) {
     h1, .h1 {
-        margin: var(--size-90) 0 var(--size-30);
+        margin: var(--90px) 0 var(--30px);
     }
     h2, .h2 {
-        margin: var(--size-60) 0 var(--size-30);
+        margin: var(--60px) 0 var(--30px);
     }
     h3, .h3 {
-        margin: var(--size-60) 0 var(--size-30);
+        margin: var(--60px) 0 var(--30px);
     }
     h4, .h4 {
-        margin: var(--size-30) 0 var(--size-30);
+        margin: var(--30px) 0 var(--30px);
     }
     h5, .h5 {
-        margin: var(--size-90) 0 var(--size-15);
+        margin: var(--90px) 0 var(--15px);
     }
     p, ul, ol, table {
-        margin: 0 0 var(--size-30);  
+        margin: 0 0 var(--30px);  
     }
     p:has(+ a),
     p:has(+ button) {
-        margin-bottom: var(--size-30); 
+        margin-bottom: var(--30px); 
     }
     blockquote {
-        margin: var(--size-30) 0;
-        padding-left: var(--size-30);
+        margin: var(--30px) 0;
+        padding-left: var(--30px);
         font-weight: 400;
     }
     blockquote p {
-        margin: 0 0 var(--size-30);
+        margin: 0 0 var(--30px);
     }
 }

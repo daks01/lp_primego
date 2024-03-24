@@ -79,28 +79,28 @@ const { backgroundImage } = Astro.props;
 
 <style lang="scss">
 	.section {
-		padding: var(--size-90) 0 var(--size-15);
+		padding: var(--90px) 0 var(--15px);
 	}
 	.title {
 		text-align: right;
-		margin-top: var(--size-60);
+		margin-top: var(--60px);
 	}
 	.blockquote {
 		margin-left: 50%;
 	}
 	.bg-img {
 		position: absolute;
-		bottom: var(--size-15);
+		bottom: var(--15px);
 		right: 63%;
 		width: auto;
-		height: calc(var(--adaptive-pixel) * 430);
+		height: calc(var(--1px) * 430);
 		max-height: 100%;
 		z-index: -1;
 	}
 	.list {
 		display: flex;
-		gap: var(--size-30);
-		margin: var(--size-200) 0 0;
+		gap: var(--30px);
+		margin: var(--200px) 0 0;
 		padding: 0;
 		justify-content: space-between;
 	}
@@ -116,18 +116,18 @@ const { backgroundImage } = Astro.props;
     	flex-basis: 0;
 	}
 	.list-item__title {
-		margin-bottom: var(--size-30);
+		margin-bottom: var(--30px);
 		color: var(--color-product);
-		font-size: calc(var(--adaptive-pixel) * 24);
+		font-size: calc(var(--1px) * 24);
 		font-weight: 600;
 	}
 	.list-item img {
-		width: calc(var(--adaptive-pixel) * 180);
-		height: calc(var(--adaptive-pixel) * 180);
+		width: calc(var(--1px) * 180);
+		height: calc(var(--1px) * 180);
 	}
 	@media screen and (max-width: 1023px) {
 		.section {
-			padding: var(--size-30) 0;
+			padding: var(--30px) 0;
 		}
 		.layout {
   			display: flex;
@@ -137,23 +137,23 @@ const { backgroundImage } = Astro.props;
 			order: 1;
 		}
 		.title {
-			margin-top: var(--size-45);
+			margin-top: var(--45px);
 			text-align: center;
 		}
 		.list {
 			flex-direction: column;
-			gap: var(--size-30);
-			margin: var(--size-60) 0 var(--size-30);
+			gap: var(--30px);
+			margin: var(--60px) 0 var(--30px);
 			order: 3;
 		}
 		.list-item__title {
 			font-size: var(--text-font-size);
 			font-weight: 600;
-			margin-bottom: var(--size-15);
+			margin-bottom: var(--15px);
 		}
 		.list-item img {
-			height: calc(var(--adaptive-pixel)* 120);
-			width: calc(var(--adaptive-pixel)* 120);
+			height: calc(var(--1px)* 120);
+			width: calc(var(--1px)* 120);
 		}
 		.blockquote-wrapper {
 			order: 4;

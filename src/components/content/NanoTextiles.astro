@@ -29,19 +29,19 @@ const { backgroundImage, mainImage, invert = false } = Astro.props;
 
 <style lang="scss">
 	.section {
-		// padding: calc(var(--adaptive-pixel) * 35) 0 calc(var(--adaptive-pixel) * 150);
+		// padding: calc(var(--1px) * 35) 0 calc(var(--1px) * 150);
 	}
 	.title {
 		display: flex;
     	text-align: right;
-		margin-top: var(--size-90);
+		margin-top: var(--90px);
 	}
 	.blockquote {
-		max-width: calc(var(--adaptive-pixel) * 590);
+		max-width: calc(var(--1px) * 590);
 	}
 	.bg-img {
-		bottom: var(--size-45);
-		height: calc(var(--adaptive-pixel)* 912);
+		bottom: var(--45px);
+		height: calc(var(--1px)* 912);
 		left: 33.5%;
 		max-height: 100%;
 		position: absolute;
@@ -50,7 +50,7 @@ const { backgroundImage, mainImage, invert = false } = Astro.props;
 	}
 	@media screen and (max-width: 1023px) {
 		.title {
-			margin-top: var(--size-45);
+			margin-top: var(--45px);
 		}
 
 		.bg-img {
@@ -58,7 +58,7 @@ const { backgroundImage, mainImage, invert = false } = Astro.props;
 			width: auto;
 			height: auto;
 			max-width: calc(100% + var(--gutter) + var(--gutter));
-			margin: calc(var(--adaptive-pixel) * 75 * -1) calc(var(--gutter) * -1) var(--size-30);
+			margin: calc(var(--1px) * 75 * -1) calc(var(--gutter) * -1) var(--30px);
 		}
 	}
 </style>

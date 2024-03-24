@@ -135,7 +135,7 @@ const {
 		align-items: flex-end;
 	}
 	.top-bar_in-footer {
-		margin-bottom: var(--size-30);
+		margin-bottom: var(--30px);
 	}
 	.top-bar__cell {
 		display: flex;
@@ -157,12 +157,12 @@ const {
 		display: none;
 	}
 	.logo {
-		width: calc(var(--adaptive-pixel) * 150);
-		height: calc(var(--adaptive-pixel) * 32);
+		width: calc(var(--1px) * 150);
+		height: calc(var(--1px) * 32);
 	}
 	.logo-icon {
-		width: calc(var(--adaptive-pixel) * 62);
-		height: calc(var(--adaptive-pixel) * 40);
+		width: calc(var(--1px) * 62);
+		height: calc(var(--1px) * 40);
 		color: var(--color-product);
 	}
 	.social-list {
@@ -175,7 +175,7 @@ const {
 	}
 	.social-list__item {
 		margin: 0;
-		padding-right: calc(var(--adaptive-pixel) * 50);
+		padding-right: calc(var(--1px) * 50);
 		list-style-type: none;
 	}
 	.social-list__link {
@@ -186,29 +186,29 @@ const {
 			opacity: 1;
 		}
 		svg {
-			width: calc(var(--adaptive-pixel) * 24);
-			height: calc(var(--adaptive-pixel) * 24);
+			width: calc(var(--1px) * 24);
+			height: calc(var(--1px) * 24);
 			display: block;
 		}
 	}
 	.mobile-logo {
 		display: none;
-		height: calc(var(--adaptive-pixel)*50);
-		width: calc(var(--adaptive-pixel)*66);
+		height: calc(var(--1px)*50);
+		width: calc(var(--1px)*66);
 		color: var(--color-product);
 	}
 	@media screen and (max-width: 1023px) {
 		.back-button {
 			display: block;
-			margin-right: var(--size-15);
+			margin-right: var(--15px);
 		}
 		.logo {
 			display: none;
 		}
 		.mobile-logo {
 			display: block;
-			height: calc(var(--adaptive-pixel)* 18);
-    		width: calc(var(--adaptive-pixel)* 98);
+			height: calc(var(--1px)* 18);
+    		width: calc(var(--1px)* 98);
 		}
 		.top-bar {
 			align-items: center;
@@ -223,9 +223,9 @@ const {
 		// }
 
 		.top-bar_in-footer {
-			margin-bottom: var(--size-30);
+			margin-bottom: var(--30px);
 			flex-direction: column;
-			gap: var(--size-15);
+			gap: var(--15px);
 			.top-bar__cell {
 				flex-basis: auto;
 				width: 100%;
@@ -242,7 +242,7 @@ const {
 			}
 			.social-list__item {
 				padding-left: 0;
-				padding-right: var(--size-15);
+				padding-right: var(--15px);
 			}
 			.social-list {
 				justify-content: end;
