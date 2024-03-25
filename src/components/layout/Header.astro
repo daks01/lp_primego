@@ -1,8 +1,9 @@
 ---
 import Section from "../ui/Section.astro";
 import Dialog from "../ui/Dialog.astro";
-import Button from "../ui/Button.astro";
 import TopBar from "./TopBar.astro";
+import LoginForm from "../islands/LoginForm.vue";
+import ShopCart from "../islands/ShopCart.vue";
 
 const { 
 	as: tag = "header",
@@ -25,37 +26,42 @@ const {
 					<path d="M7.99967 7.33333C9.47243 7.33333 10.6663 6.13943 10.6663 4.66667C10.6663 3.19391 9.47243 2 7.99967 2C6.52692 2 5.33301 3.19391 5.33301 4.66667C5.33301 6.13943 6.52692 7.33333 7.99967 7.33333Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>
 			</button>
-			<Dialog id="dialog-login" title="Войти или зарегистрироваться" >
-				<div style="background: rgba(0,0,0,.2); height: 300px"></div><br>
-				<Button class="button_size-large button_fullwidth">Войти</Button>
+			<Dialog id="dialog-login" title="Войти или зарегистрироваться" width={800}>
+				<LoginForm client:only />
 			</Dialog>
 			<button
-				class="button-basket"
+				class="button-shopcart"
 				type="button"
-				onclick={`window["dialog-basket"]?.showModal()`}
+				onclick={`window["dialog-shopcart"]?.showModal()`}
 			>
 				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					<path d="M3 6H21" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					<path d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>
-				0
+				<span data-cart-counter>0</span>
 			</button>
-			<Dialog id="dialog-basket" title="Оформление заказа">
-				<div style="background: rgba(0,0,0,.2); height: 100px"></div><br>
-				<div style="background: rgba(0,0,0,.2); height: 100px"></div><br>
-				<div style="background: rgba(0,0,0,.2); height: 100px"></div><br>
-				<div style="background: rgba(0,0,0,.2); height: 100px"></div><br>
-				<div style="background: rgba(0,0,0,.2); height: 100px"></div><br>
-				<div style="background: rgba(0,0,0,.2); height: 100px"></div><br>
-				<div style="background: rgba(0,0,0,.2); height: 100px"></div><br>
-				<div style="background: rgba(0,0,0,.2); height: 100px"></div><br>
-				<Button class="button_size-large button_fullwidth">Оплатить</Button>
+			<Dialog id="dialog-shopcart" title="Оформление заказа">
+				<ShopCart client:only />
 			</Dialog>
 		</div>
 	</TopBar>
 </Section>
 
+<script>
+	import { counter } from '../../stores/shopCartStore';
+
+	function updateCartCounter() {
+		const cartCounterEl = document.querySelector('[data-cart-counter]');
+		counter.subscribe((value) => {
+			if(document.body.contains(cartCounterEl)) {
+				cartCounterEl.innerText = value;
+			}
+		})
+	}
+
+	updateCartCounter();
+</script>
 <style lang="scss">
 	.header {
 		background-color: var(--color-black);
@@ -113,7 +119,7 @@ const {
 			height: calc(var(--1px) * 16);
 		}
 	}
-	.button-basket {
+	.button-shopcart {
 		color: currentColor;
 		padding: 0;
 		background-color: transparent;
@@ -145,7 +151,7 @@ const {
 				display: block;
 			}
 		}
-		.button-basket {
+		.button-shopcart {
 			gap: calc(var(--1px) * 5);
 			font-size: calc(var(--1px) * 24);
 		}

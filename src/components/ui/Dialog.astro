@@ -1,5 +1,10 @@
 ---
-const {id, title} = Astro.props;
+const {
+    id,
+    title,
+    width = 985,
+    ...props
+} = Astro.props;
 ---
 
 <!-- How to open -->
@@ -11,6 +16,7 @@ const {id, title} = Astro.props;
     role="dialog" 
     aria-modal="true"
     aria-labelledby={`dialog-${id}-title`}
+    {...props}
 >
     <header class="dialog__header">
         <span class="dialog__title h3" id={`dialog-${id}-title`}>{title}</span>
@@ -66,10 +72,7 @@ const {id, title} = Astro.props;
     }
 </script>
 
-<style lang="scss">
-    :root {
-        --dialog-gutter: var(--60px);
-    }
+<style lang="scss" define:vars={{ width }}>
     @keyframes animate-top {
         from {
             transform: translate(0, -5vh);
@@ -80,7 +83,6 @@ const {id, title} = Astro.props;
             opacity:1
         }
     }
-    .dialog, 
     .dialog {
         --color-product: var(--color-product-primego);
         --color-product-hover: var(--color-product-primego-hover);
@@ -90,6 +92,9 @@ const {id, title} = Astro.props;
         --text-color: var(--color-white);
         --text-product: var(--color-product);
         --text-lead: var(--color-white);
+
+        --dialog-gutter: var(--60px);
+        --dialog-width: var(--width);
     }
     .dialog {
         position: fixed;
@@ -98,10 +103,9 @@ const {id, title} = Astro.props;
         display: block;
         left: 0;
         right: 0;
-        height: fit-content;
         max-height: calc(100vh - var(--90px));
-        width: fit-content; 
-        max-width: calc(var(--1px) * 945);
+		width: calc(var(--1px) * var(--dialog-width));
+		max-width: calc(100vw - var(--gutter) *2);
         margin: var(--90px) auto auto;
         padding: 0;
         background-color: var(--color-bg-disabled);
@@ -110,6 +114,7 @@ const {id, title} = Astro.props;
         border: none;
         animation-name: animate-top;
         animation-duration: 0.4s;
+        color: var(--text-color);
 
         &:not([open]) {
             display: none

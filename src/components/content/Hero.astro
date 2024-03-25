@@ -3,7 +3,7 @@ import "@splidejs/splide/css/core";
 import { Image } from "astro:assets";
 import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
-import Button from "../ui/Button.astro";
+import BuyButton from "../ui/BuyButton.astro";
 import imgSlide1 from "/src/assets/img/hero-slider/slide-1.png";
 import imgSlide2 from "/src/assets/img/hero-slider/slide_2.png";
 import imgSlide3 from "/src/assets/img/hero-slider/slide_3.png";
@@ -26,9 +26,15 @@ const { backgroundImage } = Astro.props;
 					Наша обувь способна вдохновлять и&nbsp;очаровывать аудиторию по&nbsp;всему миру. 
 					Создай свой образ с&nbsp;помощью констуктора
 				</p>
-				<Button as="button" onclick={`window["dialog-basket"]?.showModal()`}>
+				<BuyButton 
+					name="Кастом"
+					type="Пользовательская модель"
+					sku="1224sfs" 
+					price="27700"
+					img={imgSlide1.src}
+				>
 					Создать образ
-				</Button>
+				</BuyButton>
 			</div>
 		</div>
 		<div class="heroSlider-wrapper">
@@ -92,66 +98,6 @@ const { backgroundImage } = Astro.props;
 	</div>
 </Section>
 
-<style lang="scss">
-	.section {
-		min-height: calc(var(--section-height) - var(--header-height));
-	}
-</style>
-<style lang="scss" is:global>
-	.page-title {
-		margin-bottom: var(--90px);
-		font-size: var(--heading-1);
-	}
-	.hero-layout {
-		display: flex;
-		margin-bottom: calc(var(--1px) * 150);
-	}
-	.hero {
-		min-width: 40%;
-	}
-	.heroSlider-wrapper {
-		display: flex;
-		align-self: flex-end;
-		margin-left: calc(var(--1px) * 60 * -1);
-		position: relative;
-	}
-	.heroSlider__dots {
-		position: absolute;
-		height: 150%;
-		right: 0;
-		top: -20%;
-		transform: rotate(6deg);
-		pointer-events: none;
-		svg {
-			height: 100%;
-			transform: translate(32%, -15%);
-		}
-	}
-
-	@media screen and (max-width: 1023px) {
-		.hero {
-			min-width: auto;
-			text-align: center;
-		}
-		.hero-layout {
-			margin-bottom: calc(var(--1px) * 90);
-			flex-direction: column;
-		}
-		.page-title {
-			font-size: calc(var(--1px) * 128);
-			margin-top: calc(var(--1px) * 36);
-			margin-bottom: var(--30px);
-		}
-		.heroSlider-wrapper {
-			margin: var(--30px) 0;
-		}
-		.heroSlider__dots {
-			top: -46%;
-			transform: rotate(86deg);
-		}
-	}
-</style>
-
 <script>
 	import Splide from "@splidejs/splide/dist/js/splide.min.js";
 
@@ -206,6 +152,67 @@ const { backgroundImage } = Astro.props;
 		}
 	});
 </script>
+
+<style lang="scss">
+	.section {
+		min-height: calc(var(--section-height) - var(--header-height));
+	}
+</style>
+
+<style lang="scss" is:global>
+	.page-title {
+		margin-bottom: var(--90px);
+		font-size: var(--heading-1);
+	}
+	.hero-layout {
+		display: flex;
+		margin-bottom: calc(var(--1px) * 150);
+	}
+	.hero {
+		min-width: 40%;
+	}
+	.heroSlider-wrapper {
+		display: flex;
+		align-self: flex-end;
+		margin-left: calc(var(--1px) * 60 * -1);
+		position: relative;
+	}
+	.heroSlider__dots {
+		position: absolute;
+		height: 150%;
+		right: 0;
+		top: -20%;
+		transform: rotate(6deg);
+		pointer-events: none;
+		svg {
+			height: 100%;
+			transform: translate(32%, -15%);
+		}
+	}
+
+	@media screen and (max-width: 1023px) {
+		.hero {
+			min-width: auto;
+			text-align: center;
+		}
+		.hero-layout {
+			margin-bottom: calc(var(--1px) * 90);
+			flex-direction: column;
+		}
+		.page-title {
+			font-size: calc(var(--1px) * 128);
+			margin-top: calc(var(--1px) * 36);
+			margin-bottom: var(--30px);
+		}
+		.heroSlider-wrapper {
+			margin: var(--30px) 0;
+		}
+		.heroSlider__dots {
+			top: -46%;
+			transform: rotate(86deg);
+		}
+	}
+</style>
 
 <style lang="scss">
 	.splide {

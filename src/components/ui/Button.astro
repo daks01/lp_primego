@@ -11,7 +11,7 @@ const {
   <slot />
 </Element>
 
-<style is:global>
+<style is:global lang="scss">
 .button {
     display: inline-flex;
     align-items: center;
@@ -45,7 +45,20 @@ const {
 }
 
 .button_type-icon {
-    
+    padding: calc(var(--1px) * 16);
+    background-color: #050611;
+    color: var(--color-white);
+    border-radius: 4px;
+    position: relative;
+    z-index: 1;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    &:hover {
+        color: var(--color-product);
+    }
+    &:active {
+        background-color: #25282B;
+        color: var(--color-product);
+    }
 }
 
 .button_size-large {

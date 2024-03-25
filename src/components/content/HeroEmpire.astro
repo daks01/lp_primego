@@ -2,10 +2,10 @@
 import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
 import BackgroundText from "../ui/BackgroundText.astro";
-import Button from "../ui/Button.astro";
-import { Image } from 'astro:assets';
-import imageEmpireSneakers from "/src/assets/img/hero-slider/single-empire.png";
 import BackButton from "../ui/BackButton.astro";
+import BuyButton from "../ui/BuyButton.astro";
+import { Image } from 'astro:assets';
+import imageSneakers from "/src/assets/img/hero-slider/single-empire.png";
 
 const { backgroundImage } = Astro.props;
 ---
@@ -24,11 +24,18 @@ const { backgroundImage } = Astro.props;
 			<p class="display-mobile-none price">
 				<span class="h3">27&thinsp;700&thinsp;₽</span>
 			</p>
-			<Image src={imageEmpireSneakers} alt="" role="presentation" class="hero__image" loading="lazy" />
-			<Button as="button" onclick={`window["dialog-basket"]?.showModal()`}>
+			<Image src={imageSneakers} alt="" role="presentation" class="hero__image" loading="lazy" />
+			<BuyButton 
+				name="Империя" 
+				type="Лимитированная коллекция"
+				sku="1224sfs" 
+				price="27700" 
+				color="var(--color-product-empire)"
+				img={imageSneakers.src}
+			>
 				<span class="display-none display-mobile-block">Купить от 27&thinsp;700&thinsp;₽</span>
 				<span class="display-mobile-none">Купить сейчас</span>
-			</Button>
+			</BuyButton>
 		</div>
 </Section>
 

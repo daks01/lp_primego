@@ -1,0 +1,62 @@
+---
+import Button from "./Button.astro";
+const { 
+    name,
+    type, 
+    sku,
+    price,
+    color = 'var(--color-product-primego)',
+    img,
+    class: className, 
+    ...props
+} = Astro.props;
+---
+
+<Button 
+    data-buybutton 
+    data-name={name} 
+    data-sku={sku}
+    data-type={type} 
+    data-price={price} 
+    data-color={color} 
+    data-img={img} 
+    {...props}
+>
+    <slot />
+</Button>
+<button
+    class="sr-only"
+    type="button"
+    onclick={`window["dialog-shopcart"]?.showModal()`}
+>
+    Открыть корзину
+</button>
+
+<script>
+    import { addCartItem } from "../../stores/shopCartStore";
+
+    const buyButton = document.querySelector("[data-buybutton]");
+    const {
+        name,
+        type, 
+        sku,
+        price,
+        color,
+        img
+    } = buyButton?.dataset;
+
+    buyButton?.addEventListener("click", addToCart);
+
+    function addToCart() {
+        addCartItem({
+            name,
+            type, 
+            sku,
+            price,
+            color,
+            img
+        });
+    }
+</script>
+
+<style lang="scss"></style>

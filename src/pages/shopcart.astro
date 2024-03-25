@@ -4,6 +4,7 @@ import Header from "../components/layout/Header.astro";
 import Section from "../components/ui/Section.astro";
 
 import backgroundFooter from "/src/assets/img/bg/FC1447/10.jpg";
+import ShopCart from "../components/islands/ShopCart.vue";
 ---
 
 <Layout title="Корзина" backgroundImage={backgroundFooter}>
@@ -11,6 +12,7 @@ import backgroundFooter from "/src/assets/img/bg/FC1447/10.jpg";
 	<main>
 		<Section width="985">
 			<h1 class="h3">Корзина</h1>
+			<ShopCart client:only />
 		</Section>
 	</main>
 </Layout>

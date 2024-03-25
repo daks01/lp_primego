@@ -8,7 +8,7 @@ const {
 } = Astro.props;
 ---
 
-<Button as="a" aria-label="Назад" href={href} class="button button_type-icon" {...props}>
+<Button as="a" aria-label="Назад" href={href} class="button button_type-icon button_back" {...props}>
     <svg role="presentation" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M19 12H5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         <path d="M12 19L5 12L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -16,33 +16,17 @@ const {
 </Button>
 
 <style lang="scss">
-    // ToDo разбить на два модификатора: 'button_type-secondary' и 'button_type-icon'
-    .button_type-icon {
-        padding: calc(var(--1px) * 16);
-        background-color: #050611;
-        color: var(--color-white);
-        border-radius: 4px;
-		position: relative;
-		margin: var(--60px) 0 var(--30px);
-		z-index: 1;
-        transition: background-color 0.15s ease, color 0.15s ease, ;
-        &:hover {
-            color: var(--color-product);
-        }
-        &:active {
-            background-color: #25282B;
-            color: var(--color-product);
-        }
-	}
-
+    .button_back {
+        margin: var(--60px) 0 var(--30px);
+    }
 	@media screen and (max-width: 1023px) {
-		.button {
+		.button_back {
             display: none;
         }
 	}
 </style>
 <style is:global>
-	.button_type-icon + .page-title {
+	.button_back + .page-title {
 		margin-top: 0;
 	}
 </style>
