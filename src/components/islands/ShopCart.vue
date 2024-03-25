@@ -41,22 +41,25 @@
         </ul>
         <p v-else>Корзина пуста</p>
 
-        <div style="background-color: rgba(0,0,0,.2); height: 300px"></div>
+        <div style="background-color: rgba(0,0,0,.2); height: 150px"></div>
         <br>
 
-        <div style="background-color: rgba(0,0,0,.2); height: 300px"></div>
+        <div style="background-color: rgba(0,0,0,.2); height: 150px"></div>
         <br>
-        
-        <button class="button button_size-large button_fullwidth">Оплатить</button>
+
+        <button class="button button_size-large button_fullwidth">
+            Оплатить {{separateThousands($totalPrice)}}&thinsp;₽
+        </button>
     </div>
 </template>
 
 <script setup>
     import { onMounted, computed } from 'vue';
-    import { cartItems } from '/src/stores/shopCartStore';
     import { useStore } from '@nanostores/vue';
+    import { cartItems, totalPrice } from '/src/stores/shopCartStore';
   
     const $cartItems = useStore(cartItems);
+    const $totalPrice = useStore(totalPrice);
 
     function removeItem(id) {
         cartItems.setKey(id, undefined);

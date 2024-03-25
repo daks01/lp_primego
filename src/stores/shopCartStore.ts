@@ -1,8 +1,11 @@
 import {
+    atom,
     map,
     computed
 } from 'nanostores';
 import { nanoid } from 'nanoid'
+
+export const totalPrice = atom(0);
 
 export type CartItem = {
     id?: string;
@@ -47,6 +50,14 @@ export function addCartItem({ name, sku, type, img, price, color }: ItemDisplayI
 }
 
 cartItems.subscribe(() => {
+    let total = 0;
+
+    for (let item in cartItems.get()) {
+        total += +cartItems.get()[item].price;
+    }
+
+    totalPrice.set(total);
+    
     localStorage.setItem('shopCart', JSON.stringify(cartItems.get()));
 })
 
