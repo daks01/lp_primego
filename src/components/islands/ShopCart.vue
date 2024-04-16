@@ -47,16 +47,17 @@
         <div style="background-color: rgba(0,0,0,.2); height: 150px"></div>
         <br>
 
-        <button class="button button_size-large button_fullwidth">
+        <button @click="buy" class="button button_size-large button_fullwidth">
             Оплатить {{separateThousands($totalPrice)}}&thinsp;₽
         </button>
     </div>
 </template>
 
 <script setup>
-    import { onMounted, computed } from 'vue';
+    import { onMounted, computed, toRaw, isProxy } from 'vue';
     import { useStore } from '@nanostores/vue';
     import { cartItems, totalPrice } from '/src/stores/shopCartStore';
+    import { apiUrl } from '/src/stores/googleAppScript';
   
     const $cartItems = useStore(cartItems);
     const $totalPrice = useStore(totalPrice);
@@ -67,6 +68,54 @@
 
     function separateThousands(number) {
         return number.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ' ');
+    }
+
+    function buy() {
+        const fetchBody = {
+            name: 'Кабан Кабаныч',
+            email: 'kaban@kabami.ch',
+            phone: '+70000000000',
+            address: 'Страна, Горо, Улица, дом 10, кв.1',
+            items: toRaw($cartItems.value),
+            totalPrice: `${toRaw($totalPrice.value)}₽`,
+        }
+
+        fetch(apiUrl.buy, { 
+            redirect: "follow",
+            method: "POST",
+            headers: {
+                "Content-Type": "text/plain;charset=utf-8",
+            },
+            body: JSON.stringify(fetchBody)
+        })
+        .then(response => {
+            if (!response.ok) {
+                // actionMessage.innerHTML = `
+                //     ❗ При отправке возникли проблемы.<br> Попробуйте позже
+                // `;
+                throw new Error('Network error');
+            }
+            return response.json();
+        })
+        .then((response) => {
+            if (response.result === 'success') {
+                // actionMessage.innerHTML = `
+                //     ✅ Отправлено.
+                // `;
+                // formEl.reset();
+            } else if (response.result === 'error') {
+                // actionMessage.innerHTML = `
+                //     ❗ При отправке возникли проблемы.<br> Попробуйте позже
+                // `;
+                throw new Error(response.error);
+            }
+        })
+        .catch((error) => {
+            // actionMessage.innerHTML = `
+            //     ❗ При отправке возникли проблемы.<br> Попробуйте позже
+            // `;
+            console.error(error);
+        });	
     }
 </script>
 

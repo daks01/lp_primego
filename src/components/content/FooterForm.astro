@@ -6,7 +6,7 @@ import Button from "../ui/Button.astro";
 	ToDo сделать отправку типа такой
 	https://rameezimdad.blogspot.com/2023/09/conatct-form-data-to-google-sheet-and.html 
 -->
-<div data-animate>
+<div data-animate id="order">
 	<StarTrekText as="h2" class="h1 title" id="form-title">
 		Связаться с нами
 	</StarTrekText>
@@ -15,21 +15,23 @@ import Button from "../ui/Button.astro";
 		и&nbsp;оформлением заказа
 	</p>
 	<form action="/order.php" data-contact-form class="form" aria-labelledby="form-title" aria-describedby="form-subtitle" novalidate>
+		<input type="hidden" name="email" />
 		<div class="form__layout">
 			<div class="form__row form__row_half">
 				<label for="form-name" class="sr-only">Имя</label>
-				<input id="form-name" type="text" placeholder="Имя" class="form-field" required/>
+				<input id="form-name" name="name" type="text" placeholder="Имя" class="form-field" required/>
 				<span class="form-field__error" data-field-error></span>
 			</div>
 			<div class="form__row form__row_half">
 				<label for="form-name" class="sr-only">Почта</label>
-				<input id="form-email" type="email" placeholder="Почта" class="form-field" required/>
+				<input id="form-email" name="liame" type="email" placeholder="Почта" class="form-field" required/>
 				<span class="form-field__error" data-field-error></span>
 			</div>
 			<div class="form__row">
 				<label for="form-question" class="sr-only">Текст сообщения</label>
 				<textarea 
 					id="form-question" 
+					name="message"
 					minlength="0"
 					maxlength="100" 
 					data-textarea 
@@ -50,14 +52,78 @@ import Button from "../ui/Button.astro";
 </div>
 
 <script>
+    import { apiUrl } from '../../stores/googleAppScript';
+
 	document.addEventListener("DOMContentLoaded", () => {
 		sendContactForm();
 		countTextaria();
 	});
 
+	// https://seoneurons.com/create-contact-us-page/
 	function sendContactForm() {
 		const formEl = document.querySelector("[data-contact-form]");
 		const actionMessage = document.querySelector('[data-form-msg]');
+
+		formEl?.addEventListener('submit', (e) => {
+			e.preventDefault();
+
+			validateForm();
+
+			if (!formEl.checkValidity()) {
+				// formEl.reportValidity();
+
+				return;
+			}
+
+			const formData = new FormData(e.target);
+			const fetchBody = {
+				name: formData.get('name'),
+				email: formData.get('liame'),
+				message: formData.get('message'),
+				url: location.href
+			}
+
+			fetch(apiUrl.contact, { 
+				redirect: "follow",
+				method: "POST",
+				headers: {
+					"Content-Type": "text/plain;charset=utf-8",
+				},
+				body: JSON.stringify(fetchBody)
+			})
+			.then(response => {
+				if (!response.ok) {
+					actionMessage.innerHTML = `
+						❗ При отправке возникли проблемы.<br> Попробуйте позже
+					`;
+					throw new Error('Network error');
+				}
+				return response.json();
+			})
+			.then((response) => {
+				if (response.result === 'success') {
+					actionMessage.innerHTML = `
+						✅ Отправлено.
+					`;
+					formEl.reset();
+				} else if (response.result === 'error') {
+					actionMessage.innerHTML = `
+						❗ При отправке возникли проблемы.<br> Попробуйте позже
+					`;
+					throw new Error(response.error);
+				}
+			})
+			.catch((error) => {
+				actionMessage.innerHTML = `
+					❗ При отправке возникли проблемы.<br> Попробуйте позже
+				`;
+				console.error(error);
+			});	
+		});
+	}
+
+	function validateForm() {
+		const formEl = document.querySelector("[data-contact-form]");
 		const errorSvg = `
 			<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g clip-path="url(#clip0_7_1104)">
@@ -72,51 +138,17 @@ import Button from "../ui/Button.astro";
 				</defs>
 			</svg>`;
 
-		formEl?.addEventListener('submit', (e) => {
-			e.preventDefault();
+		formEl?.querySelectorAll(".form-field").forEach((element) => {
+			const errorMsgEl = element?.closest('div')?.querySelector('[data-field-error]');
 
-			formEl.querySelectorAll(".form-field").forEach((element) => {
-				const errorMsgEl = element?.closest('div')?.querySelector('[data-field-error]');
-
-				if(!element.checkValidity()) {
-					element.classList.add('form-field_error');
-					errorMsgEl.innerHTML = `${errorSvg} ${element?.validationMessage}`;
-					return;
-				} 
-
-				element.classList.remove('form-field_error');
-				errorMsgEl.innerHTML = '';
-			});
-
-			if (!formEl.checkValidity()) {
-				// formEl.reportValidity();
-
+			if(!element.checkValidity()) {
+				element.classList.add('form-field_error');
+				errorMsgEl.innerHTML = `${errorSvg} ${element?.validationMessage}`;
 				return;
-			}
+			} 
 
-			const url = formEl?.action;
-			fetch(url, {
-				method:'post', 
-				body: new FormData(formEl)
-			})
-			.then((response) => {
-				if (response.status === 200) {
-					actionMessage.innerHTML = `
-						✅ Отправлено.
-					`;
-				} else {
-					actionMessage.innerHTML = `
-						❗ При отправке возникли проблемы.
-					`;
-				}
-			})
-			.catch(() => {
-				actionMessage.innerHTML = `
-					❗ При отправке возникли проблемы.<br>
-					Попробуйте позже
-				`;
-			});	
-
+			element.classList.remove('form-field_error');
+			errorMsgEl.innerHTML = '';
 		});
 	}
 
