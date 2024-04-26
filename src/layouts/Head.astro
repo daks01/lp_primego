@@ -1,6 +1,32 @@
 ---
 import "/src/assets/css/index.scss";
+import env from '../utils/client'
+
+const isProduction = env.MODE === "production";
+const { title = "Primego" } = Astro.props;
 ---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta name="generator" content={Astro.generator} />
+{!isProduction && 
+    <meta name="robots" content="noindex">
+}
+
+<title>{title}</title>
+
+<!-- ToDo заполнить-->
+<meta name="description" content="" />
+<meta name="author" content="" />
+
+<!-- ToDo заполнить-->
+<meta property="og:url" content="" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content="" />
+<meta property="og:image" content="" />
+<meta property="og:type" content="" />
+<meta property="vk:image" content="" />
 
 <!-- Animation On Scroll -->
 <style is:global>

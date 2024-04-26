@@ -1,11 +1,7 @@
 ---
 import { getImage } from "astro:assets"
 import Head from './Head.astro';
-
-const {
-	title = "Primego",
-	backgroundImage
-} = Astro.props;
+const { backgroundImage } = Astro.props;
 
 const optimizedBackgroundImage = backgroundImage 
 	? await getImage({ src: backgroundImage, quality: '95' }) 
@@ -13,29 +9,10 @@ const optimizedBackgroundImage = backgroundImage
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="ru">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-
-		<title>{title}</title>
-
-		<!-- ToDo заполнить-->
-		<meta name="description" content="" />
-		<meta name="author" content="" />
-
-		<!-- ToDo заполнить-->
-		<meta property="og:url" content="" />
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content="" />
-		<meta property="og:image" content="" />
-		<meta property="og:type" content="" />
-		<meta property="vk:image" content="" />
-		
 		<Head />
+		<slot name="head" />
 	</head>
 	<body style={backgroundImage ? `background-image: url(${optimizedBackgroundImage?.src})` : ''}>
 		<slot />
