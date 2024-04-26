@@ -57,7 +57,7 @@
     import { onMounted, computed, toRaw, isProxy } from 'vue';
     import { useStore } from '@nanostores/vue';
     import { cartItems, totalPrice } from '/src/stores/shopCartStore';
-    import { apiUrl } from '/src/stores/googleAppScript';
+    import { apiUrl } from '/src/utils/routes';
   
     const $cartItems = useStore(cartItems);
     const $totalPrice = useStore(totalPrice);

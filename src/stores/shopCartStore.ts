@@ -4,6 +4,8 @@ import {
     computed
 } from 'nanostores';
 import { nanoid } from 'nanoid'
+import { apiUrl } from '../utils/routes';
+import { nanoquery } from '@nanostores/query';
 
 export const totalPrice = atom(0);
 
@@ -65,4 +67,8 @@ export const counter = computed(cartItems, (items) => {
     return Object.keys(items).length;
 });
 
-//export const isCartOpen = atom(false);
+export const [createFetcherStore, createMutatorStore] = nanoquery({
+    fetcher: (...keys) => fetch(keys.join('')).then((r) => r.json()),
+});
+
+export const productsAvailability = createFetcherStore(apiUrl.availability);
