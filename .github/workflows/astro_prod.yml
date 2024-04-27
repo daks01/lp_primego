@@ -75,14 +75,11 @@ jobs:
     name: Deploy
     steps:
       - uses: actions/download-artifact@v4
-      - name: Move files to parent folder
-        run: |
-          cd artifact/
-          mv * ../
       - name: Deploy to Prod
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./artifact/
           server-dir: ./
