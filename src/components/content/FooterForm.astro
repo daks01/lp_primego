@@ -19,7 +19,7 @@ import Button from "../ui/Button.astro";
 		<div class="form__layout">
 			<div class="form__row form__row_half">
 				<label for="form-name" class="sr-only">Имя</label>
-				<input id="form-name" name="name" type="text" placeholder="Имя" class="form-field" required/>
+				<input id="form-name" name="name" type="text" placeholder="Имя" class="form-field"/>
 				<span class="form-field__error" data-field-error></span>
 			</div>
 			<div class="form__row form__row_half">
@@ -37,7 +37,7 @@ import Button from "../ui/Button.astro";
 					data-textarea 
 					placeholder="Текст сообщения" 
 					class="form-field" 
-					rows="5" 
+					rows="5"
 					required
 				></textarea>
 				<span class="form-field__error" data-field-error></span>
