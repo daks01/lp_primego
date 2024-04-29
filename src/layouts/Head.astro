@@ -16,12 +16,11 @@ const pageUrl = Astro.url;
     <meta name="robots" content="noindex">
 }
 <title>{title}</title>
-<!-- ToDo заполнить-->
 <meta name="description" content="" />
 <meta property="og:url" content={pageUrl} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content="" />
-<meta property="og:image" content="" />
+<meta property="og:image" content={`${pageUrl.origin}/og_image.png`} />
 <meta property="og:type" content="website" />
 <!-- <meta property="vk:image" content="" /> -->
 
