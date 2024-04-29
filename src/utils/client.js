@@ -1,1 +1,1 @@
-export default import.meta.env;
+export default import.meta.env || process?.env?.NODE_ENV;
