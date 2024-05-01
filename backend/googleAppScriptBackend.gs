@@ -50,30 +50,54 @@ function doGet(e) {
 }
 
 function getProductsAvailability() {
-  const sheet = getOrCreateSheet("Наличие");
+  const sheet = getOrCreateSheet("Наличие", ['название', 'артикул', 'цена', 'размер', 'наличие', 'резерв']);
   const data = sheet.getDataRange().getValues();
+  Logger.log(convertToGroup(data))
+
   return convertToGroup(data);
 }
 
 function convertToGroup(data) {
-  const headers = data[0]
-  const rawData = data.slice(1,)
-  let currentGroup;
-  let result = {}
+  const headers = data[0];    // название, артикул, цена, размер, наличие, резерв
+  const rawData = data.slice(1,);
+  let groupName;
+  let group = {};
+  let result = {};
 
-  rawData.forEach(currentRow => {
-    const group = currentRow[0]
-    const object = {}
+  rawData.forEach((currentRow) => {
+    const isNewGroup = currentRow[0];
+    const name = currentRow[0] || group[headers[0]];
+    const sku = currentRow[1] || group[headers[1]];
+    const price = currentRow[2] || group[headers[2]];
+    const size = currentRow[3];
+    const availability = currentRow[4];
 
-    if(group) {
-      currentGroup = group
-      result[currentGroup] = []
-    } 
-
-    for (let i = 1; i < headers.length; i++) {
-      object[headers[i]] = currentRow[i]
+    if(isNewGroup) {
+      groupName = sku;
+      group = {};
     }
-    result[currentGroup].push(object)
+
+    group = {
+      ...name && {[headers[0]] : name},
+      ...sku && {[headers[1]] : sku},
+      ...price && {[headers[2]] : price},
+      ...{
+        [headers[4]] : {
+          ...{[size] : availability},
+          ...group[headers[4]],
+        },
+      },
+    };
+
+    /*
+      3225sfs:{
+        наличие: {44:6},
+        артикул: 3225sfs,
+        название: Империя,
+        цена: 27700
+      }
+    */
+    result[groupName] = group;
   });
 
   return result;
@@ -81,7 +105,7 @@ function convertToGroup(data) {
 
 function addNewQuestion(postData) {
   const SHEET_NAME = "Обратная связь";
-  const sheet = getOrCreateSheet(SHEET_NAME);
+  const sheet = getOrCreateSheet(SHEET_NAME, ['статус','дата','имя','email','текст', 'откуда']);
   const {name, email, message} = postData;
 
   // Store data in Google Sheet
@@ -107,7 +131,7 @@ function addNewQuestion(postData) {
 
 function addNewOrder(postData) {
   const SHEET_NAME = "Заказы";
-  const sheet = getOrCreateSheet(SHEET_NAME);
+  const sheet = getOrCreateSheet(SHEET_NAME, ['статус','дата','имя','email','телефон','адрес','итого','заказ']);
   const itemsPropMap = {
       name: 'Название',
       sku: 'Модель',
@@ -170,8 +194,8 @@ function getTimestamp() {
 }
 
 function getEmailsCC() {
-  const emailsSheet = getOrCreateSheet('Оповещения');
-  const result = emailsSheet.getDataRange().getValues().flat(1).toString();
+  const emailsSheet = getOrCreateSheet('Оповещения', ['почты']);
+  const result = emailsSheet.getDataRange().getValues().slice(1,).flat(1).toString();
   return result;
 }
 
@@ -180,14 +204,24 @@ function logEmailQuota() {
   logger.log("Доступно оповещений по почте на сегодня: " + emailQuotaRemaining);
 }
 
-function getOrCreateSheet(name) {
-  return SpreadsheetApp.getActiveSpreadsheet().getSheetByName(name) 
-         || SpreadsheetApp.getActiveSpreadsheet().insertSheet(name);
+function getOrCreateSheet(name, titlesArr) {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(name) 
+              || SpreadsheetApp.getActiveSpreadsheet().insertSheet(name);
+
+  if (isSheetEmpty(sheet)) {
+    sheet.appendRow(titlesArr);
+  }
+
+  return sheet;
 }
 const logger = {
   log:(val)=>{
-    const logsSheet = getOrCreateSheet('Logs');
+    const logsSheet = getOrCreateSheet('Logs', ['date', 'console.log()']);
 
     logsSheet.appendRow([new Date(), `${JSON.stringify(val)}`]);
   }
 };
+
+function isSheetEmpty(sheet) {
+  return sheet.getDataRange().getValues().join("") === "";
+}

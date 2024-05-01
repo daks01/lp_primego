@@ -14,6 +14,9 @@
 - ✅ возможность писать компоненты на любом фреймворке: react, vue, svelte etc
 - ✅ и встраивать их в статичный сайт как интерактивные острова
 
+## 🧞 API
+[Инструкция по разработке API](backend/readme.md)
+
 ## 🧞 Как какать 
 для локальной разработки и билда статичного сайта нужно:
 - поставить Node.js (lts) https://nodejs.org/en
@@ -37,6 +40,8 @@
 
 ```text
 ├── public/
+├── backend/
+│   ├── googleAppScriptBackend.gs
 ├── src/
 │   ├── components/
 │   │   ├── ui/
