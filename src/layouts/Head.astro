@@ -7,24 +7,25 @@ const { title = "Primego" } = Astro.props;
 const pageUrl = Astro.url;
 
 const og_title = "Премиальные кроссовки. Шагай вместе с PRIMEGO";
-const og_description = `Сделано в Москве. Качественные материалы. Стильные модели. 
-Доставка по всей России на официальном сайте.`;
+const og_description = "Сделано в Москве. Качественные материалы. Стильные модели. Доставка по всей России на официальном сайте.";
 ---
 
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width" />
-<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta name="generator" content={Astro.generator} />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-<title>{title}. {og_title}</title>
+<title>{`${title}. ${og_title}`}</title>
 <meta name="description" content={og_description} />
 <meta property="og:url" content={pageUrl} />
 <meta property="og:title" content={og_title} />
 <meta property="og:description" content={og_description} />
-<meta property="og:image" content={`${pageUrl.origin}/og_image.png`} />
+<meta property="og:image" content={`${pageUrl.origin}/og-image.png`} />
 <meta property="og:type" content="website" />
 
-{ !isProduction && <meta name="robots" content="noindex"> }
+{!isProduction && 
+    <meta name="robots" content="noindex">
+}
 <link rel="sitemap" href="/sitemap-index.xml" />
 
 <!-- Animation On Scroll -->
