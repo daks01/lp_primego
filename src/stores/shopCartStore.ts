@@ -3,49 +3,42 @@ import {
     map,
     computed
 } from 'nanostores';
+import {productList} from './productListStore';
 import { nanoid } from 'nanoid'
-import { apiUrl } from '../utils/routes';
-import { nanoquery } from '@nanostores/query';
 
-export const totalPrice = atom(0);
 
 export type CartItem = {
     id?: string;
     name: string; 
     type: string;
     sku: string; 
-    size?: number;
+    size?: object;
     lace?: string; 
     fur_tongue?: boolean;
     fur_edge?: boolean;
     price: string;
     img: string;
-    color: string;
+    siteColor: string;
+    color: any,
 }
 
-const defaultCartItem = { 
-    size: 42,
-    lace: 'стандарт', 
-    fur_tongue: false,
-    fur_edge: false,
-}
+type ItemDisplayInfo = Pick<CartItem, 'sku' | 'img' | 'color'>;
+
 const storedCartItems = JSON.parse(localStorage.getItem('shopCart')) || {};
+
+export const totalPrice = atom(0);
 
 export const cartItems = map<Record<string, CartItem>>(storedCartItems);
 
-type ItemDisplayInfo = Pick<CartItem, 'name' | 'sku' | 'type' | 'img' | 'price' | 'color'>;
-
-export function addCartItem({ name, sku, type, img, price, color }: ItemDisplayInfo) {
+export function addCartItem({ sku, img, color }: ItemDisplayInfo) {
     const id = nanoid();
     const productData = {
-        ...defaultCartItem,
-        id,
-        name, 
-        sku,
-        type,
-        price,
-        color,
+        ...productList.get()?.data[sku],
+        siteColor: color,
         img,
+        //     lace: 'стандарт', 
+        //     fur_tongue: false,
+        //     fur_edge: false,
     };
 
     cartItems.setKey(id, {...productData});
@@ -65,10 +58,4 @@ cartItems.subscribe(() => {
 
 export const counter = computed(cartItems, (items) => {
     return Object.keys(items).length;
-});
-
-export const [createFetcherStore, createMutatorStore] = nanoquery({
-    fetcher: (...keys) => fetch(keys.join('')).then((r) => r.json()),
-});
-
-export const productsAvailability = createFetcherStore(apiUrl.availability);
+}); 
