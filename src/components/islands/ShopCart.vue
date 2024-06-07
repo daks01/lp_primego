@@ -50,8 +50,8 @@
                                     <option value="---">
                                         ---
                                     </option>
-                                    <option v-for="(value, key) in cartItem.size[cartItem?.['selected-size'] || cartItem.size[0]].available" 
-                                        :key="cartItem?.['selected-size']+key"
+                                    <option v-for="(value, key) in cartItem.size?.[cartItem['selected-size']]?.available" 
+                                        :key="cartItem['selected-size']+key"
                                         :value="key"
                                     >
                                         {{ colorMap[key] || key }}
@@ -208,7 +208,7 @@
     function updatePrice(e, id) {
         cartItems.setKey(id, {
             ...toRaw($cartItems.value)[id],
-            ['selected-size']: e.target.value,
+            ['selected-size']: e.target.value === '---' ? undefined : e.target.value,
             ['selected-color']: undefined,
         });
     }
