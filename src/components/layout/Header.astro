@@ -14,7 +14,7 @@ const {
 <Section as={tag} class="header">
 	<TopBar isHome={isHome}>
 		<div class="action-panel">
-			<button 
+			<!-- <button 
 				class="button-login" 
 				type="button" 
 				aria-describedby="profile-btn-title" 
@@ -28,7 +28,7 @@ const {
 			</button>
 			<Dialog id="dialog-login" title="Войти или зарегистрироваться" width={800}>
 				<LoginForm client:only />
-			</Dialog>
+			</Dialog> -->
 			<button
 				class="button-shopcart"
 				type="button"
@@ -49,7 +49,7 @@ const {
 </Section>
 
 <script>
-	import { counter, productsAvailability } from '../../stores/shopCartStore';
+	import { counter } from '../../stores/shopCartStore';
 
 	function updateCartCounter() {
 		const cartCounterEl = document.querySelector('[data-cart-counter]');
@@ -59,10 +59,6 @@ const {
 			}
 		})
 	}
-
-	productsAvailability.subscribe((data, loading) => {
-		console.log(111, data, loading)
-	})
 
 	updateCartCounter();
 </script>

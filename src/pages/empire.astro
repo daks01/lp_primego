@@ -24,6 +24,9 @@ import imageCustomSneaker from '/src/assets/img/customization/Sneaker-FFCD01.png
 import backgroundInnovation from "/src/assets/img/bg/FFCD01/7.jpg";
 import backgroundMadeIn from "/src/assets/img/bg/FFCD01/8.jpg";
 import backgroundFooter from "/src/assets/img/bg/FFCD01/10.jpg";
+import { productOptMap } from "../utils/product-list";
+
+const productSKU = productOptMap.empire.sku;
 ---
 
 <style is:global>
@@ -39,7 +42,7 @@ import backgroundFooter from "/src/assets/img/bg/FFCD01/10.jpg";
 <Layout title="Primego | Империя">
 	<Header/>
 	<main>
-		<HeroEmpire backgroundImage={backgroundHero}/>
+		<HeroEmpire backgroundImage={backgroundHero} sku={productSKU}/>
 		<NanoTextiles backgroundImage={backgroundNano} mainImage={imageNano}/>
 		<Convection backgroundImage={backgroundConvection} mainImage={imageConvection}/>
 		<FootShape backgroundImage={backgroundShape}/>

@@ -3,11 +3,12 @@ import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
 import BuyButton from "../ui/BuyButton.astro";
 import BackButton from "../ui/BackButton.astro";
+import ProductPriceFromApi from "../content/ProductPriceFromApi.astro";
 import { Image } from 'astro:assets';
 import imageSneakers from  "/src/assets/img/hero-slider/single-royal.png";
 import BackgroundText from "../ui/BackgroundText.astro";
 
-const { backgroundImage } = Astro.props;
+const { backgroundImage, sku } = Astro.props;
 ---
 
 <Section backgroundImage={backgroundImage}>
@@ -22,20 +23,16 @@ const { backgroundImage } = Astro.props;
 				обеспечивая вам непревзойденный опыт носки.
 			</p>
 			<p class="display-mobile-none price">
-				<span class="h3">27&thinsp;700&thinsp;₽</span>
+				<span class="h3">
+					<ProductPriceFromApi sku={sku}/>
+				</span>
 			</p>
 			<Image src={imageSneakers} alt="" role="presentation" class="hero__image" loading="lazy" />
-			<BuyButton 
-				name="Рояль"
-				type="Лимитированная коллекция"
-				sku="1224sfs" 
-				price="27700" 
+			<BuyButton
+				sku={sku}
 				color="var(--color-product-royal)"
 				img={imageSneakers.src}
-			>
-				<span class="display-none display-mobile-block">Купить от 27&thinsp;700&thinsp;₽</span>
-				<span class="display-mobile-none">Купить сейчас</span>
-			</BuyButton>
+			/>
 		</div>
 	</div>
 </Section>

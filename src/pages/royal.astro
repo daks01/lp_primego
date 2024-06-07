@@ -24,6 +24,9 @@ import imageCustomSneaker from '/src/assets/img/customization/Sneaker-FFFFFF.png
 import backgroundInnovation from "/src/assets/img/bg/FFFFFF/7.jpg";
 import backgroundMadeIn from "/src/assets/img/bg/FFFFFF/8.jpg";
 import backgroundFooter from "/src/assets/img/bg/FFFFFF/10.jpg";
+import { productOptMap } from "../utils/product-list"
+
+const productSKU = productOptMap.royal.sku;
 ---
 
 <style is:global>
@@ -39,7 +42,7 @@ import backgroundFooter from "/src/assets/img/bg/FFFFFF/10.jpg";
 <Layout title="Primego | Рояль">
 	<Header/>
 	<main>
-		<HeroRoyal backgroundImage={backgroundHero}/>
+		<HeroRoyal backgroundImage={backgroundHero} sku={productSKU}/>
 		<NanoTextiles backgroundImage={backgroundNano} mainImage={imageNano}/>
 		<Convection backgroundImage={backgroundConvection} mainImage={imageConvection}/>
 		<FootShape backgroundImage={backgroundShape}/>

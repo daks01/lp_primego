@@ -50,53 +50,85 @@ function doGet(e) {
 }
 
 function getProductsAvailability() {
-  const sheet = getOrCreateSheet("Наличие", ['название', 'артикул', 'цена', 'размер', 'наличие', 'резерв']);
+  const thead = ['Артикул',	'Название',	'Тип', 'Цвет',	'Цена',	'Наличие',	'Резерв',	'Размер колодки',	'Длина',	'Ширина',	'Размер на ярлычке',	'Новый размер'];
+  const sheet = getOrCreateSheet("Наличие", thead);
   const data = sheet.getDataRange().getValues();
-  Logger.log(convertToGroup(data))
+  Logger.log(convertProductsToGroup(data));
 
-  return convertToGroup(data);
+  return convertProductsToGroup(data);
 }
 
-function convertToGroup(data) {
-  const headers = data[0];    // название, артикул, цена, размер, наличие, резерв
+function convertProductsToGroup(data) {
+  const headers = data[0];    // ['Артикул',	'Название',	'Тип', 'Цвет',	'Цена',	'Наличие',	'Резерв',	'Размер колодки',	'Длина',	'Ширина',	'Размер на ярлычке',	'Новый размер']
   const rawData = data.slice(1,);
   let groupName;
   let group = {};
   let result = {};
 
+
+  /* return
+    EM24:{
+      sku: string,
+      name: string,
+      type: string,
+      color: array
+      price: number,
+      size колодки: {
+        44: {
+          availability: number,
+          reserve: number,
+          length: number,
+          width: number,
+          tagSize: number,
+          newSize: number,
+        }
+      },
+    }
+  */
   rawData.forEach((currentRow) => {
     const isNewGroup = currentRow[0];
-    const name = currentRow[0] || group[headers[0]];
-    const sku = currentRow[1] || group[headers[1]];
-    const price = currentRow[2] || group[headers[2]];
-    const size = currentRow[3];
-    const availability = currentRow[4];
-
+    const sku = currentRow[0] || group['sku'];
+    const name = currentRow[1] || group['name'];
+    const type = currentRow[2] || group['type'];
+    const color = currentRow[3] || group['color'];
+    const price = currentRow[4] || group['price'];
+    const availability = currentRow[5];
+    const reserve = currentRow[6];
+    const size = currentRow[7];
+    const length = currentRow[8];
+    const width = currentRow[9];
+    const tagSize = currentRow[10];
+    const newSize = currentRow[11];
+    
     if(isNewGroup) {
       groupName = sku;
       group = {};
     }
-
+    
     group = {
-      ...name && {[headers[0]] : name},
-      ...sku && {[headers[1]] : sku},
-      ...price && {[headers[2]] : price},
+      ...sku && {'sku' : sku},
+      ...name && {'name' : name},
+      ...type && {'type' : type},
+      ...color && {'color' : color.toString().split(',').map(s => s.trim())},
+      ...price && {'price' : price},
       ...{
-        [headers[4]] : {
-          ...{[size] : availability},
-          ...group[headers[4]],
+        'size' : {
+          ...{
+            [size] : {
+              availability,
+              reserve,
+              length,
+              width,
+              size,
+              tagSize,
+              newSize,
+            }
+          },
+          ...group['size'],
         },
       },
     };
 
-    /*
-      3225sfs:{
-        наличие: {44:6},
-        артикул: 3225sfs,
-        название: Империя,
-        цена: 27700
-      }
-    */
     result[groupName] = group;
   });
 
@@ -105,7 +137,8 @@ function convertToGroup(data) {
 
 function addNewQuestion(postData) {
   const SHEET_NAME = "Обратная связь";
-  const sheet = getOrCreateSheet(SHEET_NAME, ['статус','дата','имя','email','текст', 'откуда']);
+  const thead = ['статус','дата','имя','email','текст', 'откуда'];
+  const sheet = getOrCreateSheet(SHEET_NAME, thead);
   const {name, email, message} = postData;
 
   // Store data in Google Sheet
@@ -131,7 +164,8 @@ function addNewQuestion(postData) {
 
 function addNewOrder(postData) {
   const SHEET_NAME = "Заказы";
-  const sheet = getOrCreateSheet(SHEET_NAME, ['статус','дата','имя','email','телефон','адрес','итого','заказ']);
+  const thead = ['статус','дата','имя','email','телефон','адрес','итого','заказ'];
+  const sheet = getOrCreateSheet(SHEET_NAME, thead);
   const itemsPropMap = {
       name: 'Название',
       sku: 'Модель',

@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import Header from "../components/layout/Header.astro";
 import Section from "../components/ui/Section.astro";
+import Button from "../components/ui/Button.astro";
 
 import backgroundFooter from "/src/assets/img/bg/FC1447/10.jpg";
 import ShopCart from "../components/islands/ShopCart.vue";
@@ -13,12 +14,40 @@ import ShopCart from "../components/islands/ShopCart.vue";
 	<main>
 		<Section width="985">
 			<h1 class="h3">Корзина</h1>
+
+			<!-- <Button 
+				data-buybutton
+				data-sku={sku}
+				data-color={color} 
+				data-img={img}
+			>
+				Оформить
+			</Button> -->
 			<ShopCart client:only />
 		</Section>
 	</main>
 </Layout>
 
-<script></script>
+<script>
+    import { addCartItem } from "../stores/shopCartStore";
+
+    const buyButton = document.querySelector("[data-buybutton]");
+    const {
+        sku,
+        color,
+        img
+    } = buyButton?.dataset;
+
+    buyButton?.addEventListener("click", addToCart);
+
+    function addToCart() {
+        addCartItem({
+            sku,
+            img,
+            color,
+        });
+    }
+</script>
 
 <style>
 	.section {
