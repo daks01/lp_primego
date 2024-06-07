@@ -1,5 +1,4 @@
 // https://seoneurons.com/create-contact-us-page/#33-setting-up-a-trigger
-const MAILTO = 'email@domain.com';
 
 function doPost(e) {
   // logger.log(e);
@@ -50,7 +49,7 @@ function doGet(e) {
 }
 
 function getProductsAvailability() {
-  const thead = ['Артикул',	'Название',	'Тип', 'Цвет',	'Цена',	'Наличие',	'Резерв',	'Размер колодки',	'Длина',	'Ширина',	'Размер на ярлычке',	'Новый размер'];
+  const thead = ['Артикул',	'Название',	'Тип',	'Утеплитель', 'Цвета', 'Цена',	'Размер', 'Резерв', 'Длина',	'Ширина',	'dark side', 'light side',	'white',	'black',	'gold',	'classic',	'choco',	'fif'];
   const sheet = getOrCreateSheet("Наличие", thead);
   const data = sheet.getDataRange().getValues();
   Logger.log(convertProductsToGroup(data));
@@ -59,69 +58,87 @@ function getProductsAvailability() {
 }
 
 function convertProductsToGroup(data) {
-  const headers = data[0];    // ['Артикул',	'Название',	'Тип', 'Цвет',	'Цена',	'Наличие',	'Резерв',	'Размер колодки',	'Длина',	'Ширина',	'Размер на ярлычке',	'Новый размер']
+  const headers = data[0];    // ['Артикул',	'Название',	'Тип',	'Утеплитель', 'Цвета', 'Цена',	'Размер', 'Резерв', 'Длина',	'Ширина',	'dark side', 'light side',	'white',	'black',	'gold',	'classic',	'choco',	'fif']
   const rawData = data.slice(1,);
   let groupName;
   let group = {};
   let result = {};
 
-
-  /* return
-    EM24:{
-      sku: string,
-      name: string,
-      type: string,
-      color: array
-      price: number,
-      size колодки: {
-        44: {
-          availability: number,
-          reserve: number,
-          length: number,
-          width: number,
-          tagSize: number,
-          newSize: number,
-        }
-      },
-    }
-  */
   rawData.forEach((currentRow) => {
     const isNewGroup = currentRow[0];
     const sku = currentRow[0] || group['sku'];
     const name = currentRow[1] || group['name'];
     const type = currentRow[2] || group['type'];
-    const color = currentRow[3] || group['color'];
-    const price = currentRow[4] || group['price'];
-    const availability = currentRow[5];
-    const reserve = currentRow[6];
-    const size = currentRow[7];
-    const length = currentRow[8];
-    const width = currentRow[9];
-    const tagSize = currentRow[10];
-    const newSize = currentRow[11];
+    const insulation = currentRow[3] || group['insulation'];
+    const colors = currentRow[4] || group['colors'];
+    const price = currentRow[5] || group['price'];
+    const size = currentRow[6];
+    const length = currentRow[7];
+    const width = currentRow[8];
+    const reserved = currentRow[9];
+    const availableColor1 = currentRow[10];
+    const availableColor2 = currentRow[11];
+    const availableColor3 = currentRow[12];
+    const availableColor4 = currentRow[13];
+    const availableColor5 = currentRow[14];
+    const availableColor6 = currentRow[15];
+    const availableColor7 = currentRow[16];
+    const availableColor8 = currentRow[17];
     
     if(isNewGroup) {
       groupName = sku;
       group = {};
     }
     
+
+    /* тут формируется json для API
+      EM24:{
+        sku: string,
+        name: string,
+        type: string,
+        insulation: array,
+        colors: array,
+        price: number,
+        size колодки: {
+          44: {
+            availability: {
+              gold: number,
+              black: number,
+            },
+            reserve: array,
+            length: number,
+            width: number,
+          }
+        },
+      }
+    */
     group = {
       ...sku && {'sku' : sku},
       ...name && {'name' : name},
       ...type && {'type' : type},
-      ...color && {'color' : color.toString().split(',').map(s => s.trim())},
+      ...insulation && {'insulation' : insulation.toString().split(',').map(s => s.trim())},
+      ...colors && {'colors' : colors.toString().split(',').map(s => s.trim())},
       ...price && {'price' : price},
       ...{
         'size' : {
           ...{
             [size] : {
-              availability,
-              reserve,
+              available: {
+                ...availableColor1 && { [headers[10]]: availableColor1 },
+                ...availableColor2 && { [headers[11]]: availableColor2 },
+                ...availableColor3 && { [headers[12]]: availableColor3 },
+                ...availableColor4 && { [headers[13]]: availableColor4 },
+                ...availableColor5 && { [headers[14]]: availableColor5 },
+                ...availableColor6 && { [headers[15]]: availableColor6 },
+                ...availableColor7 && { [headers[16]]: availableColor7 },
+                ...availableColor8 && { [headers[17]]: availableColor8 },
+              },
+              ...reserved && {
+                'reserved' : reserved.toString().split(',').map(s => s.trim()),
+              },
               length,
               width,
               size,
-              tagSize,
-              newSize,
             }
           },
           ...group['size'],
@@ -146,7 +163,7 @@ function addNewQuestion(postData) {
 
   // Send email
   MailApp.sendEmail({
-    to: MAILTO, 
+    to: getAdminEmail(), 
     cc: getEmailsCC(),
     name: 'Сайт Primego',
     noReply: true,
@@ -164,7 +181,7 @@ function addNewQuestion(postData) {
 
 function addNewOrder(postData) {
   const SHEET_NAME = "Заказы";
-  const thead = ['статус','дата','имя','email','телефон','адрес','итого','заказ'];
+  const thead = ['статус','дата','имя', 'фамилия', 'email','телефон','адрес', 'доставка', 'итого','заказ'];
   const sheet = getOrCreateSheet(SHEET_NAME, thead);
   const itemsPropMap = {
       name: 'Название',
@@ -172,12 +189,11 @@ function addNewOrder(postData) {
       type: 'Коллекция',
       fur_tongue: 'Меховой язык',
       fur_edge: 'Меховой кант',
-      lace: 'Шнурок',
       color: 'Цвет',
       size: 'Размер',
       price: 'Цена',
   };
-  const {name, email, phone, address, items, totalPrice} = postData;
+  const {name, surname, email, phone, address, items, totalPrice} = postData;
   const { items: _, ...postDataWithoutItems } = postData;
   const dataArrWithoutItems = Object.values(postDataWithoutItems);
   const getArrWithItems = () => {
@@ -199,14 +215,14 @@ function addNewOrder(postData) {
 
   // Send email
   MailApp.sendEmail({
-    to: MAILTO, 
+    to: getAdminEmail(), 
     cc: getEmailsCC(),
     name: 'Сайт Primego',
     noReply: true,
-    subject: `[Primego][Buy]. ${name} оформил заказ`,
+    subject: `[Primego][Buy]. ${name} ${surname} оформил заказ`,
     htmlBody: `
-      <b>Покупатель</b>: ${name} [<a href="mailto:${email}">${email}</a>]<br>
-      <b>Телфон</b>: <a href="tel:${phone}">${phone}</a><br>
+      <b>Покупатель</b>: ${name} ${surname} [<a href="mailto:${email}">${email}</a>]<br>
+      <b>Телефон</b>: <a href="tel:${phone}">${phone}</a><br>
       <b>Адрес доставки</b>: ${address}</a><br>
       <b>Товаров</b>: ${Object.keys(items).length} <br>
       <b>Итого</b>: ${totalPrice} <br>
@@ -227,9 +243,15 @@ function getTimestamp() {
   return Utilities.formatDate(new Date(), "IST", "yyyy-MM-dd HH:mm");
 }
 
+function getAdminEmail() {
+  const emailsSheet = getOrCreateSheet('Оповещения', ['почты']);
+  const result = emailsSheet.getDataRange().getValues().at(1).flat(1).toString();
+  return result;
+}
+
 function getEmailsCC() {
   const emailsSheet = getOrCreateSheet('Оповещения', ['почты']);
-  const result = emailsSheet.getDataRange().getValues().slice(1,).flat(1).toString();
+  const result = emailsSheet.getDataRange().getValues().slice(2,).flat(1).toString();
   return result;
 }
 
