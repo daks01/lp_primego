@@ -6,7 +6,6 @@ import {
 import {productList} from './productListStore';
 import { nanoid } from 'nanoid'
 
-
 export type CartItem = {
     id?: string;
     name: string; 
@@ -36,6 +35,7 @@ export function addCartItem({ sku, img, color }: ItemDisplayInfo) {
         ...productList.get()?.data[sku],
         siteColor: color,
         img,
+        id,
         //     lace: 'стандарт', 
         //     fur_tongue: false,
         //     fur_edge: false,
