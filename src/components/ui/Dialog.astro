@@ -172,12 +172,17 @@ const {
         }
     }
     @media screen and (max-width: 1023px) {
-        :root {
-            --dialog-gutter: var(--30px);
+        .dialog {
+            --dialog-gutter: var(--15px);
         }
 		.dialog {
 		    max-width: 100vw;
+            max-height: 100%;
+            margin: 0;
 		}
+        .dialog__header {
+            padding: var(--dialog-gutter);
+        }
         .dialog__title {
             word-break: break-word;
         }

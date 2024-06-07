@@ -1,10 +1,8 @@
 ---
 import Button from "./Button.astro";
+import ProductPriceFromApi from "../content/ProductPriceFromApi.astro";
 const { 
-    name,
-    type, 
     sku,
-    price,
     color = 'var(--color-product-primego)',
     img,
     class: className, 
@@ -12,17 +10,21 @@ const {
 } = Astro.props;
 ---
 
-<Button 
-    data-buybutton 
-    data-name={name} 
+<Button
+    data-buybutton
     data-sku={sku}
-    data-type={type} 
-    data-price={price} 
     data-color={color} 
     data-img={img} 
     {...props}
 >
-    <slot />
+    <Fragment>
+        <span class="display-none display-mobile-block">
+            Купить от <ProductPriceFromApi sku={sku}/>
+        </span>
+        <span class="display-mobile-none">
+            Купить сейчас
+        </span>
+    </Fragment>
 </Button>
 <button
     class="sr-only"
@@ -37,10 +39,7 @@ const {
 
     const buyButton = document.querySelector("[data-buybutton]");
     const {
-        name,
-        type, 
         sku,
-        price,
         color,
         img
     } = buyButton?.dataset;
@@ -49,13 +48,11 @@ const {
 
     function addToCart() {
         addCartItem({
-            name,
-            type, 
             sku,
-            price,
+            img,
             color,
-            img
         });
+        window["dialog-shopcart"]?.showModal();
     }
 </script>
 

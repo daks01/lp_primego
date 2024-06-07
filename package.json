@@ -1,9 +1,9 @@
 {
-  "name": "puffy-phase",
+  "name": "primego.online",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
+    "dev": "astro dev --open",
     "build:staging": "NODE_ENV=staging  astro build --mode staging ",
     "build": "astro build",
     "preview": "astro preview",

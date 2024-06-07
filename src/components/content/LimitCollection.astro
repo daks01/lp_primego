@@ -4,6 +4,8 @@ import { Image } from "astro:assets";
 import imgImperial from "/src/assets/img/limit-collection/imperial.png";
 import imgRoyal from "/src/assets/img/limit-collection/royal.png";
 import Section from "../ui/Section.astro";
+import ProductPriceFromApi from "./ProductPriceFromApi.astro";
+import { productOptMap } from "../../utils/product-list";
 
 ---
 <Section class="section">
@@ -20,7 +22,7 @@ import Section from "../ui/Section.astro";
 					<a href="empire" class="menu__link card">
 						<div class="card__left">
 							<StarTrekText title="Империя" class="card__title" as="span" style="color: var(--color-product-empire)">
-								ИМПЕРИЯ
+								{productOptMap.empire.name}
 							</StarTrekText>
 							<span class="card__subtitle">Непобедимый стиль</span>
 							<button class="read-more">Подробнее</button>
@@ -34,7 +36,9 @@ import Section from "../ui/Section.astro";
 								loading="lazy"
 								class="card__img"
 							/>
-							<span class="card__price">27&thinsp;700&thinsp;₽</span>
+							<span class="card__price">
+								<ProductPriceFromApi sku={productOptMap.empire.sku}/>
+							</span>
 						</div>
 					</a>
 				</li>
@@ -42,7 +46,7 @@ import Section from "../ui/Section.astro";
 					<a href="royal" class="menu__link card">
 						<div class="card__left">
 							<StarTrekText title="Рояль" class="card__title" as="span" style="color: var(--color-product-royal)">
-								Рояль
+								{productOptMap.royal.name}
 							</StarTrekText>
 							<span class="card__subtitle">Уникальный стиль</span>
 							<button class="read-more">Подробнее</button>
@@ -56,7 +60,9 @@ import Section from "../ui/Section.astro";
 								loading="lazy"
 								class="card__img"
 							/>
-							<span class="card__price">27&thinsp;700&thinsp;₽</span>
+							<span class="card__price">
+								<ProductPriceFromApi sku={productOptMap.royal.sku}/>
+							</span>
 						</div>
 					</a>
 				</li>

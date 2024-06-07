@@ -38,6 +38,11 @@ const {
     &:active {
         background-color: var(--color-product-active);
     }
+    &[disabled] {
+        background-color: var(--color-bg-disabled);
+        filter: brightness(0.9);
+        cursor: default;
+    }
 }
 
 .button_type-secondary {

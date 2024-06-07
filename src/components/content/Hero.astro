@@ -3,7 +3,6 @@ import "@splidejs/splide/css/core";
 import { Image } from "astro:assets";
 import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
-import BuyButton from "../ui/BuyButton.astro";
 import imgSlide1 from "/src/assets/img/hero-slider/slide-1.png";
 import imgSlide2 from "/src/assets/img/hero-slider/slide_2.png";
 import imgSlide3 from "/src/assets/img/hero-slider/slide_3.png";
@@ -26,15 +25,9 @@ const { backgroundImage } = Astro.props;
 					Наша обувь способна вдохновлять и&nbsp;очаровывать аудиторию по&nbsp;всему миру. 
 					Создай свой образ с&nbsp;помощью констуктора
 				</p>
-				<BuyButton 
-					name="Кастом"
-					type="Пользовательская модель"
-					sku="1224sfs" 
-					price="27700"
-					img={imgSlide1.src}
-				>
+				<!-- <Button>
 					Создать образ
-				</BuyButton>
+				</Button> -->
 			</div>
 		</div>
 		<div class="heroSlider-wrapper">
