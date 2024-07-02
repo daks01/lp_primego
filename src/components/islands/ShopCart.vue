@@ -11,7 +11,7 @@
                         <img :src="cartItem.img" :alt="cartItem.name" class="product-img" width="110" />
                     </div>
                     <div class="col col_desc">
-                        <span>{{cartItem.type}}</span>
+                        <span class="product-tag">{{cartItem.type}}</span>
                         <div 
                             class="font_star-trek product-title" 
                             :style="{color: cartItem.siteColor}"
@@ -19,48 +19,46 @@
                             {{cartItem.name}}
                         </div>
 
-                        <div>
-                            <br>
-                            Модель: {{cartItem.sku}} 
-                            &emsp;
-                            <br>
-
-                            Размер: 
-                            <select aria-label="Выбрать размер"
-                                @change="updatePrice($event, cartItem.id)"
-                            >
-                                <option value="---">
-                                    ---
-                                </option>
-                                <option v-for="size in cartItem.size" 
-                                    :key="size.size"
-                                    :value="size.size" 
-                                    :disabled="isOutOfStock(size.available)"
-                                >
-                                    {{ size.size }}&thinsp;RU
-                                </option>
-                            </select> 
-
-                            <template v-if="'selected-size' in cartItem">
-                                &emsp;
-                                Цвет:
-                                <select aria-label="Выбрать цвет"
-                                    @change="updateColor($event, cartItem.id)"
+                        <div class="product-desc">
+                            <div class="product-desc__item">
+                                Модель: 
+                                {{cartItem.sku}} 
+                            </div>
+                            <div class="product-desc__item">
+                                Размер: 
+                                <select aria-label="Выбрать размер"
+                                    @change="updatePrice($event, cartItem.id)"
                                 >
                                     <option value="---">
                                         ---
                                     </option>
-                                    <option v-for="(value, key) in cartItem.size?.[cartItem['selected-size']]?.available" 
-                                        :key="cartItem['selected-size']+key"
-                                        :value="key"
+                                    <option v-for="size in cartItem.size" 
+                                        :key="size.size"
+                                        :value="size.size" 
+                                        :disabled="isOutOfStock(size.available)"
                                     >
-                                        {{ colorMap[key] || key }}
+                                        {{ size.size }}&thinsp;RU {{ size.available }}
                                     </option>
-                                </select>
-                            </template>
-
-                            <br>
-                            <br>
+                                </select> 
+                            </div>
+                            <div class="product-desc__item">
+                                <template v-if="'selected-size' in cartItem">
+                                    Цвет:
+                                    <select aria-label="Выбрать цвет"
+                                        @change="updateColor($event, cartItem.id)"
+                                    >
+                                        <option value="---">
+                                            ---
+                                        </option>
+                                        <option v-for="(value, key) in cartItem.size?.[cartItem['selected-size']]?.available" 
+                                            :key="cartItem['selected-size']+key"
+                                            :value="key"
+                                        >
+                                            {{ colorMap[key] || key }}
+                                        </option>
+                                    </select>
+                                </template>
+                            </div>
                         </div>
                         <details>
                             <summary>
@@ -194,18 +192,20 @@
         cartItems.setKey(id, undefined);
     }
 
-    function isOutOfStock(available = {}) {
-        return Object.keys(available).length === 0;
+    function isOutOfStock(number) {
+        return number === 0;
     }
 
     function updateColor(e, id) {
+        console.log(toRaw($cartItems.value)[id])
         cartItems.setKey(id, {
             ...toRaw($cartItems.value)[id],
-            ['selected-color']: e.target.value
+            ['selected-color']: e.target.value,
         });
     }
 
     function updatePrice(e, id) {
+        console.log(toRaw($cartItems.value)[id])
         cartItems.setKey(id, {
             ...toRaw($cartItems.value)[id],
             ['selected-size']: e.target.value === '---' ? undefined : e.target.value,
@@ -302,13 +302,17 @@
         border-bottom: var(--1px) solid var(--color-product);
         display: flex;
         gap: var(--15px);
-        padding: var(--15px) 0;
+        padding: 0 0 var(--15px);
     }
     .product-img {
         width: calc(var(--1px) * 110);
     }
+    .product-tag {
+        margin-top: -0.3em;
+        display: block;
+    }
     .product-title {
-        margin: var(--15px) 0;
+        margin: calc(var(--1px) * 5) 0 var(--15px);
         font-size: calc(var(--1px) * 80);
     }
     .product-price {
@@ -317,6 +321,13 @@
         color: var(--text-color);
         margin-top: var(--15px);
         display: block;
+    }
+    .product-desc {
+        font-size: var(--small-font-size);
+    }
+    .product-desc__item {
+        margin-right: var(--15px);
+        display: inline-block;
     }
     .col {
         
