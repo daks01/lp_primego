@@ -3,12 +3,12 @@
         <template v-if="Object.values($cartItems).length">
             <ul class="product-list">
                 <li v-for="cartItem in Object.values($cartItems)" :key="cartItem.id" class="product-list__item">
-                    <div class="col">
+                    <div class="col col_1">
                         <img :src="cartItem.img" :alt="cartItem.name" class="product-img" width="110" />
                     </div>
-                    <div class="col col_desc">
+                    <div class="col col_2 col_desc">
                         <span class="product-tag">{{cartItem.type}}</span>
-                        <div class="font_star-trek product-title" :style="{color: cartItem.siteColor}">
+                        <div class="font_star-trek product-title display-mobile-none " :style="{color: cartItem.siteColor}">
                             {{cartItem.name}}
                         </div>
 
@@ -75,10 +75,13 @@
                             </table>
                         </div>
                     </div>
-                    <div class="col col_align-center">
+                    <div class="col col_3 col_align-center">
+                        <div class="font_star-trek product-title display-none display-mobile-block" :style="{color: cartItem.siteColor}">
+                            {{cartItem.name}}
+                        </div>
                         <span class="product-price">{{ priceWithRouble(cartItem.price) }}</span>
                     </div>
-                    <div class="col col_align-center">
+                    <div class="col col_4 col_align-center">
                         <button type="button" class="button button_type-icon" aria-label="Удалить"
                             @click="removeItem(cartItem.id)">
                             <svg role="presentation" width="24" height="25" viewBox="0 0 24 25" fill="none"
@@ -467,7 +470,7 @@ input::placeholder {
 }
 
 .inputCheckbox__label {
-    line-height: 1.4;
+    line-height: 1.3;
 }
 .inputCheckbox__input {
     position: absolute;
@@ -529,11 +532,49 @@ input::placeholder {
 }
 
 @media screen and (max-width: 1023px) {
+    .product-list {
+        margin-bottom: var(--15px);
+    }
     .product-list__item {
-        flex-direction: column;
+        /* flex-direction: column; */
+        flex-wrap: wrap;
     }
     .col_align-center {
         padding-top: 0;
+    }
+    .col_1 {
+        order: 1;
+    }
+    .col_2 {
+        order: 4;
+    }
+    .col_3 {
+        order: 2;
+        flex-grow: 1;
+    }
+    .col_4 {
+        order: 3;
+    }
+    .product-img {
+        width: var(--60px);
+    }
+    .product-title {
+        font-size: calc(var(--1px) * 40);
+        margin: 0;
+    }
+    .product-price {
+        margin-top: calc(var(--1px) * 10);
+        font-size: calc(var(--1px) * 18);
+    }
+    .product-tag {
+        margin-bottom: var(--15px);
+        font-size: calc(var(--1px) * 14);
+    }
+    .button_type-icon {
+        padding: calc(var(--1px)* 12);
+    }
+    .button_type-icon svg {
+        width: calc(var(--1px) * 24);
     }
     .size-table td:first-child,
     .size-table th:first-child {
@@ -542,6 +583,31 @@ input::placeholder {
     .size-table td:last-child,
     .size-table th:last-child {
         padding-right: var(--15px);
+    }
+    .total {
+        margin-bottom: var(--30px);
+    }
+    .total-price{
+        font-size: var(--heading-4);
+    }
+    fieldset {
+        padding: var(--30px) var(--15px) var(--30px);
+    }
+    legend svg {
+        width: var(--30px);
+    }
+    input {
+        margin-bottom: var(--15px);
+        padding: calc(var(--1px)* 9) var(--15px) ;
+        font-size: calc(var(--1px) * 12);
+    }
+    .inputCheckbox {
+        margin-bottom: var(--15px);
+        padding: var(--15px);
+        font-size: calc(var(--1px) * 12);
+    }
+    .form__footer {
+        margin-top: var(--30px);
     }
 }
 </style>

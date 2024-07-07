@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/layout/Header.astro";
 import Section from "../components/ui/Section.astro";
 import Button from "../components/ui/Button.astro";
+import StarTrekText from "../components/ui/StarTrekText.astro";
 
 import backgroundFooter from "/src/assets/img/bg/FC1447/10.jpg";
 import ShopCart from "../components/islands/ShopCart.vue";
@@ -13,17 +14,13 @@ import ShopCart from "../components/islands/ShopCart.vue";
 	<Header/>
 	<main>
 		<Section width="985">
-			<h1 class="h3">Корзина</h1>
-
-			<!-- <Button 
-				data-buybutton
-				data-sku={sku}
-				data-color={color} 
-				data-img={img}
-			>
-				Оформить
-			</Button> -->
-			<ShopCart client:only />
+			<!-- TODO не хватило стилей. компоненты ради них -->
+			<Button class="display-none"></Button>
+			<StarTrekText class="display-none"></StarTrekText>
+			<div class="box">
+				<h1 class="h3 title">Корзина</h1>	
+				<ShopCart client:only />
+			</div>
 		</Section>
 	</main>
 </Layout>
@@ -50,7 +47,47 @@ import ShopCart from "../components/islands/ShopCart.vue";
 </script>
 
 <style>
+	body {
+		background-attachment: fixed;
+		height: auto;
+	}
 	.section {
 		min-height: auto;
+	}
+	/* TODO обобщить стили с диалогом */
+	.box {
+        --color-product: var(--color-product-primego);
+        --color-product-hover: var(--color-product-primego-hover);
+        --color-product-active: var(--color-product-primego-active);
+        --button-text-color: var(--color-white);
+
+        --text-color: var(--color-white);
+        --text-product: var(--color-product);
+        --text-lead: var(--color-white);
+		--dialog-width: 985;
+		--dialog-gutter: var(--60px);
+
+        background-color: var(--color-bg-disabled);
+        color: var(--text-color);
+		width: calc(var(--1px) * var(--dialog-width));
+		max-width: calc(100vw - var(--gutter) *2);
+        padding: var(--dialog-gutter) var(--dialog-gutter) var(--45px);
+        margin: var(--90px) auto;
+        box-shadow: 0px var(--8px) var(--15px) calc(var(--8px) * -1) rgba(252,20,71,.45);
+    }
+	.title {
+		margin: 0 0 var(--45px);
+	}
+	@media screen and (max-width: 1023px) {
+        .box {
+            --dialog-gutter: var(--15px);
+        }
+		.box {
+		    max-width: 100vw;
+            max-height: 100%;
+            margin: 0;
+			margin-left: calc(var(--gutter) * -1);
+			margin-right: calc(var(--gutter) * -1);
+		}
 	}
 </style>

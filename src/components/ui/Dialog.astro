@@ -152,7 +152,6 @@ const {
         margin: 0 var(--dialog-gutter) var(--dialog-gutter);
     }
     .dialog__title {
-        padding-right: var(--45px);
         margin: 0;
         color: var(--color-product);
     }
@@ -190,12 +189,13 @@ const {
         }
         .dialog__title {
             word-break: break-word;
+            font-size: calc(var(--1px) * 20);
         }
         .button-close {
-            padding: var(--15px);
+            padding: var(--15px) var(--15px) 0 var(--15px);
             & :global(svg) {
-                width: var(--30px);
-                height: var(--30px);
+                width: calc(var(--1px) * 24);
+                width: calc(var(--1px) * 24);
             }
         }
 	}
