@@ -127,29 +127,53 @@
                     </svg>
                     Тип доставки
                 </legend>
-                <label>
-                    <input type="radio" id="radio-1" v-model="formData.delivery" checked
-                        value="Доставка по Москве до двери (бесплатно при заказе от 40 000)" />
-                    <span>&emsp;Доставка по Москве до двери (бесплатно при заказе от 40 000)</span>
+                <label class="inputCheckbox">
+                    <input
+                        class="inputCheckbox__input"
+                        type="radio" 
+                        id="radio-1" 
+                        v-model="formData.delivery" 
+                        checked
+                        value="Доставка по Москве до двери (бесплатно при заказе от 40 000)" 
+                    />
+                    <span class="inputCheckbox__radio-box"></span>
+                    <span class="inputCheckbox__label">Доставка по&nbsp;Москве до&nbsp;двери (бесплатно при&nbsp;заказе от&nbsp;40&thinsp;000&thinsp;руб)</span>
                 </label>
-                <label>
-                    <input type="radio" id="radio-2" v-model="formData.delivery"
-                        value="Доставка по России до пункта выдачи от 0 до 100 000 руб. в зависимости от зоны доставки (оплата доставки при получении)" />
-                    <span>&emsp;Доставка по России до пункта выдачи от 0 до 100 000 руб. в зависимости от зоны доставки
-                        (оплата доставки при получении)</span>
+                <label class="inputCheckbox">
+                    <input 
+                        class="inputCheckbox__input"
+                        type="radio" 
+                        id="radio-2" 
+                        v-model="formData.delivery"
+                        value="Доставка по России до пункта выдачи от 0 до 100 000 руб. в зависимости от зоны доставки (оплата доставки при получении)" 
+                    />
+                    <span class="inputCheckbox__radio-box"></span>
+                    <span class="inputCheckbox__label">Доставка по&nbsp;России до&nbsp;пункта выдачи от&nbsp;0 до&nbsp;100&thinsp;000&thinsp;руб. в&nbsp;зависимости от&nbsp;зоны доставки
+                        (оплата доставки при&nbsp;получении)</span>
                 </label>
-                <label>
-                    <input type="radio" id="radio-3" v-model="formData.delivery"
-                        value="Доставка по России до двери в зависимости от зоны доставки" />
-                    <span>&emsp;Доставка по России до двери в зависимости от зоны доставки</span>
+                <label class="inputCheckbox">
+                    <input 
+                        class="inputCheckbox__input"
+                        type="radio" 
+                        id="radio-3" 
+                        v-model="formData.delivery"
+                        value="Доставка по России до двери в зависимости от зоны доставки" 
+                    />
+                    <span class="inputCheckbox__radio-box"></span>
+                    <span class="inputCheckbox__label">Доставка по&nbsp;России до&nbsp;двери в&nbsp;зависимости от&nbsp;зоны доставки</span>
                 </label>
             </fieldset>
+            <div class="form__footer">
+                <button 
+                    @click="buy"
+                    type="submit" 
+                    class="button button_size-large button_fullwidth"
+                    :disabled="status === 'sending' || Object.values($cartItems).length === 0"
+                >
+                    <!-- Оплатить -->{{priceWithRouble($totalPrice)}}
+                </button>
+            </div>
         </form>
-
-        <button @click="buy" class="button button_size-large button_fullwidth"
-            :disabled="status === 'sending' || Object.values($cartItems).length === 0">
-            <!-- Оплатить -->{{priceWithRouble($totalPrice)}}
-        </button>
     </div>
 </template>
 
@@ -379,15 +403,21 @@ select {
     padding-right: var(--30px);
 }
 
-form {
-    margin-bottom: var(--45px);
+.form {
+    margin: 0;
+}
+.form__footer {
+    margin-top: var(--45px);
 }
 fieldset {
-    background-color: #050611;
+    background-color: var(--color-bg-black);
     border: none;
     border-left: calc(var(--4px) /2) solid var(--color-product);
     padding: var(--30px) var(--30px) var(--60px);
     margin-bottom: var(--15px);
+}
+fieldset:last-child {
+    margin-bottom: 0;
 }
 legend {
     font-size: var(--text-font-size);
@@ -413,23 +443,78 @@ input {
     color: var(--color-white);
     width: 100%;
     margin-bottom: var(--30px);
+    border-radius: var(--4px);
+}
+input:last-child {
+    margin-bottom: 0;
 }
 input::placeholder {
     color: var(--text-color);
 }
-input[type=radio] {
-    width: auto;
-    margin: 0;
-    padding: 0;
-    vertical-align: middle;
-}
-label {
-    display: block;
+
+.inputCheckbox {
+    display: flex;
+    align-items: center;
+    gap: var(--15px);
+    cursor: pointer;
     margin-bottom: var(--30px);
     padding: var(--15px) calc(var(--1px) * 20);
+    border-radius: var(--4px);
     background: #25282B;
+}
+.inputCheckbox:last-child {
+    margin-bottom: 0;
+}
+
+.inputCheckbox__label {
     line-height: 1.4;
 }
+.inputCheckbox__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+}
+.inputCheckbox__radio-box {
+    flex-shrink: 0;
+    position: relative;
+    width: calc(var(--1px) * 24);
+    height: calc(var(--1px) * 24);
+    background-color: var(--color-bg-black);
+    border: var(--1px) solid var(--color-stroke-grey);
+    border-radius: var(--30px);
+    color: transparent;
+}
+.inputCheckbox__radio-box::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(var(--1px) * 10);
+    height: calc(var(--1px) * 10);
+    border-radius: var(--15px);
+    background-color: currentColor;
+}
+/* Checked */
+.inputCheckbox__input:checked + .inputCheckbox__radio-box {
+    background-color: transparent;
+    color: var(--color-product);
+    border-color: currentColor;
+}
+/* Focused */
+.inputCheckbox__input:focus-visible + .inputCheckbox__radio-box {
+    box-shadow: 0 0 0 var(--1px) var(--color-white);
+}
+/* Disabled */
+.inputCheckbox__input:disabled + .inputCheckbox__radio-box {
+    background-color: var(--color-bg-disabled);
+}
+.inputCheckbox__input:checked:disabled + .inputCheckbox__radio-box {
+    background-color: var(--color-bg-disabled);
+}
+
 .total {
     text-align: right;
     font-size: var(--text-font-size);
