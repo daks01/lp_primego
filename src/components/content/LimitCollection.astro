@@ -6,26 +6,35 @@ import imgRoyal from "/src/assets/img/limit-collection/royal.png";
 import Section from "../ui/Section.astro";
 import ProductPriceFromApi from "./ProductPriceFromApi.astro";
 import { productOptMap } from "../../utils/product-list";
-
 ---
+
 <Section class="section">
 	<div class="limit">
 		<div class="limit-header">
-			<StarTrekText as="h4" class="limit-header__title" id="nav-title">
-				лимитированные коллекции
-			</StarTrekText>
-			<p>Уникальный стиль под уникальных людей</p>
+		<StarTrekText as="h4" class="limit-header__title" id="nav-title">
+			лимитированные коллекции
+		</StarTrekText>
+		<p>Уникальный стиль под уникальных людей</p>
 		</div>
 		<nav aria-labeledby="nav-title">
 			<ul class="menu">
 				<li class="menu__item">
 					<a href="empire" class="menu__link card">
 						<div class="card__left">
-							<StarTrekText title="Империя" class="card__title" as="span" style="color: var(--color-product-empire)">
+							<span class="card__subtitle">Непобедимый стиль</span>
+							<StarTrekText
+								title="Империя"
+								class="card__title card__title_scale"
+								as="span"
+								style="color: var(--color-product-empire)"
+							>
 								{productOptMap.empire.name}
 							</StarTrekText>
-							<span class="card__subtitle">Непобедимый стиль</span>
-							<button class="read-more">Подробнее</button>
+							<div>
+								<span class="read-more">
+									Купить <ProductPriceFromApi sku={productOptMap.empire.sku} />
+								</span>
+							</div>
 						</div>
 						<div class="card__right">
 							<Image
@@ -36,20 +45,26 @@ import { productOptMap } from "../../utils/product-list";
 								loading="lazy"
 								class="card__img"
 							/>
-							<span class="card__price">
-								<ProductPriceFromApi sku={productOptMap.empire.sku}/>
-							</span>
 						</div>
 					</a>
 				</li>
 				<li class="menu__item">
 					<a href="royal" class="menu__link card">
 						<div class="card__left">
-							<StarTrekText title="Рояль" class="card__title" as="span" style="color: var(--color-product-royal)">
+							<span class="card__subtitle">Уникальный стиль</span>
+							<StarTrekText
+								title="Рояль"
+								class="card__title"
+								as="span"
+								style="color: var(--color-product-royal)"
+							>
 								{productOptMap.royal.name}
 							</StarTrekText>
-							<span class="card__subtitle">Уникальный стиль</span>
-							<button class="read-more">Подробнее</button>
+							<div>
+								<span class="read-more">
+									Купить <ProductPriceFromApi sku={productOptMap.royal.sku} />
+								</span>
+							</div>
 						</div>
 						<div class="card__right">
 							<Image
@@ -60,9 +75,6 @@ import { productOptMap } from "../../utils/product-list";
 								loading="lazy"
 								class="card__img"
 							/>
-							<span class="card__price">
-								<ProductPriceFromApi sku={productOptMap.royal.sku}/>
-							</span>
 						</div>
 					</a>
 				</li>
@@ -72,192 +84,180 @@ import { productOptMap } from "../../utils/product-list";
 </Section>
 
 <style>
-	.section {
-		background-color: #0E0205;
-		min-height: auto !important;
-	}
-	.limit {
-		margin-bottom: var(--90px);
-	}
-	.limit-header {
-		text-align: center;
-		margin-top: 0;
-	}
-	.limit-header__title {
-		font-size: calc(var(--1px) * 80);
-		margin-top: 0;
-	}
-	.menu {
-		margin: calc(var(--30px) * -1) 0 0;
-		padding: 0;
-		display: flex;
-		justify-content: space-around;
-	}
-	.menu__item {
-		list-style-type: none;
-		padding: 0;
-		margin: 0 0 var(--90px);
-		flex-basis: 36%;
-	}
-	.menu__link {
-		text-decoration: none;
-		color: var(--text-color);
-	}
-	.card {
-		display: flex;
-		justify-content: space-between;
-		padding: calc(var(--1px) * 20) 0 calc(var(--1px) * 25) calc(var(--1px) * 50);
-		position: relative;
-		z-index: 1;
-		&:before,
-		&:after {
-			content: '';
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			top: 0;
-			left: 0;
-		}
-		&::before {
-			background: linear-gradient(267.46deg, #8C1630 1.33%, var(--color-black) 97.51%);
-			clip-path: polygon(6% 0, 100% 0%, 100% 100%, 0 100%, 0 13%);
-			z-index: -1;
-		}	
-		&::after {
-			border-radius: 100%;
-			transform: rotate(-13.75deg);
-			background: transparent;
-			mix-blend-mode: hard-light;
-			filter: blur(100px);
-			z-index: -2;
-			transition: background-color ease .5s;
-		}
-		&:hover {
-			&::after {
-				background-color: rgba(252, 20, 71, 0.35);
-			}
-			.card__title:after {
-				opacity: .15;
-			}
-			.card__img {
-				transform: rotate(-4deg) scale(1.1);
-			}
-		}	
-	}
-	.card__left {
-		font-size: var(--heading-4);
-	}
-	.card__right {
-		color: var(--text-color);
-		transform: translate(var(--30px), var(--45px));
-		margin-bottom: calc(var(--45px)* -1);
-		position: relative;
-	}
+  .section {
+    background-color: #0e0205;
+    min-height: auto !important;
+  }
+  .limit {
+    margin-bottom: var(--90px);
+  }
+  .limit-header {
+    text-align: center;
+    margin-top: 0;
+  }
+  .limit-header__title {
+    font-size: calc(var(--1px) * 80);
+    margin-top: 0;
+  }
+  .menu {
+    margin: calc(var(--30px) * -1) 0 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: calc(var(--1px) * 140);
+  }
+  .menu__item {
+    list-style-type: none;
+    padding: 0;
+    margin: 0 0 var(--90px);
+    flex-basis: 32%;
+  }
+  .menu__link {
+    text-decoration: none;
+    color: var(--text-color);
+  }
+  .card {
+    display: flex;
+    justify-content: space-between;
+    padding: calc(var(--1px) * 20) 0 calc(var(--1px) * 25) calc(var(--1px) * 55);
+    position: relative;
+    z-index: 1;
+    &:before,
+    &:after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+    }
+    &::before {
+      background: linear-gradient(
+        267.46deg,
+        #8c1630 1.33%,
+        var(--color-black) 97.51%
+      );
+      clip-path: polygon(6% 0, 100% 0%, 100% 100%, 0 100%, 0 13%);
+      z-index: -1;
+    }
+    &::after {
+      border-radius: 100%;
+      transform: rotate(-13.75deg);
+      background-color: rgba(252, 20, 71, 0.35);
+      mix-blend-mode: hard-light;
+      filter: blur(100px);
+      z-index: -2;
+      transition: background-color ease 0.5s;
+    }
+    &:hover {
+      .card__img {
+        transform: rotate(-19deg) scale(1.2) translateY(-10%);
+      }
+      &:after {
+        background-color: rgba(252, 20, 71, 0.55);
+      }
+    }
+  }
+  .card__left {
+    font-size: var(--heading-4);
+    display: flex;
+    flex-direction: column;
+  }
+  .card__right {
+    position: relative;
+  }
 
-	.card__img {
-		position: absolute;
-		bottom: var(--90px);
-		left: calc(var(--15px) * -1);
-		width: calc(var(--1px) * 270);
-		max-width: none;
-		transition: transform ease .5s;
-	}
-	.card__title {
-		font-size: calc(var(--1px) * 128);
-		margin-bottom: calc(var(--1px) * 20);
-		display: block;
-		&::after {
-			content: attr(title);
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			font-size: calc(var(--1px)* 370);
-			line-height: 0.55;
-			color: var(--color-product);
-			clip-path: polygon(6% 0, 100% 0%, 100% 100%, 0 100%, 0 13%);
-			opacity: 0;
-			z-index: -1;
-			pointer-events: none;
-			transition: opacity ease .5s;
-		}
-	}
-	.card__subtitle {
-		font-weight: 600;
-	}
-	.card__price {
-		display: flex;
-		align-items: flex-end;
-		justify-content: center;
-		font-weight: 600;
-		font-size: calc(var(--1px) * 32);
-		padding: calc(var(--1px) * 25) var(--15px);
-		background-color: var(--color-product);
-	
-		color: var(--text-color);
-		white-space: nowrap;
-		min-width: calc(var(--1px) * 190);
-		min-height: calc(var(--1px) * 180);
-	}
-	.read-more {
-		background-color: rgba(175,175,175,.13);
-		border: none;
-		padding: var(--8px) calc(var(--1px)* 24);
-		color: var(--color-product);
-		font-weight: 600;
-		font-size: var(--small-font-size);
-		border-radius: var(--4px);
-		display: none;
-	}
+  .card__img {
+    right: calc(var(--60px) * -1);
+    max-width: none;
+    position: absolute;
+    top: calc(var(--30px) * -1);
+    width: calc(var(--1px) * 300);
+    transform: rotate(-8deg);
+    transition: transform ease 0.1s;
+  }
+  .card__title {
+    font-size: calc(var(--1px) * 128);
+    margin-bottom: calc(var(--1px) * 32);
+    display: block;
+    &::after {
+      content: attr(title);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      font-size: calc(var(--1px) * 414);
+      line-height: 0.58;
+      color: var(--color-product);
+      clip-path: polygon(6% 0%, 100% 0%, 100% 100%, 0 100%, 0 13%);
+      opacity: 0.15;
+      z-index: -1;
+      pointer-events: none;
+      transition: opacity ease 0.5s;
+    }
+  }
+  .card__title_scale::after {
+    clip-path: polygon(8% 0%, 130% 0%, 130% 100%, 0 100%, 0 13%);
+    transform: scale(0.77, 1);
+    transform-origin: left;
+  }
+  .card__subtitle {
+    font-weight: 600;
+    margin-bottom: calc(var(--1px) * 10);
+  }
+  .read-more {
+    display: inline-block;
+    background-color: var(--color-product-primego);
+    border: none;
+    padding: calc(var(--1px) * 14) calc(var(--1px) * 32);
+    color: var(----color-white);
+    font-weight: 600;
+    font-size: var(--small-font-size);
+    border-radius: var(--4px);
+  }
 
-	@media screen and (max-width: 1023px) {
-		.limit {
-			margin-bottom: 0;
-		}
-		.limit-header__title {
-			font-size: var(--heading-1);
-			line-height: .72;;
-		}
-		.menu {
-			flex-direction: column;
-			margin: 0 calc(var(--gutter) * -1);
-		}
-		.menu__item {
-			margin: 0 0 var(--60px);
-			flex-basis: 100%;
-		}
-		.card {
-			padding: calc(var(--1px)* 10) var(--gutter);
-		}
-		.card__title {
-			font-size: calc(var(--1px)* 48);
-			margin-bottom: var(--15px);
-		}
-		.card__right {
-			margin-bottom: 0;
-			transform: translate(0, var(--30px));
-		}
-		.card__img {
-			bottom: var(--45px);
-			left: auto;
-			right: calc(var(--1px)* -20);
-			width: calc(var(--1px)* 140);
-		}
-		.card__price {
-			font-size: var(--text-font-size);
-			font-weight: 600;
-			min-height: calc(var(--1px)* 90);
-			min-width: calc(var(--1px)* 90);
-			padding: var(--15px) var(--8px);
-			border-radius: var(--4px);
-		}
-		.card__subtitle {
-			display: none;
-		}
-		.read-more {
-			display: inline-block;
-		}
-
-	}
+  @media screen and (max-width: 1023px) {
+    .limit {
+      margin-bottom: 0;
+    }
+    .limit-header__title {
+      font-size: var(--heading-1);
+      line-height: 0.72;
+    }
+    .menu {
+      flex-direction: column;
+      margin: 0 calc(var(--gutter) * -1);
+      gap: var(--30px);
+    }
+    .menu__item {
+      margin: 0;
+      flex-basis: 100%;
+    }
+    .card {
+      padding: calc(var(--1px) * 10) var(--gutter);
+    }
+    .card__title {
+      font-size: calc(var(--1px) * 48);
+      margin-bottom: var(--15px);
+      &::after {
+        font-size: calc(var(--1px) * 188);
+      }
+    }
+    .card__right {
+      margin-bottom: 0;
+      transform: translate(0, var(--30px));
+    }
+    .card__img {
+      bottom: var(--45px);
+      left: auto;
+      right: calc(var(--1px) * -20);
+      width: calc(var(--1px) * 140);
+    }
+    .card__subtitle {
+      display: none;
+    }
+    .read-more {
+    }
+  }
 </style>
