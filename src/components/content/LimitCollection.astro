@@ -145,7 +145,7 @@ import { productOptMap } from "../../utils/product-list";
       transform: rotate(-13.75deg);
       background-color: rgba(252, 20, 71, 0.35);
       mix-blend-mode: hard-light;
-      filter: blur(100px);
+      filter: blur(var(--90px));
       z-index: -2;
       transition: background-color ease 0.5s;
     }
@@ -180,6 +180,7 @@ import { productOptMap } from "../../utils/product-list";
     font-size: calc(var(--1px) * 128);
     margin-bottom: calc(var(--1px) * 32);
     display: block;
+	  /* bg text */
     &::after {
       content: attr(title);
       position: absolute;
@@ -227,37 +228,38 @@ import { productOptMap } from "../../utils/product-list";
     }
     .menu {
       flex-direction: column;
-      margin: 0 calc(var(--gutter) * -1);
-      gap: var(--30px);
+      margin: var(--45px) calc(var(--gutter) * -1);
+      gap: var(--45px);
     }
     .menu__item {
       margin: 0;
       flex-basis: 100%;
     }
     .card {
-      padding: calc(var(--1px) * 10) var(--gutter);
+      padding: calc(var(--1px) * 10) 0 var(--15px) var(--30px);
     }
     .card__title {
-      font-size: calc(var(--1px) * 48);
+      font-size: calc(var(--1px) * 64);
       margin-bottom: var(--15px);
+	  /* bg text */
       &::after {
-        font-size: calc(var(--1px) * 188);
+        font-size: calc(var(--1px) * 240);
       }
     }
     .card__right {
       margin-bottom: 0;
-      transform: translate(0, var(--30px));
+      transform: none;
     }
     .card__img {
-      bottom: var(--45px);
-      left: auto;
-      right: calc(var(--1px) * -20);
-      width: calc(var(--1px) * 140);
+      top: calc(var(--1px) * 10);
+	  right: var(--4px);
+      width: calc(var(--1px) * 135);
     }
     .card__subtitle {
-      display: none;
+	  font-size: var(--small-font-size);
     }
     .read-more {
+		padding: calc(var(--1px) * 8) var(--15px);
     }
   }
 </style>
