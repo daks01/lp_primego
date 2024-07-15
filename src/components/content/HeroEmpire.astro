@@ -5,7 +5,7 @@ import BackgroundText from "../ui/BackgroundText.astro";
 import BackButton from "../ui/BackButton.astro";
 import BuyButton from "../ui/BuyButton.astro";
 import ProductPriceFromApi from "../content/ProductPriceFromApi.astro";
-import { Image } from 'astro:assets';
+import { Image } from "astro:assets";
 import imageSneakers from "/src/assets/img/hero-slider/single-empire.png";
 
 const { backgroundImage, sku } = Astro.props;
@@ -14,27 +14,34 @@ const { backgroundImage, sku } = Astro.props;
 <Section backgroundImage={backgroundImage}>
 	<BackgroundText>Primego</BackgroundText>
 	<div class="hero">
-		<BackButton href="./../"></BackButton>
-		<StarTrekText as="h1" class="page-title">ИМПЕРИЯ</StarTrekText>
+		<BackButton href="./../" />
+		<StarTrekText as="h1" class="page-title">ИМПЕРИУМ</StarTrekText>
 		<div>
 			<p class="lead">Герб Российской Империи</p>
 			<p>
-				Непревзойденные качества и&nbsp;технологии, исключительный комфорт, ультрасовременный стиль непобедимой Российской Империи
+				Непревзойденные качества и&nbsp;технологии, исключительный
+				комфорт, ультрасовременный стиль непобедимой Российской Империи
 			</p>
 			<p class="display-mobile-none price">
 				<span class="h3">
-					<ProductPriceFromApi sku={sku}/>
+					<ProductPriceFromApi sku={sku} />
 				</span>
 			</p>
-			<Image src={imageSneakers} alt="" role="presentation" class="hero__image" loading="lazy" />
+			<Image
+				src={imageSneakers}
+				alt=""
+				role="presentation"
+				class="hero__image"
+				loading="lazy"
+			/>
 			<BuyButton
 				sku={sku}
 				color="var(--color-product-empire)"
 				img={imageSneakers.src}
 			/>
 		</div>
+	</div>
 </Section>
-
 <style lang="scss">
 	.page-title {
 		margin-bottom: var(--90px);
@@ -45,9 +52,9 @@ const { backgroundImage, sku } = Astro.props;
 		margin-bottom: calc(var(--1px) * 150);
 	}
 	.hero__image {
-		bottom: calc(var(--1px)* 270);
+		bottom: calc(var(--1px) * 270);
 		position: absolute;
-		width: calc(var(--1px)* 785);
+		width: calc(var(--1px) * 785);
 		left: 50%;
 	}
 	.price {

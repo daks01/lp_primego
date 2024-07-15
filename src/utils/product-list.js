@@ -4,7 +4,7 @@ export const productOptMap = {
         sku: 'RL24',
     },
     empire: {
-        name: 'Империя',
+        name: 'ИМПЕРИУМ',
         sku: 'EM24'
     },
 };
