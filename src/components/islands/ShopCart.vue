@@ -137,10 +137,10 @@
                         id="radio-1" 
                         v-model="formData.delivery" 
                         checked
-                        value="Доставка по Москве до двери (бесплатно при заказе от 40 000)" 
+                        value="Курьерская доставка до двери (Москва и Санкт Петербург)" 
                     />
                     <span class="inputCheckbox__radio-box"></span>
-                    <span class="inputCheckbox__label">Доставка по&nbsp;Москве до&nbsp;двери (бесплатно при&nbsp;заказе от&nbsp;40&thinsp;000&thinsp;руб)</span>
+                    <span class="inputCheckbox__label">Курьерская доставка до&nbsp;двери (Москва и&nbsp;Санкт&nbsp;Петербург)</span>
                 </label>
                 <label class="inputCheckbox">
                     <input 
@@ -148,11 +148,10 @@
                         type="radio" 
                         id="radio-2" 
                         v-model="formData.delivery"
-                        value="Доставка по России до пункта выдачи от 0 до 100 000 руб. в зависимости от зоны доставки (оплата доставки при получении)" 
+                        value="СДЭК (доставка по России)" 
                     />
                     <span class="inputCheckbox__radio-box"></span>
-                    <span class="inputCheckbox__label">Доставка по&nbsp;России до&nbsp;пункта выдачи от&nbsp;0 до&nbsp;100&thinsp;000&thinsp;руб. в&nbsp;зависимости от&nbsp;зоны доставки
-                        (оплата доставки при&nbsp;получении)</span>
+                    <span class="inputCheckbox__label">СДЭК (доставка по&nbsp;России)</span>
                 </label>
                 <label class="inputCheckbox">
                     <input 
@@ -160,10 +159,10 @@
                         type="radio" 
                         id="radio-3" 
                         v-model="formData.delivery"
-                        value="Доставка по России до двери в зависимости от зоны доставки" 
+                        value="БОКСБЕРРИ (Доставка по России)" 
                     />
                     <span class="inputCheckbox__radio-box"></span>
-                    <span class="inputCheckbox__label">Доставка по&nbsp;России до&nbsp;двери в&nbsp;зависимости от&nbsp;зоны доставки</span>
+                    <span class="inputCheckbox__label">БОКСБЕРРИ (Доставка по&nbsp;России)</span>
                 </label>
             </fieldset>
             <div class="form__footer">
@@ -173,7 +172,9 @@
                     class="button button_size-large button_fullwidth"
                     :disabled="status === 'sending' || Object.values($cartItems).length === 0"
                 >
-                    <!-- Оплатить -->{{priceWithRouble($totalPrice)}}
+                    <!-- Оплатить -->
+                    <!-- {{priceWithRouble($totalPrice)}} -->
+                    Заказать
                 </button>
             </div>
         </form>
