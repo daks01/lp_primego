@@ -7,9 +7,9 @@ import HeroRoyal from "../components/content/HeroRoyal.astro";
 import NanoTextiles from "../components/content/NanoTextiles.astro";
 import Convection from "../components/content/Convection.astro";
 import FootShape from "../components/content/FootShape.astro";
-import MobileApp from "../components/content/MobileApp.astro";
-import Customization from "../components/content/Customization.astro";
-import Innovation from "../components/content/Innovation.astro";
+// import MobileApp from "../components/content/MobileApp.astro";
+// import Customization from "../components/content/Customization.astro";
+// import Innovation from "../components/content/Innovation.astro";
 import Faq from "../components/content/Faq.astro";
 import MadeInRussia from "../components/content/MadeInRussia.astro";
 
@@ -19,10 +19,10 @@ import imageNano from '/src/assets/img/nano-textiles/FFFFFF.png';
 import backgroundConvection from "/src/assets/img/bg/FFFFFF/3.jpg";
 import imageConvection from '/src/assets/img/convection/sneaker_FFFFFF.svg';
 import backgroundShape from "/src/assets/img/bg/FFFFFF/4.jpg";
-import backgroundMobileApp from "/src/assets/img/bg/FFFFFF/5.jpg";
-import backgroundCustom from "/src/assets/img/bg/FFFFFF/6.jpg";
-import imageCustomSneaker from '/src/assets/img/customization/Sneaker-FFFFFF.png';
-import backgroundInnovation from "/src/assets/img/bg/FFFFFF/7.jpg";
+// import backgroundMobileApp from "/src/assets/img/bg/FFFFFF/5.jpg";
+// import backgroundCustom from "/src/assets/img/bg/FFFFFF/6.jpg";
+// import imageCustomSneaker from '/src/assets/img/customization/Sneaker-FFFFFF.png';
+// import backgroundInnovation from "/src/assets/img/bg/FFFFFF/7.jpg";
 import backgroundMadeIn from "/src/assets/img/bg/FFFFFF/8.jpg";
 import backgroundFooter from "/src/assets/img/bg/FFFFFF/10.jpg";
 import { productOptMap } from "../utils/product-list"
@@ -45,11 +45,11 @@ const productSKU = productOptMap.royal.sku;
 	<main>
 		<HeroRoyal backgroundImage={backgroundHero} sku={productSKU}/>
 		<NanoTextiles backgroundImage={backgroundNano} mainImage={imageNano}/>
-		<Convection backgroundImage={backgroundConvection} mainImage={imageConvection}/>
 		<FootShape backgroundImage={backgroundShape}/>
-		<MobileApp backgroundImage={backgroundMobileApp}/>
+		<Convection backgroundImage={backgroundConvection} mainImage={imageConvection}/>
+		<!-- <MobileApp backgroundImage={backgroundMobileApp}/>
 		<Customization backgroundImage={backgroundCustom} mainImage={imageCustomSneaker}/>
-		<Innovation backgroundImage={backgroundInnovation}/>
+		<Innovation backgroundImage={backgroundInnovation}/> -->
 		<Faq/>
 		<MadeInRussia backgroundImage={backgroundMadeIn}/>
 	</main>
