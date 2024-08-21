@@ -1,0 +1,17 @@
+pre-commit:
+  parallel: true
+  commands:
+    eslint:
+      root: "src"
+      glob: "*.{js,ts,astro,json}"
+      run: |
+        npx prettier --log-level error --write {staged_files}
+        npx eslint --fix --quiet {staged_files}
+      stage_fixed: true
+    stylelint:
+      root: "src"
+      glob: "*.{css,astro}"
+      run: |
+        npx prettier --log-level error --write {staged_files}
+        npx stylelint --fix --quiet {staged_files}
+      stage_fixed: true
