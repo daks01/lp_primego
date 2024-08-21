@@ -62,9 +62,14 @@
     --color-product-active: var(--color-product-primego-active);
     --button-text-color: var(--color-white);
 
+    --button-main-style-secondary-bg-default: #AFAFAF21;
+    --button-main-style-secondary-bg-hover: #AFAFAF33;
+    --button-main-style-secondary-bg-active: #AFAFAF33;
+
     --text-color: var(--color-white);
     --text-product: var(--color-product);
     --text-lead: var(--color-white);
+    --text-light-grey: #C9C8D3;
 }
 
 @media screen and (max-width: 1023px) {

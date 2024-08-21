@@ -1,130 +1,175 @@
 ---
 import StarTrekText from "../ui/StarTrekText.astro";
 import Button from "../ui/Button.astro";
+import Dialog from "../ui/Dialog.astro";
+import DeliveryText from "./DeliveryText.astro";
 ---
+
 <!-- 
 	ToDo сделать отправку типа такой
 	https://rameezimdad.blogspot.com/2023/09/conatct-form-data-to-google-sheet-and.html 
 -->
 <div data-animate id="order">
-	<StarTrekText as="h2" class="h1 title" id="form-title">
-		Связаться с нами
-	</StarTrekText>
-	<p class="subtitle" id="form-subtitle">
-		Мы можем вам помочь с&nbsp;выбором модели <br />
-		и&nbsp;оформлением заказа
-	</p>
-	<form action="/order.php" data-contact-form class="form" aria-labelledby="form-title" aria-describedby="form-subtitle" novalidate>
-		<input type="hidden" name="email" />
-		<div class="form__layout">
-			<div class="form__row form__row_half">
-				<label for="form-name" class="sr-only">Имя</label>
-				<input id="form-name" name="name" type="text" placeholder="Имя" class="form-field"/>
-				<span class="form-field__error" data-field-error></span>
-			</div>
-			<div class="form__row form__row_half">
-				<label for="form-name" class="sr-only">Почта</label>
-				<input id="form-email" name="liame" type="email" placeholder="Почта" class="form-field" required/>
-				<span class="form-field__error" data-field-error></span>
-			</div>
-			<div class="form__row">
-				<label for="form-question" class="sr-only">Текст сообщения</label>
-				<textarea 
-					id="form-question" 
-					name="message"
-					minlength="0"
-					maxlength="100" 
-					data-textarea 
-					placeholder="Текст сообщения" 
-					class="form-field" 
-					rows="5"
-					required
-				></textarea>
-				<span class="form-field__error" data-field-error></span>
-				<span class="form-field__description" data-textarea-counter>1/100</span>
-			</div>
-			<div class="form__row form__row_submit">
-				<Button type="submit" data-animate>Отправить</Button>
-				<p role="alert" aria-live="polite" data-form-msg class="form_submit-message"></p>
-			</div>
-		</div>
-	</form>
+  <StarTrekText as="h2" class="h1 title" id="form-title">
+    Связаться с нами
+  </StarTrekText>
+  <p class="subtitle" id="form-subtitle">
+    Мы можем вам помочь с&nbsp;выбором модели и&nbsp;оформлением заказа
+    <br />
+    <br />
+    <button
+      class="link"
+      type="button"
+      onclick={`window["dialog-delivery"]?.showModal()`}
+    >
+      Условия доставки и оплаты
+    </button>
+  </p>
+  <Dialog id="dialog-delivery" title="Условия доставки и оплаты" width={985}>
+    <DeliveryText />
+    <Button 
+		class="button_type-secondary button_fullwidth" 
+		onclick={`window["dialog-delivery"]?.close()`}
+    >
+		Назад
+	</Button>
+  </Dialog>
+  <form
+    action="/order.php"
+    data-contact-form
+    class="form"
+    aria-labelledby="form-title"
+    aria-describedby="form-subtitle"
+    novalidate
+  >
+    <input type="hidden" name="email" />
+    <div class="form__layout">
+      <div class="form__row form__row_half">
+        <label for="form-name" class="sr-only">Имя</label>
+        <input
+          id="form-name"
+          name="name"
+          type="text"
+          placeholder="Имя"
+          class="form-field"
+        />
+        <span class="form-field__error" data-field-error></span>
+      </div>
+      <div class="form__row form__row_half">
+        <label for="form-name" class="sr-only">Почта</label>
+        <input
+          id="form-email"
+          name="liame"
+          type="email"
+          placeholder="Почта"
+          class="form-field"
+          required
+        />
+        <span class="form-field__error" data-field-error></span>
+      </div>
+      <div class="form__row">
+        <label for="form-question" class="sr-only">Текст сообщения</label>
+        <textarea
+          id="form-question"
+          name="message"
+          minlength="0"
+          maxlength="100"
+          data-textarea
+          placeholder="Текст сообщения"
+          class="form-field"
+          rows="5"
+          required></textarea>
+        <span class="form-field__error" data-field-error></span>
+        <span class="form-field__description" data-textarea-counter>1/100</span>
+      </div>
+      <div class="form__row form__row_submit">
+        <Button type="submit" data-animate>Отправить</Button>
+        <p
+          role="alert"
+          aria-live="polite"
+          data-form-msg
+          class="form_submit-message"
+        >
+        </p>
+      </div>
+    </div>
+  </form>
 </div>
 
 <script>
-    import { apiUrl } from '../../utils/routes';
+  import { apiUrl } from "../../utils/routes";
 
-	document.addEventListener("DOMContentLoaded", () => {
-		sendContactForm();
-		countTextaria();
-	});
+  document.addEventListener("DOMContentLoaded", () => {
+    sendContactForm();
+    countTextaria();
+  });
 
-	// https://seoneurons.com/create-contact-us-page/
-	function sendContactForm() {
-		const formEl = document.querySelector("[data-contact-form]");
-		const actionMessage = document.querySelector('[data-form-msg]');
+  // https://seoneurons.com/create-contact-us-page/
+  function sendContactForm() {
+    const formEl = document.querySelector("[data-contact-form]");
+    const actionMessage = document.querySelector("[data-form-msg]");
 
-		formEl?.addEventListener('submit', (e) => {
-			e.preventDefault();
+    formEl?.addEventListener("submit", (e) => {
+      e.preventDefault();
 
-			validateForm();
+      validateForm();
 
-			if (!formEl.checkValidity()) {
-				// formEl.reportValidity();
+      if (!formEl.checkValidity()) {
+        // formEl.reportValidity();
 
-				return;
-			}
+        return;
+      }
 
-			const formData = new FormData(e.target);
-			const fetchBody = {
-				name: formData.get('name'),
-				email: formData.get('liame'),
-				message: formData.get('message'),
-				url: location.href
-			}
+      const formData = new FormData(e.target);
+      const fetchBody = {
+        name: formData.get("name"),
+        email: formData.get("liame"),
+        message: formData.get("message"),
+        url: location.href,
+      };
 
-			fetch(apiUrl.contact, { 
-				redirect: "follow",
-				method: "POST",
-				headers: {
-					"Content-Type": "text/plain;charset=utf-8",
-				},
-				body: JSON.stringify(fetchBody)
-			})
-			.then(response => {
-				if (!response.ok) {
-					actionMessage.innerHTML = `
+      fetch(apiUrl.contact, {
+        redirect: "follow",
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8",
+        },
+        body: JSON.stringify(fetchBody),
+      })
+        .then((response) => {
+          if (!response.ok) {
+            actionMessage.innerHTML = `
 						❗ При отправке возникли проблемы.<br> Попробуйте позже
 					`;
-					throw new Error('Network error');
-				}
-				return response.json();
-			})
-			.then((response) => {
-				if (response.result === 'success') {
-					actionMessage.innerHTML = `
+            throw new Error("Network error");
+          }
+          return response.json();
+        })
+        .then((response) => {
+          if (response.result === "success") {
+            actionMessage.innerHTML = `
 						✅ Отправлено.
 					`;
-					formEl.reset();
-				} else if (response.result === 'error') {
-					actionMessage.innerHTML = `
+            formEl.reset();
+          } else if (response.result === "error") {
+            actionMessage.innerHTML = `
 						❗ При отправке возникли проблемы.<br> Попробуйте позже
 					`;
-					throw new Error(response.error);
-				}
-			})
-			.catch((error) => {
-				actionMessage.innerHTML = `
+            throw new Error(response.error);
+          }
+        })
+        .catch((error) => {
+          actionMessage.innerHTML = `
 					❗ При отправке возникли проблемы.<br> Попробуйте позже
 				`;
-				console.error(error);
-			});	
-		});
-	}
+          console.error(error);
+        });
+    });
+  }
 
-	function validateForm() {
-		const formEl = document.querySelector("[data-contact-form]");
-		const errorSvg = `
+  function validateForm() {
+    const formEl = document.querySelector("[data-contact-form]");
+    const errorSvg = `
 			<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<g clip-path="url(#clip0_7_1104)">
 					<path d="M7.99967 14.6666C11.6816 14.6666 14.6663 11.6818 14.6663 7.99992C14.6663 4.31802 11.6816 1.33325 7.99967 1.33325C4.31778 1.33325 1.33301 4.31802 1.33301 7.99992C1.33301 11.6818 4.31778 14.6666 7.99967 14.6666Z" stroke="#FC1447" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
@@ -138,153 +183,160 @@ import Button from "../ui/Button.astro";
 				</defs>
 			</svg>`;
 
-		formEl?.querySelectorAll(".form-field").forEach((element) => {
-			const errorMsgEl = element?.closest('div')?.querySelector('[data-field-error]');
+    formEl?.querySelectorAll(".form-field").forEach((element) => {
+      const errorMsgEl = element
+        ?.closest("div")
+        ?.querySelector("[data-field-error]");
 
-			if(!element.checkValidity()) {
-				element.classList.add('form-field_error');
-				errorMsgEl.innerHTML = `${errorSvg} ${element?.validationMessage}`;
-				return;
-			} 
+      if (!element.checkValidity()) {
+        element.classList.add("form-field_error");
+        errorMsgEl.innerHTML = `${errorSvg} ${element?.validationMessage}`;
+        return;
+      }
 
-			element.classList.remove('form-field_error');
-			errorMsgEl.innerHTML = '';
-		});
-	}
+      element.classList.remove("form-field_error");
+      errorMsgEl.innerHTML = "";
+    });
+  }
 
-	function countTextaria() {
-		const textarea = document.querySelector("[data-textarea]");
-		const counterEl = document.querySelector("[data-textarea-counter]");
+  function countTextaria() {
+    const textarea = document.querySelector("[data-textarea]");
+    const counterEl = document.querySelector("[data-textarea-counter]");
 
-		textarea?.addEventListener("input", (e) => {
-			render(e);
-		});
-		textarea?.addEventListener("change", (e) => {
-			render(e);
-		});
+    textarea?.addEventListener("input", (e) => {
+      render(e);
+    });
+    textarea?.addEventListener("change", (e) => {
+      render(e);
+    });
 
-		function render(event) {
-			const target = event.currentTarget;
-			const maxLength = target.getAttribute("maxlength");
-			const currentLength = target.value.length;
+    function render(event) {
+      const target = event.currentTarget;
+      const maxLength = target.getAttribute("maxlength");
+      const currentLength = target.value.length;
 
-			counterEl.innerHTML = `${currentLength}/${maxLength}`;
-		}
-	}
+      counterEl.innerHTML = `${currentLength}/${maxLength}`;
+    }
+  }
 </script>
 <style lang="scss">
-	.title {
-		text-align: center;
-		font-size: calc(var(--1px) * 80);
-		line-height: 1.1;
-		margin-bottom: var(--15px);
-	}
-	.subtitle {
-		text-align: center;
-		margin-bottom: var(--60px);
-	}
-	.form {
-		margin: var(--60px) auto var(--120px);
-		max-width: calc(var(--1px) * 706);
-	}
-	.form_submit-message {
-		text-align: center;
-		margin: var(--30px) 0;
-		&:empty {
-			display: none;
-		}
-	}
-	.form__layout {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-	}
-	.form__row {
-		margin-bottom: calc(var(--1px) * 20);
-		width: 100%;
-	}
-	.form__row_half {
-		width: 48%;
-	}
-	.form__row_submit {
-		margin-top: var(--30px);
-		text-align: center;
-	}
+  .title {
+    text-align: center;
+    font-size: calc(var(--1px) * 80);
+    line-height: 1.1;
+    margin-bottom: var(--15px);
+  }
+  .subtitle {
+    text-align: center;
+    margin-bottom: var(--60px);
+  }
+  .link {
+	color: var(--color-product);
+	text-decoration: underline;
+	border: none;
+	background: none;
+	cursor: pointer;
+  }
+  .form {
+    margin: var(--60px) auto var(--120px);
+    max-width: calc(var(--1px) * 706);
+  }
+  .form_submit-message {
+    text-align: center;
+    margin: var(--30px) 0;
+    &:empty {
+      display: none;
+    }
+  }
+  .form__layout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .form__row {
+    margin-bottom: calc(var(--1px) * 20);
+    width: 100%;
+  }
+  .form__row_half {
+    width: 48%;
+  }
+  .form__row_submit {
+    margin-top: var(--30px);
+    text-align: center;
+  }
 
-	.form-field {
-		border: none;
-		background: #25282B;
-		color: var(--text-color);
-		font-weight: 400;
-		font-size: calc(var(--1px) * 16);
-		line-height: 1.5;
-		font-family: inherit;
-		padding: calc(var(--1px) * 16) calc(var(--1px) * 20);
-		width: 100%;
-		border-radius: var(--4px);
-		&:hover {
-			outline: 1px solid #E8E6F8;
-		}
-		&:focus {
-			outline: 1px solid #605DEC;
-		}
-		// &:not(:focus):invalid {
-		// 	outline: 1px solid #FFEAC1;
-		// }
-		&_error {
-			outline: 1px solid #FFD8D8;
-		}
-		&::placeholder {
-			color: var(--text-color);
-		}
-
-	}
-	textarea.form-field {
-		display: block;
-		resize: vertical;
-		min-height: calc(var(--1px) * 140);
-		max-height: calc(var(--1px) * 300);
-	}
-	.form-field__error,
-	.form-field__description {
-		display: flex;
-		align-items: flex-start;
-    	gap: 0.3em;
-		color: #AAAAAA;
-		font-size: var(--extra-small-font-size);
-		margin-top: var(--8px);
-		&:empty {
-			display: none;
-		}
-		& :global(svg) {
-			min-width: calc(var(--1px) * 16);
-		}
-	}
-	@media screen and (max-width: 1023px) {
-		.title {
-			font-size: var(--heading-1);
-			margin-top: var(--60px);
-			margin-bottom: var(--30px);
-			line-height: .72;
-		}
-		.subtitle {
-			margin-bottom: var(--30px);
-		}
-		.form {
-			margin: var(--30px) auto var(--90px);
-		}
-		.form__layout {
-			flex-direction: column;
-		}
-		.form__row {
-			margin-bottom: var(--15px);
-		}
-		.form__row_half {
-			width: 100%;
-		}
-		.form__row_submit {
-			margin-top: var(--15px);
-		}
-
-	}
+  .form-field {
+    border: none;
+    background: #25282b;
+    color: var(--text-color);
+    font-weight: 400;
+    font-size: calc(var(--1px) * 16);
+    line-height: 1.5;
+    font-family: inherit;
+    padding: calc(var(--1px) * 16) calc(var(--1px) * 20);
+    width: 100%;
+    border-radius: var(--4px);
+    &:hover {
+      outline: 1px solid #e8e6f8;
+    }
+    &:focus {
+      outline: 1px solid #605dec;
+    }
+    // &:not(:focus):invalid {
+    // 	outline: 1px solid #FFEAC1;
+    // }
+    &_error {
+      outline: 1px solid #ffd8d8;
+    }
+    &::placeholder {
+      color: var(--text-color);
+    }
+  }
+  textarea.form-field {
+    display: block;
+    resize: vertical;
+    min-height: calc(var(--1px) * 140);
+    max-height: calc(var(--1px) * 300);
+  }
+  .form-field__error,
+  .form-field__description {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.3em;
+    color: #aaaaaa;
+    font-size: var(--extra-small-font-size);
+    margin-top: var(--8px);
+    &:empty {
+      display: none;
+    }
+    & :global(svg) {
+      min-width: calc(var(--1px) * 16);
+    }
+  }
+  @media screen and (max-width: 1023px) {
+    .title {
+      font-size: var(--heading-1);
+      margin-top: var(--60px);
+      margin-bottom: var(--30px);
+      line-height: 0.72;
+    }
+    .subtitle {
+      margin-bottom: var(--30px);
+    }
+    .form {
+      margin: var(--30px) auto var(--90px);
+    }
+    .form__layout {
+      flex-direction: column;
+    }
+    .form__row {
+      margin-bottom: var(--15px);
+    }
+    .form__row_half {
+      width: 100%;
+    }
+    .form__row_submit {
+      margin-top: var(--15px);
+    }
+  }
 </style>

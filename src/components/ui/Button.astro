@@ -46,7 +46,14 @@ const {
 }
 
 .button_type-secondary {
-    padding: calc(var(--1px) * 16);
+    background-color: var(--button-main-style-secondary-bg-default);
+    color: var(--color-product);
+    &:hover {
+        background-color: var(--button-main-style-secondary-bg-hover);
+    }
+    &:active {
+        background-color: var(--button-main-style-secondary-bg-active);
+    }
 }
 
 .button_type-icon {
