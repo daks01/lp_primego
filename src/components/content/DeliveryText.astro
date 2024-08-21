@@ -140,6 +140,7 @@
         border-left: calc(var(--1px) * 2) solid var(--color-product);
         padding: var(--30px) var(--30px) var(--60px);
         margin-bottom: var(--45px);
+        font-size: var(--small-font-size);
     }
     
     .list-with-rounded-numbers {
@@ -151,26 +152,28 @@
         & > li {
             counter-increment: my-awesome-counter;
             margin: 0 0 var(--30px);
+        }
 
-            h5 {
+        & h5 {
+            display: flex;
+            align-items: center;
+            margin: 0 0 var(--30px);
+            font-size: var(--text-font-size);
+            font-weight: 600;
+
+            &::before {
+                content: counter(my-awesome-counter);
+                flex-shrink: 0;
+                color: var(--text-light-grey);
+                border: calc(var(--1px) * 2) solid currentColor;
+                font-size: var(--heading-4);
                 display: flex;
                 align-items: center;
-                margin: 0 0 var(--30px);
-
-                &::before {
-                    content: counter(my-awesome-counter);
-                    font-size: 1.5rem;
-                    color: var(--text-light-grey);
-                    border: calc(var(--1px) * 2) solid currentColor;
-                    font-size: var(--heading-4);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    width: var(--60px);
-                    height: var(--60px);
-                    border-radius: var(--60px);
-                    margin-right: var(--15px);
-                }
+                justify-content: center;
+                width: var(--60px);
+                height: var(--60px);
+                border-radius: var(--60px);
+                margin-right: var(--15px);
             }
         }
 
@@ -181,4 +184,17 @@
         }
     }
 
+    @media screen and (max-width: 1023px) {
+      .article {
+        padding: var(--30px) var(--15px) var(--30px);
+        margin-bottom: var(--30px);
+      }
+      .list-with-rounded-numbers {
+        h5::before {
+            font-size: var(--heading-5);
+            width: var(--30px);
+            height: var(--30px);
+        }
+      }
+    }
 </style>
