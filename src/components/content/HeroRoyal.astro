@@ -1,74 +1,79 @@
 ---
 import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
-import BuyButton from "../ui/BuyButton.astro";
-import BackButton from "../ui/BackButton.astro";
-import ProductPriceFromApi from "../content/ProductPriceFromApi.astro";
-import { Image } from 'astro:assets';
-import imageSneakers from  "/src/assets/img/hero-slider/single-royal.png";
 import BackgroundText from "../ui/BackgroundText.astro";
+import BackButton from "../ui/BackButton.astro";
+import Parametrs from "./Parametrs.astro";
+import { Image } from "astro:assets";
+import imageSneakers from  "/src/assets/img/hero-slider/single-royal.png";
 
 const { backgroundImage, sku } = Astro.props;
 ---
 
 <Section backgroundImage={backgroundImage}>
 	<BackgroundText>Primego</BackgroundText>
-	<div class="hero">
-		<BackButton href="./../"></BackButton>
-		<StarTrekText as="h1" class="page-title">Рояль</StarTrekText>
-		<div>
-			<p class="lead">Твой элегантный стиль</p>
-			<p>
-				Уникальный дизайн современной классики, идеальное сочетание цветов и&nbsp;форм, говорящих о&nbsp;своем статусе
-			</p>
-			<p class="display-mobile-none price">
-				<span class="h3">
-					<ProductPriceFromApi sku={sku}/>
-				</span>
-			</p>
-			<Image src={imageSneakers} alt="" role="presentation" class="hero__image" loading="lazy" />
-			<BuyButton
-				sku={sku}
-				color="var(--color-product-royal)"
-				img={imageSneakers.src}
-			/>
+	<div class="hero__wrap">
+		<div class="hero">
+			<BackButton href="./../" />
+			<StarTrekText as="h1" class="page-title">Рояль</StarTrekText>
+			<div>
+				<p class="hero__lead">Твой элегантный стиль</p>
+				<Image
+					src={imageSneakers}
+					alt=""
+					role="presentation"
+					class="hero__image"
+					loading="lazy"
+				/>
+			</div>
 		</div>
 	</div>
+
+	<Fragment slot="after-footer">
+		<Parametrs sku={sku} imageSneakers={imageSneakers}/>
+	</Fragment>
 </Section>
 
 <style lang="scss">
 	.page-title {
-		margin-bottom: var(--90px);
+		margin-bottom: var(--60px);
 		font-size: var(--heading-1);
+	}
+	.hero__wrap {
+		position: relative;
 	}
 	.hero {
 		max-width: calc(var(--1px) * 720);
-		margin-bottom: calc(var(--1px) * 150);
+		margin-bottom: calc(var(--1px) * 180);
+	}
+	.hero__lead {
+		font-size: calc(var(--1px) * 72);
+		line-height: 1.05;
+		color: var(--color-gray);
+		text-transform: uppercase;
 	}
 	.hero__image {
-		bottom: calc(var(--1px)* 270);
+		top: var(--60px);
 		position: absolute;
-		width: calc(var(--1px)* 785);
+		width: calc(var(--1px) * 785);
 		left: 50%;
-	}
-	.price {
-		color: var(--text-color);
-		margin-bottom: var(--45px);
 	}
 
 	@media screen and (max-width: 1023px) {
 		.hero {
-			text-align: center;
-			margin-bottom: calc(var(--1px) * 60);
+			margin-bottom: calc(var(--1px) * 200);
 		}
 		.page-title {
 			font-size: calc(var(--1px) * 128);
 			margin-top: calc(var(--1px) * 36);
 			margin-bottom: var(--30px);
 		}
+		.hero__lead {
+			font-size: calc(var(--1px) * 36);
+			line-height: 1.05;
+		}
 		.hero__image {
-			position: static;
-			margin-bottom: calc(var(--1px) * 30);
+			display: none;
 		}
 	}
 </style>

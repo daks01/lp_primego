@@ -1,0 +1,133 @@
+---
+import StarTrekText from "../ui/StarTrekText.astro";
+import BuyButton from "../ui/BuyButton.astro";
+import ProductPriceFromApi from "./ProductPriceFromApi.astro";
+
+const { sku, imageSneakers } = Astro.props;
+---
+
+<div class="params">
+	<StarTrekText as="h2" class="params__title">Параметры модели</StarTrekText>
+	<div class="params__aria">
+		<ul class="params__list">
+			<li class="params__list-item">
+				Цвет: <span class="params__value">черный / желтый</span>
+			</li>
+			<li class="params__list-item">
+				Сезон: <span class="params__value">демисезон</span>
+			</li>
+			<li class="params__list-item">
+				Вид застежки: <span class="params__value">шнуровка</span>
+			</li>
+			<li class="params__list-item">
+				Состав верх: <span class="params__value">100%&nbsp;кожа</span>
+			</li>
+			<li class="params__list-item">
+				Состав подкладка: <span class="params__value">100%&nbsp;хлопок</span>
+			</li>
+			<li class="params__list-item">
+				Состав подошва: <span class="params__value">ЭВА</span>
+			</li>
+			<li class="params__list-item">
+				Высота подошвы: <span class="params__value">2.5&thinsp;см</span>
+			</li>
+			<li class="params__list-item">
+				Полнота обуви: <span class="params__value">F&thinsp;(6)</span>
+			</li>
+			<li class="params__list-item">
+				Страна производства: <span class="params__value">Россия</span>
+			</li>
+		</ul>
+	</div>
+	<div class="params__footer">
+		<div class="params__price"><ProductPriceFromApi sku={sku} /></div>
+		<BuyButton
+			sku={sku}
+			color="var(--color-product-royal)"
+			img={imageSneakers.src}
+		/>
+	</div>
+</div>
+
+<style lang="scss">
+	.params {
+		&__title {
+			font-size: calc(var(--1px) * 80);
+			margin: 0 0 var(--60px);
+			text-align: center;
+		}
+		&__aria {
+			background-color: var(--color-bg-disabled);
+			border-radius: var(--4px);     
+			padding: var(--30px);
+			border-left: calc(var(--1px) * 2) solid var(--color-product);
+		}
+		&__list {
+			margin: 0;
+			padding: 0;
+			columns: 3;
+		}
+		&__list-item {
+			list-style-type: none;
+			padding: 0;
+			margin: 0;
+			line-height: 2;
+			font-size: var(--heading-5);
+			font-weight: 600;
+		}
+		&__value {
+			padding-left: var(--8px);
+			color: var(--color-gray);
+		}
+		&__footer {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: var(--30px);
+			margin: var(--45px) 0 var(--90px);
+		}
+		&__price {
+			color: var(--text-color);
+			font-size: var(--heading-2);
+			font-weight: 600;
+		}
+	}
+
+
+	@media screen and (max-width: 1023px) {
+		.params {
+			&__title {
+				font-size: calc(var(--1px)* 74);
+				margin: 0 0 var(--30px);
+			}
+			&__aria {
+				padding-right: var(--8px);
+			}
+			&__list {
+				columns: auto;
+			}
+			&__list-item {
+				font-size: var(--extra-small-font-size);
+				line-height: normal;
+				& + & {
+					margin-top: var(--8px);
+				}
+			}
+			&__footer {
+				gap: var(--15px);
+				margin-bottom: var(--60px);
+			}
+			&__price {
+				font-size: var(--heading-4);
+				background-color: var(--button-main-style-secondary-bg-default);
+				display: flex;
+				padding: calc(var(--1px)* 12);
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				border-radius: var(--4px);
+				white-space: nowrap;
+			}	
+		}
+	}
+</style>
