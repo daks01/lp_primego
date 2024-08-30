@@ -4,6 +4,7 @@ import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
 
 import HeroRoyal from "../components/content/HeroRoyal.astro";
+import Gallery from "../components/content/Gallery.astro";
 import NanoTextiles from "../components/content/NanoTextiles.astro";
 import Convection from "../components/content/Convection.astro";
 import FootShape from "../components/content/FootShape.astro";
@@ -44,6 +45,7 @@ const productSKU = productOptMap.royal.sku;
 	<Header/>
 	<main>
 		<HeroRoyal backgroundImage={backgroundHero} sku={productSKU}/>
+		<Gallery sku={productSKU} />
 		<NanoTextiles backgroundImage={backgroundNano} mainImage={imageNano}/>
 		<FootShape backgroundImage={backgroundShape}/>
 		<Convection backgroundImage={backgroundConvection} mainImage={imageConvection}/>

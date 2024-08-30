@@ -1,0 +1,384 @@
+---
+import "@splidejs/splide/css/core";
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import Dialog from "../ui/Dialog.astro";
+import Button from "../ui/Button.astro";
+
+const { sku } = Astro.props;
+
+const imageList = {
+  EM24: import.meta.glob("/src/assets/img/gallery/EM24/*.{jpeg,jpg}"),
+  RL24: import.meta.glob("/src/assets/img/gallery/RL24/*.{jpeg,jpg}"),
+};
+
+const hasImages =
+  imageList[sku] !== undefined && Object.keys(imageList[sku]).length > 0;
+---
+
+<section>
+  {
+    hasImages && (
+      <div class="gallery">
+        <div class="custom-slider" data-gallery>
+          <button
+            type="button"
+            data-gallery-button="prev"
+            class="custom-slider__button"
+            aria-label="previous slide"
+          >
+            <svg
+              width="9"
+              height="14"
+              viewBox="0 0 9 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M3.33432 6.99967L8.66797 12.3332L7.33479 13.6663L0.667969 6.99967L7.33479 0.333008L8.66797 1.66615L3.33432 6.99967Z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+          <button
+            type="button"
+            data-gallery-button="next"
+            class="custom-slider__button"
+            aria-label="next slide"
+          >
+            <svg
+              width="9"
+              height="14"
+              viewBox="0 0 9 14"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5.66568 7.00033L0.332032 1.6668L1.66521 0.333659L8.33203 7.00033L1.66521 13.667L0.332031 12.3338L5.66568 7.00033Z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+          <ul class="custom-slider__list" role="group">
+            {Object.keys(imageList[sku]).map((key, index) => (
+              <li class="custom-slider__list-item">
+                <div class="custom-slider__img-wrap">
+                  <Button
+                    type="button"
+                    class="button_type-icon custom-slider__zoom-button"
+                    tabindex="-1"
+                    data-gallery-zoom-button={index}
+                  >
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M20.9984 21.0004L16.6484 16.6504" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M11 8V14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      <path d="M8 11H14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </Button>
+                  <Image
+                    src={imageList[sku][key]()}
+                    class="custom-slider__img"
+                    alt=""
+                    decoding="async"
+                    loading="lazy"
+                    quality="75"
+                    width="480"
+                    densities={[2]}
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <Dialog id="dialog-gallery-modal" class="dialog_gallery" width="1830">
+          <div class="custom-slider" data-gallery>
+            <button
+              type="button"
+              data-gallery-button="prev"
+              class="custom-slider__button"
+              aria-label="previous slide"
+            >
+              <svg
+                width="9"
+                height="14"
+                viewBox="0 0 9 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M3.33432 6.99967L8.66797 12.3332L7.33479 13.6663L0.667969 6.99967L7.33479 0.333008L8.66797 1.66615L3.33432 6.99967Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </button>
+            <button
+              type="button"
+              data-gallery-button="next"
+              class="custom-slider__button"
+              aria-label="next slide"
+            >
+              <svg
+                width="9"
+                height="14"
+                viewBox="0 0 9 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5.66568 7.00033L0.332032 1.6668L1.66521 0.333659L8.33203 7.00033L1.66521 13.667L0.332031 12.3338L5.66568 7.00033Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </button>
+            <ul class="custom-slider__list" role="group">
+              {Object.keys(imageList[sku]).map((key, index) => (
+                <li
+                  class="custom-slider__list-item"
+                  style="min-width: 100%"
+                  data-modal-slide-index={index}
+                >
+                  <Image
+                    src={imageList[sku][key]()}
+                    class="custom-slider__img"
+                    alt=""
+                    decoding="async"
+                    loading="lazy"
+                    quality="80"
+                    widths={[720, 1700]}
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Dialog>
+      </div>
+    )
+  }
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const galleryList = document.querySelectorAll("[data-gallery]");
+    const zoomButtonList = document.querySelectorAll("[data-gallery-zoom-button]");
+
+    galleryList.forEach((gallery) => {
+      const galleryNavButtonList = gallery.querySelectorAll("[data-gallery-button]");
+
+      galleryNavButtonList.forEach((button) => {
+        button.addEventListener("click", (e) => {
+          const slideList = gallery.querySelector('ul');
+          slideList?.scrollBy({
+            top: 0,
+            left: e.target.dataset.galleryButton == "next" ? 1 : -1,
+            behavior: "smooth",
+          });
+        });
+      });
+    });
+
+    zoomButtonList.forEach((button) => {
+      button.addEventListener("click", (e) => {
+        const index = e.target.dataset.galleryZoomButton || 0;
+        window["dialog-gallery-modal"]?.showModal();
+        document.querySelector(`[data-modal-slide-index="${index}"]`)?.scrollIntoView();
+      });
+    });
+  });
+</script>
+
+<style lang="scss">
+  .section {
+    min-height: calc(var(--section-height) - var(--header-height));
+  }
+
+  .gallery {
+  }
+
+  .custom-slider {
+    position: relative;
+
+    &__button {
+      position: absolute;
+      top: 50%;
+      transform: translate(0, -50%);
+      background: white;
+      border-radius: var(--45px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+      border: none;
+      color: var(--color-product-primego);
+      width: var(--30px);
+      height: var(--30px);
+      cursor: pointer;
+      z-index: 10;
+
+      &::before {
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        border-radius: 100%;
+        z-index: -1;
+      }
+
+      &[data-gallery-button="prev"] {
+        left: var(--30px);
+      }
+      &[data-gallery-button="next"] {
+        right: var(--30px);
+      }
+
+      svg {
+        pointer-events: none;
+      }
+    }
+    &__list {
+      display: flex;
+      flex-wrap: nowrap;
+      margin: calc(var(--45px) * -1) 0 !important;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0;
+      scroll-snap-type: x mandatory;
+      position: relative;
+      z-index: 3;
+    }
+    &__list-item {
+      list-style-type: none;
+      padding: var(--45px) 0;
+      margin: 0;
+      aspect-ratio: 9 / 16;
+      scroll-snap-align: start;
+      min-width: 25%;
+    }
+
+    &__img-wrap {
+      display: block;
+      height: 100%;
+      width: 100%;
+      border: none;
+      background: none;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      position: relative;
+      z-index: 0;
+      transition:
+        transform 0.15s ease,
+        border 0.15s ease;
+
+      &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        z-index: 2;
+
+        background: var(--color-product);
+        opacity: 0.25;
+        mix-blend-mode: hard-light;
+        filter: blur(var(--90px));
+      }
+      &:hover {
+        transform: scale(1.1);
+        transform-origin: center;
+        border: calc(var(--1px) * 2) solid var(--color-white);
+        z-index: 1;
+      }
+    }
+    &__zoom-button {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 3;
+      background-color: var(--color-bg-black);
+      svg {
+        pointer-events: none;
+      }
+      &:hover {
+        background-color: var(--color-product-hover);
+      }
+    }
+    &__img-wrap:hover &__zoom-button {
+      display: block;
+    }
+    &__img {
+      display: block;
+      height: 100%;
+      width: auto;
+      object-fit: cover;
+      object-position: center;
+      aspect-ratio: 16 / 9;
+    }
+  }
+
+  .dialog_gallery {
+    max-width: calc(100vw - var(--30px) * 2);
+    // width: fit-content;
+    // margin: auto;
+    height: calc(100vh - var(--90px));
+
+    & :global(.dialog__header) {
+      padding-bottom: 0;
+    }
+    & :global(.dialog__body) {
+      height: calc(100% - var(--1px)* 120);
+      margin: var(--30px) var(--dialog-gutter);
+    }
+
+    .custom-slider {
+      padding: 0 var(--90px);
+    }
+    .custom-slider,
+    .custom-slider__list {
+      height: 100%;
+    }
+    .custom-slider__list-item {
+      padding: 0;
+    }
+    .custom-slider__img {
+      height: 100%;
+      object-fit: contain;
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 1023px) {
+
+    .custom-slider {
+      &__list-item {
+        min-width: 100%;
+      }
+      &__img-wrap:hover {
+        &:hover {
+          transform: none;
+          border: none;
+        }
+      }
+      &__zoom-button,
+      &__img-wrap:hover &__zoom-button {
+        display: none;
+      }
+    }
+    .custom-slider__button{
+      height: calc(var(--1px) * 24);
+      width: calc(var(--1px) * 24);
+
+      &[data-gallery-button=prev] {
+        left: var(--8px);
+      }
+      &[data-gallery-button=next] {
+        right: var(--8px);
+      }
+    }
+
+  }
+</style>
