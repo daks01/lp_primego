@@ -3,7 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
 
-import HeroRoyal from "../components/content/HeroRoyal.astro";
+import HeroSubPage from "../components/content/HeroSubPage.astro";
 import Gallery from "../components/content/Gallery.astro";
 import NanoTextiles from "../components/content/NanoTextiles.astro";
 import Convection from "../components/content/Convection.astro";
@@ -15,6 +15,8 @@ import Faq from "../components/content/Faq.astro";
 import MadeInRussia from "../components/content/MadeInRussia.astro";
 
 import backgroundHero from "/src/assets/img/bg/FFFFFF/1.jpg";
+import backgroundHeroMobile from "/src/assets/img/bg/FFFFFF/1_mobile.jpg";
+import imageSneakers from  "/src/assets/img/hero-slider/single-royal.png";
 import backgroundNano from "/src/assets/img/bg/FFFFFF/2.jpg";
 import imageNano from '/src/assets/img/nano-textiles/FFFFFF.png';
 import backgroundConvection from "/src/assets/img/bg/FFFFFF/3.jpg";
@@ -44,7 +46,14 @@ const productSKU = productOptMap.royal.sku;
 <Layout title="Primego | Рояль">
 	<Header/>
 	<main>
-		<HeroRoyal backgroundImage={backgroundHero} sku={productSKU}/>
+		<HeroSubPage 
+			backgroundImage={backgroundHero}
+			backgroundImageMobile={backgroundHeroMobile}
+			imageSneakers={imageSneakers}
+			title="Рояль" 
+			lead="Твой элегантный стиль"
+			sku={productSKU} 
+		/>
 		<Gallery sku={productSKU} />
 		<NanoTextiles backgroundImage={backgroundNano} mainImage={imageNano}/>
 		<FootShape backgroundImage={backgroundShape}/>

@@ -102,7 +102,7 @@ const { backgroundImage } = Astro.props;
 	document.addEventListener("DOMContentLoaded", () => {
 		const pagination = document.querySelector('[data-splide-progress] svg');
 
-		var splide = new Splide(".splide", {
+		const splide = new Splide(".splide", {
 			type: "fade",
 			rewind: true,
 			lazyLoad: "nearby",

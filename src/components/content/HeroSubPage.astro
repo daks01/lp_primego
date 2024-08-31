@@ -1,23 +1,37 @@
 ---
+import { getImage } from "astro:assets"
 import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
 import BackgroundText from "../ui/BackgroundText.astro";
 import BackButton from "../ui/BackButton.astro";
 import Parametrs from "./Parametrs.astro";
 import { Image } from "astro:assets";
-import imageSneakers from  "/src/assets/img/hero-slider/single-royal.png";
 
-const { backgroundImage, sku } = Astro.props;
+const { 
+	backgroundImage, 
+	backgroundImageMobile, 
+	imageSneakers, 
+	title, 
+	lead,
+	sku 
+} = Astro.props;
+
+const optimizedBackgroundImage = backgroundImageMobile 
+	? await getImage({ src: backgroundImageMobile, quality: '80' }) 
+	: {src:''};
 ---
 
-<Section backgroundImage={backgroundImage}>
-	<BackgroundText>Primego</BackgroundText>
+<Section 
+	backgroundImage={backgroundImage} 
+	style={`--bg-url-mobile: url(${optimizedBackgroundImage.src})`}
+>
+	<BackgroundText class="background-text">Primego</BackgroundText>
 	<div class="hero__wrap">
 		<div class="hero">
 			<BackButton href="./../" />
-			<StarTrekText as="h1" class="page-title">Рояль</StarTrekText>
+			<StarTrekText as="h1" class="page-title">{title}</StarTrekText>
 			<div>
-				<p class="hero__lead">Твой элегантный стиль</p>
+				<p class="hero__lead">{lead}</p>
 				<Image
 					src={imageSneakers}
 					alt=""
@@ -34,8 +48,14 @@ const { backgroundImage, sku } = Astro.props;
 	</Fragment>
 </Section>
 
-<style lang="scss">
+<style>
+	.section {
+		background-size: contain;
+	}
 	.page-title {
+		background-color: var(--backgroundColor);
+		background-image: var(--bgimg);
+		color: var(--foregroundColor);
 		margin-bottom: var(--60px);
 		font-size: var(--heading-1);
 	}
@@ -60,8 +80,15 @@ const { backgroundImage, sku } = Astro.props;
 	}
 
 	@media screen and (max-width: 1023px) {
+		.section {
+			background-image: var(--bg-url-mobile) !important;
+			background-size: contain;
+		}
 		.hero {
-			margin-bottom: calc(var(--1px) * 200);
+			margin-bottom: calc(var(--1px) * 420);
+		}
+		.background-text {
+			display: none;
 		}
 		.page-title {
 			font-size: calc(var(--1px) * 128);
