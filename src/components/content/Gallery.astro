@@ -169,9 +169,10 @@ const hasImages =
       galleryNavButtonList.forEach((button) => {
         button.addEventListener("click", (e) => {
           const slideList = gallery.querySelector('ul');
+          const slideItemWidth = slideList?.querySelectorAll('li')[0].offsetWidth;
           slideList?.scrollBy({
             top: 0,
-            left: e.target.dataset.galleryButton == "next" ? 320 : -320,
+            left: e.target.dataset.galleryButton == "next" ? slideItemWidth : slideItemWidth * -1,
             behavior: "smooth",
           });
         });
