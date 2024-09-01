@@ -1,0 +1,88 @@
+---
+const {
+  	class: className,
+} = Astro.props;
+---
+<div class:list={["social-list-wrap", className]}>
+	<span class="social-list-label">Мы в соцсетях</span>
+	<ul class="social-list" aria-label="Соцсети">
+		<li class="social-list__item">
+			<a
+				href="https://www.instagram.com/prim.ego/"
+				class="social-list__link"
+				target="_blank"
+				rel="nofollow noopener"
+				title="Instagram"
+			>
+				<span class="sr-only" lang="en">Instagram</span>
+				<svg role="presentation" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M17 2H7C4.23858 2 2 4.23858 2 7V17C2 19.7614 4.23858 22 7 22H17C19.7614 22 22 19.7614 22 17V7C22 4.23858 19.7614 2 17 2Z" fill="white"/>
+					<path d="M15.9997 11.3703C16.1231 12.2025 15.981 13.0525 15.5935 13.7993C15.206 14.5461 14.5929 15.1517 13.8413 15.53C13.0898 15.9082 12.2382 16.0399 11.4075 15.9062C10.5768 15.7726 9.80947 15.3804 9.21455 14.7855C8.61962 14.1905 8.22744 13.4232 8.09377 12.5925C7.96011 11.7619 8.09177 10.9102 8.47003 10.1587C8.84829 9.40716 9.45389 8.79404 10.2007 8.40654C10.9475 8.01904 11.7975 7.87689 12.6297 8.0003C13.4786 8.12619 14.2646 8.52176 14.8714 9.12861C15.4782 9.73545 15.8738 10.5214 15.9997 11.3703Z" fill="#050611" stroke="black" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M17.5 6.5H17.51" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+			</a>
+		</li>
+		<li class="social-list__item">
+			<a
+				href="https://vk.com/primego.online"
+				class="social-list__link"
+				target="_blank"
+				rel="nofollow noopener"
+				title="Vkontakte"
+			>
+				<span class="sr-only" lang="en">Vkontakte</span>
+				<svg role="presentation" width="21" height="25" viewBox="0 0 21 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M20.003 18.3804H17.722C16.859 18.3804 16.599 17.6814 15.052 16.1334C13.7 14.8304 13.129 14.6684 12.787 14.6684C12.314 14.6684 12.185 14.7984 12.185 15.4494V17.5014C12.185 18.0564 12.005 18.3814 10.555 18.3814C9.14829 18.2869 7.78416 17.8595 6.57497 17.1345C5.36578 16.4095 4.34612 15.4076 3.6 14.2114C1.82839 12.0064 0.595707 9.41844 0 6.65336C0 6.31136 0.13 6.00136 0.782 6.00136H3.062C3.648 6.00136 3.859 6.26236 4.089 6.86536C5.196 10.1234 7.085 12.9574 7.852 12.9574C8.146 12.9574 8.274 12.8274 8.274 12.0944V8.73836C8.177 7.20736 7.364 7.07836 7.364 6.52436C7.37428 6.3782 7.44114 6.24181 7.55037 6.14415C7.65961 6.04649 7.80261 5.99527 7.949 6.00136H11.533C12.023 6.00136 12.185 6.24536 12.185 6.83136V11.3614C12.185 11.8504 12.395 12.0124 12.543 12.0124C12.837 12.0124 13.063 11.8504 13.602 11.3124C14.7574 9.90334 15.7013 8.33352 16.404 6.65236C16.4759 6.45051 16.6119 6.27773 16.7912 6.16037C16.9705 6.04302 17.1832 5.98752 17.397 6.00236H19.678C20.362 6.00236 20.507 6.34436 20.362 6.83236C19.5324 8.69077 18.5058 10.4549 17.3 12.0944C17.054 12.4694 16.956 12.6644 17.3 13.1044C17.526 13.4464 18.326 14.1144 18.863 14.7494C19.645 15.5294 20.294 16.4314 20.785 17.4194C20.981 18.0554 20.654 18.3804 20.003 18.3804Z" fill="white"/>
+				</svg>
+			</a>
+		</li>
+	</ul>
+</div>
+
+
+<style lang="scss">
+	.social-list-wrap {
+		display: flex;
+		align-items: center;
+		gap: var(--15px);
+	}
+	.social-list-label {
+		font-size: var(--small-font-size);
+	}
+	.social-list {
+		margin: 0;
+		padding: 0;
+		display: flex;
+		gap: var(--15px);
+		align-items: center;
+	}
+	.social-list__item {
+		margin: 0;
+		list-style-type: none;
+	}
+	.social-list__link {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: calc(var(--1px) * 12);
+		border-radius: var(--4px);
+		background-color: var(--button-main-style-primary-bg-default);
+		&:hover,
+		&:focus {
+			text-decoration: none;
+			background-color: var(--button-main-style-primary-bg-hover);
+		}
+		&:active {
+			background-color: var(--button-main-style-primary-bg-click);
+		}
+		svg {
+			width: calc(var(--1px) * 24);
+			height: calc(var(--1px) * 24);
+			display: block;
+		}
+	}
+
+	@media screen and (max-width: 1023px) {
+		
+	}
+</style>

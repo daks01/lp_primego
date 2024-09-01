@@ -21,7 +21,7 @@
     --200px: calc(var(--1px) * 200); 
 
     --gutter: var(--200px);
-    --header-height: var(--60px);
+    --header-height: calc(var(--1px) * 80);
     --section-height: calc(var(--1px) * 1080);
 
     --heading-1: calc(var(--1px) * 350);
@@ -62,9 +62,14 @@
     --color-product-active: var(--color-product-primego-active);
     --button-text-color: var(--color-white);
 
+    // цвета кнопок
+    --button-main-style-primary-bg-default: var(--color-product-primego);
+    --button-main-style-primary-bg-hover: var(--color-product-primego-hover);
+    --button-main-style-primary-bg-click: var(--color-product-primego-active);
+
     --button-main-style-secondary-bg-default: #AFAFAF21;
     --button-main-style-secondary-bg-hover: #AFAFAF33;
-    --button-main-style-secondary-bg-active: #AFAFAF33;
+    --button-main-style-secondary-bg-click: #AFAFAF33;
 
     --text-color: var(--color-white);
     --text-product: var(--color-product);

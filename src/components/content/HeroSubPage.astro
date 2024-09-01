@@ -1,106 +1,109 @@
 ---
-import { getImage } from "astro:assets"
+import { getImage } from "astro:assets";
 import Section from "../ui/Section.astro";
+import SocialList from "../ui/SocialList.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
 import BackgroundText from "../ui/BackgroundText.astro";
 import BackButton from "../ui/BackButton.astro";
 import Parametrs from "./Parametrs.astro";
 import { Image } from "astro:assets";
 
-const { 
-	backgroundImage, 
-	backgroundImageMobile, 
-	imageSneakers, 
-	title, 
-	lead,
-	sku 
+const {
+  backgroundImage,
+  backgroundImageMobile,
+  imageSneakers,
+  title,
+  lead,
+  sku,
 } = Astro.props;
 
-const optimizedBackgroundImage = backgroundImageMobile 
-	? await getImage({ src: backgroundImageMobile, quality: '80' }) 
-	: {src:''};
+const optimizedBackgroundImage = backgroundImageMobile
+  ? await getImage({ src: backgroundImageMobile, quality: "80" })
+  : { src: "" };
 ---
 
-<Section 
-	backgroundImage={backgroundImage} 
-	style={`--bg-url-mobile: url(${optimizedBackgroundImage.src})`}
+<Section
+  backgroundImage={backgroundImage}
+  style={`--bg-url-mobile: url(${optimizedBackgroundImage.src})`}
 >
-	<BackgroundText class="background-text">Primego</BackgroundText>
-	<div class="hero__wrap">
-		<div class="hero">
-			<BackButton href="./../" />
-			<StarTrekText as="h1" class="page-title">{title}</StarTrekText>
-			<div>
-				<p class="hero__lead">{lead}</p>
-				<Image
-					src={imageSneakers}
-					alt=""
-					role="presentation"
-					class="hero__image"
-					loading="lazy"
-				/>
-			</div>
-		</div>
-	</div>
+  <BackgroundText class="background-text">Primego</BackgroundText>
+  <div class="hero__wrap">
+    <div class="hero">
+      <BackButton href="./../" />
+      <StarTrekText as="h1" class="page-title">{title}</StarTrekText>
+      <div>
+        <p class="hero__lead">{lead}</p>
+        <Image
+          src={imageSneakers}
+          alt=""
+          role="presentation"
+          class="hero__image"
+          loading="lazy"
+        />
+      </div>
+      <SocialList class="display-none display-mobile-flex" />
+    </div>
+  </div>
 
-	<Fragment slot="after-footer">
-		<Parametrs sku={sku} imageSneakers={imageSneakers}/>
-	</Fragment>
+  <Fragment slot="after-footer">
+    <Parametrs sku={sku} imageSneakers={imageSneakers} />
+  </Fragment>
 </Section>
 
 <style>
-	.section {
-		background-size: contain;
-	}
-	.page-title {
-		background-color: var(--backgroundColor);
-		background-image: var(--bgimg);
-		color: var(--foregroundColor);
-		margin-bottom: var(--60px);
-		font-size: var(--heading-1);
-	}
-	.hero__wrap {
-		position: relative;
-	}
-	.hero {
-		max-width: calc(var(--1px) * 720);
-		margin-bottom: calc(var(--1px) * 180);
-	}
-	.hero__lead {
-		font-size: calc(var(--1px) * 72);
-		line-height: 1.05;
-		color: var(--color-gray);
-		text-transform: uppercase;
-	}
-	.hero__image {
-		top: var(--60px);
-		position: absolute;
-		width: calc(var(--1px) * 785);
-		left: 50%;
-	}
+  .section {
+    background-size: contain;
+  }
+  .page-title {
+    background-color: var(--backgroundColor);
+    background-image: var(--bgimg);
+    color: var(--foregroundColor);
+    margin-bottom: var(--60px);
+    font-size: var(--heading-1);
+  }
+  .hero__wrap {
+    position: relative;
+  }
+  .hero {
+    max-width: calc(var(--1px) * 720);
+    margin-bottom: calc(var(--1px) * 180);
+  }
+  .hero__lead {
+    font-size: calc(var(--1px) * 72);
+    line-height: 1.05;
+    color: var(--color-gray);
+    text-transform: uppercase;
+  }
+  .hero__image {
+    top: var(--60px);
+    position: absolute;
+    width: calc(var(--1px) * 785);
+    left: 50%;
+  }
 
-	@media screen and (max-width: 1023px) {
-		.section {
-			background-image: var(--bg-url-mobile) !important;
-			background-size: contain;
-		}
-		.hero {
-			margin-bottom: calc(var(--1px) * 420);
-		}
-		.background-text {
-			display: none;
-		}
-		.page-title {
-			font-size: calc(var(--1px) * 128);
-			margin-top: calc(var(--1px) * 36);
-			margin-bottom: var(--30px);
-		}
-		.hero__lead {
-			font-size: calc(var(--1px) * 36);
-			line-height: 1.05;
-		}
-		.hero__image {
-			display: none;
-		}
-	}
+  @media screen and (max-width: 1023px) {
+    .section {
+      background-image: var(--bg-url-mobile) !important;
+      background-size: contain;
+    }
+    .hero {
+      margin-bottom: var(--60px);
+    }
+    .background-text {
+      display: none;
+    }
+    .page-title {
+      font-size: calc(var(--1px) * 128);
+      margin-top: calc(var(--1px) * 36);
+      margin-bottom: var(--30px);
+    }
+    .hero__lead {
+      font-size: calc(var(--1px) * 36);
+      line-height: 1.05;
+	  margin-bottom: calc(var(--1px)* 300);
+    }
+    .hero__image {
+      display: none;
+    }
+  }
 </style>

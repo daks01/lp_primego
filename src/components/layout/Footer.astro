@@ -1,7 +1,8 @@
 ---
 import Section from "../ui/Section.astro";
-import FooterForm from "../content/FooterForm.astro";
-import TopBar from "./TopBar.astro";
+import FooterForm from "../blocks/FooterForm.astro";
+import SocialList from "../ui/SocialList.astro";
+import Logo from "../ui/Logo.astro";
 
 const { backgroundImage, isHome = false } = Astro.props;
 
@@ -17,65 +18,65 @@ const currentYear = today.getFullYear();
 >
 	<FooterForm />
 	<Fragment slot="after-footer">
-		<TopBar class="top-bar_in-footer">
-			{
-				!isHome && (
-					<div class="footer__copyright">
-						<span>
-							©&nbsp;Все права защищены | PRIMEGO&nbsp;
-							{currentYear}
-						</span>
-					</div>
-				)
-			}
-			{
-				isHome && (
-					<address class="footer__address">
-						<p class="footer__address-col">
-							ИП&nbsp;Пчелинцев&nbsp;С.Н.
-							<br />
-							ИНН&nbsp;343503278989
-						</p>
-						<p class="footer__address-col">
-							ОГРНИП&nbsp;312343518600025
-							<br />
-							Тел:&nbsp;
-							<a
-								href="tel:+7(936)2306655"
-								class="footer__phone-link"
-							>
-								+7&thinsp;(936)&thinsp;230&thinsp;66&thinsp;55
-							</a>
-						</p>
-					</address>
-				)
-			}
-		</TopBar>
-		{
-			isHome && (
-				<div class="footer__copyright footer__copyright_center">
-					<span>
-						©&nbsp;Все права защищены | PRIMEGO&nbsp;{currentYear}
-					</span>
-				</div>
-			)
-		}
+		<div class="footer-layout">
+			<div class="footer-layout__cell-1">
+				<SocialList />
+			</div>
+			<div class="footer-layout__cell-2">
+				<Logo />
+			</div>
+			<div class="footer-layout__cell-3">
+				<address class="footer__address">
+					<p class="footer__address-col">
+						ИП&nbsp;Пчелинцев&nbsp;С.Н.
+						<br />
+						ИНН&nbsp;343503278989
+					</p>
+					<p class="footer__address-col">
+						ОГРНИП&nbsp;312343518600025
+						<br />
+						Тел:&nbsp;
+						<a
+							href="tel:+7(936)2306655"
+							class="footer__phone-link"
+						>
+							+7&thinsp;(936)&thinsp;230&thinsp;66&thinsp;55
+						</a>
+					</p>
+				</address>
+			</div>
+		</div>
+		<div class="footer__copyright">
+			<span>
+				©&nbsp;Все права защищены | PRIMEGO&nbsp;{currentYear}
+			</span>
+		</div>
 	</Fragment>
 </Section>
-<style>
+<style lang="scss">
 	.footer {
 		background-position: top center;
 		background-size: cover;
 		background-repeat: no-repeat;
 		/* min-height: calc(var(--1px) * 1080); */
 	}
+	.footer-layout {
+		display: flex;
+		align-items: center;
+	}
+	.footer-layout__cell-1,
+	.footer-layout__cell-3 {
+		flex-basis: 50%;
+		flex-grow: 1;
+	}
+	.footer-layout__cell-2 {
+
+	}
 	.footer__copyright {
 		opacity: 0.8;
 		color: var(--color-white);
 		margin-top: var(--30px);
 		font-size: var(--extra-small-font-size);
-	}
-	.footer__copyright_center {
 		text-align: center;
 		margin: var(--45px) 0 var(--30px);
 		font-weight: 300;
@@ -89,24 +90,42 @@ const currentYear = today.getFullYear();
 		gap: var(--60px);
 		font-style: normal;
 		font-size: var(--heading-5);
-		margin-top: var(--30px);
+		justify-content: end;
 	}
 	.footer__address-col {
 		margin: 0;
 	}
 	@media screen and (max-width: 1023px) {
+		.footer-layout {
+			flex-wrap: wrap;
+		}
+		.footer-layout__cell-1 {
+			order: 2;
+			flex-basis: 50%;
+			justify-content: right;
+			display: flex;
+			& :global(.social-list-label) {
+				display: none;
+			}
+		}
+		.footer-layout__cell-2 {
+			order: 1;
+			flex-basis: 50%;
+		}
+		.footer-layout__cell-3 {
+			order: 3;
+			flex-basis: 100%;
+		}
 		.footer__address {
 			flex-direction: column;
 			gap: var(--15px);
 			font-size: var(--small-font-size);
+			margin-top: var(--45px);
 		}
 		.footer__copyright {
-			margin: 0;
 			text-align: center;
-		}
-		.footer__copyright_center {
 			text-align: left;
-			margin: var(--30px) 0	;
+			margin: var(--30px) 0;
 		}
 	}
 </style>
