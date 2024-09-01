@@ -61,11 +61,9 @@ import ShopCart from "../blocks/ShopCart.vue";
 
 <style lang="scss">
 	.action-panel {
-		padding: var(--15px) calc(var(--1px) * 20);
 		display: flex;
-		gap: var(--30px);
+		gap: var(--15px);
 		border-radius: 0 0 var(--4px) var(--4px);
-        font-family: inherit;
 		transition: transform 0.5s ease;
 		position: relative;
 
@@ -90,8 +88,8 @@ import ShopCart from "../blocks/ShopCart.vue";
 		&:hover {
 			&:before {
 				background-color: var(--color-product);
-				transform: translate(0, var(--8px));
 				color: var(--color-black);
+				transform: translate(0, var(--8px));
 			}
 			& > * {
 				transform: translate(0, var(--4px));
@@ -129,11 +127,15 @@ import ShopCart from "../blocks/ShopCart.vue";
 		display: flex;
 		align-items: center;
 		gap: calc(var(--1px) * 10);
+		padding: var(--15px) calc(var(--1px) * 20);
 		min-width: var(--45px);
 		text-decoration: none;
 		svg {
 			width: calc(var(--1px) * 24);
 			height: calc(var(--1px) * 24);
+		}
+		.action-panel:hover & {
+			color: var(--color-black)
 		}
 	}
 	.button-shopcart__title {
@@ -143,8 +145,16 @@ import ShopCart from "../blocks/ShopCart.vue";
 
 	@media screen and (max-width: 1024px) {
 		.action-panel {
-
 			padding: calc(var(--1px) * 12) var(--15px);
+			&:focus-within,
+			&:hover {
+				&:before {
+					transform: none;
+				}
+				& > * {
+					transform: none;
+				}
+			}
 		}
 		// .button-login {
 		// 	background-color: var(--color-bg-black);
