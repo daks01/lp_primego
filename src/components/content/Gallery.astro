@@ -171,7 +171,7 @@ const hasImages =
           const slideList = gallery.querySelector('ul');
           slideList?.scrollBy({
             top: 0,
-            left: e.target.dataset.galleryButton == "next" ? 1 : -1,
+            left: e.target.dataset.galleryButton == "next" ? 320 : -320,
             behavior: "smooth",
           });
         });
