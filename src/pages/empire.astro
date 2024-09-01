@@ -3,25 +3,29 @@ import Layout from "../layouts/Layout.astro";
 import Header from "../components/layout/Header.astro";
 import Footer from "../components/layout/Footer.astro";
 
-import HeroEmpire from "../components/content/HeroEmpire.astro";
+import HeroSubPage from "../components/content/HeroSubPage.astro";
+import Gallery from "../components/content/Gallery.astro";
 import NanoTextiles from "../components/content/NanoTextiles.astro";
 import Convection from "../components/content/Convection.astro";
 import FootShape from "../components/content/FootShape.astro";
-import MobileApp from "../components/content/MobileApp.astro";
-import Customization from "../components/content/Customization.astro";
-import Innovation from "../components/content/Innovation.astro";
+// import MobileApp from "../components/content/MobileApp.astro";
+// import Customization from "../components/content/Customization.astro";
+// import Innovation from "../components/content/Innovation.astro";
+import Faq from "../components/content/Faq.astro";
 import MadeInRussia from "../components/content/MadeInRussia.astro";
 
 import backgroundHero from "/src/assets/img/bg/FFCD01/1.jpg";
+import backgroundHeroMobile from "/src/assets/img/bg/FFCD01/1_mobile.jpg";
+import imageSneakers from "/src/assets/img/hero-slider/single-empire.png";
 import backgroundNano from "/src/assets/img/bg/FFCD01/2.jpg";
 import imageNano from '/src/assets/img/nano-textiles/FFCD01.png';
 import backgroundConvection from "/src/assets/img/bg/FFCD01/3.jpg";
 import imageConvection from '/src/assets/img/convection/sneaker_FFCD01.svg';
 import backgroundShape from "/src/assets/img/bg/FFCD01/4.jpg";
-import backgroundMobileApp from "/src/assets/img/bg/FFCD01/5.jpg";
-import backgroundCustom from "/src/assets/img/bg/FFCD01/6.jpg";
-import imageCustomSneaker from '/src/assets/img/customization/Sneaker-FFCD01.png';
-import backgroundInnovation from "/src/assets/img/bg/FFCD01/7.jpg";
+// import backgroundMobileApp from "/src/assets/img/bg/FFCD01/5.jpg";
+// import backgroundCustom from "/src/assets/img/bg/FFCD01/6.jpg";
+// import imageCustomSneaker from '/src/assets/img/customization/Sneaker-FFCD01.png';
+// import backgroundInnovation from "/src/assets/img/bg/FFCD01/7.jpg";
 import backgroundMadeIn from "/src/assets/img/bg/FFCD01/8.jpg";
 import backgroundFooter from "/src/assets/img/bg/FFCD01/10.jpg";
 import { productOptMap } from "../utils/product-list";
@@ -42,13 +46,22 @@ const productSKU = productOptMap.empire.sku;
 <Layout title="Primego | Империум">
 	<Header/>
 	<main>
-		<HeroEmpire backgroundImage={backgroundHero} sku={productSKU}/>
+		<HeroSubPage 
+			backgroundImage={backgroundHero}
+			backgroundImageMobile={backgroundHeroMobile}
+			imageSneakers={imageSneakers}
+			title="ИМПЕРИУМ" 
+			lead="Герб Российской Империи"
+			sku={productSKU} 
+		/>
+		<Gallery sku={productSKU} />
 		<NanoTextiles backgroundImage={backgroundNano} mainImage={imageNano}/>
-		<Convection backgroundImage={backgroundConvection} mainImage={imageConvection}/>
 		<FootShape backgroundImage={backgroundShape}/>
-		<MobileApp backgroundImage={backgroundMobileApp}/>
+		<Convection backgroundImage={backgroundConvection} mainImage={imageConvection}/>
+		<!-- <MobileApp backgroundImage={backgroundMobileApp}/>
 		<Customization backgroundImage={backgroundCustom} mainImage={imageCustomSneaker}/>
-		<Innovation backgroundImage={backgroundInnovation}/>
+		<Innovation backgroundImage={backgroundInnovation}/> -->
+		<Faq/>
 		<MadeInRussia backgroundImage={backgroundMadeIn}/>
 	</main>
 	<Footer backgroundImage={backgroundFooter}/>

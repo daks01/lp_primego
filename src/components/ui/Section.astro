@@ -6,6 +6,7 @@ const {
   as: Element = "section",
   width,
   class: className,
+  style,
   backgroundImage,
   invert = false,
   ...props
@@ -18,7 +19,7 @@ const optimizedBackgroundImage = backgroundImage
 <Element 
     {...props} 
     class:list={["section", {"section_invert" : invert}, className]}
-	style={backgroundImage ? `background-image: url(${optimizedBackgroundImage?.src})` : ''}
+	style={`background-image: url(${optimizedBackgroundImage?.src}); ${style}`}
 >
 	<Container width={width}>
 		<slot />

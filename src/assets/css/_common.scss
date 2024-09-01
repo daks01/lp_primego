@@ -40,6 +40,9 @@ img, svg {
     flex-shrink: 0;
 }
 
+a:link {
+    color: var(--color-product)
+}
 
 .display-none {
     display: none !important;

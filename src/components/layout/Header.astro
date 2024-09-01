@@ -1,9 +1,10 @@
 ---
 import Section from "../ui/Section.astro";
 import Dialog from "../ui/Dialog.astro";
-import TopBar from "./TopBar.astro";
-import LoginForm from "../islands/LoginForm.vue";
-import ShopCart from "../islands/ShopCart.vue";
+import ShopCart from "../blocks/ShopCart.vue";
+import SocialList from "../ui/SocialList.astro";
+import Logo from "../ui/Logo.astro";
+import ActionPanel from "../blocks/ActionPanel.astro";
 
 const { 
 	as: tag = "header",
@@ -12,64 +13,28 @@ const {
 ---
 
 <Section as={tag} class="header">
-	<TopBar isHome={isHome}>
-		<div class="action-panel">
-			<!-- <button 
-				class="button-login" 
-				type="button" 
-				aria-describedby="profile-btn-title" 
-				onclick={`window["dialog-login"]?.showModal()`}
-			>
-				<span class="button-login__title">Войти на сайт</span>
-				<svg role="presentation" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M13.3337 14V12.6667C13.3337 11.9594 13.0527 11.2811 12.5526 10.781C12.0525 10.281 11.3742 10 10.667 10H5.33366C4.62641 10 3.94814 10.281 3.44804 10.781C2.94794 11.2811 2.66699 11.9594 2.66699 12.6667V14" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-					<path d="M7.99967 7.33333C9.47243 7.33333 10.6663 6.13943 10.6663 4.66667C10.6663 3.19391 9.47243 2 7.99967 2C6.52692 2 5.33301 3.19391 5.33301 4.66667C5.33301 6.13943 6.52692 7.33333 7.99967 7.33333Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+	<div class="top-bar">
+		<div class="top-bar__cell top-bar__cell_1">
+			<a href="/" aria-label="На главную" class="back-button" hidden={isHome}>
+				<svg role="presentation" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M19 12H5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M12 19L5 12L12 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 				</svg>
-			</button>
-			<Dialog id="dialog-login" title="Войти или зарегистрироваться" width={800}>
-				<LoginForm client:only />
-			</Dialog> -->
-			<a
-				href="./order"
-				class="button-shopcart"
-				type="button"
-				onclick={`event.preventDefault(); window["dialog-shopcart"]?.showModal()`}
-				aria-label="Корзина"
-				data-cart-button
-			>
-				Корзина
-				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-					<path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-					<path d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-				</svg>
-				<span data-cart-counter>0</span>
 			</a>
-			<Dialog id="dialog-shopcart" title="Оформление заказа">
-				<ShopCart client:only />
-			</Dialog>
+			<SocialList class="display-mobile-none"/>
 		</div>
-	</TopBar>
+		<div class="top-bar__cell top-bar__cell_2">
+			<a href="/" aria-label="На главную">
+				<Logo />
+			</a>
+		</div>
+		<div class="top-bar__cell top-bar__cell_3">
+			<ActionPanel />
+		</div>
+	</div>
 </Section>
 
-<script>
-	import { counter } from '../../stores/shopCartStore';
-
-	function updateCartCounter() {
-		const cartCounterEl = document.querySelector('[data-cart-counter]');
-		const cartButtonEl = document.querySelector('[data-cart-button]');
-		counter.subscribe((value) => {
-			if(document.body.contains(cartCounterEl)) {
-				cartCounterEl.innerText = value;
-			}
-			if(document.body.contains(cartButtonEl)) {
-				cartButtonEl.disabled = !value;
-			}
-		})
-	}
-
-	updateCartCounter();
-</script>
+<script></script>
 <style lang="scss">
 	.header {
 		background-color: var(--color-black);
@@ -78,93 +43,47 @@ const {
 		z-index: 2;
 		overflow: initial;
 	}
-	.action-panel {
-		background-color: var(--color-bg-disabled);
-		box-shadow: 0 calc(var(--1px) * -8) 0 0 var(--color-bg-disabled);
-		color: var(--color-white);
-		padding: calc(var(--1px) * 12) var(--15px);
-		display: flex;
-		gap: var(--30px);
-		border-radius: 0 0 var(--4px) var(--4px);
-        font-family: inherit;
-		transition: transform 0.5s ease;
-		color: var(--color-white);
-	}
-	@media screen and (min-width: 1024px) {
-		.action-panel {
-			transition: transform 0.5s ease;
-			&:focus-within,
-			&:hover {
-				background-color: var(--color-product);
-				box-shadow: 0 calc(var(--1px) * -8) 0 0 var(--color-product);
-				transform: translate(0, var(--8px));
-				color: var(--color-black);
-				& > * {
-					transform: translate(0, calc(var(--1px) * -4));
-				}
-			}
-
-			& > * {
-				transition: transform 0.5s ease;
-			}
-		}
-	}
-	// ToDo :hover
-	.button-login {
-		color: currentColor;
-		padding: var(--8px) calc(var(--1px) * 24);
-		border: none;
-		background-color: rgba(#AFAFAF, .13);
-		border-radius: var(--4px);
-		cursor: pointer;
-        font-family: inherit;
-		font-size: var(--extra-small-font-size);
-		font-weight: 600;
-		&:hover {
-			background: rgba(0, 0, 0, .2);
-		}
-		svg {
-			display: none;
-			width: calc(var(--1px) * 16);
-			height: calc(var(--1px) * 16);
-		}
-	}
-	.button-shopcart {
-		color: currentColor;
-		padding: 0;
-		background-color: transparent;
-		border: none;
+	.top-bar {
+		height: var(--header-height);
 		display: flex;
 		align-items: center;
-		cursor: pointer;
-		gap: calc(var(--1px) * 10);
-		font-size: calc(var(--1px) * 20);
-		font-weight: 600;
-		min-width: var(--45px);
-		text-decoration: none;
+	}
+	.top-bar_in-footer {
+		margin-bottom: var(--30px);
+	}
+	.top-bar__cell {
+		display: flex;
+		align-items: center;
+	}
+	.top-bar__cell_1,
+	.top-bar__cell_3 {
+		flex-grow: 1;
+		flex-basis: 50%;
+	}
+	.top-bar__cell_3 {
+		justify-content: flex-end;
+		align-self: flex-start;
+	}
+	.back-button {
+		display: none;
 		svg {
+			display: block;
 			width: calc(var(--1px) * 24);
 			height: calc(var(--1px) * 24);
 		}
 	}
-	@media screen and (max-width: 1023px) {
-		.action-panel {
-			padding: var(--8px) calc(var(--1px) * 16);
-			gap: var(--15px);
+	@media screen and (max-width: 1024px) {
+		.back-button {
+			display: block;
+			margin-right: var(--15px);
 		}
-		.button-login {
-			background-color: var(--color-bg-black);
-			padding: var(--8px);
-			span {
-				display: none;
-			}
-			svg {
-				display: block;
-			}
+		.top-bar__cell_1 {
+			flex-basis: auto;
+			flex-grow: inherit;
+			flex-shrink: 0;
 		}
-		.button-shopcart {
-			gap: calc(var(--1px) * 5);
-			font-size: calc(var(--1px) * 24);
+		.top-bar {
+			align-items: center;
 		}
 	}
 </style>

@@ -1,6 +1,5 @@
 ---
 import Button from "./Button.astro";
-import ProductPriceFromApi from "../content/ProductPriceFromApi.astro";
 const { 
     sku,
     color = 'var(--color-product-primego)',
@@ -18,12 +17,7 @@ const {
     {...props}
 >
     <Fragment>
-        <span class="display-none display-mobile-block">
-            Купить <ProductPriceFromApi sku={sku}/>
-        </span>
-        <span class="display-mobile-none">
-            Купить сейчас
-        </span>
+        Заказать
     </Fragment>
 </Button>
 <button

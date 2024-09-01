@@ -1,0 +1,33 @@
+---
+const { sku } = Astro.props;
+---
+
+<span data-product-sku={sku}>
+      &thinsp;   &thinsp;₽
+</span>
+
+<script>
+    import { productList } from "../../stores/productListStore";
+    import { priceWithRouble } from "../../utils/format"
+
+    productList.subscribe((data) => {
+        if(!data?.data) {
+            return;
+        }
+
+        const priceElList = document.querySelectorAll('[data-product-sku]');
+        [...priceElList].forEach((item) => {
+            if(item.hasAttribute('data-price-loaded')) {
+                return;
+            }
+            
+            const sku = item.getAttribute('data-product-sku');
+            const currentProduct = sku ? data.data[sku] : null;
+            const currentPrice = currentProduct ? currentProduct.price : '';
+
+            item.innerText = priceWithRouble(currentPrice);
+            item.setAttribute('data-price-loaded', 'true')
+        });
+        
+    });
+</script>
