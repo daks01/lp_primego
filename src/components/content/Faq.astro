@@ -63,13 +63,14 @@ import StarTrekText from "../ui/StarTrekText.astro";
 
 <style lang="scss">
 	.section {
-		padding: var(--90px) 0 var(--15px);
+		padding: var(--90px) 0 var(--90px);
+		min-height: auto;
 	}
 	.title {
 		text-align: center;
 		font-size: calc(var(--1px) * 80);
 		line-height: 1.1;
-		margin-bottom: var(--60px);
+		margin: var(--45px) 0 var(--60px);
 	}
 
 	.faq {
@@ -138,13 +139,13 @@ import StarTrekText from "../ui/StarTrekText.astro";
 
 	@media screen and (max-width: 1023px) {
 		.section {
-			padding: var(--30px) 0;
+			padding: var(--60px) 0 var(--30px);
 		}
 		
 		.title {
 			font-size: var(--heading-1);
 			line-height: .75;
-			margin-bottom: var(--30px);
+			margin: 0 0 var(--30px);
 		}
 
 		.faq__item {   
