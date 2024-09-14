@@ -2,8 +2,9 @@
 import { Image } from 'astro:assets';
 import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
-import imageSneaker from '../../assets/img/foot-shape/Sneaker.png';
-import imageScheme from '../../assets/img/foot-shape/scheme.svg?raw';
+import imageScheme1 from '../../assets/img/foot-shape/scheme1.svg';
+import imageScheme2 from '../../assets/img/foot-shape/scheme2.svg';
+import imageScheme3 from '../../assets/img/foot-shape/scheme3.svg';
 
 const { backgroundImage } = Astro.props;
 
@@ -12,24 +13,44 @@ const { backgroundImage } = Astro.props;
 	<div class="layout">
 		<header>
 			<StarTrekText as="h2" class="h1 title">
-				Форма<br/>
-				стопы
+				Форма стопы
 			</StarTrekText>
 		</header>
-		<Image
-			width="1030"
-			height="596"
-			src={imageSneaker}
-			alt=""
-			loading="lazy"
-			class="bg-img"
-		/>
-		<div set:html={imageScheme} style="color: var(--color-product)" class="scheme"/>
-		<blockquote class="blockquote">
-			<p>Трехмерное термическое формование, учет индвидуальной формы стопы</p>
-			<p>Подошва учитывает форму стопы, не&nbsp;деформирует ногу</p>
-			<p>Адаптация подошвы к&nbsp;стопе для&nbsp;здоровых ног</p>
-		</blockquote>
+		<ul class="list">
+			<li class="list-item">
+				<Image
+					width="362"
+					height="362"
+					src={imageScheme1}
+					alt=""
+					loading="lazy"
+				/>
+				<span class="list-item__title">Типичная<br> форма обуви</span>
+				<span class="list-item__desc">Нога в дискомфорте</span>
+			</li>
+			<li class="list-item">
+				<Image
+					width="362"
+					height="362"
+					src={imageScheme2}
+					alt=""
+					loading="lazy"
+				/>
+				<span class="list-item__title">Оригинальная форма Primego,<br> модель Империум</span>
+				<span class="list-item__desc">Широкая нога</span>
+			</li>
+			<li class="list-item">
+				<Image
+					width="362"
+					height="362"
+					src={imageScheme3}
+					alt=""
+					loading="lazy"
+				/>
+				<span class="list-item__title">Оригинальная форма Primego,<br> модель Рояль</span>
+				<span class="list-item__desc">Стандартная нога</span>
+			</li>
+		</ul>
 	</div>
 </Section>
 
@@ -41,41 +62,83 @@ const { backgroundImage } = Astro.props;
 		// padding-left: calc(var(--1px) * 150)
 	}
 	.title {
+		text-align: center;
+		margin: var(--120px) 0;
+	}
+
+	.list {
 		display: flex;
-		text-align: right;
+		gap: var(--30px);
+		margin: var(--120px) 0 0;
+		padding: 0;
+		justify-content: space-between;
 	}
-	.blockquote {
-		max-width: calc(var(--1px) * 500);
+	.list-item {
+		padding: 0;
+		margin: 0;
+		text-align: center;
+		list-style-type: none;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 	}
-	.bg-img {
-		height: calc(var(--1px)* 900);
-		max-height: 100%;
-		position: absolute;
-		left: 41%;
-		top: var(--30px);
-		width: auto;
-		z-index: -1;
+	.list-item__title {
+		display: block;
+		color: var(--color-product);
+		font-size: var(--heading-4);
+		font-weight: 600;
+		margin-bottom: var(--15px);
 	}
-	.scheme {
-		width: calc(var(--1px) * 446);
-		float: right;
+	.list-item__desc {
+		display: block;
+		font-size: var(--text-font-size);
+	}
+	.list-item img {
+		width: calc(var(--1px) * 362);
+		height: calc(var(--1px) * 362);
+		margin-bottom: var(--45px);
 	}
 
 	@media screen and (max-width: 1023px) {
+		.section {
+			order: -1;
+			position: relative;
+			&::before {
+				content: '';
+				position: absolute;
+				top: 30%;
+				height: 40vw;
+				width: 100vw;
+				color: rgba(252, 20, 71, 0.37);
+				background-color: currentColor;
+				box-shadow: 0 0 var(--120px) var(--120px) currentColor;
+				border-radius: 100%;
+				filter: blur(var(--60px));
+				z-index: -1;
+			}
+		}
 		.title {
-			margin-top: 0;
-		}
-		.bg-img {
-			position: static;
-			width: auto;
-			height: auto;
-			margin: calc(var(--45px) * -1) 0 0;
-		}
-		.scheme {
-			float: none;
+			// --text-product: var(--color-white);
 			margin: var(--60px) 0;
-			width: auto;
-			text-align: center;
+		}
+		.list {
+			// --color-product: var(--color-white);
+			margin: 0 0 var(--30px);
+			flex-direction: column;
+		}
+		.list-item {
+			margin-bottom: var(--15px);
+		}
+		.list-item img {
+			width: calc(var(--1px) * 128);
+			height: calc(var(--1px) * 128);
+			margin-bottom: var(--15px);
+			filter: drop-shadow(0px 1px 0px var(--color-bg-black));
+			border: var(--1px) solid white;
+  			border-radius: 100%;
+		}
+		.list-item__title {
+			font-size: var(--text-font-size);
 		}
 	}
 </style>

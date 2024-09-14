@@ -16,7 +16,7 @@ const hasImages =
   imageList[sku] !== undefined && Object.keys(imageList[sku]).length > 0;
 ---
 
-<section>
+<section class="section">
   {
     hasImages && (
       <div class="gallery">
@@ -349,7 +349,9 @@ const hasImages =
   }
 
   @media screen and (max-width: 1023px) {
-
+		.section {
+			order: -1;
+		}
     .custom-slider {
       &__list-item {
         min-width: 100%;

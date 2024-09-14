@@ -41,7 +41,7 @@ const optimizedBackgroundImage = backgroundImageMobile
           loading="lazy"
         />
       </div>
-      <SocialList class="display-none display-mobile-flex" />
+      <SocialList class="display-none display-mobile-flex justify-content-center" />
     </div>
   </div>
 
@@ -85,6 +85,7 @@ const optimizedBackgroundImage = backgroundImageMobile
     .section {
       background-image: var(--bg-url-mobile) !important;
       background-size: contain;
+			order: -1;
     }
     .hero {
       margin-bottom: var(--60px);

@@ -2,14 +2,13 @@
 import { Image } from 'astro:assets';
 import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
-import imageSneaker from '../../assets/img/convection/sneaker.svg?raw';
 import imageScheme1 from '../../assets/img/convection/scheme1.png';
 import imageScheme2 from '../../assets/img/convection/scheme2.png';
 
-const { backgroundImage, mainImage } = Astro.props;
+const { backgroundImage, mainImage, class: className } = Astro.props;
 
 ---
-<Section backgroundImage={backgroundImage} class="section">
+<Section backgroundImage={backgroundImage} class:list={["section", className]}>
 	<div class="layout">
 		<ul class="list">
 			<li class="list-item">
@@ -80,10 +79,10 @@ const { backgroundImage, mainImage } = Astro.props;
 	}
 	.bg-img {
 		position: absolute;
-		top: var(--60px);
+		top: var(--200px);
 		right: 46%;
 		width: auto;
-		height: calc(var(--1px) * 880);
+		height: calc(var(--1px) * 720);
 		max-height: 100%;
 		z-index: -1;
 	}
@@ -115,20 +114,27 @@ const { backgroundImage, mainImage } = Astro.props;
 		.layout {
 			float: none;
 			margin-top: var(--60px);
+			display: flex;
+			flex-direction: column;
+		}
+		header {
+			order: 0;
 		}
 		.title {
-			margin-top: var(--45px);
+			margin-top: 0;
 			text-align: left;
 		}
 		.bg-img {
     		position: static;
 			width: auto;
 			height: auto;
-			margin: calc(var(--8px) * -1) 0 calc(var(--15px) * -1);
+			margin: var(--60px) 0;
+			order: 2;
 		}
 		.list {
 			gap: var(--30px);
 			margin: 0 0 var(--60px);
+			order: 3;
 		}
 		.list-item {
 			text-align: center;
@@ -138,7 +144,11 @@ const { backgroundImage, mainImage } = Astro.props;
 			width: auto;
 		}
 		.blockquote {
-			margin-bottom: var(--30px);
+			margin: 0;
+			order: 1;
+			p:last-child {
+				margin-bottom: 0;
+			}
 		}
 	}
 </style>

@@ -5,10 +5,10 @@ import StarTrekText from "../ui/StarTrekText.astro";
 import bg2Image from '../../assets/img/made-in-russia/bg.svg';
 import bg2MobileImage from '../../assets/img/made-in-russia/bg_mobile.svg';
 
-const { backgroundImage } = Astro.props;
+const { backgroundImage, class: className } = Astro.props;
 
 ---
-<Section backgroundImage={backgroundImage} class="section">
+<Section backgroundImage={backgroundImage} class:list={["section", className]}>
 	<header>
 		<StarTrekText as="h2" class="h1 title">Сделано в России</StarTrekText>
 	</header>

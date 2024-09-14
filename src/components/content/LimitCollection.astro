@@ -10,10 +10,10 @@ import { productOptMap } from "../../utils/product-list";
 <Section class="section">
 	<div class="limit">
 		<div class="limit-header">
-		<StarTrekText as="h4" class="limit-header__title" id="nav-title">
-			лимитированные коллекции
-		</StarTrekText>
-		<p>Уникальный стиль под уникальных людей</p>
+      <StarTrekText as="h4" class="limit-header__title" id="nav-title">
+        лимитированные коллекции
+      </StarTrekText>
+      <p>Уникальный стиль под уникальных людей</p>
 		</div>
 		<nav aria-labeledby="nav-title">
 			<ul class="menu">
@@ -218,8 +218,14 @@ import { productOptMap } from "../../utils/product-list";
   }
 
   @media screen and (max-width: 1023px) {
+    .section {
+      order: -1;
+    }
     .limit {
       margin-bottom: 0;
+    }
+    .limit-header {
+      display: none;
     }
     .limit-header__title {
       font-size: var(--heading-1);
@@ -227,7 +233,7 @@ import { productOptMap } from "../../utils/product-list";
     }
     .menu {
       flex-direction: column;
-      margin: var(--45px) calc(var(--gutter) * -1);
+      margin: var(--60px) calc(var(--gutter) * -1) var(--45px);
       gap: var(--45px);
     }
     .menu__item {
@@ -236,6 +242,9 @@ import { productOptMap } from "../../utils/product-list";
     }
     .card {
       padding: calc(var(--1px) * 10) 0 var(--15px) var(--30px);
+      &::after {
+        filter: blur(var(--30px));
+      }
     }
     .card__title {
       font-size: calc(var(--1px) * 64);

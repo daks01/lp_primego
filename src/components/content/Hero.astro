@@ -7,6 +7,7 @@ import imgSlide1 from "/src/assets/img/hero-slider/slide-1.png";
 import imgSlide2 from "/src/assets/img/hero-slider/slide_2.png";
 import imgSlide3 from "/src/assets/img/hero-slider/slide_3.png";
 import BackgroundText from "../ui/BackgroundText.astro";
+import SocialList from "../ui/SocialList.astro";
 
 const imageList = [
 	imgSlide1, imgSlide2, imgSlide3, imgSlide2
@@ -89,6 +90,7 @@ const { backgroundImage } = Astro.props;
 			</div>
 		</div>
 	</div>
+	<SocialList class="display-none display-mobile-flex justify-content-center" />
 </Section>
 
 <script>
@@ -150,9 +152,6 @@ const { backgroundImage } = Astro.props;
 	.section {
 		min-height: calc(var(--section-height) - var(--header-height));
 	}
-</style>
-
-<style lang="scss" is:global>
 	.page-title {
 		margin-bottom: var(--90px);
 		font-size: var(--heading-1);
@@ -184,6 +183,9 @@ const { backgroundImage } = Astro.props;
 	}
 
 	@media screen and (max-width: 1023px) {
+		.section {
+			order: -1;
+		}
 		.hero {
 			min-width: auto;
 			text-align: center;

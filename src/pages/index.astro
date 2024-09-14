@@ -28,6 +28,7 @@ import backgroundShape from "/src/assets/img/bg/FC1447/4.jpg";
 import backgroundMadeIn from "/src/assets/img/bg/FC1447/8.jpg";
 // import backgroundCustomizer from "/src/assets/img/bg/FC1447/9.jpg";
 import backgroundFooter from "/src/assets/img/bg/FC1447/10.jpg";
+import SocialOnMobile from "../components/content/SocialOnMobile.astro";
 ---
 
 <style is:global>
@@ -41,20 +42,30 @@ import backgroundFooter from "/src/assets/img/bg/FC1447/10.jpg";
 
 <Layout title="Primego">
 	<Header isHome={true}/>
-	<main>
+	<main class="main">
 		<Hero backgroundImage={backgroundHero}/>
 		<LimitCollection />
-		<NanoTextiles backgroundImage={backgroundNano} mainImage={imageNano}/>
+		<NanoTextiles backgroundImage={backgroundNano} mainImage={imageNano} class="display-mobile-none"/>
 		<FootShape backgroundImage={backgroundShape}/>
-		<Convection backgroundImage={backgroundConvection} mainImage={imageConvection}/>
+		<SocialOnMobile />
+		<Convection backgroundImage={backgroundConvection} mainImage={imageConvection} class="display-mobile-none"/>
 		<!-- <MobileApp backgroundImage={backgroundMobileApp}/>
 		<Customization backgroundImage={backgroundCustom} mainImage={imageCustomSneaker}/>
 		<Innovation backgroundImage={backgroundInnovation}/> -->
 		<Faq/>
-		<MadeInRussia backgroundImage={backgroundMadeIn}/>
+		<MadeInRussia backgroundImage={backgroundMadeIn} class="display-mobile-none"/>
 		<!-- <Customizator backgroundImage={backgroundCustomizer}/> -->
 	</main>
 	<Footer isHome={true} backgroundImage={backgroundFooter}/>
 </Layout>
 
 <script></script>
+
+<style>
+	@media screen and (max-width: 1023px) {
+		.main {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+</style>
