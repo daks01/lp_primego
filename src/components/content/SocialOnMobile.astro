@@ -1,0 +1,31 @@
+---
+import StarTrekText from "../ui/StarTrekText.astro";
+import Section from "../ui/Section.astro";
+import SocialList from "../ui/SocialList.astro";
+---
+
+<Section class="section">
+    <header>
+      <StarTrekText as="h2" class="h1 title">
+        Мы в соцсетях
+      </StarTrekText>
+    </header>
+		<SocialList variant="imgList"/>
+</Section>
+
+<style>
+  .section {
+    display: none;
+  }
+
+  @media screen and (max-width: 1023px) {
+    .section {
+      display: block;
+      padding-bottom: var(--30px);
+    }
+    .title {
+			margin: var(--45px) 0 var(--60px);
+      text-align: center;
+    }
+  }
+</style>

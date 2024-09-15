@@ -45,7 +45,7 @@ const productSKU = productOptMap.royal.sku;
 
 <Layout title="Primego | Рояль">
 	<Header/>
-	<main>
+	<main class="main">
 		<HeroSubPage 
 			backgroundImage={backgroundHero}
 			backgroundImageMobile={backgroundHeroMobile}
@@ -68,3 +68,12 @@ const productSKU = productOptMap.royal.sku;
 </Layout>
 
 <script></script>
+
+<style>
+	@media screen and (max-width: 1023px) {
+		.main {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+</style>

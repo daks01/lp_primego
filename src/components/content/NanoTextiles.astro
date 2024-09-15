@@ -3,10 +3,10 @@ import { Image } from 'astro:assets';
 import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
 
-const { backgroundImage, mainImage, invert = false } = Astro.props;
+const { backgroundImage, mainImage, invert = false, class: className  } = Astro.props;
 
 ---
-<Section backgroundImage={backgroundImage} invert={invert} class="section">
+<Section backgroundImage={backgroundImage} invert={invert} class:list={["section", className]}>
 	<header>
 		<StarTrekText as="h2" class="h1 title">
 			НАНО <br />ТЕКСТИЛЬ
@@ -58,7 +58,7 @@ const { backgroundImage, mainImage, invert = false } = Astro.props;
 			width: auto;
 			height: auto;
 			max-width: calc(100% + var(--gutter) + var(--gutter));
-			margin: calc(var(--1px) * 75 * -1) calc(var(--gutter) * -1) var(--30px);
+			margin: calc(var(--45px)* -1) calc(var(--gutter)* -1) 0;
 		}
 	}
 </style>

@@ -105,7 +105,7 @@
         </template>
         <p v-else>Корзина пуста</p>
 
-        <form action="">
+        <form action="" @submit="buy()">
             <fieldset>
                 <legend>
                     <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -114,9 +114,9 @@
                     </svg>
                     Получатель
                 </legend>
-                <input type="phone" aria-label="Номер телефона" placeholder="Номер телефона" v-model="formData.phone"
+                <input type="phone" aria-label="Номер телефона" placeholder="Номер телефона*" v-model="formData.phone"
                     class="input" required>
-                <input type="text" aria-label="Имя" placeholder="Имя" v-model="formData.name" class="input" required>
+                <input type="text" aria-label="Имя" placeholder="Имя" v-model="formData.name" class="input">
                 <input type="text" aria-label="Фамилия" placeholder="Фамилия" v-model="formData.surname" class="input">
                 <input type="email" aria-label="E-mail" placeholder="E-mail" v-model="formData.email" class="input">
                 <input type="text" aria-label="Почтовый адрес" placeholder="Почтовый адрес" v-model="formData.address"
@@ -166,8 +166,7 @@
                 </label>
             </fieldset>
             <div class="form__footer">
-                <button 
-                    @click="buy"
+                <button
                     type="submit" 
                     class="button button_size-large button_fullwidth"
                     :disabled="status === 'sending' || Object.values($cartItems).length === 0"
