@@ -148,12 +148,17 @@ import { productOptMap } from "../../utils/product-list";
       z-index: -2;
       transition: background-color ease 0.5s;
     }
-    &:hover {
-      .card__img {
-        transform: rotate(-19deg) scale(1.2) translateY(-10%);
-      }
-      &:after {
-        background-color: rgba(252, 20, 71, 0.55);
+  }
+
+  @media(hover: hover) and (pointer: fine) {
+    .card {
+      &:hover {
+        .card__img {
+          transform: rotate(-19deg) scale(1.2) translateY(-10%);
+        }
+        &:after {
+          background-color: rgba(252, 20, 71, 0.55);
+        }
       }
     }
   }
