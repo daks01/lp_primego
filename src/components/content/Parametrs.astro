@@ -4,6 +4,9 @@ import BuyButton from "../ui/BuyButton.astro";
 import ProductPriceFromApi from "../blocks/ProductPriceFromApi.astro";
 
 const { sku, imageSneakers } = Astro.props;
+import { productOptMap } from "../../utils/product-list";
+
+const productOptions = productOptMap[sku];
 ---
 
 <div class="params">
@@ -11,31 +14,36 @@ const { sku, imageSneakers } = Astro.props;
 	<div class="params__aria">
 		<ul class="params__list">
 			<li class="params__list-item">
-				Цвет: <span class="params__value">черный / желтый</span>
+				Цвет: 
+				<span class="params__value">{productOptions.color}</span>
 			</li>
 			<li class="params__list-item">
-				Сезон: <span class="params__value">демисезон</span>
+				Сезон: 
+				<span class="params__value">{productOptions.season}</span>
 			</li>
 			<li class="params__list-item">
-				Вид застежки: <span class="params__value">шнуровка</span>
+				Вид застежки: 
+				<span class="params__value">{productOptions.typeOfClasp}</span>
 			</li>
 			<li class="params__list-item">
-				Состав верх: <span class="params__value">100%&nbsp;кожа</span>
+				Состав верх:
+				<span class="params__value" set:html={productOptions.upperComposition}></span>
 			</li>
 			<li class="params__list-item">
-				Состав подкладка: <span class="params__value">100%&nbsp;хлопок</span>
+				Состав подкладка: 
+				<span class="params__value" set:html={productOptions.liningComposition}></span>
 			</li>
 			<li class="params__list-item">
-				Состав подошва: <span class="params__value">ЭВА</span>
+				Состав подошва: <span class="params__value" set:html={productOptions.soleComposition}></span>
 			</li>
 			<li class="params__list-item">
-				Высота подошвы: <span class="params__value">2.5&thinsp;см</span>
+				Высота подошвы: <span class="params__value" set:html={productOptions.soleHeight}></span>
 			</li>
 			<li class="params__list-item">
-				Полнота обуви: <span class="params__value">F&thinsp;(6)</span>
+				Полнота обуви: <span class="params__value" set:html={productOptions.fullnessOfShoes}></span>
 			</li>
 			<li class="params__list-item">
-				Страна производства: <span class="params__value">Россия</span>
+				Страна производства: <span class="params__value">{productOptions.madeIn}</span>
 			</li>
 		</ul>
 	</div>

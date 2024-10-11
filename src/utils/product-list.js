@@ -1,11 +1,26 @@
+const defaultOptions = {
+    season: 'демисезон',
+    typeOfClasp: 'шнуровка',
+    upperComposition: '100%&nbsp;кожа',
+    liningComposition: '100%&nbsp;хлопок',
+    soleComposition: 'Vibram (ЭВА)',
+    soleHeight: '2.5&thinsp;см',
+    fullnessOfShoes: 'F&thinsp;(6)',
+    madeIn: 'Россия',
+}
+
 export const productOptMap = {
-    royal: {
+    RL24: {
+        ...defaultOptions,
         name: 'Рояль',
         sku: 'RL24',
+        color: 'черный / белый',
     },
-    empire: {
+    EM24: {
+        ...defaultOptions,
         name: 'ИМПЕРИУМ',
-        sku: 'EM24'
+        sku: 'EM24',
+        color: 'черный / желтый',
     },
 };
 
