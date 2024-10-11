@@ -3,13 +3,17 @@ const {
   as: Element = "button",
   href,
   class: className,
+  children = Astro.slots.render('default') || null,
   ...props
 } = Astro.props;
 ---
 
-<Element {...props} href={href} class:list={["button", className]}>
-  <slot />
-</Element>
+<Element 
+    {...props}
+    href={href} 
+    class:list={["button", className]} 
+    set:html={children}
+></Element>
 
 <style is:global lang="scss">
 .button {

@@ -1,7 +1,6 @@
 html {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
-    background-color: var(--color-black);
 }
 
 body {
@@ -9,6 +8,9 @@ body {
     font-size: var(--text-font-size);
     line-height: var(--text-line-height);
     color: var(--text-color);
+}
+
+body:not([class*="astrobook"]) {
     background-color: var(--color-black);
 }
 
@@ -40,8 +42,16 @@ img, svg {
     flex-shrink: 0;
 }
 
-a:link {
+a:link:not(.button) {
     color: var(--color-product)
+}
+
+.link {
+    color: var(--color-product);
+    text-decoration: underline;
+    border: none;
+    background: none;
+    cursor: pointer;
 }
 
 .justify-content-center {
