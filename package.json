@@ -6,16 +6,15 @@
     "dev": "astro dev --open",
     "build:staging": "NODE_ENV=staging  astro build --mode staging ",
     "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "astrobook": "astro dev --open --port 4322 --config astrobook.config.mjs"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.0.5",
-    "@astrojs/vue": "^4.0.8",
+    "@astrojs/vue": "^4.5.2",
     "@nanostores/query": "^0.3.0",
     "@nanostores/vue": "^0.10.0",
     "@splidejs/splide": "^4.1.4",
-    "astro": "^4.2.3",
+    "astro": "^4.15.12",
     "autoprefixer": "^10.4.17",
     "cssnano": "^6.0.3",
     "dialog-polyfill": "^0.5.6",
@@ -24,5 +23,8 @@
     "nanostores": "^0.10.3",
     "sass": "^1.70.0",
     "vue": "^3.4.15"
+  },
+  "devDependencies": {
+    "astrobook": "^0.4.4"
   }
 }
