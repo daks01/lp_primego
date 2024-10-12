@@ -15,6 +15,7 @@ export const productOptMap = {
         name: 'Рояль',
         sku: 'RL24',
         color: 'черный / белый',
+        soleComposition: 'ЭВА',
     },
     EM24: {
         ...defaultOptions,
