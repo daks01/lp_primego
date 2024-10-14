@@ -3,15 +3,17 @@ import { getImage } from "astro:assets"
 import Head from './Head.astro';
 const { backgroundImage } = Astro.props;
 
-const optimizedBackgroundImage = backgroundImage 
-	? await getImage({ src: backgroundImage, quality: '95' }) 
+const optimizedBackgroundImage = backgroundImage
+	? await getImage({ src: backgroundImage, quality: '95' })
 	: {src:''};
+
+const { title } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="ru">
 	<head>
-		<Head />
+		<Head title={title} />
 		<slot name="head" />
 	</head>
 	<body style={backgroundImage ? `background-image: url(${optimizedBackgroundImage?.src})` : ''}>
