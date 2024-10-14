@@ -1,0 +1,25 @@
+---
+const {
+    as: Element = "section",
+    class: className,
+    ...props
+} = Astro.props;
+
+---
+<Element {...props} class:list={["group", className]}>
+    <slot/>
+</Element>
+
+<style lang="scss">
+    .group {
+        display: flex;
+        flex-flow: row nowrap;
+        height: 100%
+    }
+
+    @media screen and (max-width: 1023px) {
+        .group {
+            flex-direction: column-reverse;
+        }
+    }
+</style>
