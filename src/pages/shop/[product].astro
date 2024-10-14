@@ -1,0 +1,137 @@
+---
+import Group from '../../components/ui/Group.astro';
+import StarTrekText from '../../components/ui/StarTrekText.astro';
+import Warning from '../../components/ui/Warning.astro';
+import Layout from '../../layouts/Layout.astro';
+import BackButton from '../../components/ui/BackButton.astro';
+import { productOptMap } from '../../utils/product-list';
+
+export function getStaticPaths() {
+    return [
+        {
+            params: { product: 'empire' },
+            props: { sku: 'EM24' },
+        },
+        {
+            params: { product: 'royal' },
+            props: { sku: 'RL24' },
+        },
+    ];
+}
+
+const { sku } = Astro.props;
+
+const productOptions = productOptMap[sku];
+---
+
+<Layout title="Primego | Примерочная">
+    <Group as="main" class="mainGroup">
+        <section class="left">
+            <BackButton href="./../" class="backButton" />
+            <header>
+                <span class="subtitle">Лимитированная коллекция</span>
+                <StarTrekText as="h1" class:list={['title', { empire: sku === 'EM24', royal: sku === 'RL24' }]}>
+                    {productOptions.name}
+                </StarTrekText>
+            </header>
+            <Warning
+                >Внимание! В каждой коллекции собственный размерный ряд. Используйте калькулятор ниже для подбора размера.</Warning
+            >
+            <form>
+                <fieldset>
+                    <legend>Выбери цвет модели</legend>
+                    <div>
+                        <label><input type="radio" name="colour" />цвет 1</label>
+                        <label><input type="radio" name="colour" />цвет 2</label>
+                        <label><input type="radio" name="colour" />цвет 3</label>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Определи свой размер</legend>
+                    <button>Как снять мерку?</button>
+                    <span>Параметры стопы</span>
+                    <div>
+                        <label>
+                            Длина (см):
+                            <select aria-label="Выбрать длину">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select>
+                        </label>
+                        <label>
+                            Ширина в  широкой части (см):
+                            <select aria-label="Выбрать ширину">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select>
+                        </label>
+                    </div>
+                    <label><input type="checkbox" />Подтвердите указанные размеры</label>
+                </fieldset>
+                <fieldset>
+                    <legend>Выбери размер</legend>
+                    <div>
+                        <label><input type="radio" name="size" />36</label>
+                        <label><input disabled type="radio" name="size" />37</label>
+                        <label><input disabled type="radio" name="size" />38</label>
+                        <label><input checked type="radio" name="size" />39</label>
+                    </div>
+                    <span>Параметры модели</span>
+                    <div>
+                        <span>
+                            <span>Длина по стельке (см):</span>
+                            <span>30.5</span>
+                        </span>
+                        <span>
+                            <span>Ширина по стельке в широкой части (см):</span>
+                            <span>10.5</span>
+                        </span>
+                    </div>
+                    <label>
+                        <input type="checkbox" />Внимание! Выбранный размер не совпадает с рекомендованным, продолжить?</label
+                    >
+                </fieldset>
+                <div>
+                    <div>
+                        <span>Цена</span>
+                        <span>27 700 ₽</span>
+                    </div>
+                    <button type="submit">Оформить заказ</button>
+                </div>
+            </form>
+        </section>
+        <section style="background: white; width: 50%; height: 100%; color: black;">
+            тут должна быть галерея с картинками
+        </section>
+    </Group>
+</Layout>
+
+<style lang="scss">
+    .mainGroup {
+        background-color: var(--color-bg-disabled);
+    }
+
+    .backButton {
+        margin-top: 0;
+    }
+
+    .title {
+        font-size: calc(var(--1px) * 128);
+        margin: var(--15px) 0 var(--30px);
+
+        &.empire {
+            color: var(--color-product-empire);
+        }
+
+        &.royal {
+            color: var(--color-product-royal);
+        }
+    }
+
+    .subtitle {
+        color: var(--color-gray);
+        font-weight: 600;
+    }
+</style>
