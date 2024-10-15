@@ -1,10 +1,11 @@
 ---
-import Group from '../../components/ui/Group.astro';
+import ProductPriceFromApi from '../../components/blocks/ProductPriceFromApi.astro';
 import StarTrekText from '../../components/ui/StarTrekText.astro';
 import Warning from '../../components/ui/Warning.astro';
 import Layout from '../../layouts/Layout.astro';
 import BackButton from '../../components/ui/BackButton.astro';
 import { productOptMap } from '../../utils/product-list';
+import { priceWithRouble } from '../../utils/format';
 
 export function getStaticPaths() {
     return [
@@ -25,8 +26,8 @@ const productOptions = productOptMap[sku];
 ---
 
 <Layout title="Primego | Примерочная">
-    <Group as="main" class="mainGroup">
-        <section class="left">
+    <main class="product-layout">
+        <section class="product-layout__content">
             <BackButton href="./../" class="backButton" />
             <header>
                 <span class="subtitle">Лимитированная коллекция</span>
@@ -37,17 +38,17 @@ const productOptions = productOptMap[sku];
             <Warning
                 >Внимание! В каждой коллекции собственный размерный ряд. Используйте калькулятор ниже для подбора размера.</Warning
             >
-            <form>
-                <fieldset>
-                    <legend>Выбери цвет модели</legend>
-                    <div>
-                        <label><input type="radio" name="colour" />цвет 1</label>
-                        <label><input type="radio" name="colour" />цвет 2</label>
-                        <label><input type="radio" name="colour" />цвет 3</label>
+            <form class="product-form">
+                <fieldset class="product-fieldset">
+                    <legend class="product-fieldset__legend">Выбери цвет модели</legend>
+                    <div class="colour-select">
+                        <label class="colour-select__option"><input type="radio" name="colour" />цвет 1</label>
+                        <label class="colour-select__option"><input type="radio" name="colour" />цвет 2</label>
+                        <label class="colour-select__option"><input type="radio" name="colour" />цвет 3</label>
                     </div>
                 </fieldset>
-                <fieldset>
-                    <legend>Определи свой размер</legend>
+                <fieldset class="product-fieldset">
+                    <legend class="product-fieldset__legend">Определи свой размер</legend>
                     <button>Как снять мерку?</button>
                     <span>Параметры стопы</span>
                     <div>
@@ -70,8 +71,8 @@ const productOptions = productOptMap[sku];
                     </div>
                     <label><input type="checkbox" />Подтвердите указанные размеры</label>
                 </fieldset>
-                <fieldset>
-                    <legend>Выбери размер</legend>
+                <fieldset class="product-fieldset">
+                    <legend class="product-fieldset__legend">Выбери размер</legend>
                     <div>
                         <label><input type="radio" name="size" />36</label>
                         <label><input disabled type="radio" name="size" />37</label>
@@ -96,7 +97,7 @@ const productOptions = productOptMap[sku];
                 <div>
                     <div>
                         <span>Цена</span>
-                        <span>27 700 ₽</span>
+                        <ProductPriceFromApi sku={sku} />
                     </div>
                     <button type="submit">Оформить заказ</button>
                 </div>
@@ -105,11 +106,14 @@ const productOptions = productOptMap[sku];
         <section style="background: white; width: 50%; height: 100%; color: black;">
             тут должна быть галерея с картинками
         </section>
-    </Group>
+    </main>
 </Layout>
 
 <style lang="scss">
-    .mainGroup {
+    .product-layout {
+        display: flex;
+        flex-flow: row nowrap;
+        height: 100%;
         background-color: var(--color-bg-disabled);
     }
 
@@ -133,5 +137,91 @@ const productOptions = productOptMap[sku];
     .subtitle {
         color: var(--color-gray);
         font-weight: 600;
+    }
+
+    .product-form {
+        counter-reset: step-counter 0;
+    }
+
+    .product-fieldset {
+        counter-increment: step-counter;
+        background-color: var(--color-bg-black);
+        border: none;
+        border-left: var(--2px) solid var(--color-product);
+        padding: var(--30px) var(--30px) var(--60px);
+
+        &__legend {
+            font-size: var(--text-font-size);
+            font-weight: 600;
+            float: left;
+            display: flex;
+            align-items: center;
+            margin: 0 0 var(--30px);
+            padding: 0;
+            width: 100%;
+
+            &::before {
+                content: counter(step-counter);
+                flex-shrink: 0;
+                color: var(--text-light-grey);
+                border: var(--2px) solid currentColor;
+                font-size: var(--heading-4);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: var(--60px);
+                height: var(--60px);
+                border-radius: var(--60px);
+                margin-right: var(--15px);
+            }
+        }
+    }
+
+    .product-fieldset + .product-fieldset {
+        margin-top: var(--15px);
+    }
+
+    .colour-select {
+        display: flex;
+        width: 100%;
+        align-items: center;
+
+        &__option {
+            cursor: pointer;
+
+            input {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+            }
+        }
+
+        &__option + &__option {
+            margin-left: calc(var(--1px) * 20);
+        }
+
+        &__pic {
+            display: inline-block;
+            width: calc(var(--1px) * 38);
+            height: calc(var(--1px) * 38);
+            border-radius: 50%;
+            overflow: hidden;
+            transform: rotate(30deg);
+        }
+
+        input:hover + &__pic,
+        input:focus + &__pic {
+            box-shadow: 0 0 0 var(--2px) var(--text-light-grey);
+        }
+
+        input:checked + &__pic {
+            box-shadow: 0 0 0 var(--2px) var(--button-main-style-primary-stroke-focused);
+        }
+    }
+
+    @media screen and (max-width: 1023px) {
+        .product-layout {
+            flex-direction: column-reverse;
+        }
     }
 </style>
