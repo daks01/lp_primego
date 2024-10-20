@@ -1,0 +1,31 @@
+---
+const { as: Element = 'a', class: className, ...props } = Astro.props;
+---
+
+<Element {...props} class:list={['link', className]}>
+    <slot />
+</Element>
+
+<style lang="scss">
+    .link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        margin: 0;
+        padding: 0;
+        width: auto;
+        background: transparent;
+        cursor: pointer;
+        color: var(--color-product-primego);
+        font: inherit;
+        font-size: var(--small-font-size);
+        font-weight: 600;
+        text-decoration: underline;
+        text-underline-offset: var(--4px);
+    }
+
+    .link:hover {
+        color: var(--color-gray);
+    }
+</style>
