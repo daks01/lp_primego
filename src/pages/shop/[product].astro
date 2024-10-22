@@ -1,0 +1,279 @@
+---
+import ProductPriceFromApi from '../../components/blocks/ProductPriceFromApi.astro';
+import HowToMeasure from '../../components/content/HowToMeasure.astro';
+import Button from '../../components/ui/Button.astro';
+import UnderlineClickable from '../../components/ui/UnderlineClickable.astro';
+import Dialog from '../../components/ui/Dialog.astro';
+import StarTrekText from '../../components/ui/StarTrekText.astro';
+import Warning from '../../components/ui/Warning.astro';
+import Layout from '../../layouts/Layout.astro';
+import BackButton from '../../components/ui/BackButton.astro';
+import { productOptMap } from '../../utils/product-list';
+import { priceWithRouble } from '../../utils/format';
+
+export function getStaticPaths() {
+    return [
+        {
+            params: { product: 'empire' },
+            props: { sku: 'EM24' },
+        },
+        {
+            params: { product: 'royal' },
+            props: { sku: 'RL24' },
+        },
+    ];
+}
+
+const { sku } = Astro.props;
+
+const productOptions = productOptMap[sku];
+---
+
+<Layout title="Primego | Примерочная">
+    <main class="product-layout">
+        <section class="product-layout__content">
+            <BackButton href="./../" class="backButton" />
+            <header>
+                <span class="subtitle">Лимитированная коллекция</span>
+                <StarTrekText as="h1" class:list={['title', { empire: sku === 'EM24', royal: sku === 'RL24' }]}>
+                    {productOptions.name}
+                </StarTrekText>
+            </header>
+            <Warning
+                >Внимание! В каждой коллекции собственный размерный ряд. Используйте калькулятор ниже для подбора размера.</Warning
+            >
+            <form class="product-form">
+                <fieldset class="product-fieldset">
+                    <legend class="product-fieldset__legend">Выбери цвет модели</legend>
+                    <div class="colour-select">
+                        <label class="colour-select__option"><input type="radio" name="colour" />цвет 1</label>
+                        <label class="colour-select__option"><input type="radio" name="colour" />цвет 2</label>
+                        <label class="colour-select__option"><input type="radio" name="colour" />цвет 3</label>
+                    </div>
+                </fieldset>
+                <fieldset class:list={['product-fieldset', 'measure-step']}>
+                    <legend class="product-fieldset__legend">Определи свой размер</legend>
+                    <UnderlineClickable
+                        as="button"
+                        type="button"
+                        onclick={`window["dialog-measuring"]?.showModal()`}
+                        class="measure-step__how-to-button"
+                    >
+                        <svg
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            role="presentation"
+                        >
+                            <path
+                                fill-rule="evenodd"
+                                clip-rule="evenodd"
+                                d="M3 6C1.34315 6 0 7.34315 0 9V16C0 17.6569 1.34315 19 3 19H21C22.6569 19 24 17.6569 24 16V9C24 7.34315 22.6569 6 21 6H3ZM9 8H7V13C7 13.5523 6.55228 14 6 14C5.44772 14 5 13.5523 5 13V8H3C2.44772 8 2 8.44772 2 9V16C2 16.5523 2.44772 17 3 17H21C21.5523 17 22 16.5523 22 16V9C22 8.44772 21.5523 8 21 8H19V11C19 11.5523 18.5523 12 18 12C17.4477 12 17 11.5523 17 11V8H15V13C15 13.5523 14.5523 14 14 14C13.4477 14 13 13.5523 13 13V8H11V11C11 11.5523 10.5523 12 10 12C9.44771 12 9 11.5523 9 11V8Z"
+                                fill="currentColor"></path>
+                        </svg>
+                        Как снять мерку?
+                    </UnderlineClickable>
+                    <span class="product-fieldset__description">Параметры стопы</span>
+                    <div>
+                        <label>
+                            Длина (см):
+                            <select aria-label="Выбрать длину">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select>
+                        </label>
+                        <label>
+                            Ширина в  широкой части (см):
+                            <select aria-label="Выбрать ширину">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                            </select>
+                        </label>
+                    </div>
+                    <label><input type="checkbox" />Подтвердите указанные размеры</label>
+                </fieldset>
+                <fieldset class="product-fieldset">
+                    <legend class="product-fieldset__legend">Выбери размер</legend>
+                    <div>
+                        <label><input type="radio" name="size" />36</label>
+                        <label><input disabled type="radio" name="size" />37</label>
+                        <label><input disabled type="radio" name="size" />38</label>
+                        <label><input checked type="radio" name="size" />39</label>
+                    </div>
+                    <span class="product-fieldset__description">Параметры модели</span>
+                    <div>
+                        <span>
+                            <span>Длина по стельке (см):</span>
+                            <span>30.5</span>
+                        </span>
+                        <span>
+                            <span>Ширина по стельке в широкой части (см):</span>
+                            <span>10.5</span>
+                        </span>
+                    </div>
+                    <label>
+                        <input type="checkbox" />Внимание! Выбранный размер не совпадает с рекомендованным, продолжить?</label
+                    >
+                </fieldset>
+                <div>
+                    <div>
+                        <span>Цена</span>
+                        <ProductPriceFromApi sku={sku} />
+                    </div>
+                    <button type="submit">Оформить заказ</button>
+                </div>
+            </form>
+        </section>
+        <Dialog id="dialog-measuring" title="Как снять мерку">
+            <HowToMeasure />
+            <Button class="button_type-secondary button_fullwidth" onclick={`window["dialog-measuring"]?.close()`}>
+                Назад
+            </Button>
+        </Dialog>
+        <section style="background: white; width: 50%; height: 100%; color: black;">
+            тут должна быть галерея с картинками
+        </section>
+    </main>
+</Layout>
+
+<style lang="scss">
+    .product-layout {
+        display: flex;
+        flex-flow: row nowrap;
+        height: 100%;
+        background-color: var(--color-bg-disabled);
+    }
+
+    .backButton {
+        margin-top: 0;
+    }
+
+    .title {
+        font-size: calc(var(--1px) * 128);
+        margin: var(--15px) 0 var(--30px);
+
+        &.empire {
+            color: var(--color-product-empire);
+        }
+
+        &.royal {
+            color: var(--color-product-royal);
+        }
+    }
+
+    .subtitle {
+        color: var(--color-gray);
+        font-weight: 600;
+    }
+
+    .product-form {
+        counter-reset: step-counter 0;
+    }
+
+    .product-fieldset {
+        counter-increment: step-counter;
+        background-color: var(--color-bg-black);
+        border: none;
+        border-left: var(--2px) solid var(--color-product);
+        padding: var(--30px) var(--30px) var(--60px);
+
+        &__legend {
+            font-size: var(--text-font-size);
+            font-weight: 600;
+            float: left;
+            display: flex;
+            align-items: center;
+            margin: 0 0 var(--30px);
+            padding: 0;
+            width: 100%;
+
+            &::before {
+                content: counter(step-counter);
+                flex-shrink: 0;
+                color: var(--text-light-grey);
+                border: var(--2px) solid currentColor;
+                font-size: var(--heading-4);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: var(--60px);
+                height: var(--60px);
+                border-radius: var(--60px);
+                margin-right: var(--15px);
+            }
+        }
+
+        &__description {
+            color: var(--color-gray);
+            margin-top: var(--30px);
+        }
+    }
+
+    .product-fieldset + .product-fieldset {
+        margin-top: var(--15px);
+    }
+
+    .colour-select {
+        display: flex;
+        width: 100%;
+        align-items: center;
+
+        &__option {
+            cursor: pointer;
+
+            input {
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+            }
+        }
+
+        &__option + &__option {
+            margin-left: calc(var(--1px) * 20);
+        }
+
+        &__pic {
+            display: inline-block;
+            width: calc(var(--1px) * 38);
+            height: calc(var(--1px) * 38);
+            border-radius: 50%;
+            overflow: hidden;
+            transform: rotate(30deg);
+        }
+
+        input:hover + &__pic,
+        input:focus + &__pic {
+            box-shadow: 0 0 0 var(--2px) var(--text-light-grey);
+        }
+
+        input:checked + &__pic {
+            box-shadow: 0 0 0 var(--2px) var(--button-main-style-primary-stroke-focused);
+        }
+    }
+
+    .measure-step {
+        position: relative;
+
+        &__how-to-button {
+            position: absolute;
+            top: var(--45px);
+            right: var(--30px);
+
+            svg {
+                margin-right: calc(var(--1px) * 10);
+                width: calc(var(--1px) * 24);
+                height: calc(var(--1px) * 24);
+            }
+        }
+    }
+
+    @media screen and (max-width: 1023px) {
+        .product-layout {
+            flex-direction: column-reverse;
+        }
+    }
+</style>

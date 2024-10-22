@@ -6,7 +6,7 @@ import SocialList from "../ui/SocialList.astro";
 import Logo from "../ui/Logo.astro";
 import ActionPanel from "../blocks/ActionPanel.astro";
 
-const { 
+const {
 	as: tag = "header",
 	isHome = false,
 } = Astro.props;
@@ -72,7 +72,7 @@ const {
 			height: calc(var(--1px) * 24);
 		}
 	}
-	@media screen and (max-width: 1024px) {
+	@media screen and (max-width: 1023px) {
 		.back-button {
 			display: block;
 			margin-right: var(--15px);

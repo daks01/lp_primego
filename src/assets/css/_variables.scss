@@ -10,6 +10,7 @@
     --1px: min(.052085vw, var(--container-width-in-px) / 100 * .052085);
     --module: calc(var(--1px) * 15);
 
+    --2px: calc(var(--1px) * 2);
     --4px: calc(var(--1px) * 4);
     --8px: calc(var(--1px) * 8);
     --15px: var(--module);
