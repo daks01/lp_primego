@@ -87,6 +87,7 @@
             width: calc(var(--1px) * 24);
             height: calc(var(--1px) * 24);
             margin-right: var(--15px);
+            flex: 0 0 auto;
 
             &:before {
                 content: '';
