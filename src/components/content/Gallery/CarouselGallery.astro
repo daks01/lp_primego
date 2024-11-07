@@ -1,9 +1,9 @@
 ---
 import "@splidejs/splide/css/core";
-import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
-import Dialog from "../ui/Dialog.astro";
-import Button from "../ui/Button.astro";
+import Dialog from "../../ui/Dialog.astro";
+import Button from "../../ui/Button.astro";
+import SliderButton from "./SliderButton.astro";
 
 const { sku } = Astro.props;
 
@@ -21,44 +21,22 @@ const hasImages =
     hasImages && (
       <div class="gallery">
         <div class="custom-slider" data-gallery>
-          <button
-            type="button"
-            data-gallery-button="prev"
-            class="custom-slider__button"
-            aria-label="previous slide"
-          >
-            <svg
-              width="9"
-              height="14"
-              viewBox="0 0 9 14"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M3.33432 6.99967L8.66797 12.3332L7.33479 13.6663L0.667969 6.99967L7.33479 0.333008L8.66797 1.66615L3.33432 6.99967Z"
-                fill="currentColor"
-              />
-            </svg>
-          </button>
-          <button
-            type="button"
-            data-gallery-button="next"
-            class="custom-slider__button"
-            aria-label="next slide"
-          >
-            <svg
-              width="9"
-              height="14"
-              viewBox="0 0 9 14"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M5.66568 7.00033L0.332032 1.6668L1.66521 0.333659L8.33203 7.00033L1.66521 13.667L0.332031 12.3338L5.66568 7.00033Z"
-                fill="currentColor"
-              />
-            </svg>
-          </button>
+            <SliderButton
+                as="button"
+                type="button"
+                variant="left"
+                data-gallery-button="prev"
+                class="custom-slider__button"
+                aria-label="previous slide"
+            />
+            <SliderButton
+                as="button"
+                type="button"
+                variant="right"
+                data-gallery-button="next"
+                class="custom-slider__button"
+                aria-label="next slide"
+            />
           <ul class="custom-slider__list" role="group">
             {Object.keys(imageList[sku]).map((key, index) => (
               <li class="custom-slider__list-item">
@@ -94,44 +72,22 @@ const hasImages =
 
         <Dialog id="dialog-gallery-modal" class="dialog_gallery" width="1830">
           <div class="custom-slider" data-gallery>
-            <button
-              type="button"
-              data-gallery-button="prev"
-              class="custom-slider__button"
-              aria-label="previous slide"
-            >
-              <svg
-                width="9"
-                height="14"
-                viewBox="0 0 9 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M3.33432 6.99967L8.66797 12.3332L7.33479 13.6663L0.667969 6.99967L7.33479 0.333008L8.66797 1.66615L3.33432 6.99967Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </button>
-            <button
-              type="button"
-              data-gallery-button="next"
-              class="custom-slider__button"
-              aria-label="next slide"
-            >
-              <svg
-                width="9"
-                height="14"
-                viewBox="0 0 9 14"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M5.66568 7.00033L0.332032 1.6668L1.66521 0.333659L8.33203 7.00033L1.66521 13.667L0.332031 12.3338L5.66568 7.00033Z"
-                  fill="currentColor"
-                />
-              </svg>
-            </button>
+              <SliderButton
+                  as="button"
+                  type="button"
+                  variant="left"
+                  data-gallery-button="prev"
+                  class="custom-slider__button"
+                  aria-label="previous slide"
+              />
+              <SliderButton
+                  as="button"
+                  type="button"
+                  variant="right"
+                  data-gallery-button="next"
+                  class="custom-slider__button"
+                  aria-label="next slide"
+              />
             <ul class="custom-slider__list" role="group">
               {Object.keys(imageList[sku]).map((key, index) => (
                 <li
@@ -198,39 +154,12 @@ const hasImages =
 
     &__button {
       position: absolute;
-      top: 50%;
-      transform: translate(0, -50%);
-      background: white;
-      border-radius: var(--45px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0;
-      border: none;
-      color: var(--color-product-primego);
-      width: var(--30px);
-      height: var(--30px);
-      cursor: pointer;
-      z-index: 10;
-
-      &::before {
-        content: "";
-        position: absolute;
-        width: 200%;
-        height: 200%;
-        border-radius: 100%;
-        z-index: -1;
-      }
 
       &[data-gallery-button="prev"] {
         left: var(--30px);
       }
       &[data-gallery-button="next"] {
         right: var(--30px);
-      }
-
-      svg {
-        pointer-events: none;
       }
     }
     &__list {
@@ -367,10 +296,7 @@ const hasImages =
         display: none;
       }
     }
-    .custom-slider__button{
-      height: calc(var(--1px) * 24);
-      width: calc(var(--1px) * 24);
-
+    .custom-slider__button {
       &[data-gallery-button=prev] {
         left: var(--8px);
       }
