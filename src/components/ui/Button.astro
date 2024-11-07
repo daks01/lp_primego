@@ -38,8 +38,9 @@ const {
     &:active {
         background-color: var(--color-product-active);
     }
-    &[disabled] {
+    &:disabled {
         background-color: var(--color-bg-disabled);
+        color: var(--button-text-color-disabled);
         filter: brightness(0.9);
         cursor: default;
     }

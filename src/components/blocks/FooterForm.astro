@@ -3,6 +3,7 @@ import StarTrekText from "../ui/StarTrekText.astro";
 import Button from "../ui/Button.astro";
 import Dialog from "../ui/Dialog.astro";
 import DeliveryText from "../content/DeliveryText.astro";
+import UnderlineClickable from "../ui/UnderlineClickable.astro";
 ---
 
 <!-- 
@@ -17,13 +18,13 @@ import DeliveryText from "../content/DeliveryText.astro";
     Мы можем вам помочь с&nbsp;выбором модели и&nbsp;оформлением заказа
     <br />
     <br />
-    <button
-      class="link"
+    <UnderlineClickable
+      as="button"
       type="button"
       onclick={`window["dialog-delivery"]?.showModal()`}
     >
       Условия доставки и оплаты
-    </button>
+    </UnderlineClickable>
   </p>
   <Dialog id="dialog-delivery" title="Условия доставки и оплаты" width={985}>
     <DeliveryText />
@@ -229,13 +230,6 @@ import DeliveryText from "../content/DeliveryText.astro";
   .subtitle {
     text-align: center;
     margin-bottom: var(--60px);
-  }
-  .link {
-	color: var(--color-product);
-	text-decoration: underline;
-	border: none;
-	background: none;
-	cursor: pointer;
   }
   .form {
     margin: var(--60px) auto var(--120px);

@@ -1,0 +1,90 @@
+---
+
+---
+
+<article class="article">
+    <ol class="list-with-rounded-numbers">
+        <li>
+            <h5>Шаг 1</h5>
+            <p>Наденьте чулки или носки, которые вы обычно носите с таким видом обуви.</p>
+        </li>
+        <li>
+            <h5>Шаг 2</h5>
+            <p>
+                Встаньте прямо на твёрдой плоской поверхности, касаясь стены пятками. При необходимости попросите кого-нибудь
+                помочь вам снять мерки. Прижав пятки к стене, измерьте длину стопы от основания пятки до крайней точки самого
+                длинного пальца. Аналогичным образом измерьте ширину самой широкой части.
+            </p>
+        </li>
+        <li>
+            <h5>Шаг 3</h5>
+            <p>Измерьте обе стопы и используйте наибольшую величину для определения размера.</p>
+        </li>
+    </ol>
+</article>
+
+<style lang="scss">
+    // todo: объединить с DeliveryText
+    .article {
+        background-color: var(--color-bg-black);
+        border-left: var(--2px) solid var(--color-product);
+        padding: var(--30px) var(--30px) var(--60px);
+        margin-bottom: var(--45px);
+        font-size: var(--small-font-size);
+    }
+
+    .list-with-rounded-numbers {
+        counter-reset: my-awesome-counter;
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+
+        & > li {
+            counter-increment: my-awesome-counter;
+            margin: 0 0 var(--30px);
+        }
+
+        & h5 {
+            display: flex;
+            align-items: center;
+            margin: 0 0 var(--30px);
+            font-size: var(--text-font-size);
+            font-weight: 600;
+
+            &::before {
+                content: counter(my-awesome-counter);
+                flex-shrink: 0;
+                color: var(--text-light-grey);
+                border: var(--2px) solid currentColor;
+                font-size: var(--heading-4);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: var(--60px);
+                height: var(--60px);
+                border-radius: var(--60px);
+                margin-right: var(--15px);
+            }
+        }
+
+        & ul,
+        & ol,
+        & p {
+            margin-bottom: var(--30px);
+        }
+    }
+
+    @media screen and (max-width: 1023px) {
+        .article {
+            padding: var(--30px) var(--15px) var(--30px);
+            margin-bottom: var(--30px);
+        }
+        .list-with-rounded-numbers {
+            h5::before {
+                font-size: var(--heading-5);
+                width: var(--30px);
+                height: var(--30px);
+            }
+        }
+    }
+</style>

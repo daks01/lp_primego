@@ -10,6 +10,7 @@
     --1px: min(.052085vw, var(--container-width-in-px) / 100 * .052085);
     --module: calc(var(--1px) * 15);
 
+    --2px: calc(var(--1px) * 2);
     --4px: calc(var(--1px) * 4);
     --8px: calc(var(--1px) * 8);
     --15px: var(--module);
@@ -57,6 +58,7 @@
     --color-product-empire-active: #E1BA1B;
 
     // default, но перебивается на страницах
+    --background-color: var(--color-black);
     --color-product: var(--color-product-primego);
     --color-product-hover: var(--color-product-primego-hover);
     --color-product-active: var(--color-product-primego-active);
@@ -66,6 +68,7 @@
     --button-main-style-primary-bg-default: var(--color-product-primego);
     --button-main-style-primary-bg-hover: var(--color-product-primego-hover);
     --button-main-style-primary-bg-click: var(--color-product-primego-active);
+    --button-main-style-primary-stroke-focused: #F845FC;
 
     --button-main-style-secondary-bg-default: #AFAFAF21;
     --button-main-style-secondary-bg-hover: #AFAFAF33;
@@ -75,6 +78,9 @@
     --text-product: var(--color-product);
     --text-lead: var(--color-white);
     --text-light-grey: #C9C8D3;
+
+    // цвета для форм
+    --fields-title: #9d99ac;
 }
 
 @media screen and (max-width: 1023px) {
