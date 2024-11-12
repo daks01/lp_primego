@@ -9,13 +9,15 @@ import ActionPanel from "../blocks/ActionPanel.astro";
 const {
 	as: tag = "header",
 	isHome = false,
+	backTo = '/',
+    class: className
 } = Astro.props;
 ---
 
-<Section as={tag} class="header">
+<Section as={tag} class:list={["header", className]}>
 	<div class="top-bar">
 		<div class="top-bar__cell top-bar__cell_1">
-			<a href="/" aria-label="На главную" class="back-button" hidden={isHome}>
+			<a href={backTo} aria-label="На предыдущую страницу" class="back-button" hidden={isHome}>
 				<svg role="presentation" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M19 12H5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					<path d="M12 19L5 12L12 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>

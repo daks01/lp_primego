@@ -43,7 +43,7 @@
         padding: 0;
         width: 100%;
 
-        &::before {
+        &:before {
             content: counter(step-counter);
             flex-shrink: 0;
             color: var(--text-light-grey);
@@ -300,6 +300,7 @@
         border-radius: var(--4px);
         text-align: center;
         cursor: pointer;
+        flex-shrink: 0;
     }
 
     &__value {
@@ -380,7 +381,8 @@
     font-size: var(--lead-font-size);
     font-weight: 600;
 
-    &__label {
+    &:before {
+        content: 'Цена';
         color: var(--color-gray);
         font-size: var(--text-font-size);
         font-weight: 400;
@@ -390,4 +392,116 @@
 .buyProductButton {
     width: calc(var(--120px) * 2);
     height: calc(var(--60px));
+    margin-bottom: var(--8px);
+}
+
+@media screen and (max-width: 1023px) {
+    .productFieldset {
+        width: 100%;
+        padding: var(--15px) var(--8px) var(--30px) var(--15px);
+
+        &__description,
+        &__approval {
+            font-size: var(--small-font-size);
+        }
+    }
+
+    .productFieldset__legend {
+        margin-bottom: var(--15px);
+
+        &:before {
+            width: var(--30px);
+            height: var(--30px);
+        }
+    }
+
+    .colourSelect {
+        &__pic {
+            width: var(--30px);
+            height: var(--30px);
+        }
+
+        &__option + &__option {
+            margin-left: var(--15px);
+        }
+    }
+
+    .measuring {
+        flex-direction: column;
+        align-items: start;
+
+        &__label {
+            width: 100%;
+            justify-content: space-between;
+            font-size: var(--small-font-size);
+        }
+
+        &__label + &__label {
+            margin-left: 0;
+            margin-top: var(--15px);
+        }
+
+        &__value {
+            font-size: var(--lead-font-size);
+            width: auto;
+        }
+    }
+
+    .measureStep .productFieldset__description {
+        margin-top: var(--90px);
+    }
+
+    .sizes {
+        padding: 0;
+        margin-left: calc(-1 * var(--15px));
+
+        &__label {
+            margin-left: var(--15px);
+            margin-bottom: var(--15px);
+            width: calc(var(--1px) * 52);
+
+            &__content {
+                padding: var(--8px) var(--4px);
+                font-size: var(--small-font-size);
+
+                &:after {
+                    content: 'RU';
+                    padding-left: var(--4px);
+                }
+            }
+        }
+    }
+
+    .sizes + .productFieldset__description {
+        margin-top: var(--15px);
+    }
+
+    .productForm__footer {
+        flex-direction: column;
+        margin-top: var(--15px);
+        align-items: center;
+    }
+
+    .productPrice,
+    .buyProductButton {
+        width: 100%;
+        border-radius: var(--4px);
+        height: var(--45px);
+    }
+
+    .productPrice {
+        font-size: var(--lead-font-size);
+        background-color: var(--button-main-style-secondary-bg-default);
+        justify-content: center;
+        align-items: center;
+
+        &:before {
+            content: none;
+        }
+    }
+
+    .buyProductButton {
+        margin-bottom: 0;
+        margin-top: var(--15px);
+    }
 }

@@ -1,9 +1,13 @@
 ---
+import empireImage from '/src/assets/img/limit-collection/imperial.png';
+import royalImage from '/src/assets/img/limit-collection/royal.png';
+import { Image } from 'astro:assets';
 import React from 'react';
 import FittingRoom from '../../components/blocks/react/FittingRoom';
 import FittingRoomGallery from '../../components/content/Gallery/FittingRoomGallery.astro';
 import HowToMeasure from '../../components/content/HowToMeasure.astro';
 import Button from '../../components/ui/Button.astro';
+import SwappableHeader from '../../components/ui/SwappableHeader.astro';
 import UnderlineClickable from '../../components/ui/UnderlineClickable.astro';
 import Dialog from '../../components/ui/Dialog.astro';
 import StarTrekText from '../../components/ui/StarTrekText.astro';
@@ -11,6 +15,7 @@ import Warning from '../../components/ui/Warning.astro';
 import Layout from '../../layouts/Layout.astro';
 import BackButton from '../../components/ui/BackButton.astro';
 import { productOptMap } from '../../utils/product-list';
+import Header from '../../components/layout/Header.astro';
 
 
 export function getStaticPaths() {
@@ -39,19 +44,34 @@ const productOptions = productOptMap[sku];
 </style>
 
 <Layout title="Primego | Примерочная">
+    <Header backTo={backTo} class:list={['display-none', 'display-mobile-block']} />
+    <div class:list={['display-none', 'display-mobile-block']}>
+        <SwappableHeader sku={sku}>
+            <Image
+                slot="image"
+                src={sku === 'EM24' ? empireImage : royalImage}
+                alt={productOptions.name}
+                class="headerImage"
+                width="100"
+            />
+        </SwappableHeader>
+        <Warning class="warning">
+            Внимание! В каждой коллекции собственный размерный ряд. Используйте калькулятор ниже для подбора размера.
+        </Warning>
+    </div>
     <main class="product-layout">
         <section class="product-layout__pictures">
             <FittingRoomGallery sku={sku} />
         </section>
         <section class="product-layout__content">
-            <BackButton href={backTo} class="backButton" />
-            <header>
+            <BackButton href={backTo} class:list={['backButton', 'display-mobile-none']} />
+            <header class="display-mobile-none">
                 <span class="subtitle">Лимитированная коллекция</span>
                 <StarTrekText as="h1" class:list={['title', { empire: sku === 'EM24', royal: sku === 'RL24' }]}>
                     {productOptions.name}
                 </StarTrekText>
             </header>
-            <Warning>
+            <Warning class="display-mobile-none">
                 Внимание! В каждой коллекции собственный размерный ряд. Используйте калькулятор ниже для подбора размера.
             </Warning>
             <FittingRoom sku={sku} client:only="react">
@@ -146,8 +166,38 @@ const productOptions = productOptMap[sku];
     }
 
     @media screen and (max-width: 1023px) {
+        .headerImage {
+            width: calc(var(--1px) * 85);
+            transform: rotate(-15deg);
+        }
+
         .product-layout {
-            flex-direction: column-reverse;
+            flex-direction: column;
+            overflow-y: visible;
+            min-height: 100%;
+
+            &__content {
+                overflow-y: visible;
+                width: 100%;
+                padding: var(--30px) calc(var(--1px) * 20) var(--60px);
+                max-height: none;
+            }
+
+            &__pictures {
+                width: 100%;
+                height: calc(var(--1px) * 485);
+                flex-shrink: 0;
+            }
+        }
+
+        .warning {
+            margin: var(--30px) calc(var(--1px) * 20);
+        }
+
+        .how-to-button {
+            top: calc(var(--1px) * 55);
+            right: auto;
+            left: var(--15px);
         }
     }
 </style>

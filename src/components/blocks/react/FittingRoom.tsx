@@ -177,7 +177,6 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
             </fieldset>
             <div className={styles.productForm__footer}>
                 <div className={styles.productPrice}>
-                    <span className={styles.productPrice__label}>Цена</span>
                     {price ? priceWithRouble(price) : '-'}
                 </div>
                 <button type="submit" className={cn('button', styles.buyProductButton)} disabled={!isSubmitEnabled}>
