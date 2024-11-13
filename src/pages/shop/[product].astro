@@ -1,6 +1,7 @@
 ---
 import React from 'react';
 import FittingRoom from '../../components/blocks/react/FittingRoom';
+import FittingRoomGallery from '../../components/content/Gallery/FittingRoomGallery.astro';
 import HowToMeasure from '../../components/content/HowToMeasure.astro';
 import Button from '../../components/ui/Button.astro';
 import UnderlineClickable from '../../components/ui/UnderlineClickable.astro';
@@ -39,6 +40,9 @@ const productOptions = productOptMap[sku];
 
 <Layout title="Primego | Примерочная">
     <main class="product-layout">
+        <section class="product-layout__pictures">
+            <FittingRoomGallery sku={sku} />
+        </section>
         <section class="product-layout__content">
             <BackButton href={backTo} class="backButton" />
             <header>
@@ -82,14 +86,13 @@ const productOptions = productOptMap[sku];
                 Назад
             </Button>
         </Dialog>
-        <section class="product-layout__pictures">тут должна быть галерея с картинками</section>
     </main>
 </Layout>
 
 <style lang="scss">
     .product-layout {
         display: flex;
-        flex-flow: row nowrap;
+        flex-flow: row-reverse nowrap;
         height: 100%;
     }
 
