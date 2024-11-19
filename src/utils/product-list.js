@@ -13,6 +13,7 @@ export const productOptMap = {
     RL24: {
         ...defaultOptions,
         name: 'Рояль',
+        altName: 'royal',
         sku: 'RL24',
         color: 'черный / белый',
         soleComposition: 'ЭВА',
@@ -20,6 +21,7 @@ export const productOptMap = {
     EM24: {
         ...defaultOptions,
         name: 'ИМПЕРИУМ',
+        altName: 'empire',
         sku: 'EM24',
         color: 'черный / желтый',
     },

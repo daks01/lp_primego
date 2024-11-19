@@ -67,7 +67,7 @@ const productOptions = productOptMap[sku];
             <BackButton href={backTo} class:list={['backButton', 'display-mobile-none']} />
             <header class="display-mobile-none">
                 <span class="subtitle">Лимитированная коллекция</span>
-                <StarTrekText as="h1" class:list={['title', { empire: sku === 'EM24', royal: sku === 'RL24' }]}>
+                <StarTrekText as="h1" class:list={['title', productOptMap[sku].altName]}>
                     {productOptions.name}
                 </StarTrekText>
             </header>

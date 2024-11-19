@@ -1,10 +1,11 @@
-import React, { Fragment, useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Tooltip from '../../ui/react/Tooltip';
 import styles from './FittingRoom.module.scss';
 import cn from 'classnames';
-import { productList } from '../../../stores/productListStore';
-import { colorMap } from '../../../utils/product-list';
+import { $availableSizesByColor, $colors, $prices, $sizes, type Sizes } from '../../../stores/productListStore';
+import { colorMap, productOptMap } from '../../../utils/product-list';
 import { priceWithRouble } from '../../../utils/format';
+import { useStore } from '@nanostores/react';
 
 interface LocalState {
     color?: string;
@@ -15,7 +16,6 @@ interface LocalState {
     size?: string;
     selectedSizeApproval?: boolean;
 }
-type Sizes = Record<string, { width: number; length: number }>;
 
 export default function FittingRoom({ sku, howToMeasureButton }) {
     const { colors, sizes, available, lengths, widths, price } = useAvailableProperties(sku);
@@ -68,7 +68,7 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
         (state.recommended && state.recommended === state.size) ||
         (state.recommended && state.recommended !== state.size && state.selectedSizeApproval);
     return (
-        <form className={cn(styles.productForm, { [styles.empire]: sku === 'EM24', [styles.royal]: sku === 'RL24' })}>
+        <form className={cn(styles.productForm, styles[productOptMap[sku].altName])}>
             <fieldset className={styles.productFieldset}>
                 <legend className={styles.productFieldset__legend}>Выбери цвет модели</legend>
                 <div className={styles.colourSelect}>
@@ -176,9 +176,7 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
                 ) : null}
             </fieldset>
             <div className={styles.productForm__footer}>
-                <div className={styles.productPrice}>
-                    {price ? priceWithRouble(price) : '-'}
-                </div>
+                <div className={styles.productPrice}>{price ? priceWithRouble(price) : '-'}</div>
                 <button type="submit" className={cn('button', styles.buyProductButton)} disabled={!isSubmitEnabled}>
                     Оформить заказ
                 </button>
@@ -188,36 +186,12 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
 }
 
 const useAvailableProperties = (sku: string) => {
-    const [colors, setColors] = useState<string[]>([]);
-    const [sizes, setSizes] = useState<Sizes>({});
-    const [available, setAvailable] = useState<Record<string, Set<string>>>({});
-    const [price, setPrice] = useState<number | null>(null);
-    useEffect(() => {
-        productList.subscribe((data) => {
-            if (!data?.data) return;
-            const currentProduct = sku ? data.data[sku] : null;
-            setPrice(currentProduct.price);
-            setColors(currentProduct.colors);
-            const sortedSizes = Object.fromEntries(
-                Object.entries<Sizes[keyof Sizes]>(currentProduct.size).sort(([sizeA], [sizeB]) =>
-                    alphabeticCompare(sizeA, sizeB),
-                ),
-            );
-            setSizes(sortedSizes);
-
-            const available: Record<string, Set<string>> = Object.fromEntries(
-                currentProduct.colors.map((color) => [color, new Set()]),
-            );
-            for (const [size, rest] of Object.entries<{ available: Record<string, number> }>(currentProduct.size)) {
-                for (const [color, count] of Object.entries(rest.available)) {
-                    if (count !== 0) available[color].add(size);
-                }
-            }
-            setAvailable(available);
-        });
-    }, [sku]);
-    const widths = useMemo(() => Array.from(getRange(Object.values<Sizes[keyof Sizes]>(sizes), 'width')), [sizes]);
-    const lengths = useMemo(() => Array.from(getRange(Object.values<Sizes[keyof Sizes]>(sizes), 'length', 5)), [sizes]);
+    const sizes = useStore($sizes)[sku];
+    const colors = useStore($colors)[sku];
+    const price = useStore($prices)[sku];
+    const available = useStore($availableSizesByColor)[sku];
+    const widths = useMemo(() => Array.from(getRange(Object.values(sizes), 'width')), [sizes]);
+    const lengths = useMemo(() => Array.from(getRange(Object.values(sizes), 'length', 5)), [sizes]);
     return { colors, sizes, available, widths, lengths, price };
 };
 
@@ -235,12 +209,6 @@ const getRecommendedSize = (sizes: Sizes, { width, length }: { width?: number; l
     for (const [size, params] of Object.entries(sizes)) {
         if (params.length >= length && params.width >= width) return size;
     }
-};
-
-const alphabeticCompare = (a: string, b: string) => {
-    if (a > b) return 1;
-    if (a < b) return -1;
-    return 0;
 };
 
 interface SizeButtonProps extends Omit<React.ComponentProps<'input'>, 'type' | 'name'> {
