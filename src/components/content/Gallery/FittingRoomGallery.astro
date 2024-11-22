@@ -52,7 +52,7 @@ const hasImages = imageList[sku] !== undefined && Object.keys(imageList[sku]).le
                                     data-modal-slide-index={`${color}-${index}`}
                                     data-product-color={color}
                                 >
-                                    <Image src={images[key]()} class="custom-slider__img" alt="" />
+                                    <Image src={images[key]()} class="custom-slider__img" alt="" loading="eager" />
                                 </li>
                             )),
                         )}
@@ -73,6 +73,7 @@ const hasImages = imageList[sku] !== undefined && Object.keys(imageList[sku]).le
                                         src={images[key]()}
                                         class="custom-slider__img"
                                         alt=""
+                                        loading="eager"
                                         quality="60"
                                         width="200"
                                     />
