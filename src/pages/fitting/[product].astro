@@ -15,6 +15,7 @@ import Layout from '../../layouts/Layout.astro';
 import BackButton from '../../components/ui/BackButton.astro';
 import { productOptMap } from '../../utils/product-list';
 import Header from '../../components/layout/Header.astro';
+import MeasurementsIllustration from '../../components/content/MeasurementsIllustration.astro';
 
 export function getStaticPaths() {
     return [
@@ -58,8 +59,9 @@ const productOptions = productOptMap[sku];
         </Warning>
     </div>
     <main class="product-layout">
-        <section class="product-layout__pictures">
+        <section class="product-layout__pictures" data-product-pictures-section>
             <FittingRoomGallery sku={sku} />
+            <MeasurementsIllustration />
         </section>
         <section class="product-layout__content">
             <BackButton href={backTo} class:list={['backButton', 'display-mobile-none']} />
@@ -124,9 +126,16 @@ const productOptions = productOptMap[sku];
     }
 
     .product-layout__pictures {
-        background-color: var(--color-white);
         width: 50%;
         height: 100vh;
+
+        &[data-product-pictures-section='photos'] {
+            background-color: var(--color-white);
+        }
+
+        &[data-product-pictures-section='measurements'] {
+            background-color: var(--color-bg-black);
+        }
     }
 
     .backButton.backButton {
@@ -199,3 +208,25 @@ const productOptions = productOptMap[sku];
         }
     }
 </style>
+
+<script>
+    import { $selectedProduct } from '../../stores/shopProductStore';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const picturesSection = document.querySelector('[data-product-pictures-section]');
+        const gallery = picturesSection?.querySelector('[data-shop-photo-gallery]');
+        const illustration = picturesSection?.querySelector('[data-shop-illustration]');
+
+        $selectedProduct.listen((_product, _oldProduct, changed) => {
+            if (changed === 'color') {
+                picturesSection?.setAttribute('data-product-pictures-section', 'photos');
+                gallery?.setAttribute('data-shop-photo-gallery', 'visible');
+                illustration?.setAttribute('data-shop-illustration', 'hidden');
+            } else {
+                picturesSection?.setAttribute('data-product-pictures-section', 'measurements');
+                gallery?.setAttribute('data-shop-photo-gallery', 'hidden');
+                illustration?.setAttribute('data-shop-illustration', 'visible');
+            }
+        });
+    });
+</script>

@@ -26,7 +26,7 @@ const hasImages = imageList[sku] !== undefined && Object.keys(imageList[sku]).le
 <Fragment>
     {
         hasImages && (
-            <div class="gallery">
+            <div class="gallery" data-shop-photo-gallery>
                 <div class:list={['custom-slider', 'gallery__main']} data-gallery-main>
                     <SliderButton
                         as="button"
@@ -95,6 +95,10 @@ const hasImages = imageList[sku] !== undefined && Object.keys(imageList[sku]).le
     .gallery {
         position: relative;
         height: 100%;
+    }
+
+    [data-shop-photo-gallery='hidden'] {
+        display: none;
     }
 
     .custom-slider {

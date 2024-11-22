@@ -1,0 +1,300 @@
+---
+import Warning from '../ui/Warning.astro';
+
+const rulerOfLength = { lengthInPx: 630, lengthInCm: 35 };
+const rulerOfWidth = { lengthInPx: 270, lengthInCm: 15 };
+---
+
+<div class="measurements" data-shop-illustration>
+    <div class="measurements__presentation">
+        <div class="measurements__presentation__wrapper">
+            <div class:list={['measurement', 'horizontal']} data-width-ruler-container>
+                <span class="measurement__ruler-label">см</span>
+                <svg
+                    class="measurement__ruler"
+                    style={`width: calc(var(--1px) * ${rulerOfWidth.lengthInPx})`}
+                    preserveAspectRatio="none"
+                    focusable="false"
+                    width="123"
+                    height="34"
+                    viewBox="0 0 123 34"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                >
+                    <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-width=".903"
+                        d="M122.383.637v32.508M120.758.637v8.127M119.133.637v8.127M117.508.637v8.127M115.883.637v8.127M114.254.637v16M112.629.637v8.127M111.004.637v8.127M109.379.637v8.127M107.754.637v8.127M106.129.637v16M104.504.637v8.127M102.879.637v8.127M101.254.637v8.127M99.629.637v8.127M98 .637v16M96.375.637v8.127M94.75.637v8.127M93.125.637v8.127M91.5.637v8.127M89.875.637v16M88.25.637v8.127M86.625.637v8.127M85 .637v8.127M83.375.637v8.127M81.746.637v32.508M80.121.637v8.127M78.496.637v8.127M76.871.637v8.127M75.246.637v8.127M73.617.637v16M71.992.637v8.127M70.367.637v8.127M68.742.637v8.127M67.117.637v8.127M65.492.637v16M63.867.637v8.127M62.242.637v8.127M60.617.637v8.127M58.992.637v8.127M57.363.637v16M55.738.637v8.127M54.113.637v8.127M52.488.637v8.127M50.863.637v8.127M49.238.637v16M47.613.637v8.127M45.988.637v8.127M44.363.637v8.127M42.738.637v8.127M41.11.637v32.508M39.488.637v8.127M37.863.637v8.127M36.238.637v8.127M34.613.637v8.127M32.984.637v16M31.36.637v8.127M29.734.637v8.127M28.11.637v8.127M26.484.637v8.127M24.86.637v16M23.234.637v8.127M21.61.637v8.127M19.984.637v8.127M18.36.637v8.127M16.73.637v16M15.105.637v8.127M13.48.637v8.127M11.855.637v8.127M10.23.637v8.127M8.605.637v16M6.98.637v8.127M5.355.637v8.127M3.73.637v8.127M2.105.637v8.127M.477.637v32.508"
+                    ></path>
+                </svg>
+                {
+                    Array.from(Array(rulerOfWidth.lengthInCm / 5 + 1), (_, i) => {
+                        const oneCmInPx = rulerOfWidth.lengthInPx / rulerOfWidth.lengthInCm;
+                        return (
+                            <span style={`left: calc(var(--1px) * ${oneCmInPx * 5 * i})`} class="measurement__label">
+                                {5 * i}
+                            </span>
+                        );
+                    })
+                }
+                <div class="measurement__tooltip" data-width-ruler-tooltip>
+                    <span></span>
+                    <svg
+                        focusable="false"
+                        class="measurement__tooltip__arrow"
+                        aria-hidden="true"
+                        width="12"
+                        height="6"
+                        viewBox="0 0 12 16"
+                    >
+                        <path stroke="none" d="M0,0 H12 L6,6 Q6,6 6,6 Z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class:list={['measurement', 'vertical']} data-length-ruler-container>
+            <span class="measurement__ruler-label">см</span>
+            <svg
+                class="measurement__ruler"
+                style={`height: calc(var(--1px) * ${rulerOfLength.lengthInPx})`}
+                preserveAspectRatio="none"
+                focusable="false"
+                width="75"
+                height="632"
+                viewBox="0 0 75 632"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <path
+                    d="M1.207 1h72m-72 8.918h18m-18 8.914h36m-36 8.918h18m-18 9.75h36m-36 8.918h18m-18 8.918h36m-36 8.914h18m-18 8.918h36m-36 8.914h18M1.207 91h72m-72 8.918h18m-18 8.914h36m-36 8.918h18m-18 9.75h36m-36 8.918h18m-18 8.918h36m-36 8.914h18m-18 8.918h36m-36 8.914h18M1.207 181h72m-72 8.918h18m-18 8.914h36m-36 8.918h18m-18 9.75h36m-36 8.918h18m-18 8.918h36m-36 8.914h18m-18 8.918h36m-36 8.914h18M1.207 271h72m-72 8.918h18m-18 8.914h36m-36 8.918h18m-18 9.75h36m-36 8.918h18m-18 8.918h36m-36 8.914h18m-18 8.918h36m-36 8.914h18M1.207 361h72m-72 8.918h18m-18 8.914h36m-36 8.918h18m-18 9.75h36m-36 8.918h18m-18 8.918h36m-36 8.914h18m-18 8.918h36m-36 8.914h18M1.207 451h72m-72 8.918h18m-18 8.914h36m-36 8.918h18m-18 9.75h36m-36 8.918h18m-18 8.918h36m-36 8.914h18m-18 8.918h36m-36 8.914h18M1.207 541h72m-72 8.918h18m-18 8.914h36m-36 8.918h18m-18 9.75h36m-36 8.918h18m-18 8.918h36m-36 8.914h18m-18 8.918h36m-36 8.914h18m-18 8.918h72"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"></path>
+            </svg>
+            {
+                Array.from(Array(rulerOfLength.lengthInCm / 5 + 1), (_, i) => {
+                    const oneCmInPx = rulerOfLength.lengthInPx / rulerOfLength.lengthInCm;
+                    return (
+                        <span style={`top: calc(var(--1px) * ${oneCmInPx * 5 * i})`} class="measurement__label">
+                            {5 * (rulerOfLength.lengthInCm / 5 - i)}
+                        </span>
+                    );
+                })
+            }
+            <div class="measurement__tooltip" data-length-ruler-tooltip>
+                <span></span>
+                <svg
+                    focusable="false"
+                    class="measurement__tooltip__arrow"
+                    aria-hidden="true"
+                    width="12"
+                    height="6"
+                    viewBox="0 0 12 16"
+                >
+                    <path stroke="none" d="M0,0 H12 L6,6 Q6,6 6,6 Z"></path>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <div class="recommended-size">
+        Ваш рекомендованный размер: <span class="recommended-size__content" data-recommended-size>-</span>
+    </div>
+    <div data-size-warning>
+        <Warning class="warning"> Внимание! Выбранный размер не совпадает с рекомендованным</Warning>
+    </div>
+</div>
+
+<style lang="scss">
+    .measurements {
+        padding: calc(var(--15px) * 5) var(--90px) var(--90px) var(--120px);
+
+        &__presentation {
+            position: relative;
+            margin: var(--60px) var(--120px) var(--60px) calc(var(--15px) * 5);
+
+            &__wrapper {
+                display: flex;
+                justify-content: flex-end;
+                padding-bottom: var(--30px);
+            }
+        }
+    }
+
+    [data-shop-illustration='hidden'] {
+        display: none;
+    }
+
+    .measurement {
+        position: relative;
+
+        &__ruler {
+            color: var(--color-product-primego);
+        }
+
+        &__ruler-label,
+        &__label {
+            position: absolute;
+            font-weight: 600;
+            font-size: var(--text-font-size);
+        }
+
+        &__ruler-label {
+            color: var(--color-gray);
+            line-height: calc(var(--1px) * 18);
+        }
+
+        &__label {
+            color: var(--color-white);
+        }
+
+        &__tooltip {
+            position: absolute;
+            background-color: var(--color-bg-disabled);
+            padding: var(--8px) var(--15px);
+            font-size: var(--text-font-size);
+            border-radius: var(--4px);
+            font-weight: 600;
+
+            &__arrow {
+                fill: var(--color-bg-disabled);
+                position: absolute;
+                pointer-events: none;
+            }
+        }
+
+        &.horizontal {
+            .measurement__ruler {
+                height: calc(var(--1px) * 72);
+            }
+
+            .measurement__ruler-label {
+                top: 0;
+                left: calc(-1 * var(--15px));
+                transform: translateX(-100%);
+            }
+
+            .measurement__label {
+                bottom: 0;
+                transform: translateX(-50%) translateY(100%);
+                margin-top: var(--15px);
+            }
+
+            .measurement__tooltip {
+                transition: left 0.2s;
+                top: calc(-1 * var(--15px));
+                transform: translateX(-50%) translateY(-100%);
+
+                &__arrow {
+                    transform: translateX(-50%) translateY(100%);
+                    width: var(--30px);
+                    bottom: 0;
+                    left: 50%;
+                }
+            }
+        }
+
+        &.vertical {
+            .measurement__ruler {
+                width: calc(var(--1px) * 72);
+            }
+
+            .measurement__ruler-label {
+                top: calc(-1 * var(--15px));
+                left: 0;
+                transform: translateY(-100%);
+            }
+
+            .measurement__label {
+                transform: translateY(-50%);
+                margin-left: var(--15px);
+            }
+
+            .measurement__tooltip {
+                transition: top 0.2s;
+                left: calc(-1 * var(--15px));
+                transform: translateX(-100%) translateY(-50%);
+
+                &__arrow {
+                    top: 50%;
+                    left: calc(100% + 0px);
+                    width: var(--30px);
+                    transform: rotate(-90deg) translateX(25%) translateY(-50%);
+                }
+            }
+        }
+    }
+    .measurements__presentation__foot {
+    }
+
+    .recommended-size {
+        width: 100%;
+        border-radius: var(--4px);
+        padding: var(--15px);
+        background-color: var(--color-bg-disabled);
+        font-weight: 600;
+        font-size: var(--text-font-size);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &__content {
+            margin-left: var(--8px);
+        }
+    }
+
+    .warning {
+        background-color: var(--color-bg-disabled);
+    }
+
+    [data-size-warning] {
+        display: none;
+    }
+</style>
+
+<script>
+    import { listenKeys } from 'nanostores';
+    import { $selectedProduct } from '../../stores/shopProductStore';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const widthRulerContainer = document.querySelector('[data-width-ruler-container]');
+        const widthRulerLength = widthRulerContainer?.getBoundingClientRect().width;
+        const widthTooltip = widthRulerContainer?.querySelector('[data-width-ruler-tooltip]');
+        const widthTooltipContent = widthTooltip?.querySelector('span');
+
+        const lengthRulerContainer = document.querySelector('[data-length-ruler-container]');
+        const lengthRulerLength = lengthRulerContainer?.getBoundingClientRect().height;
+        const lengthTooltip = lengthRulerContainer?.querySelector('[data-length-ruler-tooltip]');
+        const lengthTooltipContent = lengthTooltip?.querySelector('span');
+
+        $selectedProduct.listen((product) => {
+            const width = product.width;
+            const length = product.length;
+            if (width && widthRulerLength) {
+                widthTooltipContent.textContent = `${(width / 10).toFixed(1)}`;
+                widthTooltip.style.display = 'block';
+                const oneCmInPx = widthRulerLength / 15;
+                widthTooltip.style.left = `${oneCmInPx * (width / 10)}px`;
+            } else {
+                widthTooltip.style.display = 'none';
+            }
+
+            if (length && lengthRulerLength) {
+                lengthTooltipContent.textContent = `${(length / 10).toFixed(1)}`;
+                lengthTooltip.style.display = 'block';
+                const oneCmInPx = lengthRulerLength / 35;
+                lengthTooltip.style.top = `${oneCmInPx * (35 - length / 10)}px`;
+            } else {
+                lengthTooltip.style.display = 'none';
+            }
+        });
+
+        const recommendedSize = document.querySelector('[data-recommended-size]');
+        const warningElement = document.querySelector('[data-size-warning]');
+        listenKeys($selectedProduct, ['recommended', 'size'], ({ recommended, size }) => {
+            recommendedSize.textContent = recommended ?? '-';
+            const isNotSame = recommended && size && recommended !== size;
+            warningElement.style.display = isNotSame ? 'block' : 'none';
+        });
+    });
+</script>
