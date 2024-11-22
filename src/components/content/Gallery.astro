@@ -1,6 +1,4 @@
 ---
-import "@splidejs/splide/css/core";
-import type { ImageMetadata } from "astro";
 import { Image } from "astro:assets";
 import Dialog from "../ui/Dialog.astro";
 import Button from "../ui/Button.astro";
@@ -239,6 +237,8 @@ const hasImages =
       margin: calc(var(--45px) * -1) 0 !important;
       overflow-x: auto;
       overflow-y: hidden;
+      scrollbar-color: red orange;
+      scrollbar-width: none;
       padding: 0;
       scroll-snap-type: x mandatory;
       position: relative;
