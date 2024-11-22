@@ -312,7 +312,8 @@
 }
 
 .sizes {
-    padding: 0 var(--60px) 0 calc(var(--1px) * 80);
+    padding: 0 var(--60px);
+    margin-left: calc(-1 * var(--15px));
 
     input {
         -webkit-appearance: none;
@@ -327,6 +328,7 @@
 
         &__content {
             padding: calc(var(--1px) * 12) calc(var(--1px) * 40);
+            flex-shrink: 0;
         }
     }
 
@@ -453,10 +455,8 @@
 
     .sizes {
         padding: 0;
-        margin-left: calc(-1 * var(--15px));
 
         &__label {
-            margin-left: var(--15px);
             margin-bottom: var(--15px);
             width: calc(var(--1px) * 52);
 
