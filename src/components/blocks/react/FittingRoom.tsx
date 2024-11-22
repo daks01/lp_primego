@@ -6,6 +6,7 @@ import { $availableSizesByColor, $colors, $prices, $sizes, type Sizes } from '..
 import { colorMap, productOptMap } from '../../../utils/product-list';
 import { priceWithRouble } from '../../../utils/format';
 import { useStore } from '@nanostores/react';
+import { updateColor } from '../../../stores/shopProductStore';
 
 interface LocalState {
     color?: string;
@@ -23,6 +24,7 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
     const isAvailableSize = (size: string) => !state.color || available[state.color].has(size);
     const onColorSelect = (color: string) =>
         setState((prev) => {
+            updateColor(color);
             const recommendedIsAvailable = prev.recommended && available[color].has(prev.recommended);
             if (!prev.size && recommendedIsAvailable) return { ...prev, color, size: prev.recommended };
             const sizeIsAvailable = prev.size && available[color].has(prev.size);
