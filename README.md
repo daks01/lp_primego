@@ -20,27 +20,24 @@
 ## 🧞 Как какать 
 для локальной разработки и билда статичного сайта нужно:
 - поставить Node.js (lts) https://nodejs.org/en
+- поставить [git-lfs](https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage) 
 - в терминале перейти в корнь проекта 
 - поставить зависимости
-  `npm i`
+  `npm сi`
 - для старта локального девсервера выполнить
   `npm run dev`
-
-Список команд:
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
 ## 🚀 Структура
 
 ```text
 ├── public/
+│   ├── fonts
+│   ├── video
+│   │   ├── README.md
+│   │   ├── hevc.mov
+│   │   ├── vp9.webm
 ├── backend/
+│   ├── README.md
 │   ├── googleAppScriptBackend.gs
 ├── src/
 │   ├── components/
@@ -52,6 +49,7 @@
 │   ├── layouts/
 │   ├── utils/
 │   └── pages/
+├── .env
 ├── astro.config.mjs
 ├── README.md
 └── package.json
@@ -87,3 +85,14 @@
 ### Production
 - для деплоя на прод нужно подлить ветку 'main' в ветку 'production'
 
+### Backend
+в качестве CRM используются гуглтаблицы 
+в качестве API тоже используются гуглтаблицы с настроенными через AppScript раздачей json
+
+[документация по настройке бекенда](./backend/README.md)
+
+### 3d Animation
+анимация на главной сделана через transparent video
+поддерживается два браузера
+
+[документация по конвертации](./public/video/README.md)

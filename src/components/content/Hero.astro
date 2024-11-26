@@ -1,255 +1,215 @@
 ---
-import "@splidejs/splide/css/core";
-import { Image } from "astro:assets";
 import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
-import imgSlide1 from "/src/assets/img/hero-slider/slide-1.png";
-import imgSlide2 from "/src/assets/img/hero-slider/slide_2.png";
-import imgSlide3 from "/src/assets/img/hero-slider/slide_3.png";
+// import imgSlide1 from "/src/assets/img/hero-slider/slide-1.png";
+// import imgSlide2 from "/src/assets/img/hero-slider/slide_2.png";
+// import imgSlide3 from "/src/assets/img/hero-slider/slide_3.png";
 import BackgroundText from "../ui/BackgroundText.astro";
 import SocialList from "../ui/SocialList.astro";
 
-const imageList = [
-	imgSlide1, imgSlide2, imgSlide3, imgSlide2
-];
+// const imageList = [imgSlide1, imgSlide2, imgSlide3, imgSlide2];
 const { backgroundImage } = Astro.props;
 ---
 
 <Section backgroundImage={backgroundImage}>
-	<BackgroundText>Primego</BackgroundText>
-	<div class="hero-layout">
-		<div class="hero">
-			<StarTrekText as="h1" class="page-title">Primego</StarTrekText>
-			<div>
-				<p class="lead">Стиль и&nbsp;инновации</p>
-				<p>
-					Наша обувь способна вдохновлять и&nbsp;очаровывать аудиторию по&nbsp;всему миру. 
-					Создай свой образ с&nbsp;помощью констуктора
-				</p>
-				<!-- <Button>
-					Создать образ
-				</Button> -->
-			</div>
-		</div>
-		<div class="heroSlider-wrapper">
-			<div class="splide" role="group" aria-hidden="true">
-				<div class="splide__track">
-					<ul class="splide__list">
-						{
-							imageList.map((item) => (
-								<li class="splide__slide">
-									<Image
-										src={item}
-										class="splide__img"
-										alt=""
-										loading="lazy"
-									/>
-								</li>
-							))
-						}
-					</ul>
-				</div>
-			</div>
-			<div class="heroSlider__dots" data-splide-progress>
-				<svg width="550" height="741" viewBox="0 0 480 741" fill="none" xmlns="http://www.w3.org/2000/svg">
-					<path d="M388.998 806C606.996 301 214.496 -5.50024 0.542179 -22.7933" stroke="url(#gradient-back)" stroke-width="3"/>
-					<path stroke-dasharray="20 20" d="M388.998 806C606.996 301 214.496 -5.50024 0.542179 -22.7933" stroke="url(#gradient-front)" stroke-width="3"/>
-
-					<circle r="10" cx="342" cy="189" fill="#C5C0DB" class="circle"></circle>
-					<circle r="10" cx="431" cy="367" fill="#C5C0DB" class="circle"></circle>
-					<circle r="10" cx="452" cy="565" fill="#C5C0DB" class="circle"></circle> 
-
-					<g style="transform: translate(-5%, -5%);">
-						<circle r="23" cx="23" cy="32" fill="#FC1447" class="circle"></circle>
-						<path d="M22.5646 32.0297L38.2226 0.371718C38.3366 0.143718 38.6736 0.223725 38.6796 0.469725L38.8426 12.5807C38.8446 12.7577 39.0236 12.8747 39.1866 12.8137L53.6945 7.32672C53.9325 7.23772 54.1236 7.52172 53.9596 7.71072L44.3916 18.4167C44.2456 18.5787 44.3616 18.8327 44.5716 18.8397L56.8226 19.1517C57.0886 19.1577 57.1456 19.5197 56.8956 19.6137L22.8656 32.3567C22.6596 32.4337 22.4686 32.2287 22.5646 32.0297Z" fill="white"/>
-					    <!-- ToDo rotate="auto" починить -->
-						<animateMotion
-							dur="2000ms"
-							repeatCount="indefinite"
-							rotate="0"
-							path="M343,189 Q470,367 451,565 Q470,367 343,189"
-						></animateMotion>
-					</g>
-
-					<defs>
-						<linearGradient id="gradient-back" gradientTransform="rotate(90)">
-							<stop offset="10%" stop-color="#ffffff" stop-opacity="0"/>
-							<stop offset="20%" stop-color="#ffffff" stop-opacity="0.2"/>
-							<stop offset="80%" stop-color="#ffffff" stop-opacity="0.2"/>
-							<stop offset="90%" stop-color="#ffffff" stop-opacity="0"/>
-						</linearGradient>
-						
-						<linearGradient id="gradient-front" gradientTransform="rotate(90)">
-							<stop offset="10%" stop-color="#ffffff" stop-opacity="0"/>
-							<stop offset="20%" stop-color="#ffffff" stop-opacity="1"/>
-							<stop offset="80%" stop-color="#ffffff" stop-opacity="1"/>
-							<stop offset="90%" stop-color="#ffffff" stop-opacity="0"/>
-						</linearGradient>
-					</defs>
-				</svg>
-			</div>
-		</div>
-	</div>
-	<SocialList class="display-none display-mobile-flex justify-content-center" />
+  <BackgroundText>Primego</BackgroundText>
+  <div class="hero-layout">
+    <div class="hero">
+      <StarTrekText as="h1" class="page-title">Primego</StarTrekText>
+      <div>
+        <p class="hero__lead">
+          кроссовки <br />
+          премиум <br />
+          твои
+        </p>
+      </div>
+    </div>
+    <div class="heroSlider-wrapper">
+      <div class="view-3d">
+        <svg
+          class="view-3d__navigation"
+          aria-hidden="true"
+          width="324"
+          height="132"
+          viewBox="0 0 324 132"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M323 59C323 66.7457 318.693 74.2536 310.617 81.2077C302.544 88.159 290.803 94.4644 276.209 99.7797C247.029 110.407 206.65 117 162 117C117.35 117 76.9715 110.407 47.7909 99.7797C33.1965 94.4644 21.4563 88.159 13.3833 81.2077C5.30712 74.2536 1 66.7457 1 59C1 51.2543 5.30712 43.7464 13.3833 36.7923C21.4563 29.841 33.1965 23.5356 47.7909 18.2203C76.9715 7.59284 117.35 1 162 1C206.65 1 247.029 7.59284 276.209 18.2203C290.803 23.5356 302.544 29.841 310.617 36.7923C318.693 43.7464 323 51.2543 323 59Z"
+            stroke="url(#paint0_linear_8036_165538)"
+            stroke-width="2"></path>
+          <circle cx="161" cy="116" r="16" fill="white"></circle>
+          <path
+            d="M158 111L153 116L158 121"
+            stroke="#FC1447"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+          <path
+            d="M164 121L169 116L164 111"
+            stroke="#FC1447"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+          <defs>
+            <linearGradient
+              id="paint0_linear_8036_165538"
+              x1="162"
+              y1="20"
+              x2="161.898"
+              y2="118"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-opacity="0"></stop>
+              <stop offset="1" stop-color="white"></stop>
+            </linearGradient>
+          </defs>
+        </svg>
+        <video
+          class="view-3d__video"
+          data-video
+          playsinline
+          autoplay
+          loop
+          muted
+        >
+          <source src="./video/hevc.mov" type="video/mp4; codecs=hvc1" />
+          <source src="./video/vp9.webm" type="video/webm" />
+        </video>
+        <div class="view-3d__container dragscroll" data-container>
+          <div class="view-3d__timeline" data-timeline></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <SocialList class="display-none display-mobile-flex justify-content-center" />
 </Section>
 
 <script>
-	import Splide from "@splidejs/splide/dist/js/splide.min.js";
+  import "dragscroll/dragscroll.js";
 
-	window.onload = function() {
-		const pagination = document.querySelector('[data-splide-progress] svg');
-		pagination?.pauseAnimations();
-	};
+  document.addEventListener("DOMContentLoaded", () => {
+    const container = document.querySelector("[data-container]");
+    const videoEl = document.querySelector("[data-video]");
+    let lastScrollPosition = 0;
 
-	document.addEventListener("DOMContentLoaded", () => {
-		const pagination = document.querySelector('[data-splide-progress] svg');
+    videoEl.pause();
+    container.scrollLeft = container.scrollWidth / 9;
 
-		const splide = new Splide(".splide", {
-			type: "fade",
-			rewind: true,
-			lazyLoad: "nearby",
-			autoplay: true,
-   			pauseOnHover: false,
-			interval: 5000,
-			pagination: false,
-			arrows: false
-		});
-		splide.mount();
-
-		splide.on('move', () => {
-			pagination?.unpauseAnimations();
-			setTimeout(()=>pagination?.pauseAnimations(), 500);
-		});
-
-		splide.on('click', throttle(() => {
-			const autoplay = splide.Components.Autoplay;
-			const nexSlideIndex = splide.Components.Controller.getNext(true);
-
-			autoplay.pause();
-			splide.go(nexSlideIndex);
-			autoplay.play();
-		}, 2000 / 4));
-
-		function throttle(func, delay) {
-			let wait = false;
-
-			return (...args) => {
-				if (wait) {
-					return;
-				}
-
-				func(...args);
-				wait = true;
-				setTimeout(() => {
-				wait = false;
-				}, delay);
-			}
-		}
-	});
+    setInterval(() => {
+      if (videoEl.readyState !== 4) {
+        return;
+      }
+      if (lastScrollPosition === container.scrollLeft) {
+        return;
+      }
+      lastScrollPosition = container.scrollLeft;
+      const containerWidth = container.scrollWidth - container.offsetWidth;
+      const videoDuration = videoEl.duration;
+      const scrollPosition = container.scrollLeft;
+      videoEl.currentTime = (videoDuration / containerWidth) * scrollPosition;
+    }, 40);
+  });
 </script>
 
 <style lang="scss">
-	.section {
-		min-height: calc(var(--section-height) - var(--header-height));
-	}
-	.page-title {
-		margin-bottom: var(--90px);
-		font-size: var(--heading-1);
-	}
-	.hero-layout {
-		display: flex;
-		margin-bottom: calc(var(--1px) * 150);
-	}
-	.hero {
-		min-width: 40%;
-	}
-	.heroSlider-wrapper {
-		display: flex;
-		align-self: flex-end;
-		margin-left: calc(var(--1px) * 60 * -1);
-		position: relative;
-	}
-	.heroSlider__dots {
-		position: absolute;
-		height: 150%;
-		right: 0;
-		top: -20%;
-		transform: rotate(6deg);
-		pointer-events: none;
-		svg {
-			height: 100%;
-			transform: translate(32%, -15%);
-		}
-	}
+  .section {
+    min-height: calc(var(--section-height) - var(--header-height));
+  }
+  .page-title {
+    margin-bottom: var(--60px);
+    font-size: var(--heading-1);
+  }
+  .hero__lead {
+    font-size: calc(var(--1px) * 72);
+    line-height: 1.05;
+    color: var(--color-gray);
+    text-transform: uppercase;
+  }
+  .hero-layout {
+    display: flex;
+    margin-bottom: calc(var(--1px) * 150);
+  }
+  .hero {
+    min-width: 40%;
+  }
+  .heroSlider-wrapper {
+    min-width: 60%;
+    display: flex;
+    align-self: stretch;
+    justify-content: end;
+  }
 
-	@media screen and (max-width: 1023px) {
-		.section {
-			order: -1;
-		}
-		.hero {
-			min-width: auto;
-			text-align: center;
-		}
-		.hero-layout {
-			margin-bottom: calc(var(--1px) * 90);
-			flex-direction: column;
-		}
-		.page-title {
-			font-size: calc(var(--1px) * 128);
-			margin-top: calc(var(--1px) * 36);
-			margin-bottom: var(--30px);
-		}
-		.heroSlider-wrapper {
-			margin: var(--30px) 0;
-		}
-		.heroSlider__dots {
-			top: -46%;
-			transform: rotate(86deg);
-		}
-	}
-</style>
+  .view-3d {
+    position: relative;
+    display: flex;
+    width: 100%;
+  }
+  .view-3d__navigation {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%, 0);
+    pointer-events: none;
+  }
+  .view-3d__container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: auto;
+    scrollbar-width: none;
+    z-index: 1;
+  }
+  .view-3d__timeline {
+    width: 300%;
+    height: 100%;
+  }
+  .view-3d__video {
+    width: 100%;
+    scale: 1.5;
+    pointer-events: none;
+    
+    &::-webkit-media-controls {
+      display: none !important;
+      opacity: 0; 
+    }
+    &::-webkit-media-controls-start-playback-button {
+      display: none !important;
+    }
+  }
 
-<style lang="scss">
-	.splide {
-		& :global(.splide__img) {
-			transform: rotate(-15deg);
-		}
-		& :global(.splide__arrows) {
-			position: absolute;
-			bottom: var(--200px);
-			display: flex;
-			width: 100%;
-			justify-content: space-between;
-			z-index: 2;
-		}
-		& :global(.splide__arrow) {
-			background: none;
-			border: none;
-			cursor: pointer;
-		}
-		& :global(.splide__track) {
-			margin: 0 var(--60px);
-			overflow: visible;
-		}
+  @media screen and (max-width: 1023px) {
+    .section {
+      order: -1;
+    }
+    .hero {
+      min-width: auto;
+      text-align: left;
+    }
+    .hero-layout {
+      margin-bottom: calc(var(--1px) * 90);
+      flex-direction: column;
+    }
+    .page-title {
+      font-size: calc(var(--1px) * 128);
+      margin-top: calc(var(--1px) * 36);
+      margin-bottom: var(--30px);
+    }
+    .hero__lead {
+      font-size: calc(var(--1px) * 36);
+      line-height: 1.05;
+      margin-bottom: var(--15px);
+    }
+    .heroSlider-wrapper {
+      margin: var(--30px) 0;
+    }
 
-		& :global(svg) {
-			fill: var(--color-white);
-			width: calc(var(--1px) * 35);
-			height: calc(var(--1px) * 35);
-		}
-		& :global(.splide__arrow--prev) {
-			transform: scale(-1);
-		}
-		& :global(.splide__arrow--next) {
-		}
-	}
-
-	@media screen and (max-width: 1023px) {
-		.splide {
-			& :global(.splide__track) {
-				margin: 0;
-			}
-		}
-	}
-
+    .view-3d__navigation {
+      top: 100%;
+      bottom: none;
+    }
+  }
 </style>
