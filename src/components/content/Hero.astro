@@ -18,28 +18,63 @@ const { backgroundImage } = Astro.props;
       <StarTrekText as="h1" class="page-title">Primego</StarTrekText>
       <div>
         <p class="hero__lead">
-          кроссовки <br>
-          премиум <br>
+          кроссовки <br />
+          премиум <br />
           твои
         </p>
       </div>
     </div>
     <div class="heroSlider-wrapper">
       <div class="view-3d">
-        <svg class="view-3d__navigation" aria-hidden="true" width="324" height="132" viewBox="0 0 324 132" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M323 59C323 66.7457 318.693 74.2536 310.617 81.2077C302.544 88.159 290.803 94.4644 276.209 99.7797C247.029 110.407 206.65 117 162 117C117.35 117 76.9715 110.407 47.7909 99.7797C33.1965 94.4644 21.4563 88.159 13.3833 81.2077C5.30712 74.2536 1 66.7457 1 59C1 51.2543 5.30712 43.7464 13.3833 36.7923C21.4563 29.841 33.1965 23.5356 47.7909 18.2203C76.9715 7.59284 117.35 1 162 1C206.65 1 247.029 7.59284 276.209 18.2203C290.803 23.5356 302.544 29.841 310.617 36.7923C318.693 43.7464 323 51.2543 323 59Z" stroke="url(#paint0_linear_8036_165538)" stroke-width="2"/>
-          <circle cx="161" cy="116" r="16" fill="white"/>
-          <path d="M158 111L153 116L158 121" stroke="#FC1447" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          <path d="M164 121L169 116L164 111" stroke="#FC1447" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <svg
+          class="view-3d__navigation"
+          aria-hidden="true"
+          width="324"
+          height="132"
+          viewBox="0 0 324 132"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M323 59C323 66.7457 318.693 74.2536 310.617 81.2077C302.544 88.159 290.803 94.4644 276.209 99.7797C247.029 110.407 206.65 117 162 117C117.35 117 76.9715 110.407 47.7909 99.7797C33.1965 94.4644 21.4563 88.159 13.3833 81.2077C5.30712 74.2536 1 66.7457 1 59C1 51.2543 5.30712 43.7464 13.3833 36.7923C21.4563 29.841 33.1965 23.5356 47.7909 18.2203C76.9715 7.59284 117.35 1 162 1C206.65 1 247.029 7.59284 276.209 18.2203C290.803 23.5356 302.544 29.841 310.617 36.7923C318.693 43.7464 323 51.2543 323 59Z"
+            stroke="url(#paint0_linear_8036_165538)"
+            stroke-width="2"></path>
+          <circle cx="161" cy="116" r="16" fill="white"></circle>
+          <path
+            d="M158 111L153 116L158 121"
+            stroke="#FC1447"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+          <path
+            d="M164 121L169 116L164 111"
+            stroke="#FC1447"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
           <defs>
-          <linearGradient id="paint0_linear_8036_165538" x1="162" y1="20" x2="161.898" y2="118" gradientUnits="userSpaceOnUse">
-          <stop stop-opacity="0"/>
-          <stop offset="1" stop-color="white"/>
-          </linearGradient>
+            <linearGradient
+              id="paint0_linear_8036_165538"
+              x1="162"
+              y1="20"
+              x2="161.898"
+              y2="118"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stop-opacity="0"></stop>
+              <stop offset="1" stop-color="white"></stop>
+            </linearGradient>
           </defs>
         </svg>
-        <video class="view-3d__video" data-video>
-          <source src="./video/hevc.mov" type="video/mp4; codecs=hvc1"/>
+        <video
+          class="view-3d__video"
+          data-video
+          playsinline
+          autoplay
+          loop
+          muted
+        >
+          <source src="./video/hevc.mov" type="video/mp4; codecs=hvc1" />
           <source src="./video/vp9.webm" type="video/webm" />
         </video>
         <div class="view-3d__container dragscroll" data-container>
@@ -79,7 +114,7 @@ const { backgroundImage } = Astro.props;
   .page-title {
     margin-bottom: var(--60px);
     font-size: var(--heading-1);
-  } 
+  }
   .hero__lead {
     font-size: calc(var(--1px) * 72);
     line-height: 1.05;
@@ -106,7 +141,7 @@ const { backgroundImage } = Astro.props;
     width: 100%;
   }
   .view-3d__navigation {
-    position:absolute;
+    position: absolute;
     bottom: 0;
     left: 50%;
     transform: translate(-50%, 0);
@@ -153,7 +188,7 @@ const { backgroundImage } = Astro.props;
     .hero__lead {
       font-size: calc(var(--1px) * 36);
       line-height: 1.05;
-	    margin-bottom: var(--15px);
+      margin-bottom: var(--15px);
     }
     .heroSlider-wrapper {
       margin: var(--30px) 0;
