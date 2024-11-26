@@ -92,14 +92,20 @@ const { backgroundImage } = Astro.props;
   document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector("[data-container]");
     const videoEl = document.querySelector("[data-video]");
+    let lastScrollPosition = 0;
 
-    container.scrollLeft = container.scrollWidth / 7;
+    videoEl.pause();
+    container.scrollLeft = container.scrollWidth / 9;
 
     setInterval(() => {
       if (videoEl.readyState !== 4) {
         return;
       }
-      const containerWidth = container.scrollWidth;
+      if (lastScrollPosition === container.scrollLeft) {
+        return;
+      }
+      lastScrollPosition = container.scrollLeft;
+      const containerWidth = container.scrollWidth - container.offsetWidth;
       const videoDuration = videoEl.duration;
       const scrollPosition = container.scrollLeft;
       videoEl.currentTime = (videoDuration / containerWidth) * scrollPosition;
