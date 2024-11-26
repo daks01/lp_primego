@@ -170,8 +170,15 @@ const { backgroundImage } = Astro.props;
   .view-3d__video {
     width: 100%;
     scale: 1.5;
-    // transform-origin: bottom;
     pointer-events: none;
+    
+    &::-webkit-media-controls {
+      display: none !important;
+      opacity: 0; 
+    }
+    &::-webkit-media-controls-start-playback-button {
+      display: none !important;
+    }
   }
 
   @media screen and (max-width: 1023px) {
