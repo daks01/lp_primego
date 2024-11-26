@@ -23,11 +23,13 @@ productsAvailability.subscribe((data) => {
 export const productList = map(storedProductList);
 
 export const $colors = computed(productList, ({ data: products }) => {
+    if (!products) return undefined;
     return Object.fromEntries(Object.entries<{ colors: string[] }>(products).map(([sku, params]) => [sku, params.colors]));
 });
 
 export type Sizes = Record<string, { width: number; length: number; available: Record<string, number> }>;
 export const $sizes = computed(productList, ({ data: products }) => {
+    if (!products) return undefined;
     return Object.fromEntries(
         Object.entries<{ size: Sizes }>(products).map(([sku, params]) => {
             const sortedSizes = Object.fromEntries(
@@ -39,6 +41,7 @@ export const $sizes = computed(productList, ({ data: products }) => {
 });
 
 export const $availableSizesByColor = computed(productList, ({ data: products }) => {
+    if (!products) return undefined;
     return Object.fromEntries(
         Object.entries<{ colors: string[]; size: Sizes }>(products).map(([sku, params]) => {
             const available = Object.fromEntries(params.colors.map((color) => [color, new Set<string>()]));
@@ -53,5 +56,6 @@ export const $availableSizesByColor = computed(productList, ({ data: products })
 });
 
 export const $prices = computed(productList, ({ data: products }) => {
+    if (!products) return undefined;
     return Object.fromEntries(Object.entries<{ price: number }>(products).map(([sku, params]) => [sku, params.price]));
 });
