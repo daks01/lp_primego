@@ -24,6 +24,7 @@
     "classnames": "^2.5.1",
     "cssnano": "^6.0.3",
     "dialog-polyfill": "^0.5.6",
+    "dragscroll": "^0.0.8",
     "modern-normalize": "^2.0.0",
     "nanoid": "^5.0.6",
     "nanostores": "^0.10.3",
