@@ -2,7 +2,6 @@
 import empireImage from '/src/assets/img/limit-collection/imperial.png';
 import royalImage from '/src/assets/img/limit-collection/royal.png';
 import { Image } from 'astro:assets';
-import React from 'react';
 import FittingRoom from '../../components/blocks/react/FittingRoom';
 import FittingRoomGallery from '../../components/content/Gallery/FittingRoomGallery.astro';
 import HowToMeasure from '../../components/content/HowToMeasure.astro';
@@ -52,7 +51,7 @@ const productOptions = productOptMap[sku];
                 src={sku === 'EM24' ? empireImage : royalImage}
                 alt={productOptions.name}
                 class="headerImage"
-                width="100"
+                width="353"
             />
         </SwappableHeader>
         <Warning class="warning">
