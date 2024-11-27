@@ -1,4 +1,5 @@
 ---
+import { getImage } from "astro:assets";
 import Button from "./Button.astro";
 const { 
     sku,
@@ -7,13 +8,21 @@ const {
     class: className, 
     ...props
 } = Astro.props;
+
+const optimizedImg = img
+  ? await getImage({
+      src: img,
+	  width: 300,
+      quality: "80",
+    })
+  : { src: "" };
 ---
 
 <Button
     data-buybutton
     data-sku={sku}
     data-color={color} 
-    data-img={img} 
+    data-img={optimizedImg.src} 
     {...props}
 >
     <Fragment>
