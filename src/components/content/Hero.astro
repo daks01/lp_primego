@@ -1,11 +1,17 @@
 ---
+import { getImage } from "astro:assets";
 import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
 // import imgSlide1 from "/src/assets/img/hero-slider/slide-1.png";
 // import imgSlide2 from "/src/assets/img/hero-slider/slide_2.png";
 // import imgSlide3 from "/src/assets/img/hero-slider/slide_3.png";
+import poster from "/src/assets/img/hero-slider/video-poster.png";
 import BackgroundText from "../ui/BackgroundText.astro";
 import SocialList from "../ui/SocialList.astro";
+
+const optimizedPoster = poster
+  ? await getImage({ src: poster, quality: "80" })
+  : { src: "" };
 
 // const imageList = [imgSlide1, imgSlide2, imgSlide3, imgSlide2];
 const { backgroundImage } = Astro.props;
@@ -73,6 +79,7 @@ const { backgroundImage } = Astro.props;
           autoplay
           loop
           muted
+          poster={optimizedPoster.src}
         >
           <source src="./video/hevc.mov" type="video/mp4; codecs=hvc1" />
           <source src="./video/vp9.webm" type="video/webm" />
@@ -92,24 +99,49 @@ const { backgroundImage } = Astro.props;
   document.addEventListener("DOMContentLoaded", () => {
     const container = document.querySelector("[data-container]");
     const videoEl = document.querySelector("[data-video]");
+    const START_VIDEO_FRAME_POSITION = 0.9;
+
+    if (
+      !document.body.contains(container) ||
+      !document.body.contains(videoEl)
+    ) {
+      return;
+    }
+
     let lastScrollPosition = 0;
+    const containerWidth = container.scrollWidth - container.offsetWidth;
 
-    videoEl.pause();
-    container.scrollLeft = container.scrollWidth / 9;
+    function updateScrollbarOnStop() {
+      const currentTime = videoEl.currentTime;
+      const videoDuration = videoEl.duration || 0;
 
-    setInterval(() => {
-      if (videoEl.readyState !== 4) {
+      if (currentTime >= START_VIDEO_FRAME_POSITION) {
+        videoEl.pause();
+        container.scrollLeft = (containerWidth / videoDuration) * currentTime;
+        videoEl.removeEventListener("timeupdate", updateScrollbarOnStop, true);
+      }
+    }
+
+    function updateCurrentTimeAsScrollbarSay() {
+      const isGoNextThick =
+        videoEl.readyState !== 4 ||
+        lastScrollPosition === container.scrollLeft ||
+        !videoEl.paused;
+
+      if (isGoNextThick) {
         return;
       }
-      if (lastScrollPosition === container.scrollLeft) {
-        return;
-      }
-      lastScrollPosition = container.scrollLeft;
-      const containerWidth = container.scrollWidth - container.offsetWidth;
+
       const videoDuration = videoEl.duration;
       const scrollPosition = container.scrollLeft;
+      lastScrollPosition = scrollPosition;
+
       videoEl.currentTime = (videoDuration / containerWidth) * scrollPosition;
-    }, 40);
+    }
+
+    videoEl.addEventListener("timeupdate", updateScrollbarOnStop, true);
+    
+    setInterval(updateCurrentTimeAsScrollbarSay, 40);
   });
 </script>
 
@@ -171,10 +203,10 @@ const { backgroundImage } = Astro.props;
     width: 100%;
     scale: 1.5;
     pointer-events: none;
-    
+
     &::-webkit-media-controls {
       display: none !important;
-      opacity: 0; 
+      opacity: 0;
     }
     &::-webkit-media-controls-start-playback-button {
       display: none !important;
