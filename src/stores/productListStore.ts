@@ -44,7 +44,7 @@ export const $availableSizesByColor = computed(productList, ({ data: products })
             const available = Object.fromEntries(params.colors.map((color) => [color, new Set<string>()]));
             for (const [size, rest] of Object.entries(params.size)) {
                 for (const [color, count] of Object.entries(rest.available)) {
-                    if (count !== 0) available[color].add(size);
+                    if (color in available && count !== 0) available[color].add(size);
                 }
             }
             return [sku, available];
