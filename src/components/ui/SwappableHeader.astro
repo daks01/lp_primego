@@ -24,7 +24,7 @@ const prev = productList[(currentIndex - 1 + productList.length) % productList.l
         variant="left"
         data-swappable-header-button="prev"
         aria-label="Предыдущая обувь"
-        href={`/shop/${prev}`}
+        href={`/fitting/${prev}`}
     />
     <StarTrekText as="h1" class="header__title">{product.name}</StarTrekText>
     <div class="header__img">
@@ -35,7 +35,7 @@ const prev = productList[(currentIndex - 1 + productList.length) % productList.l
         variant="right"
         data-swappable-header-button="next"
         aria-label="Следующая обувь"
-        href={`/shop/${next}`}
+        href={`/fitting/${next}`}
     />
 </Element>
 
