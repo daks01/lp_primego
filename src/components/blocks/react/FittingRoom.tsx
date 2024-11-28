@@ -6,74 +6,58 @@ import { $availableSizesByColor, $colors, $prices, $sizes, type Sizes } from '..
 import { colorMap, productOptMap } from '../../../utils/product-list';
 import { priceWithRouble } from '../../../utils/format';
 import { useStore } from '@nanostores/react';
-import { updateProductParameters } from '../../../stores/shopProductStore';
-
-interface LocalState {
-    color?: string;
-    width?: number;
-    length?: number;
-    measurementsApproval?: boolean;
-    recommended?: string;
-    size?: string;
-    selectedSizeApproval?: boolean;
-}
+import { $selectedProduct, updateProduct } from '../../../stores/shopProductStore';
 
 export default function FittingRoom({ sku, howToMeasureButton }) {
     const { colors, sizes, available, lengths, widths, price } = useAvailableProperties(sku);
-    const [state, setState] = useState<LocalState>({});
-    const isAvailableSize = (size: string) => !state.color || available?.[state.color].has(size);
-    const onColorSelect = (color: string) =>
-        setState((prev) => {
-            updateProductParameters('color', color);
-            const recommendedIsAvailable = prev.recommended && available?.[color].has(prev.recommended);
-            if (!prev.size && recommendedIsAvailable) return { ...prev, color, size: prev.recommended };
-            const sizeIsAvailable = prev.size && available?.[color].has(prev.size);
-            if (!sizeIsAvailable) return { ...prev, color, size: undefined };
-            return { ...prev, color };
-        });
+    const [measurementsApproval, setMeasurementsApproval] = useState<boolean>(false);
+    const [selectedSizeApproval, setSelectedSizeApproval] = useState<boolean>(false);
+    const store = useStore($selectedProduct);
+    const isAvailableSize = (size: string) => !store.color || available?.[store.color].has(size);
+    const onColorSelect = (color: string) => {
+        const recommendedIsAvailable = store.recommended && available?.[color].has(store.recommended);
+        if (!store.size && recommendedIsAvailable) {
+            updateProduct({ size: store.recommended, color });
+            return;
+        }
+        const sizeIsAvailable = store.size && available?.[color].has(store.size);
+        if (!sizeIsAvailable) {
+            updateProduct({ size: undefined, color });
+            return;
+        }
+        updateProduct({ color });
+    };
     const onWidthSelect: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
         const value = parseFloat(e.target.value);
         const width = !isNaN(value) ? value * 10 : undefined;
-        updateProductParameters('width', width);
-        setState((prev) => ({
-            ...prev,
-            width,
-            measurementsApproval: false,
-            recommended: undefined,
-            size: undefined,
-        }));
+        updateProduct({ width, recommended: undefined, size: undefined });
+        setMeasurementsApproval(false);
     };
     const onLengthSelect: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
         const value = parseFloat(e.target.value);
         const length = !isNaN(value) ? value * 10 : undefined;
-        updateProductParameters('length', length);
-        setState((prev) => ({
-            ...prev,
-            length,
-            measurementsApproval: false,
-            recommended: undefined,
-            size: undefined,
-        }));
+        updateProduct({ length, recommended: undefined, size: undefined });
+        setMeasurementsApproval(false);
     };
     const onMeasurementsApprove: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         const checked = e.target.checked;
-        setState((prev) => {
-            const recommended =
-                checked && sizes ? getRecommendedSize(sizes, { width: prev.width, length: prev.length }) : undefined;
-            const size = checked ? (recommended && isAvailableSize(recommended) ? recommended : undefined) : undefined;
-            return { ...prev, measurementsApproval: checked, recommended, size };
-        });
+        const recommended =
+            checked && sizes ? getRecommendedSize(sizes, { width: store.width, length: store.length }) : undefined;
+        const size = checked ? (recommended && isAvailableSize(recommended) ? recommended : undefined) : undefined;
+        updateProduct({ recommended, size });
+        setMeasurementsApproval(checked);
     };
-    const onSizeSelect = (size: string) => setState((prev) => ({ ...prev, size, selectedSizeApproval: false }));
-    const onSizeApprove: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-        setState((prev) => ({ ...prev, selectedSizeApproval: e.target.checked }));
+    const onSizeSelect = (size: string) => {
+        updateProduct({ size });
+        setSelectedSizeApproval(false);
     };
+    const onSizeApprove: React.ChangeEventHandler<HTMLInputElement> = (e) => setSelectedSizeApproval(e.target.checked);
     useEffect(() => {
-        if (colors && !state.color) onColorSelect(colors[0]);
+        if (colors && !store.color) onColorSelect(colors[0]);
     }, [colors]);
     const isSubmitEnabled =
-        (state.recommended && state.recommended === state.size) ||
-        (state.recommended && state.recommended !== state.size && state.selectedSizeApproval);
+        (store.recommended && store.recommended === store.size) ||
+        (store.recommended && store.recommended !== store.size && selectedSizeApproval);
     return (
         <form className={cn(styles.productForm, styles[productOptMap[sku].altName])}>
             <fieldset className={styles.productFieldset}>
@@ -89,7 +73,7 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
                             <input
                                 type="radio"
                                 name="colour"
-                                checked={state.color === color}
+                                checked={store.color === color}
                                 onChange={() => onColorSelect(color)}
                             />
                             <span className={cn(styles.colourSelect__pic, styles[color.replace(/\s/g, '-')])} />
@@ -104,24 +88,34 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
                 <div className={styles.measuring}>
                     <label className={styles.measuring__label}>
                         Длина (см):
-                        <select aria-label="Выбрать длину" className={styles.measuring__select} onChange={onLengthSelect}>
+                        <select
+                            aria-label="Выбрать длину"
+                            className={styles.measuring__select}
+                            onChange={onLengthSelect}
+                            value={store.length ? store.length / 10 : undefined}
+                        >
                             <option>–</option>
-                            {lengths?.map((length) => <option key={length}>{length / 10}</option>)}
+                            {lengths?.map((l) => <option key={l}>{l / 10}</option>)}
                         </select>
                     </label>
                     <label className={styles.measuring__label}>
                         Ширина
                         <br />
                         в широкой части (см):
-                        <select aria-label="Выбрать ширину" className={styles.measuring__select} onChange={onWidthSelect}>
+                        <select
+                            aria-label="Выбрать ширину"
+                            className={styles.measuring__select}
+                            onChange={onWidthSelect}
+                            value={store.width ? store.width / 10 : undefined}
+                        >
                             <option>–</option>
-                            {widths?.map((width) => <option key={width}>{width / 10}</option>)}
+                            {widths?.map((w) => <option key={w}>{w / 10}</option>)}
                         </select>
                     </label>
                 </div>
-                {state?.length && state.width ? (
+                {store.length && store.width ? (
                     <label className={styles.productFieldset__approval}>
-                        <input type="checkbox" checked={state.measurementsApproval} onChange={onMeasurementsApprove} />
+                        <input type="checkbox" checked={measurementsApproval} onChange={onMeasurementsApprove} />
                         Подтвердите указанные размеры
                     </label>
                 ) : null}
@@ -132,8 +126,8 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
                     <div className={styles.sizes}>
                         {Object.keys(sizes)?.map((size) => {
                             const disabled = !isAvailableSize(size);
-                            const recommended = state.recommended === size;
-                            const checked = state.size === size;
+                            const recommended = store.recommended === size;
+                            const checked = store.size === size;
                             const tooltip = getTooltipContent({ disabled, checked, recommended });
                             return tooltip ? (
                                 <Tooltip content={tooltip} key={size}>
@@ -165,7 +159,7 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
                     <span className={styles.measuring__label}>
                         Длина по стельке (см):
                         <span className={styles.measuring__value}>
-                            {state.size && sizes ? sizes[state.size].length / 10 : '-'}
+                            {store.size && sizes ? sizes[store.size].length / 10 : '-'}
                         </span>
                     </span>
                     <span className={styles.measuring__label}>
@@ -173,13 +167,13 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
                         <br />
                         в широкой части (см):
                         <span className={styles.measuring__value}>
-                            {state.size && sizes ? sizes[state.size].width / 10 : '-'}
+                            {store.size && sizes ? sizes[store.size].width / 10 : '-'}
                         </span>
                     </span>
                 </div>
-                {state.recommended && state.size && state.recommended !== state.size ? (
+                {store.recommended && store.size && store.recommended !== store.size ? (
                     <label className={styles.productFieldset__approval}>
-                        <input type="checkbox" checked={state.selectedSizeApproval} onChange={onSizeApprove} />
+                        <input type="checkbox" checked={selectedSizeApproval} onChange={onSizeApprove} />
                         Внимание! Выбранный размер не совпадает с рекомендованным, продолжить?
                     </label>
                 ) : null}
