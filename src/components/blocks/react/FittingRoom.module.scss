@@ -221,7 +221,7 @@
         }
     }
 
-    &__pic.dark-side {
+    &__pic.light-side {
         background-color: var(--color-bg-disabled);
         position: relative;
 
@@ -238,7 +238,7 @@
         }
     }
 
-    &__pic.light-side {
+    &__pic.dark-side {
         background-color: var(--color-white);
         position: relative;
 
