@@ -6,13 +6,15 @@ import { $availableSizesByColor, $colors, $prices, $sizes, type Sizes } from '..
 import { colorMap, productOptMap } from '../../../utils/product-list';
 import { priceWithRouble } from '../../../utils/format';
 import { useStore } from '@nanostores/react';
-import { $selectedProduct, updateProduct } from '../../../stores/shopProductStore';
+import { $selectedProduct, updateProduct } from '../../../stores/fittingProductStore';
 
 export default function FittingRoom({ sku, howToMeasureButton }) {
     const { colors, sizes, available, lengths, widths, price } = useAvailableProperties(sku);
     const [measurementsApproval, setMeasurementsApproval] = useState<boolean>(false);
     const [selectedSizeApproval, setSelectedSizeApproval] = useState<boolean>(false);
     const store = useStore($selectedProduct);
+    useEffect(() => updateProduct({ sku }), []);
+
     const isAvailableSize = (size: string) => !store.color || available?.[store.color].has(size);
     const onColorSelect = (color: string) => {
         const recommendedIsAvailable = store.recommended && available?.[color].has(store.recommended);

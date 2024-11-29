@@ -232,7 +232,7 @@ const hasImages = imageList[sku] !== undefined && Object.keys(imageList[sku]).le
 
 <script>
     import { listenKeys } from 'nanostores';
-    import { $selectedProduct } from '../../../stores/shopProductStore';
+    import { $selectedProduct } from '../../../stores/fittingProductStore';
 
     document.addEventListener('DOMContentLoaded', () => {
         const mainGallery = document.querySelector('[data-gallery-main]');
