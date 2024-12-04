@@ -100,7 +100,7 @@ const productOptions = productOptMap[sku];
                 </UnderlineClickable>
             </FittingRoom>
         </section>
-        <Dialog id="dialog-measuring" title="Как снять мерку">
+        <Dialog id="dialog-measuring" title="Как снять мерку" width="817">
             <HowToMeasure />
             <Button class="button_type-secondary button_fullwidth" onclick={`window["dialog-measuring"]?.close()`}>
                 Назад
@@ -214,18 +214,18 @@ const productOptions = productOptMap[sku];
 
     document.addEventListener('DOMContentLoaded', () => {
         const picturesSection = document.querySelector('[data-product-pictures-section]');
-        const gallery = picturesSection?.querySelector('[data-shop-photo-gallery]');
-        const illustration = picturesSection?.querySelector('[data-shop-illustration]');
+        const gallery = picturesSection?.querySelector<HTMLDivElement>('[data-shop-photo-gallery]');
+        const illustration = picturesSection?.querySelector<HTMLDivElement>('[data-shop-illustration]');
 
         $selectedProduct.listen((_product, _oldProduct, changed) => {
             if (changed === 'color') {
                 picturesSection?.setAttribute('data-product-pictures-section', 'photos');
-                gallery?.setAttribute('data-shop-photo-gallery', 'visible');
-                illustration?.setAttribute('data-shop-illustration', 'hidden');
+                gallery.hidden = false;
+                illustration.hidden = true;
             } else {
                 picturesSection?.setAttribute('data-product-pictures-section', 'measurements');
-                gallery?.setAttribute('data-shop-photo-gallery', 'hidden');
-                illustration?.setAttribute('data-shop-illustration', 'visible');
+                gallery.hidden = true;
+                illustration.hidden = false;
             }
         });
     });

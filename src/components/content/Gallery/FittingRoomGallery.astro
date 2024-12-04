@@ -48,6 +48,7 @@ const hasImages = imageList[sku] !== undefined && Object.keys(imageList[sku]).le
                         {Object.entries(imageList[sku]).map(([color, images]) =>
                             Object.keys(images).map((key, index) => (
                                 <li
+                                    hidden
                                     class="custom-slider__list-item"
                                     data-modal-slide-index={`${color}-${index}`}
                                     data-product-color={color}
@@ -62,7 +63,7 @@ const hasImages = imageList[sku] !== undefined && Object.keys(imageList[sku]).le
                     <div class="custom-slider__list" role="group">
                         {Object.entries(imageList[sku]).map(([color, images]) =>
                             Object.keys(images).map((key, index) => (
-                                <label class="custom-slider__list-item" data-product-color={color}>
+                                <label class="custom-slider__list-item" data-product-color={color} hidden>
                                     <input
                                         type="radio"
                                         name="miniature"
@@ -88,17 +89,9 @@ const hasImages = imageList[sku] !== undefined && Object.keys(imageList[sku]).le
 </Fragment>
 
 <style lang="scss">
-    .visible.visible.visible {
-        display: block;
-    }
-
     .gallery {
         position: relative;
         height: 100%;
-    }
-
-    [data-shop-photo-gallery='hidden'] {
-        display: none;
     }
 
     .custom-slider {
@@ -130,7 +123,6 @@ const hasImages = imageList[sku] !== undefined && Object.keys(imageList[sku]).le
         &__list-item {
             margin: 0;
             scroll-snap-align: center;
-            display: none;
         }
 
         &__img {
@@ -192,7 +184,7 @@ const hasImages = imageList[sku] !== undefined && Object.keys(imageList[sku]).le
             }
         }
 
-        .custom-slider__list-item.visible + .custom-slider__list-item.visible {
+        .custom-slider__list-item:not([hidden]) + .custom-slider__list-item:not([hidden]) {
             margin-left: var(--15px);
         }
     }
@@ -223,7 +215,7 @@ const hasImages = imageList[sku] !== undefined && Object.keys(imageList[sku]).le
                 }
             }
 
-            .custom-slider__list-item.visible + .custom-slider__list-item.visible {
+            .custom-slider__list-item:not([hidden]) + .custom-slider__list-item:not([hidden]) {
                 margin-left: var(--8px);
             }
         }
@@ -283,13 +275,9 @@ const hasImages = imageList[sku] !== undefined && Object.keys(imageList[sku]).le
         listenKeys($selectedProduct, ['color'], (product) => {
             slidesContainer?.scrollTo(0, 0);
 
-            document.querySelectorAll('[data-product-color]').forEach((item) => {
+            document.querySelectorAll<HTMLLabelElement>('[data-product-color]').forEach((item) => {
                 const color = item.getAttribute('data-product-color');
-                if (product.color === color) {
-                    item.classList.add('visible');
-                } else {
-                    item.classList.remove('visible');
-                }
+                item.hidden = product.color !== color;
             });
         });
     });

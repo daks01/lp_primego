@@ -35,7 +35,7 @@ import Warning from '../ui/Warning.astro';
             </svg>
         </div>
         <div class="measurements__preview">
-            <div class="measurements__preview__shoe-sole" data-shoe-sole>
+            <div class="measurements__preview__shoe-sole" data-shoe-sole hidden>
                 <svg
                     preserveAspectRatio="none"
                     width="100%"
@@ -105,7 +105,7 @@ import Warning from '../ui/Warning.astro';
     <div class="recommended-size">
         Ваш рекомендованный размер: <span class="recommended-size__content" data-recommended-size>-</span>
     </div>
-    <div data-size-warning>
+    <div data-size-warning hidden>
         <Warning class="warning"> Внимание! Выбранный размер не совпадает с рекомендованным</Warning>
     </div>
 </div>
@@ -148,7 +148,6 @@ import Warning from '../ui/Warning.astro';
     }
 
     .measurements__preview__shoe-sole {
-        display: none;
         position: absolute;
         bottom: calc(calc(var(--1mm) * -10));
         left: calc(calc(var(--1mm) * -10));
@@ -270,14 +269,6 @@ import Warning from '../ui/Warning.astro';
     .warning {
         background-color: var(--color-bg-disabled);
     }
-
-    [data-shop-illustration='hidden'] {
-        display: none;
-    }
-
-    [data-size-warning] {
-        display: none;
-    }
 </style>
 
 <script>
@@ -297,10 +288,10 @@ import Warning from '../ui/Warning.astro';
     document.addEventListener('DOMContentLoaded', () => {
         setContainerHeightForOldBrowsers();
 
-        const xTooltip = document.querySelector('[data-x-ruler-tooltip]');
+        const xTooltip = document.querySelector<HTMLDivElement>('[data-x-ruler-tooltip]');
         const xTooltipContent = xTooltip?.querySelector('span');
 
-        const yTooltip = document.querySelector('[data-y-ruler-tooltip]');
+        const yTooltip = document.querySelector<HTMLDivElement>('[data-y-ruler-tooltip]');
         const yTooltipContent = yTooltip?.querySelector('span');
 
         const footContainer = document.querySelector<HTMLDivElement>('[data-foot-container]');
@@ -311,16 +302,16 @@ import Warning from '../ui/Warning.astro';
             footContainer?.style.setProperty('--length', length ? length.toString() : null);
             footContainer?.style.setProperty('--width', width ? width.toString() : null);
             if (width) {
-                xTooltip.style.display = 'block';
+                xTooltip.hidden = false;
                 xTooltipContent.textContent = `${toCm(width)?.toFixed(1)}`;
             } else {
-                xTooltip.style.display = 'none';
+                xTooltip.hidden = true;
             }
             if (length) {
-                yTooltip.style.display = 'block';
+                yTooltip.hidden = false;
                 yTooltipContent.textContent = `${toCm(length)?.toFixed(1)}`;
             } else {
-                yTooltip.style.display = 'none';
+                yTooltip.hidden = true;
             }
         });
 
@@ -335,9 +326,9 @@ import Warning from '../ui/Warning.astro';
                 } else {
                     shoeSole?.classList.remove('fit');
                 }
-                shoeSole.style.display = 'block';
+                shoeSole.hidden = false;
             } else {
-                shoeSole.style.display = 'none';
+                shoeSole.hidden = true;
             }
         });
 
@@ -346,7 +337,7 @@ import Warning from '../ui/Warning.astro';
         listenKeys($selectedProduct, ['recommended', 'size'], ({ recommended, size }) => {
             recommendedSize.textContent = recommended ?? '-';
             const isNotSame = recommended && size && recommended !== size;
-            warningElement.style.display = isNotSame ? 'block' : 'none';
+            warningElement.hidden = !isNotSame;
         });
     });
 </script>
