@@ -60,8 +60,12 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
     const isSubmitEnabled =
         (store.recommended && store.recommended === store.size) ||
         (store.recommended && store.recommended !== store.size && selectedSizeApproval);
+    const onFormSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
+        e.preventDefault();
+        window['dialog-shopcart']?.showModal();
+    };
     return (
-        <form className={cn(styles.productForm, styles[productOptMap[sku].altName])}>
+        <form className={cn(styles.productForm, styles[productOptMap[sku].altName])} onSubmit={onFormSubmit}>
             <fieldset className={styles.productFieldset}>
                 <legend className={styles.productFieldset__legend}>Выбери цвет модели</legend>
                 <div className={styles.colourSelect}>

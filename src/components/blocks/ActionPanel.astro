@@ -1,6 +1,11 @@
 ---
 import Dialog from "../ui/Dialog.astro";
-import ShopCart from "../blocks/ShopCart.vue";
+import ShopCart from "./ShopCart.vue";
+
+interface Props {
+    variant?: 'default' | 'modest';
+}
+const { variant = 'default' } = Astro.props;
 ---
 
 <div class="action-panel">
@@ -21,7 +26,7 @@ import ShopCart from "../blocks/ShopCart.vue";
 	</Dialog> -->
 	<a
 		href="./order"
-		class="button-shopcart"
+		class:list={["button-shopcart", variant]}
 		type="button"
 		onclick={`event.preventDefault(); window["dialog-shopcart"]?.showModal()`}
 		aria-label="Корзина"
@@ -121,7 +126,6 @@ import ShopCart from "../blocks/ShopCart.vue";
 		font-size: calc(var(--1px) * 20);
 		font-weight: 600;
 		line-height: 1;
-		padding: 0;
 		background-color: transparent;
 		border: none;
 		display: flex;
@@ -142,6 +146,10 @@ import ShopCart from "../blocks/ShopCart.vue";
 		font-size: calc(var(--1px) * 20);
 		padding-right: var(--15px);
 	}
+
+    .button-shopcart.modest .button-shopcart__title {
+            display: none;
+    }
 
 	@media screen and (max-width: 1023px) {
 		.action-panel {
