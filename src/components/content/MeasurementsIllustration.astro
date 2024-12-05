@@ -257,17 +257,57 @@ import Warning from '../ui/Warning.astro';
         background-color: var(--color-bg-disabled);
         font-weight: 600;
         font-size: var(--text-font-size);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        &__content {
-            margin-left: var(--8px);
-        }
+        text-align: center;
     }
 
     .warning {
         background-color: var(--color-bg-disabled);
+    }
+
+    @media screen and (max-width: 1023px) {
+        .measurements {
+            padding: var(--15px) calc(var(--1px) * 20) calc(var(--1px) * 26);
+        }
+
+        .measurements__presentation {
+            margin: calc(var(--1mm) * 15) 0 calc(var(--1mm) * 15) auto;
+            width: 85%;
+        }
+
+        .measurements__preview__foot {
+            &::before {
+                height: var(--1px);
+                background-image: repeating-linear-gradient(
+                    90deg,
+                    var(--color-gray) 0 var(--4px),
+                    transparent var(--4px) var(--8px)
+                );
+            }
+
+            &::after {
+                width: var(--1px);
+                background-image: repeating-linear-gradient(
+                    0deg,
+                    var(--color-gray) 0 var(--4px),
+                    transparent var(--4px) var(--8px)
+                );
+            }
+        }
+
+        .measurement__tooltip {
+            padding: var(--4px) var(--8px);
+            font-size: calc(var(--1px) * 8);
+
+            &[data-x-ruler-tooltip] .measurement__tooltip__arrow,
+            &[data-y-ruler-tooltip] .measurement__tooltip__arrow {
+                width: var(--15px);
+            }
+        }
+
+        .recommended-size {
+            font-size: var(--small-font-size);
+            padding: var(--8px) var(--30px);
+        }
     }
 </style>
 
