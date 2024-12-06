@@ -218,15 +218,10 @@ const productOptions = productOptMap[sku];
         const illustration = picturesSection?.querySelector<HTMLDivElement>('[data-shop-illustration]');
 
         $selectedProduct.listen((_product, _oldProduct, changed) => {
-            if (changed === 'color') {
-                picturesSection?.setAttribute('data-product-pictures-section', 'photos');
-                gallery.hidden = false;
-                illustration.hidden = true;
-            } else {
-                picturesSection?.setAttribute('data-product-pictures-section', 'measurements');
-                gallery.hidden = true;
-                illustration.hidden = false;
-            }
+            const isColorChanged = changed === 'color';
+            picturesSection?.setAttribute('data-product-pictures-section', isColorChanged ? 'photos' : 'measurements');
+            gallery.hidden = !isColorChanged;
+            illustration.hidden = isColorChanged;
         });
     });
 </script>
