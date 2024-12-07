@@ -1,0 +1,51 @@
+---
+const { as: Element = 'button', variant, class: className, ...props } = Astro.props;
+---
+
+<Element class:list={['sliderButton', className]} {...props}>
+    <svg focusable="false" width="9" height="14" viewBox="0 0 9 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+            d={variant === 'left'
+                ? 'M3.33432 6.99967L8.66797 12.3332L7.33479 13.6663L0.667969 6.99967L7.33479 0.333008L8.66797 1.66615L3.33432 6.99967Z'
+                : 'M5.66568 7.00033L0.332032 1.6668L1.66521 0.333659L8.33203 7.00033L1.66521 13.667L0.332031 12.3338L5.66568 7.00033Z'}
+            fill="currentColor"></path>
+    </svg>
+</Element>
+
+<style lang="scss">
+    .sliderButton {
+        top: 50%;
+        transform: translate(0, -50%);
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        border: none;
+        color: var(--color-product-primego);
+        width: var(--30px);
+        height: var(--30px);
+        cursor: pointer;
+        z-index: 10;
+
+        &::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            z-index: -1;
+        }
+
+        svg {
+            pointer-events: none;
+        }
+    }
+
+    @media screen and (max-width: 1023px) {
+        .sliderButton {
+            width: calc(var(--1px) * 24);
+            height: calc(var(--1px) * 24);
+        }
+    }
+</style>

@@ -1,0 +1,10 @@
+.tooltip {
+    background-color: var(--color-gray);
+    color: var(--color-bg-disabled);
+    padding: calc(var(--1px) * 6) var(--8px) var(--8px);
+    border-radius: var(--4px);
+}
+
+.arrow {
+    fill: var(--color-gray);
+}

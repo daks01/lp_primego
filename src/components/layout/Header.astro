@@ -1,21 +1,23 @@
 ---
 import Section from "../ui/Section.astro";
-import Dialog from "../ui/Dialog.astro";
-import ShopCart from "../blocks/ShopCart.vue";
 import SocialList from "../ui/SocialList.astro";
 import Logo from "../ui/Logo.astro";
 import ActionPanel from "../blocks/ActionPanel.astro";
 
-const { 
-	as: tag = "header",
-	isHome = false,
-} = Astro.props;
+interface Props {
+    variant?: 'default' | 'modest';
+    as?: string;
+    isHome?: boolean;
+    backTo?: string;
+    class?: string;
+}
+const { variant = 'default', as: tag = 'header', isHome = false, backTo = '/', class: className } = Astro.props;
 ---
 
-<Section as={tag} class="header">
+<Section as={tag} class:list={["header", variant, className]}>
 	<div class="top-bar">
 		<div class="top-bar__cell top-bar__cell_1">
-			<a href="/" aria-label="На главную" class="back-button" hidden={isHome}>
+			<a href={backTo} aria-label="На предыдущую страницу" class="back-button" hidden={isHome}>
 				<svg role="presentation" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 					<path d="M19 12H5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 					<path d="M12 19L5 12L12 5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -29,15 +31,14 @@ const {
 			</a>
 		</div>
 		<div class="top-bar__cell top-bar__cell_3">
-			<ActionPanel />
+			<ActionPanel variant={variant} />
 		</div>
 	</div>
 </Section>
 
-<script></script>
 <style lang="scss">
 	.header {
-		background-color: var(--color-black);
+        background-color: var(--background-color);
 		min-height: var(--header-height) !important;
 		position: relative;
 		z-index: 2;
@@ -72,7 +73,20 @@ const {
 			height: calc(var(--1px) * 24);
 		}
 	}
-	@media screen and (max-width: 1024px) {
+    .header.modest {
+        background-color: transparent;
+        z-index: 5;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 0;
+
+        .top-bar__cell_1,
+        .top-bar__cell_2 {
+            display: none;
+        }
+	}
+	@media screen and (max-width: 1023px) {
 		.back-button {
 			display: block;
 			margin-right: var(--15px);
@@ -85,5 +99,15 @@ const {
 		.top-bar {
 			align-items: center;
 		}
-	}
+        .header.default,
+        .header.modest {
+            background-color: var(--background-color);
+            position: relative;
+            z-index: 2;
+
+            .top-bar__cell {
+                display: flex;
+            }
+        }
+    }
 </style>
