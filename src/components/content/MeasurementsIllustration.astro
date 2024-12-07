@@ -383,10 +383,14 @@ import Warning from '../ui/Warning.astro';
 
         const recommendedSize = document.querySelector('[data-recommended-size]');
         const warningElement = document.querySelector<HTMLDivElement>('[data-size-warning]');
-        listenKeys($selectedProduct, ['recommended', 'size'], ({ recommended, size }) => {
-            recommendedSize.textContent = recommended ?? '-';
-            const isNotSame = recommended && size && recommended !== size;
-            warningElement.hidden = !isNotSame;
-        });
+        listenKeys(
+            $selectedProduct,
+            ['recommended', 'size', 'selectedSizeApproval'],
+            ({ recommended, size, selectedSizeApproval }) => {
+                recommendedSize.textContent = recommended ?? '-';
+                const isNotSame = recommended && size && recommended !== size;
+                warningElement.hidden = !isNotSame || selectedSizeApproval;
+            },
+        );
     });
 </script>

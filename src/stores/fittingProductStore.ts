@@ -8,6 +8,7 @@ interface FittingProduct {
     width?: number;
     recommended?: string;
     size?: string;
+    selectedSizeApproval?: boolean;
 }
 export const $selectedProduct = map<FittingProduct>({});
 

@@ -11,7 +11,6 @@ import { $selectedProduct, updateProduct } from '../../../stores/fittingProductS
 export default function FittingRoom({ sku, howToMeasureButton }) {
     const { colors, sizes, available, lengths, widths, price } = useAvailableProperties(sku);
     const [measurementsApproval, setMeasurementsApproval] = useState<boolean>(false);
-    const [selectedSizeApproval, setSelectedSizeApproval] = useState<boolean>(false);
     const store = useStore($selectedProduct);
     useEffect(() => updateProduct({ sku }), []);
 
@@ -49,17 +48,15 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
         updateProduct({ recommended, size });
         setMeasurementsApproval(checked);
     };
-    const onSizeSelect = (size: string) => {
-        updateProduct({ size });
-        setSelectedSizeApproval(false);
-    };
-    const onSizeApprove: React.ChangeEventHandler<HTMLInputElement> = (e) => setSelectedSizeApproval(e.target.checked);
+    const onSizeSelect = (size: string) => updateProduct({ size, selectedSizeApproval: false });
+    const onSizeApprove: React.ChangeEventHandler<HTMLInputElement> = (e) =>
+        updateProduct({ selectedSizeApproval: e.target.checked });
     useEffect(() => {
         if (colors && !store.color) onColorSelect(colors[0]);
     }, [colors]);
     const isSubmitEnabled =
         (store.recommended && store.recommended === store.size) ||
-        (store.recommended && store.recommended !== store.size && selectedSizeApproval);
+        (store.recommended && store.recommended !== store.size && store.selectedSizeApproval);
     const onFormSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
         window['dialog-shopcart']?.showModal();
@@ -179,7 +176,7 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
                 </div>
                 {store.recommended && store.size && store.recommended !== store.size ? (
                     <label className={styles.productFieldset__approval}>
-                        <input type="checkbox" checked={selectedSizeApproval} onChange={onSizeApprove} />
+                        <input type="checkbox" checked={store.selectedSizeApproval} onChange={onSizeApprove} />
                         Внимание! Выбранный размер не совпадает с рекомендованным, продолжить?
                     </label>
                 ) : null}
