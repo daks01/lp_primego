@@ -33,6 +33,10 @@
     border-left: var(--2px) solid var(--color-product);
     padding: var(--30px) var(--30px) var(--60px);
 
+    &:disabled {
+        opacity: 0.6;
+    }
+
     &__legend {
         font-size: var(--text-font-size);
         font-weight: 600;
@@ -344,6 +348,9 @@
 
     input:disabled + &__label__content {
         cursor: default;
+    }
+
+    input[disabled] + &__label__content {
         color: var(--fields-title);
         position: relative;
         overflow: hidden;

@@ -123,7 +123,7 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
                     </label>
                 ) : null}
             </fieldset>
-            <fieldset className={styles.productFieldset}>
+            <fieldset className={styles.productFieldset} disabled={!store.length || !store.width || !measurementsApproval}>
                 <legend className={styles.productFieldset__legend}>Выбери размер</legend>
                 {!sizes ? null : (
                     <div className={styles.sizes}>
