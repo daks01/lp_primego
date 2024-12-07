@@ -9,7 +9,6 @@ import Button from '../../components/ui/Button.astro';
 import SwappableHeader from '../../components/ui/SwappableHeader.astro';
 import UnderlineClickable from '../../components/ui/UnderlineClickable.astro';
 import Dialog from '../../components/ui/Dialog.astro';
-import StarTrekText from '../../components/ui/StarTrekText.astro';
 import Warning from '../../components/ui/Warning.astro';
 import Layout from '../../layouts/Layout.astro';
 import BackButton from '../../components/ui/BackButton.astro';
@@ -65,12 +64,7 @@ const productOptions = productOptMap[sku];
         </section>
         <section class="product-layout__content">
             <BackButton href={backTo} class:list={['backButton', 'display-mobile-none']} />
-            <header class="display-mobile-none">
-                <span class="subtitle">Лимитированная коллекция</span>
-                <StarTrekText as="h1" class:list={['title', productOptMap[sku].altName]}>
-                    {productOptions.name}
-                </StarTrekText>
-            </header>
+            <SwappableHeader sku={sku} class="display-mobile-none" />
             <Warning class="display-mobile-none">
                 Внимание! В каждой коллекции собственный размерный ряд. Используйте калькулятор ниже для подбора размера.
             </Warning>
@@ -140,24 +134,6 @@ const productOptions = productOptMap[sku];
 
     .backButton.backButton {
         margin-top: 0;
-    }
-
-    .title {
-        font-size: calc(var(--1px) * 128);
-        margin: var(--15px) 0 var(--30px);
-
-        &.empire {
-            color: var(--color-product-empire);
-        }
-
-        &.royal {
-            color: var(--color-product-royal);
-        }
-    }
-
-    .subtitle {
-        color: var(--color-gray);
-        font-weight: 600;
     }
 
     .how-to-button {
