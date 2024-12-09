@@ -1,0 +1,130 @@
+---
+import { Image } from 'astro:assets';
+import step1 from '/src/assets/img/measure-help/step-1.svg';
+import step2 from '/src/assets/img/measure-help/step-2.svg';
+import step3 from '/src/assets/img/measure-help/step-3.svg';
+import step4 from '/src/assets/img/measure-help/step-4.svg';
+---
+
+<article class="article">
+    <ol class="list">
+        <li class="list__item">
+            <div>
+                <h5>Шаг 1.</h5>
+                <p>Наденьте чулки или носки, которые вы обычно носите с таким видом обуви.</p>
+            </div>
+            <Image class="list__item__img" width="180" height="180" src={step1} alt="Человек надевает носки" loading="lazy" />
+        </li>
+        <li class="list__item">
+            <div>
+                <h5>Шаг 2.</h5>
+                <p>
+                    Встаньте прямо на твёрдой плоской поверхности, касаясь стены пятками. При необходимости попросите
+                    кого-нибудь помочь вам снять мерки.
+                </p>
+            </div>
+            <Image
+                class="list__item__img"
+                width="180"
+                height="180"
+                src={step2}
+                alt="Человек стоит около стены, пятки прижаты к стене"
+                loading="lazy"
+            />
+        </li>
+        <li class="list__item">
+            <div>
+                <h5>Шаг 3.</h5>
+                <p>Прижав пятки к стене, измерьте длину стопы от основания пятки до крайней точки самого длинного пальца.</p>
+            </div>
+            <Image
+                class="list__item__img"
+                width="180"
+                height="180"
+                src={step3}
+                alt="Человек стоитв в том же положении, вдоль стопы лежит линейка"
+                loading="lazy"
+            />
+        </li>
+        <li class="list__item">
+            <div>
+                <h5>Шаг 4.</h5>
+                <p>
+                    Аналогичным образом измерьте ширину самой широкой части. Измерьте обе стопы и используйте наибольшую
+                    величину для определения размера.
+                </p>
+            </div>
+            <Image
+                class="list__item__img"
+                width="180"
+                height="180"
+                src={step4}
+                alt="Линейка лежит попрёк стопы"
+                loading="lazy"
+            />
+        </li>
+    </ol>
+</article>
+
+<style lang="scss">
+    .article {
+        background-color: var(--color-bg-black);
+        border-left: var(--2px) solid var(--color-product);
+        padding: var(--30px) var(--30px) var(--60px);
+        margin-bottom: var(--45px);
+        font-size: var(--small-font-size);
+    }
+
+    .list {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+
+        &__item {
+            margin: 0 0 var(--30px);
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            gap: var(--30px);
+
+            &:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+
+            &__img {
+                width: calc(var(--1px) * 180);
+                height: calc(var(--1px) * 180);
+            }
+        }
+
+        & h5 {
+            font-size: inherit;
+            display: inline-flex;
+            align-items: center;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        & p {
+            display: inline;
+            margin: 0;
+        }
+    }
+
+    @media screen and (max-width: 1023px) {
+        .article {
+            font-size: var(--extra-small-font-size);
+            padding: var(--30px) var(--15px);
+            margin-bottom: var(--30px);
+        }
+
+        .list__item {
+            gap: var(--15px);
+
+            &__img {
+                width: var(--90px);
+                height: var(--90px);
+            }
+        }
+    }
+</style>
