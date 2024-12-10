@@ -60,15 +60,14 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
         (store.recommended && store.recommended !== store.size && store.selectedSizeApproval);
     const onFormSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
-        window['dialog-shopcart']?.showModal();
         const { color, size } = store;
+        
         addCartItem({
             sku,
-            img: 'https://place-hold.it/220x220', 
-            siteColor: 'red',
             color: color || '',
             size: size || '',
         });
+        window['dialog-shopcart']?.showModal();
     };
     return (
         <form className={cn(styles.productForm, styles[productOptMap[sku].altName])} onSubmit={onFormSubmit}>

@@ -4,7 +4,13 @@
             <ul class="product-list">
                 <li v-for="cartItem in Object.values($cartItems)" :key="cartItem.id" class="product-list__item">
                     <div class="col col_1">
-                        <img :src="productImgMap?.[cartItem.sku]?.[cartItem.color]" :alt="cartItem.name" class="product-img" width="110" />
+                        <img 
+                            :src="cartItem?.img" 
+                            :alt="cartItem.name" 
+                            class="product-img" 
+                            width="110"
+                            onerror="this.src='/favicon.svg'"
+                        />
                     </div>
                     <div class="col col_2 col_desc">
                         <span class="product-tag">
@@ -32,7 +38,7 @@
                         </div>
                     </div>
                     <div class="col col_3 col_align-center">
-                        <div class="font_star-trek product-title display-none display-mobile-block" :style="{color: cartItem.siteColor}">
+                        <div class="font_star-trek product-title display-none display-mobile-block">
                             {{cartItem.name}}
                         </div>
                         <span class="product-price">{{ priceWithRouble(cartItem.price) }}</span>
@@ -138,7 +144,6 @@
 import { ref, toRaw } from 'vue';
 import { useStore } from '@nanostores/vue';
 import { cartItems, totalPrice } from './../../stores/shopCartStore';
-import { productImgMap } from './../../stores/productListStore';
 import { apiUrl } from './../../utils/routes';
 import { priceWithRouble } from './../../utils/format';
 import { colorMap } from './../../utils/product-list';
@@ -146,7 +151,6 @@ import { productOptMap } from "../../utils/product-list";
 
 const $cartItems = useStore(cartItems);
 const $totalPrice = useStore(totalPrice);
-const $productImgMap = useStore(productImgMap);
 let status = ref('idle');
 
 const formData = ref({

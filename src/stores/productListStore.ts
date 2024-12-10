@@ -7,12 +7,7 @@ const [createFetcherStore, createMutatorStore] = nanoquery({
     fetcher: (...keys) => fetch(keys.join('')).then((r) => r.json()),
 });
 
-let storedProductList;
-try {
-    storedProductList = JSON.parse(localStorage.getItem('productList')) || {};
-} catch(e) {
-    storedProductList = {};
-}
+const storedProductList = JSON.parse(localStorage.getItem('productList')) || {};
 
 const productsAvailability = createFetcherStore(apiUrl.availability);
 
@@ -64,14 +59,3 @@ export const $prices = computed(productList, ({ data: products }) => {
     if (!products) return undefined;
     return Object.fromEntries(Object.entries<{ price: number }>(products).map(([sku, params]) => [sku, params.price]));
 });
-
-export const productImgMap = map() || {EM24: {}};
-
-export function addProductImg(sku: string, color: string, imgUrl: string) {
-    const result = {
-        ...productImgMap.get()[sku],
-        [color]: imgUrl,
-    };
-    productImgMap.setKey(sku, result);
-    console.log(444, productImgMap.get())
-}

@@ -3,8 +3,8 @@ import {
     map,
     computed
 } from 'nanostores';
-import {productList} from './productListStore';
 import { nanoid } from 'nanoid'
+import { productList } from './productListStore';
 
 export type CartItem = {
     id?: string;
@@ -13,12 +13,11 @@ export type CartItem = {
     sku: string; 
     size: string;
     price: string;
-    img: string;
     color: string;
-    siteColor: string;
+    img?: string;
 }
 
-type ItemDisplayInfo = Pick<CartItem, 'sku' | 'img' | 'siteColor' | 'color' | 'size'>;
+type ItemDisplayInfo = Pick<CartItem, 'sku' | 'color' | 'size'>;
 
 const storedCartItems = JSON.parse(localStorage.getItem('shopCart')) || {};
 
@@ -26,17 +25,17 @@ export const totalPrice = atom(0);
 
 export const cartItems = map<Record<string, CartItem>>(storedCartItems);
 
-export function addCartItem({ sku, img, siteColor, color, size }: ItemDisplayInfo) {
+export function addCartItem({ sku, color, size }: ItemDisplayInfo) {
     const id = nanoid();
+    const shopIconsJson = document.querySelector('script[data-shop-image-json]')?.dataset.shopImageJson;
+
     const productData = {
         ...productList.get()?.data[sku],
-        siteColor: color,
         color,
-        img,
         size,
         id,
+        img: JSON.parse(shopIconsJson)?.[sku]?.[color],
     };
-
     cartItems.setKey(id, {...productData});
 }
 
