@@ -27,9 +27,6 @@ const prev = productList[(currentIndex - 1 + productList.length) % productList.l
         href={`/fitting/${prev}`}
     />
     <StarTrekText as="h1" class="header__title">{product.name}</StarTrekText>
-    <div class="header__img">
-        <slot name="image" />
-    </div>
     <ArrowButton
         as="a"
         variant="right"
@@ -60,10 +57,6 @@ const prev = productList[(currentIndex - 1 + productList.length) % productList.l
             font-size: calc(var(--1px) * 128);
             margin: 0;
         }
-
-        &__img {
-            display: none;
-        }
     }
 
     [data-swappable-header-button] {
@@ -82,20 +75,11 @@ const prev = productList[(currentIndex - 1 + productList.length) % productList.l
 
     @media screen and (max-width: 1023px) {
         .header {
-            display: block;
             padding: 0 calc(var(--1px) * 40);
+            margin-top: calc(var(--1px) * 20);
 
             &__title {
                 font-size: var(--heading-1);
-                margin-top: calc(var(--1px) * 20);
-            }
-
-            &__img {
-                display: block;
-                position: absolute;
-                top: 50%;
-                right: calc(var(--1px) * 38);
-                transform: translateY(-50%);
             }
         }
     }

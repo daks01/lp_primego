@@ -1,7 +1,4 @@
 ---
-import empireImage from '/src/assets/img/limit-collection/imperial.png';
-import royalImage from '/src/assets/img/limit-collection/royal.png';
-import { Image } from 'astro:assets';
 import FittingRoom from '../../components/blocks/react/FittingRoom';
 import FittingRoomGallery from '../../components/content/Gallery/FittingRoomGallery.astro';
 import HowToMeasure from '../../components/content/HowToMeasure.astro';
@@ -44,15 +41,7 @@ const productOptions = productOptMap[sku];
 <Layout title="Primego | Примерочная">
     <Header variant="modest" backTo={backTo} />
     <div class:list={['display-none', 'display-mobile-block']}>
-        <SwappableHeader sku={sku}>
-            <Image
-                slot="image"
-                src={sku === 'EM24' ? empireImage : royalImage}
-                alt={productOptions.name}
-                class="headerImage"
-                width="353"
-            />
-        </SwappableHeader>
+        <SwappableHeader sku={sku} />
         <Warning class="warning">
             Внимание! В каждой коллекции собственный размерный ряд. Используйте калькулятор ниже для подбора размера.
         </Warning>
@@ -149,11 +138,6 @@ const productOptions = productOptMap[sku];
     }
 
     @media screen and (max-width: 1023px) {
-        .headerImage {
-            width: calc(var(--1px) * 85);
-            transform: rotate(-15deg);
-        }
-
         .product-layout {
             flex-direction: column;
             overflow-y: visible;
