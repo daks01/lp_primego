@@ -1,0 +1,86 @@
+---
+import ArrowButton from './ArrowButton.astro';
+import StarTrekText from './StarTrekText.astro';
+import { productOptMap } from '../../utils/product-list';
+
+interface Props {
+    as?: string;
+    class?: string;
+    sku: string;
+}
+const { as: Element = 'header', class: className, sku } = Astro.props;
+
+const product = productOptMap[sku];
+
+const productList = Object.entries(productOptMap);
+const currentIndex = productList.findIndex(([s]) => s === sku);
+const next = productList[(currentIndex + 1) % productList.length][1].altName;
+const prev = productList[(currentIndex - 1 + productList.length) % productList.length][1].altName;
+---
+
+<Element class:list={['header', product.altName, className]}>
+    <ArrowButton
+        as="a"
+        variant="left"
+        data-swappable-header-button="prev"
+        aria-label="Предыдущая обувь"
+        href={`/fitting/${prev}`}
+    />
+    <StarTrekText as="h1" class="header__title">{product.name}</StarTrekText>
+    <ArrowButton
+        as="a"
+        variant="right"
+        data-swappable-header-button="next"
+        aria-label="Следующая обувь"
+        href={`/fitting/${next}`}
+    />
+</Element>
+
+<style lang="scss">
+    .header {
+        background: linear-gradient(-90deg, #8c1630 1.33%, var(--color-black) 97.51%);
+        padding: var(--8px) 0;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &.empire {
+            --text-product: var(--color-product-empire);
+        }
+
+        &.royal {
+            --text-product: var(--color-product-royal);
+        }
+
+        &__title {
+            font-size: calc(var(--1px) * 128);
+            margin: 0;
+        }
+    }
+
+    [data-swappable-header-button] {
+        position: absolute;
+        top: 50%;
+        transform: translate(0, -50%);
+    }
+
+    [data-swappable-header-button='prev'] {
+        left: calc(var(--1px) * 12);
+    }
+
+    [data-swappable-header-button='next'] {
+        right: calc(var(--1px) * 12);
+    }
+
+    @media screen and (max-width: 1023px) {
+        .header {
+            padding: 0 calc(var(--1px) * 40);
+            margin-top: calc(var(--1px) * 20);
+
+            &__title {
+                font-size: var(--heading-1);
+            }
+        }
+    }
+</style>
