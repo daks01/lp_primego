@@ -11,17 +11,14 @@ export type CartItem = {
     name: string; 
     type: string;
     sku: string; 
-    size?: object;
-    lace?: string; 
-    fur_tongue?: boolean;
-    fur_edge?: boolean;
+    size: string;
     price: string;
     img: string;
+    color: string;
     siteColor: string;
-    color: any,
 }
 
-type ItemDisplayInfo = Pick<CartItem, 'sku' | 'img' | 'color'>;
+type ItemDisplayInfo = Pick<CartItem, 'sku' | 'img' | 'siteColor' | 'color' | 'size'>;
 
 const storedCartItems = JSON.parse(localStorage.getItem('shopCart')) || {};
 
@@ -29,16 +26,15 @@ export const totalPrice = atom(0);
 
 export const cartItems = map<Record<string, CartItem>>(storedCartItems);
 
-export function addCartItem({ sku, img, color }: ItemDisplayInfo) {
+export function addCartItem({ sku, img, siteColor, color, size }: ItemDisplayInfo) {
     const id = nanoid();
     const productData = {
         ...productList.get()?.data[sku],
         siteColor: color,
+        color,
         img,
+        size,
         id,
-        //     lace: 'стандарт', 
-        //     fur_tongue: false,
-        //     fur_edge: false,
     };
 
     cartItems.setKey(id, {...productData});

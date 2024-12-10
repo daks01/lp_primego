@@ -7,6 +7,7 @@ import { colorMap, productOptMap } from '../../../utils/product-list';
 import { priceWithRouble } from '../../../utils/format';
 import { useStore } from '@nanostores/react';
 import { $selectedProduct, updateProduct } from '../../../stores/fittingProductStore';
+import { addCartItem } from "../../../stores/shopCartStore";
 
 export default function FittingRoom({ sku, howToMeasureButton }) {
     const { colors, sizes, available, lengths, widths, price } = useAvailableProperties(sku);
@@ -60,6 +61,14 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
     const onFormSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
         window['dialog-shopcart']?.showModal();
+        const { color, size } = store;
+        addCartItem({
+            sku,
+            img: 'https://place-hold.it/220x220', 
+            siteColor: 'red',
+            color: color || '',
+            size: size || '',
+        });
     };
     return (
         <form className={cn(styles.productForm, styles[productOptMap[sku].altName])} onSubmit={onFormSubmit}>

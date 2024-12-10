@@ -4,75 +4,31 @@
             <ul class="product-list">
                 <li v-for="cartItem in Object.values($cartItems)" :key="cartItem.id" class="product-list__item">
                     <div class="col col_1">
-                        <img :src="cartItem.img" :alt="cartItem.name" class="product-img" width="110" />
+                        <img :src="productImgMap?.[cartItem.sku]?.[cartItem.color]" :alt="cartItem.name" class="product-img" width="110" />
                     </div>
                     <div class="col col_2 col_desc">
-                        <span class="product-tag">{{cartItem.type}}</span>
-                        <div class="font_star-trek product-title display-mobile-none " :style="{color: cartItem.siteColor}">
+                        <span class="product-tag">
+                            {{cartItem.type}}
+                        </span>
+                        <div :class="['font_star-trek product-title display-mobile-none', {
+                            'empire': cartItem.sku === productOptMap.EM24.sku,
+                            'royal': cartItem.sku === productOptMap.RL24.sku,
+                        }]">
                             {{cartItem.name}}
                         </div>
-
                         <div class="product-desc">
+                            <div class="product-desc__item">
+                                Размер:
+                                {{cartItem.size}}
+                            </div>
                             <div class="product-desc__item">
                                 Модель:
                                 {{cartItem.sku}}
                             </div>
                             <div class="product-desc__item">
-                                Размер:
-                                <select aria-label="Выбрать размер" @change="updatePrice($event, cartItem.id)">
-                                    <option value="---">
-                                        ---
-                                    </option>
-                                    <option 
-                                        v-for="size in cartItem.size" 
-                                        :key="size.size" 
-                                        :value="size.size"
-                                        :disabled="isOutOfStock(size)"
-                                    >
-                                        {{ size.size }}&thinsp;RU 
-                                        <!-- {{ size.available }} -->
-                                    </option>
-                                </select>
+                                Цвет:
+                                {{colorMap[cartItem.color]}}
                             </div>
-                            <div class="product-desc__item">
-                                <template v-if="'selected-size' in cartItem">
-                                    Цвет:
-                                    <select aria-label="Выбрать цвет" @change="updateColor($event, cartItem.id)">
-                                        <option value="---">
-                                            ---
-                                        </option>
-                                        <option
-                                            v-for="(value, key) in cartItem.size?.[cartItem['selected-size']]?.available"
-                                            :key="cartItem['selected-size'] + key" :value="key">
-                                            {{ colorMap[key] || key }}
-                                        </option>
-                                    </select>
-                                </template>
-                            </div>
-                        </div>
-                        <div>
-                            <!-- <div>Универсальная размерная сетка</div> -->
-                            <table class="size-table">
-                                <thead>
-                                    <tr>
-                                        <th>Длина стопы</th>
-                                        <th>Ширина стопы</th>
-                                        <th>
-                                            <span class="display-mobile-none">Российский размер</span>
-                                            <span class="display-none display-mobile-block">Размер (RU)</span>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <template v-for="size in cartItem.size" :key="size">
-                                        <tr>
-                                            <td>{{ size.length / 10 }}см </td>
-                                            <td>{{ size.width / 10 }}см</td>
-                                            <td>{{ size.size }}</td>
-                                        </tr>
-                                    </template>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                     <div class="col col_3 col_align-center">
@@ -171,8 +127,6 @@
                     class="button button_size-large button_fullwidth"
                     :disabled="status === 'sending' || Object.values($cartItems).length === 0"
                 >
-                    <!-- Оплатить -->
-                    <!-- {{priceWithRouble($totalPrice)}} -->
                     Заказать
                 </button>
             </div>
@@ -184,12 +138,15 @@
 import { ref, toRaw } from 'vue';
 import { useStore } from '@nanostores/vue';
 import { cartItems, totalPrice } from './../../stores/shopCartStore';
+import { productImgMap } from './../../stores/productListStore';
 import { apiUrl } from './../../utils/routes';
 import { priceWithRouble } from './../../utils/format';
 import { colorMap } from './../../utils/product-list';
+import { productOptMap } from "../../utils/product-list";
 
 const $cartItems = useStore(cartItems);
 const $totalPrice = useStore(totalPrice);
+const $productImgMap = useStore(productImgMap);
 let status = ref('idle');
 
 const formData = ref({
@@ -204,25 +161,6 @@ const formData = ref({
 
 function removeItem(id) {
     cartItems.setKey(id, undefined);
-}
-
-function isOutOfStock(size) {
-    return Object.keys(size?.available).length === 0;
-}
-
-function updateColor(e, id) {
-    cartItems.setKey(id, {
-        ...toRaw($cartItems.value)[id],
-        ['selected-color']: e.target.value,
-    });
-}
-
-function updatePrice(e, id) {
-    cartItems.setKey(id, {
-        ...toRaw($cartItems.value)[id],
-        ['selected-size']: e.target.value === '---' ? undefined : e.target.value,
-        ['selected-color']: undefined,
-    });
 }
 
 function buy() {
@@ -270,37 +208,36 @@ function buy() {
             "Content-Type": "text/plain;charset=utf-8",
         },
         body: JSON.stringify(fetchBody)
-    })
-        .then(response => {
-            if (!response.ok) {
-                status.value = 'error';
-                alert("❗ При отправке заказа возникли проблемы. Попробуйте позже");
-                throw new Error('Network error');
-            }
-            return response.json();
-        })
-        .then((response) => {
-            if (response.result === 'success') {
-                status.value = 'success';
-                alert("✅ Заказ отправлен. Ожидайте звонка");
-                cartItems.set({});
-                window["dialog-shopcart"]?.close();
-                status.value = 'idle';
-            } else if (response.result === 'error') {
-                status.value = 'error';
-                alert("❗ При отправке заказа возникли проблемы. Попробуйте позже");
-                throw new Error(response.error);
-            }
-        })
-        .catch((error) => {
+    }).then(response => {
+        if (!response.ok) {
             status.value = 'error';
             alert("❗ При отправке заказа возникли проблемы. Попробуйте позже");
-            console.error(error);
-        });
+            throw new Error('Network error');
+        }
+        return response.json();
+    })
+    .then((response) => {
+        if (response.result === 'success') {
+            status.value = 'success';
+            alert("✅ Заказ отправлен. Ожидайте звонка");
+            cartItems.set({});
+            window["dialog-shopcart"]?.close();
+            status.value = 'idle';
+        } else if (response.result === 'error') {
+            status.value = 'error';
+            alert("❗ При отправке заказа возникли проблемы. Попробуйте позже");
+            throw new Error(response.error);
+        }
+    })
+    .catch((error) => {
+        status.value = 'error';
+        alert("❗ При отправке заказа возникли проблемы. Попробуйте позже");
+        console.error(error);
+    });
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .product-list {
     list-style-type: none;
     margin: 0;
@@ -328,6 +265,14 @@ function buy() {
 .product-title {
     margin: calc(var(--1px) * 5) 0 var(--15px);
     font-size: calc(var(--1px) * 80);
+
+    &.empire {
+        color: var(--color-product-empire);
+    }
+
+    &.royal {
+        color: var(--color-product-royal);
+    }
 }
 
 .product-price {

@@ -1,13 +1,15 @@
 ---
 import { getImage } from "astro:assets"
 import Head from './Head.astro';
-const { backgroundImage } = Astro.props;
+import { optimizeImagesAndSaveInStore } from '../utils/shopCartImages';
+
+const { backgroundImage, title } = Astro.props;
 
 const optimizedBackgroundImage = backgroundImage
 	? await getImage({ src: backgroundImage, quality: '95' })
 	: {src:''};
 
-const { title } = Astro.props;
+optimizeImagesAndSaveInStore();
 ---
 
 <!doctype html>
