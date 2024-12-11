@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import vue from "@astrojs/vue";
+import react from '@astrojs/react';
 
 const siteUrlMap = {
   production: 'https://primego.online',
@@ -14,10 +15,11 @@ export default defineConfig({
   site: siteUrl,
   integrations: [
     sitemap({
-        filter: (page) => 
-          !page.includes('/shopcart/') 
+        filter: (page) =>
+          !page.includes('/shopcart/')
           && !page.includes('/profile/')
-    }), 
-    vue()
+    }),
+    vue({ include: ['**/CustomizatorApp.vue', '**/LoginForm.vue', '**/ShopCart.vue'] }),
+    react({ include: ['**/react/**'] }),
   ]
 });

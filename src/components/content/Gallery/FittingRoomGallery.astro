@@ -1,0 +1,284 @@
+---
+import '@splidejs/splide/css/core';
+import { Image } from 'astro:assets';
+import SliderButton from './SliderButton.astro';
+
+const { sku } = Astro.props;
+
+const imageList = {
+    EM24: {
+        black: import.meta.glob('/src/assets/img/shop/EM24/black/*.{jpeg,jpg}'),
+        classic: import.meta.glob('/src/assets/img/shop/EM24/classic/*.{jpeg,jpg}'),
+        choco: import.meta.glob('/src/assets/img/shop/EM24/choco/*.{jpeg,jpg}'),
+        rif: import.meta.glob('/src/assets/img/shop/EM24/rif/*.{jpeg,jpg}'),
+    },
+    RL24: {
+        'dark side': import.meta.glob('/src/assets/img/shop/RL24/darkside/*.{jpeg,jpg}'),
+        'light side': import.meta.glob('/src/assets/img/shop/RL24/lightside/*.{jpeg,jpg}'),
+        white: import.meta.glob('/src/assets/img/shop/RL24/white/*.{jpeg,jpg}'),
+        black: import.meta.glob('/src/assets/img/shop/RL24/black/*.{jpeg,jpg}'),
+    },
+};
+
+const hasImages = imageList[sku] !== undefined && Object.keys(imageList[sku]).length > 0;
+---
+
+<Fragment>
+    {
+        hasImages && (
+            <div class="gallery" data-shop-photo-gallery>
+                <div class:list={['custom-slider', 'gallery__main']} data-gallery-main>
+                    <SliderButton
+                        as="button"
+                        type="button"
+                        variant="left"
+                        data-gallery-button="prev"
+                        class="custom-slider__button"
+                        aria-label="Предыдущее фото"
+                    />
+                    <SliderButton
+                        as="button"
+                        type="button"
+                        variant="right"
+                        data-gallery-button="next"
+                        class="custom-slider__button"
+                        aria-label="Следующее фото"
+                    />
+                    <ul class="custom-slider__list" role="group">
+                        {Object.entries(imageList[sku]).map(([color, images]) =>
+                            Object.keys(images).map((key, index) => (
+                                <li
+                                    hidden
+                                    class="custom-slider__list-item"
+                                    data-modal-slide-index={`${color}-${index}`}
+                                    data-product-color={color}
+                                >
+                                    <Image src={images[key]()} class="custom-slider__img" alt="" loading="eager" />
+                                </li>
+                            )),
+                        )}
+                    </ul>
+                </div>
+                <div class:list={['custom-slider', 'gallery__miniatures']} data-gallery-secondary>
+                    <div class="custom-slider__list" role="group">
+                        {Object.entries(imageList[sku]).map(([color, images]) =>
+                            Object.keys(images).map((key, index) => (
+                                <label class="custom-slider__list-item" data-product-color={color} hidden>
+                                    <input
+                                        type="radio"
+                                        name="miniature"
+                                        checked={index === 0}
+                                        data-gallery-miniature={`${color}-${index}`}
+                                    />
+                                    <Image
+                                        src={images[key]()}
+                                        class="custom-slider__img"
+                                        alt=""
+                                        loading="eager"
+                                        quality="60"
+                                        width="200"
+                                    />
+                                </label>
+                            )),
+                        )}
+                    </div>
+                </div>
+            </div>
+        )
+    }
+</Fragment>
+
+<style lang="scss">
+    .gallery {
+        position: relative;
+        height: 100%;
+    }
+
+    .custom-slider {
+        position: relative;
+
+        &__button {
+            position: absolute;
+
+            &[data-gallery-button='prev'] {
+                left: var(--30px);
+            }
+
+            &[data-gallery-button='next'] {
+                right: var(--30px);
+            }
+        }
+
+        &__list {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 0;
+            scroll-snap-type: x mandatory;
+            position: relative;
+            z-index: 3;
+        }
+
+        &__list-item {
+            margin: 0;
+            scroll-snap-align: center;
+        }
+
+        &__img {
+            width: calc(var(--1px) * 100);
+            height: calc(var(--1px) * 100);
+            object-fit: cover;
+            object-position: center;
+            border-radius: var(--4px);
+        }
+    }
+
+    .gallery__main {
+        height: 100%;
+
+        .custom-slider__list {
+            height: 100%;
+        }
+
+        .custom-slider__list-item {
+            min-width: 100%;
+        }
+
+        .custom-slider__img {
+            height: 100%;
+            width: 100%;
+            object-fit: contain;
+        }
+    }
+
+    .gallery__miniatures {
+        width: 100%;
+        position: absolute;
+        bottom: var(--60px);
+        display: flex;
+        justify-content: center;
+
+        .custom-slider {
+            &__list {
+                padding: 0 calc(var(--30px));
+            }
+
+            &__img {
+                border: var(--2px) solid var(--color-gray);
+            }
+
+            &__list-item {
+                cursor: pointer;
+                flex-shrink: 0;
+
+                input {
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                }
+
+                input:checked + .custom-slider__img {
+                    border-color: var(--color-product-primego);
+                }
+            }
+        }
+
+        .custom-slider__list-item:not([hidden]) + .custom-slider__list-item:not([hidden]) {
+            margin-left: var(--15px);
+        }
+    }
+
+    @media screen and (max-width: 1023px) {
+        .custom-slider__button {
+            &[data-gallery-button='prev'] {
+                left: calc(var(--1px) * 12);
+            }
+
+            &[data-gallery-button='next'] {
+                right: calc(var(--1px) * 12);
+            }
+        }
+
+        .gallery__miniatures {
+            bottom: var(--15px);
+
+            .custom-slider {
+                &__list {
+                    padding: 0 calc(var(--15px));
+                }
+
+                &__img {
+                    border-width: var(--1px);
+                    width: var(--45px);
+                    height: var(--45px);
+                }
+            }
+
+            .custom-slider__list-item:not([hidden]) + .custom-slider__list-item:not([hidden]) {
+                margin-left: var(--8px);
+            }
+        }
+    }
+</style>
+
+<script>
+    import { listenKeys } from 'nanostores';
+    import { $selectedProduct } from '../../../stores/fittingProductStore';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainGallery = document.querySelector('[data-gallery-main]');
+        const slidesContainer = mainGallery?.querySelector('ul');
+        const slides = slidesContainer?.querySelectorAll('li');
+        const galleryNavButtonList = mainGallery?.querySelectorAll('[data-gallery-button]');
+        galleryNavButtonList?.forEach((button) =>
+            button.addEventListener('click', (e) => {
+                if (!slides) return;
+                const isNextButton = (e.target as HTMLButtonElement)?.dataset.galleryButton == 'next';
+                const slideItemWidth = Array.from(slides, (s) => s.offsetWidth).filter((w) => w > 0)[0];
+                slidesContainer?.scrollBy({
+                    top: 0,
+                    left: isNextButton ? slideItemWidth : slideItemWidth * -1,
+                    behavior: 'smooth',
+                });
+            }),
+        );
+
+        const secondaryGallery = document.querySelector('[data-gallery-secondary]');
+        const miniatureList = secondaryGallery?.querySelectorAll('[data-gallery-miniature]');
+        miniatureList?.forEach((miniature) => {
+            miniature.addEventListener('click', (e) => {
+                const index = (e.target as HTMLInputElement)?.dataset.galleryMiniature || 0;
+                mainGallery?.querySelector(`[data-modal-slide-index="${index}"]`)?.scrollIntoView();
+            });
+        });
+
+        const supportsIntersectionObserver = 'IntersectionObserver' in window;
+        if (supportsIntersectionObserver) {
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries?.forEach((entry) => {
+                        if (entry.intersectionRatio > 0.6) {
+                            const index = (entry.target as HTMLElement)?.dataset.modalSlideIndex;
+                            const radioInput = secondaryGallery?.querySelector(
+                                `[data-gallery-miniature="${index}"]`,
+                            ) as HTMLInputElement;
+                            radioInput.checked = true;
+                        }
+                    });
+                },
+                { threshold: 0.6 },
+            );
+            slides?.forEach((slide) => observer.observe(slide));
+        }
+
+        listenKeys($selectedProduct, ['color'], (product) => {
+            slidesContainer?.scrollTo(0, 0);
+
+            document.querySelectorAll<HTMLLabelElement>('[data-product-color]').forEach((item) => {
+                const color = item.getAttribute('data-product-color');
+                item.hidden = product.color !== color;
+            });
+        });
+    });
+</script>
