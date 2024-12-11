@@ -17,6 +17,12 @@ export const productOptMap = {
         sku: 'RL24',
         color: 'черный / белый',
         soleComposition: 'ЭВА',
+        images: {
+            'dark side': import('/src/assets/img/shop/RL24/darkside/01.jpg'),
+            'light side': import('/src/assets/img/shop/RL24/lightside/01.jpg'),
+            white: import('/src/assets/img/shop/RL24/white/01.jpg'),
+            black: import('/src/assets/img/shop/RL24/black/01.jpg'),
+        },
     },
     EM24: {
         ...defaultOptions,
@@ -24,6 +30,12 @@ export const productOptMap = {
         altName: 'empire',
         sku: 'EM24',
         color: 'черный / желтый',
+        images: {
+            black: import('/src/assets/img/shop/EM24/black/01.jpg'),
+            classic: import('/src/assets/img/shop/EM24/classic/01.jpg'),
+            choco: import('/src/assets/img/shop/EM24/choco/01.jpg'),
+            rif: import('/src/assets/img/shop/EM24/rif/01.jpg'),
+        },
     },
 };
 

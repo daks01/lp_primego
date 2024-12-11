@@ -1,13 +1,16 @@
 ---
 import { getImage } from "astro:assets"
 import Head from './Head.astro';
-const { backgroundImage } = Astro.props;
+import { optimizedImagesMap } from '../utils/shopCartImages';
+
+const { backgroundImage, title } = Astro.props;
 
 const optimizedBackgroundImage = backgroundImage
 	? await getImage({ src: backgroundImage, quality: '95' })
 	: {src:''};
 
-const { title } = Astro.props;
+const optimizedImages = await optimizedImagesMap();
+
 ---
 
 <!doctype html>
@@ -15,6 +18,7 @@ const { title } = Astro.props;
 	<head>
 		<Head title={title} />
 		<slot name="head" />
+		<script type="application/json" data-shop-image-json={JSON.stringify(optimizedImages)}></script>
 	</head>
 	<body style={backgroundImage ? `background-image: url(${optimizedBackgroundImage?.src})` : ''}>
 		<slot />
