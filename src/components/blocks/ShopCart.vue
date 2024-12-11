@@ -4,79 +4,41 @@
             <ul class="product-list">
                 <li v-for="cartItem in Object.values($cartItems)" :key="cartItem.id" class="product-list__item">
                     <div class="col col_1">
-                        <img :src="cartItem.img" :alt="cartItem.name" class="product-img" width="110" />
+                        <img 
+                            :src="cartItem?.img" 
+                            :alt="cartItem.name" 
+                            class="product-img" 
+                            width="110"
+                            onerror="this.src='/favicon.svg'"
+                        />
                     </div>
                     <div class="col col_2 col_desc">
-                        <span class="product-tag">{{cartItem.type}}</span>
-                        <div class="font_star-trek product-title display-mobile-none " :style="{color: cartItem.siteColor}">
+                        <span class="product-tag">
+                            {{cartItem.type}}
+                        </span>
+                        <div :class="['font_star-trek product-title display-mobile-none', {
+                            'empire': cartItem.sku === productOptMap.EM24.sku,
+                            'royal': cartItem.sku === productOptMap.RL24.sku,
+                        }]">
                             {{cartItem.name}}
                         </div>
-
                         <div class="product-desc">
+                            <div class="product-desc__item">
+                                Размер:
+                                {{cartItem.size}}
+                            </div>
                             <div class="product-desc__item">
                                 Модель:
                                 {{cartItem.sku}}
                             </div>
                             <div class="product-desc__item">
-                                Размер:
-                                <select aria-label="Выбрать размер" @change="updatePrice($event, cartItem.id)">
-                                    <option value="---">
-                                        ---
-                                    </option>
-                                    <option 
-                                        v-for="size in cartItem.size" 
-                                        :key="size.size" 
-                                        :value="size.size"
-                                        :disabled="isOutOfStock(size)"
-                                    >
-                                        {{ size.size }}&thinsp;RU 
-                                        <!-- {{ size.available }} -->
-                                    </option>
-                                </select>
+                                Цвет:
+                                {{colorMap[cartItem.color]}}
                             </div>
-                            <div class="product-desc__item">
-                                <template v-if="'selected-size' in cartItem">
-                                    Цвет:
-                                    <select aria-label="Выбрать цвет" @change="updateColor($event, cartItem.id)">
-                                        <option value="---">
-                                            ---
-                                        </option>
-                                        <option
-                                            v-for="(value, key) in cartItem.size?.[cartItem['selected-size']]?.available"
-                                            :key="cartItem['selected-size'] + key" :value="key">
-                                            {{ colorMap[key] || key }}
-                                        </option>
-                                    </select>
-                                </template>
-                            </div>
-                        </div>
-                        <div>
-                            <!-- <div>Универсальная размерная сетка</div> -->
-                            <table class="size-table">
-                                <thead>
-                                    <tr>
-                                        <th>Длина стопы</th>
-                                        <th>Ширина стопы</th>
-                                        <th>
-                                            <span class="display-mobile-none">Российский размер</span>
-                                            <span class="display-none display-mobile-block">Размер (RU)</span>
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <template v-for="size in cartItem.size" :key="size">
-                                        <tr>
-                                            <td>{{ size.length / 10 }}см </td>
-                                            <td>{{ size.width / 10 }}см</td>
-                                            <td>{{ size.size }}</td>
-                                        </tr>
-                                    </template>
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                     <div class="col col_3 col_align-center">
-                        <div class="font_star-trek product-title display-none display-mobile-block" :style="{color: cartItem.siteColor}">
+                        <div class="font_star-trek product-title display-none display-mobile-block">
                             {{cartItem.name}}
                         </div>
                         <span class="product-price">{{ priceWithRouble(cartItem.price) }}</span>
@@ -105,7 +67,7 @@
         </template>
         <p v-else>Корзина пуста</p>
 
-        <form action="" @submit="buy()">
+        <form action="" @submit.prevent="buy()">
             <fieldset>
                 <legend>
                     <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -171,10 +133,14 @@
                     class="button button_size-large button_fullwidth"
                     :disabled="status === 'sending' || Object.values($cartItems).length === 0"
                 >
-                    <!-- Оплатить -->
-                    <!-- {{priceWithRouble($totalPrice)}} -->
                     Заказать
                 </button>
+                <p v-if="status === 'error'" class="submit-message">
+                    ❗ При отправке заказа возникли проблемы. Попробуйте позже
+                </p>
+                <p v-if="status === 'success'" class="submit-message">
+                    ✅ Заказ отправлен. Ожидайте звонка
+                </p>
             </div>
         </form>
     </div>
@@ -187,6 +153,7 @@ import { cartItems, totalPrice } from './../../stores/shopCartStore';
 import { apiUrl } from './../../utils/routes';
 import { priceWithRouble } from './../../utils/format';
 import { colorMap } from './../../utils/product-list';
+import { productOptMap } from "../../utils/product-list";
 
 const $cartItems = useStore(cartItems);
 const $totalPrice = useStore(totalPrice);
@@ -204,25 +171,6 @@ const formData = ref({
 
 function removeItem(id) {
     cartItems.setKey(id, undefined);
-}
-
-function isOutOfStock(size) {
-    return Object.keys(size?.available).length === 0;
-}
-
-function updateColor(e, id) {
-    cartItems.setKey(id, {
-        ...toRaw($cartItems.value)[id],
-        ['selected-color']: e.target.value,
-    });
-}
-
-function updatePrice(e, id) {
-    cartItems.setKey(id, {
-        ...toRaw($cartItems.value)[id],
-        ['selected-size']: e.target.value === '---' ? undefined : e.target.value,
-        ['selected-color']: undefined,
-    });
 }
 
 function buy() {
@@ -246,16 +194,16 @@ function buy() {
                 sku: item.sku,
                 name: item.name,
                 price: item.price,
-                size: item['selected-size'],
-                color: item['selected-color'],
+                size: item.size,
+                color: item.color,
             }
         };
     }
 
     const fetchBody = {
         name,
-        email,
         surname,
+        email,
         phone,
         address,
         delivery,
@@ -270,37 +218,34 @@ function buy() {
             "Content-Type": "text/plain;charset=utf-8",
         },
         body: JSON.stringify(fetchBody)
-    })
-        .then(response => {
-            if (!response.ok) {
-                status.value = 'error';
-                alert("❗ При отправке заказа возникли проблемы. Попробуйте позже");
-                throw new Error('Network error');
-            }
-            return response.json();
-        })
-        .then((response) => {
-            if (response.result === 'success') {
-                status.value = 'success';
-                alert("✅ Заказ отправлен. Ожидайте звонка");
-                cartItems.set({});
-                window["dialog-shopcart"]?.close();
-                status.value = 'idle';
-            } else if (response.result === 'error') {
-                status.value = 'error';
-                alert("❗ При отправке заказа возникли проблемы. Попробуйте позже");
-                throw new Error(response.error);
-            }
-        })
-        .catch((error) => {
+    }).then(response => {
+        if (!response.ok) {
             status.value = 'error';
-            alert("❗ При отправке заказа возникли проблемы. Попробуйте позже");
-            console.error(error);
-        });
+            throw new Error('Network error');
+        }
+        return response.json();
+    })
+    .then((response) => {
+        if (response.result === 'success') {
+            status.value = 'success';
+            setTimeout(() => {
+                window["dialog-shopcart"]?.close();
+                cartItems.set({});
+                status.value = 'idle';
+            }, 2500);
+        } else if (response.result === 'error') {
+            status.value = 'error';
+            throw new Error(response.error);
+        }
+    })
+    .catch((error) => {
+        status.value = 'error';
+        throw new Error(error);
+    });
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .product-list {
     list-style-type: none;
     margin: 0;
@@ -328,6 +273,14 @@ function buy() {
 .product-title {
     margin: calc(var(--1px) * 5) 0 var(--15px);
     font-size: calc(var(--1px) * 80);
+
+    &.empire {
+        color: var(--color-product-empire);
+    }
+
+    &.royal {
+        color: var(--color-product-royal);
+    }
 }
 
 .product-price {
@@ -529,6 +482,10 @@ input::placeholder {
     font-size: var(--heading-3);
     font-weight: 600;
     color: var(--text-color)
+}
+.submit-message {
+    text-align: center;
+    margin: var(--15px) 0 0;
 }
 
 @media screen and (max-width: 1023px) {

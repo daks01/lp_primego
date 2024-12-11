@@ -1,9 +1,9 @@
 ---
 import StarTrekText from "../ui/StarTrekText.astro";
-import BuyButton from "../ui/BuyButton.astro";
+import Button from "../ui/Button.astro";
 import ProductPriceFromApi from "../blocks/ProductPriceFromApi.astro";
 
-const { sku, imageSneakers } = Astro.props;
+const { sku } = Astro.props;
 import { productOptMap } from "../../utils/product-list";
 
 const productOptions = productOptMap[sku];
@@ -49,11 +49,7 @@ const productOptions = productOptMap[sku];
 	</div>
 	<div class="params__footer">
 		<div class="params__price"><ProductPriceFromApi sku={sku} /></div>
-		<BuyButton
-			sku={sku}
-			color="var(--color-product-royal)"
-			img={imageSneakers}
-		/>
+        <Button as="a" aria-label="Заказать" href={`/fitting/${productOptions?.altName}`}>Заказать</Button>
 	</div>
 </div>
 
@@ -68,7 +64,7 @@ const productOptions = productOptMap[sku];
 			background-color: var(--color-bg-disabled);
 			border-radius: var(--4px);     
 			padding: var(--30px);
-			border-left: calc(var(--1px) * 2) solid var(--color-product);
+            border-left: var(--2px) solid var(--color-product);
 		}
 		&__list {
 			margin: 0;

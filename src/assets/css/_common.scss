@@ -1,7 +1,7 @@
 html {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
-    background-color: var(--color-black);
+    background-color: var(--background-color);
 }
 
 body {
@@ -9,7 +9,7 @@ body {
     font-size: var(--text-font-size);
     line-height: var(--text-line-height);
     color: var(--text-color);
-    background-color: var(--color-black);
+    background-color: var(--background-color);
 }
 
 * {
@@ -38,10 +38,6 @@ img, svg {
     max-width: 100%;
     height: auto;
     flex-shrink: 0;
-}
-
-a:link {
-    color: var(--color-product)
 }
 
 .justify-content-center {

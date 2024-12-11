@@ -1,0 +1,42 @@
+---
+const { class: className, ...props } = Astro.props;
+---
+
+<div {...props} class:list={["warning", className]}>
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="warning__icon" role="presentation">
+        <path
+            d="M16.182 29.8346C23.5458 29.8346 29.5153 23.8651 29.5153 16.5013C29.5153 9.13751 23.5458 3.16797 16.182 3.16797C8.81817 3.16797 2.84863 9.13751 2.84863 16.5013C2.84863 23.8651 8.81817 29.8346 16.182 29.8346Z"
+            fill="white"></path>
+        <path d="M16.1816 21.8333V16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+        <path d="M16.1816 11.168H16.195" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        ></path>
+    </svg>
+    <slot />
+</div>
+
+<style lang="scss">
+    .warning {
+        display: flex;
+        align-items: center;
+        margin: var(--30px) 0;
+        box-shadow: 0 0 0 var(--2px) var(--color-product-primego);
+        border-radius: var(--4px);
+        padding: var(--15px);
+        color: var(--color-gray);
+        font-weight: 600;
+
+        &__icon {
+            margin-right: calc(var(--1px) * 10);
+            width: calc(var(--1px) * 32);
+            height: calc(var(--1px) * 32);
+            color: var(--color-product-primego);
+        }
+    }
+
+    @media screen and (max-width: 1023px) {
+        .warning {
+            font-size: var(--small-font-size);
+            align-items: flex-start;
+        }
+    }
+</style>

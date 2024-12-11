@@ -18,33 +18,12 @@ import ShopCart from "../components/blocks/ShopCart.vue";
 			<Button class="display-none"></Button>
 			<StarTrekText class="display-none"></StarTrekText>
 			<div class="box">
-				<h1 class="h3 title">Корзина</h1>	
+				<h1 class="h3 title">Корзина</h1>
 				<ShopCart client:only />
 			</div>
 		</Section>
 	</main>
 </Layout>
-
-<script>
-    import { addCartItem } from "../stores/shopCartStore";
-
-    const buyButton = document.querySelector("[data-buybutton]");
-    const {
-        sku,
-        color,
-        img
-    } = buyButton?.dataset;
-
-    buyButton?.addEventListener("click", addToCart);
-
-    function addToCart() {
-        addCartItem({
-            sku,
-            img,
-            color,
-        });
-    }
-</script>
 
 <style>
 	body {

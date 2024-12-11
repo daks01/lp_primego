@@ -1,0 +1,187 @@
+---
+import FittingRoom from '../../components/blocks/react/FittingRoom';
+import FittingRoomGallery from '../../components/content/Gallery/FittingRoomGallery.astro';
+import HowToMeasure from '../../components/content/HowToMeasure.astro';
+import Button from '../../components/ui/Button.astro';
+import SwappableHeader from '../../components/ui/SwappableHeader.astro';
+import UnderlineClickable from '../../components/ui/UnderlineClickable.astro';
+import Dialog from '../../components/ui/Dialog.astro';
+import Warning from '../../components/ui/Warning.astro';
+import Layout from '../../layouts/Layout.astro';
+import BackButton from '../../components/ui/BackButton.astro';
+import { productOptMap } from '../../utils/product-list';
+import Header from '../../components/layout/Header.astro';
+import MeasurementsIllustration from '../../components/content/MeasurementsIllustration.astro';
+
+export function getStaticPaths() {
+    return [
+        {
+            params: { product: 'empire' },
+            props: { sku: 'EM24' },
+        },
+        {
+            params: { product: 'royal' },
+            props: { sku: 'RL24' },
+        },
+    ];
+}
+
+const { sku } = Astro.props;
+const backTo = sku === 'EM24' ? '/empire' : sku === 'RL24' ? '/royal' : '/';
+
+const productOptions = productOptMap[sku];
+---
+
+<style is:global>
+    :root:root {
+        --background-color: var(--color-bg-disabled);
+    }
+</style>
+
+<Layout title="Primego | Примерочная">
+    <Header variant="modest" backTo={backTo} />
+    <div class:list={['display-none', 'display-mobile-block']}>
+        <SwappableHeader sku={sku} />
+        <Warning class="warning">
+            Внимание! В каждой коллекции собственный размерный ряд. Используйте калькулятор ниже для подбора размера.
+        </Warning>
+    </div>
+    <main class="product-layout">
+        <section class="product-layout__pictures" data-product-pictures-section>
+            <FittingRoomGallery sku={sku} />
+            <MeasurementsIllustration />
+        </section>
+        <section class="product-layout__content">
+            <BackButton href={backTo} class:list={['backButton', 'display-mobile-none']} />
+            <SwappableHeader sku={sku} class="display-mobile-none" />
+            <Warning class="display-mobile-none">
+                Внимание! В каждой коллекции собственный размерный ряд. Используйте калькулятор ниже для подбора размера.
+            </Warning>
+            <FittingRoom sku={sku} client:only="react">
+                <UnderlineClickable
+                    as="button"
+                    type="button"
+                    slot="howToMeasureButton"
+                    onclick={`window["dialog-measuring"]?.showModal()`}
+                    class="how-to-button"
+                >
+                    <svg
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        role="presentation"
+                    >
+                        <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M3 6C1.34315 6 0 7.34315 0 9V16C0 17.6569 1.34315 19 3 19H21C22.6569 19 24 17.6569 24 16V9C24 7.34315 22.6569 6 21 6H3ZM9 8H7V13C7 13.5523 6.55228 14 6 14C5.44772 14 5 13.5523 5 13V8H3C2.44772 8 2 8.44772 2 9V16C2 16.5523 2.44772 17 3 17H21C21.5523 17 22 16.5523 22 16V9C22 8.44772 21.5523 8 21 8H19V11C19 11.5523 18.5523 12 18 12C17.4477 12 17 11.5523 17 11V8H15V13C15 13.5523 14.5523 14 14 14C13.4477 14 13 13.5523 13 13V8H11V11C11 11.5523 10.5523 12 10 12C9.44771 12 9 11.5523 9 11V8Z"
+                            fill="currentColor"></path>
+                    </svg>
+                    Как снять мерку?
+                </UnderlineClickable>
+            </FittingRoom>
+        </section>
+        <Dialog id="dialog-measuring" title="Как снять мерку" width="817">
+            <HowToMeasure />
+            <Button class="button_type-secondary button_fullwidth" onclick={`window["dialog-measuring"]?.close()`}>
+                Назад
+            </Button>
+        </Dialog>
+    </main>
+</Layout>
+
+<style lang="scss">
+    .product-layout {
+        display: flex;
+        flex-flow: row-reverse nowrap;
+        height: 100%;
+    }
+
+    .product-layout__content {
+        padding: var(--60px) var(--90px) var(--120px) var(--200px);
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        max-height: 100vh;
+        overscroll-behavior-y: contain;
+        width: 50%;
+    }
+
+    .product-layout__pictures {
+        width: 50%;
+        height: 100vh;
+
+        &[data-product-pictures-section='photos'] {
+            background-color: var(--color-white);
+        }
+
+        &[data-product-pictures-section='measurements'] {
+            background-color: var(--color-bg-black);
+        }
+    }
+
+    .backButton.backButton {
+        margin-top: 0;
+    }
+
+    .how-to-button {
+        position: absolute;
+        top: var(--45px);
+        right: var(--30px);
+
+        svg {
+            margin-right: calc(var(--1px) * 10);
+            width: calc(var(--1px) * 24);
+            height: calc(var(--1px) * 24);
+        }
+    }
+
+    @media screen and (max-width: 1023px) {
+        .product-layout {
+            flex-direction: column;
+            overflow-y: visible;
+            min-height: 100%;
+
+            &__content {
+                overflow-y: visible;
+                width: 100%;
+                padding: var(--30px) calc(var(--1px) * 20) var(--60px);
+                max-height: none;
+            }
+
+            &__pictures {
+                width: 100%;
+                height: calc(var(--1px) * 485);
+                flex-shrink: 0;
+            }
+        }
+
+        .warning {
+            margin: var(--30px) calc(var(--1px) * 20);
+        }
+
+        .how-to-button {
+            top: calc(var(--1px) * 55);
+            right: auto;
+            left: var(--15px);
+        }
+    }
+</style>
+
+<script>
+    import { $selectedProduct } from '../../stores/fittingProductStore';
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const picturesSection = document.querySelector('[data-product-pictures-section]');
+        const gallery = picturesSection?.querySelector<HTMLDivElement>('[data-shop-photo-gallery]');
+        const illustration = picturesSection?.querySelector<HTMLDivElement>('[data-shop-illustration]');
+
+        $selectedProduct.listen((_product, _oldProduct, changed) => {
+            const isColorChanged = changed === 'color';
+            picturesSection?.setAttribute('data-product-pictures-section', isColorChanged ? 'photos' : 'measurements');
+            gallery.hidden = !isColorChanged;
+            illustration.hidden = isColorChanged;
+        });
+    });
+</script>
