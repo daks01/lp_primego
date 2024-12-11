@@ -67,7 +67,7 @@
         </template>
         <p v-else>Корзина пуста</p>
 
-        <form action="" @submit="buy()">
+        <form action="" @submit.prevent="buy()">
             <fieldset>
                 <legend>
                     <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -135,6 +135,12 @@
                 >
                     Заказать
                 </button>
+                <p v-if="status === 'error'" class="submit-message">
+                    ❗ При отправке заказа возникли проблемы. Попробуйте позже
+                </p>
+                <p v-if="status === 'success'" class="submit-message">
+                    ✅ Заказ отправлен. Ожидайте звонка
+                </p>
             </div>
         </form>
     </div>
@@ -188,16 +194,16 @@ function buy() {
                 sku: item.sku,
                 name: item.name,
                 price: item.price,
-                size: item['selected-size'],
-                color: item['selected-color'],
+                size: item.size,
+                color: item.color,
             }
         };
     }
 
     const fetchBody = {
         name,
-        email,
         surname,
+        email,
         phone,
         address,
         delivery,
@@ -215,7 +221,6 @@ function buy() {
     }).then(response => {
         if (!response.ok) {
             status.value = 'error';
-            alert("❗ При отправке заказа возникли проблемы. Попробуйте позже");
             throw new Error('Network error');
         }
         return response.json();
@@ -223,20 +228,19 @@ function buy() {
     .then((response) => {
         if (response.result === 'success') {
             status.value = 'success';
-            alert("✅ Заказ отправлен. Ожидайте звонка");
-            cartItems.set({});
-            window["dialog-shopcart"]?.close();
-            status.value = 'idle';
+            setTimeout(() => {
+                window["dialog-shopcart"]?.close();
+                cartItems.set({});
+                status.value = 'idle';
+            }, 2500);
         } else if (response.result === 'error') {
             status.value = 'error';
-            alert("❗ При отправке заказа возникли проблемы. Попробуйте позже");
             throw new Error(response.error);
         }
     })
     .catch((error) => {
         status.value = 'error';
-        alert("❗ При отправке заказа возникли проблемы. Попробуйте позже");
-        console.error(error);
+        throw new Error(error);
     });
 }
 </script>
@@ -478,6 +482,10 @@ input::placeholder {
     font-size: var(--heading-3);
     font-weight: 600;
     color: var(--text-color)
+}
+.submit-message {
+    text-align: center;
+    margin: var(--15px) 0 0;
 }
 
 @media screen and (max-width: 1023px) {
