@@ -7,6 +7,7 @@ import { colorMap, productOptMap } from '../../../utils/product-list';
 import { priceWithRouble } from '../../../utils/format';
 import { useStore } from '@nanostores/react';
 import { $selectedProduct, updateProduct } from '../../../stores/fittingProductStore';
+import { addCartItem } from "../../../stores/shopCartStore";
 
 export default function FittingRoom({ sku, howToMeasureButton }) {
     const { colors, sizes, available, lengths, widths, price } = useAvailableProperties(sku);
@@ -59,6 +60,13 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
         (store.recommended && store.recommended !== store.size && store.selectedSizeApproval);
     const onFormSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
+        const { color, size } = store;
+        
+        addCartItem({
+            sku,
+            color: color || '',
+            size: size || '',
+        });
         window['dialog-shopcart']?.showModal();
     };
     return (

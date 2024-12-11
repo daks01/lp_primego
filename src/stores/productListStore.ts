@@ -7,7 +7,7 @@ const [createFetcherStore, createMutatorStore] = nanoquery({
     fetcher: (...keys) => fetch(keys.join('')).then((r) => r.json()),
 });
 
-let storedProductList = JSON.parse(localStorage.getItem('productList')) || {};
+const storedProductList = JSON.parse(localStorage.getItem('productList')) || {};
 
 const productsAvailability = createFetcherStore(apiUrl.availability);
 

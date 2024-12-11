@@ -3,44 +3,39 @@ import {
     map,
     computed
 } from 'nanostores';
-import {productList} from './productListStore';
 import { nanoid } from 'nanoid'
+import { productList } from './productListStore';
 
 export type CartItem = {
     id?: string;
     name: string; 
     type: string;
     sku: string; 
-    size?: object;
-    lace?: string; 
-    fur_tongue?: boolean;
-    fur_edge?: boolean;
+    size: string;
     price: string;
-    img: string;
-    siteColor: string;
-    color: any,
+    color: string;
+    img?: string;
 }
 
-type ItemDisplayInfo = Pick<CartItem, 'sku' | 'img' | 'color'>;
+type ItemDisplayInfo = Pick<CartItem, 'sku' | 'color' | 'size'>;
 
-const storedCartItems = JSON.parse(localStorage.getItem('shopCart')) || {};
+const storedCartItems = JSON.parse(localStorage.getItem('shoppingCart')) || {};
 
 export const totalPrice = atom(0);
 
 export const cartItems = map<Record<string, CartItem>>(storedCartItems);
 
-export function addCartItem({ sku, img, color }: ItemDisplayInfo) {
+export function addCartItem({ sku, color, size }: ItemDisplayInfo) {
     const id = nanoid();
+    const shopIconsJson = document.querySelector('script[data-shop-image-json]')?.dataset.shopImageJson;
+
     const productData = {
         ...productList.get()?.data[sku],
-        siteColor: color,
-        img,
+        color,
+        size,
         id,
-        //     lace: 'стандарт', 
-        //     fur_tongue: false,
-        //     fur_edge: false,
+        img: JSON.parse(shopIconsJson)?.[sku]?.[color],
     };
-
     cartItems.setKey(id, {...productData});
 }
 
@@ -53,7 +48,7 @@ cartItems.subscribe(() => {
 
     totalPrice.set(total);
     
-    localStorage.setItem('shopCart', JSON.stringify(cartItems.get()));
+    localStorage.setItem('shoppingCart', JSON.stringify(cartItems.get()));
 })
 
 export const counter = computed(cartItems, (items) => {
