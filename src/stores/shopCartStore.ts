@@ -19,7 +19,7 @@ export type CartItem = {
 
 type ItemDisplayInfo = Pick<CartItem, 'sku' | 'color' | 'size'>;
 
-const storedCartItems = JSON.parse(localStorage.getItem('shopCart')) || {};
+const storedCartItems = JSON.parse(localStorage.getItem('shoppingCart')) || {};
 
 export const totalPrice = atom(0);
 
@@ -48,7 +48,7 @@ cartItems.subscribe(() => {
 
     totalPrice.set(total);
     
-    localStorage.setItem('shopCart', JSON.stringify(cartItems.get()));
+    localStorage.setItem('shoppingCart', JSON.stringify(cartItems.get()));
 })
 
 export const counter = computed(cartItems, (items) => {
