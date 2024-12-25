@@ -1,0 +1,207 @@
+.measurements {
+    background-color: var(--color-bg-black);
+    padding: calc(var(--15px) * 5) var(--90px) var(--90px) var(--120px);
+
+    &__presentation {
+        position: relative;
+        container-type: size;
+        margin: calc(var(--1mm) * 10) auto;
+        aspect-ratio: 450 / 792;
+        width: 70%;
+
+        // не работает в safari на iphone c iOS 15 и некоторых других браузерах
+        // https://caniuse.com/mdn-css_types_length_container_query_length_units
+        --100cqh: 100cqh;
+        --container-height-in-mm: 440;
+        // фолбэк для старых браузеров, --height сетиться из js
+        --container-height: var(--100cqh, var(--height));
+        --1mm: calc(var(--container-height) / var(--container-height-in-mm));
+        --offsetX: calc(80 * var(--1mm));
+        --offsetY: calc(75 * var(--1mm));
+
+        &__coords {
+            width: 100%;
+            height: 100%;
+            color: var(--color-white);
+        }
+    }
+}
+
+.measurements__preview {
+    position: absolute;
+    bottom: var(--offsetY);
+    left: var(--offsetX);
+    width: calc(var(--1mm) * 150);
+    height: calc(var(--1mm) * 350);
+    display: flex;
+    align-items: flex-end;
+}
+
+.measurements__preview__shoeSole {
+    position: absolute;
+    bottom: calc(calc(var(--1mm) * -10));
+    left: calc(calc(var(--1mm) * -10));
+    width: calc(var(--1mm) * var(--width) + var(--1mm) * 10 * 2);
+    height: calc(var(--1mm) * var(--length) + var(--1mm) * 10 * 2);
+    color: var(--color-product-primego);
+    transition:
+        height 0.2s,
+        width 0.2s;
+
+    & > svg {
+        height: 100%;
+    }
+
+    &.fit {
+        color: var(--text-success);
+    }
+}
+
+.measurements__preview__foot {
+    position: relative;
+    width: calc(var(--1mm) * var(--width, 84));
+    height: calc(var(--1mm) * var(--length, 280));
+    transition:
+        height 0.2s,
+        width 0.2s;
+
+    & > svg {
+        height: 100%;
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: calc(var(--1mm) * 150);
+        height: var(--2px);
+        background-image: repeating-linear-gradient(
+            90deg,
+            var(--color-gray) 0 var(--15px),
+            transparent var(--15px) var(--30px)
+        );
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        height: calc(var(--1mm) * 350);
+        width: var(--2px);
+        background-image: repeating-linear-gradient(0deg, var(--color-gray) 0 var(--15px), transparent var(--15px) var(--30px));
+    }
+}
+
+.measurement__tooltip {
+    position: absolute;
+    background-color: var(--color-bg-disabled);
+    padding: var(--8px) var(--15px);
+    font-size: var(--text-font-size);
+    border-radius: var(--4px);
+    font-weight: 600;
+
+    &__arrow {
+        fill: var(--color-bg-disabled);
+        position: absolute;
+        pointer-events: none;
+    }
+
+    &.xTooltip {
+        bottom: calc(var(--1mm) * 350);
+        right: 0;
+        margin-bottom: calc(var(--1mm) * 10);
+        transform: translateX(50%);
+
+        .measurement__tooltip__arrow {
+            transform: translateX(-50%) translateY(100%);
+            width: var(--30px);
+            bottom: 0;
+            left: 50%;
+        }
+    }
+
+    &.yTooltip {
+        top: 0;
+        left: calc(var(--1mm) * 150);
+        margin-left: calc(var(--1mm) * 10);
+        transform: translateY(-50%);
+
+        .measurement__tooltip__arrow {
+            top: 50%;
+            right: calc(100% + 0px);
+            width: var(--30px);
+            transform: rotate(90deg) translateX(-25%) translateY(-50%);
+        }
+    }
+}
+
+.recommendedSize {
+    width: 100%;
+    border-radius: var(--4px);
+    padding: var(--15px);
+    background-color: var(--color-bg-disabled);
+    font-weight: 600;
+    font-size: var(--text-font-size);
+    text-align: center;
+}
+
+.warning {
+    background-color: var(--color-bg-disabled);
+    margin: var(--30px) 0;
+}
+
+@media screen and (max-width: 1023px) {
+    .measurements {
+        padding: var(--15px) calc(var(--1px) * 20) calc(var(--1px) * 26);
+    }
+
+    .measurements__presentation {
+        width: 60%;
+    }
+
+    .measurements__preview__foot {
+        &::before {
+            height: var(--1px);
+            background-image: repeating-linear-gradient(
+                90deg,
+                var(--color-gray) 0 var(--4px),
+                transparent var(--4px) var(--8px)
+            );
+        }
+
+        &::after {
+            width: var(--1px);
+            background-image: repeating-linear-gradient(
+                0deg,
+                var(--color-gray) 0 var(--4px),
+                transparent var(--4px) var(--8px)
+            );
+        }
+    }
+
+    .measurement__tooltip {
+        padding: var(--4px) var(--8px);
+        font-size: calc(var(--1px) * 8);
+
+        &.xTooltip .measurement__tooltip__arrow,
+        &.yTooltip .measurement__tooltip__arrow {
+            width: var(--15px);
+        }
+    }
+
+    .recommendedSize {
+        font-size: var(--small-font-size);
+        padding: var(--8px) var(--30px);
+    }
+
+    .warning {
+        position: fixed;
+        z-index: 10;
+        margin: 0;
+        top: var(--15px);
+        right: var(--15px);
+        left: var(--15px);
+    }
+}
