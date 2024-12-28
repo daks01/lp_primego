@@ -7,9 +7,10 @@ import { colorMap, productOptMap } from '../../../utils/product-list';
 import { priceWithRouble } from '../../../utils/format';
 import { useStore } from '@nanostores/react';
 import { $selectedProduct, updateProduct } from '../../../stores/fittingProductStore';
-import { addCartItem } from "../../../stores/shopCartStore";
+import { addCartItem } from '../../../stores/shopCartStore';
+import MeasurementsIllustration from '../../content/react/MeasurementsIllustration.tsx';
 
-export default function FittingRoom({ sku, howToMeasureButton }) {
+export default function FittingRoom({ sku, howToMeasureButton, sizeWarning }) {
     const { colors, sizes, available, lengths, widths, price } = useAvailableProperties(sku);
     const [measurementsApproval, setMeasurementsApproval] = useState<boolean>(false);
     const store = useStore($selectedProduct);
@@ -61,7 +62,7 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
     const onFormSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
         const { color, size } = store;
-        
+
         addCartItem({
             sku,
             color: color || '',
@@ -92,6 +93,7 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
                     ))}
                 </div>
             </fieldset>
+            <MeasurementsIllustration withoutSole showOn="mobile" className={styles.measurementsDemo} warning={sizeWarning} />
             <fieldset className={cn([styles.productFieldset, styles.measureStep])}>
                 <legend className={styles.productFieldset__legend}>Определи свой размер</legend>
                 <>{howToMeasureButton}</>
@@ -131,6 +133,7 @@ export default function FittingRoom({ sku, howToMeasureButton }) {
                     </label>
                 ) : null}
             </fieldset>
+            <MeasurementsIllustration showOn="mobile" className={styles.measurementsDemo} warning={sizeWarning} />
             <fieldset className={styles.productFieldset} disabled={!store.length || !store.width || !measurementsApproval}>
                 <legend className={styles.productFieldset__legend}>Выбери размер</legend>
                 {!sizes ? null : (
