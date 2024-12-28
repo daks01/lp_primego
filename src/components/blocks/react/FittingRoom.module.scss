@@ -129,8 +129,13 @@
         }
     }
 }
+.measurementsDemo {
+    margin: 0 calc(var(--1px) * -20);
+}
 
-.productFieldset + .productFieldset {
+.productFieldset + .productFieldset,
+.productFieldset + .measurementsDemo,
+.measurementsDemo + .productFieldset {
     margin-top: var(--15px);
 }
 

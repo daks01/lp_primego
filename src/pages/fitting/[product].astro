@@ -9,9 +9,8 @@ import Dialog from '../../components/ui/Dialog.astro';
 import Warning from '../../components/ui/Warning.astro';
 import Layout from '../../layouts/Layout.astro';
 import BackButton from '../../components/ui/BackButton.astro';
-import { productOptMap } from '../../utils/product-list';
 import Header from '../../components/layout/Header.astro';
-import MeasurementsIllustration from '../../components/content/MeasurementsIllustration.astro';
+import MeasurementsIllustration from '../../components/content/react/MeasurementsIllustration';
 
 export function getStaticPaths() {
     return [
@@ -28,8 +27,6 @@ export function getStaticPaths() {
 
 const { sku } = Astro.props;
 const backTo = sku === 'EM24' ? '/empire' : sku === 'RL24' ? '/royal' : '/';
-
-const productOptions = productOptMap[sku];
 ---
 
 <style is:global>
@@ -42,22 +39,27 @@ const productOptions = productOptMap[sku];
     <Header variant="modest" backTo={backTo} />
     <div class:list={['display-none', 'display-mobile-block']}>
         <SwappableHeader sku={sku} />
-        <Warning class="warning">
+        <Warning class="product-warning">
             Внимание! В каждой коллекции собственный размерный ряд. Используйте калькулятор ниже для подбора размера.
         </Warning>
     </div>
     <main class="product-layout">
-        <section class="product-layout__pictures" data-product-pictures-section>
+        <section class="product-layout__gallery" data-product-gallery>
             <FittingRoomGallery sku={sku} />
-            <MeasurementsIllustration />
+        </section>
+        <section class="product-layout__measurements" data-product-measurements hidden>
+            <MeasurementsIllustration showOn="desktop" client:only="react">
+                <Warning slot="warning">Внимание! Выбранный размер не совпадает с рекомендованным</Warning>
+            </MeasurementsIllustration>
         </section>
         <section class="product-layout__content">
             <BackButton href={backTo} class:list={['backButton', 'display-mobile-none']} />
             <SwappableHeader sku={sku} class="display-mobile-none" />
-            <Warning class="display-mobile-none">
+            <Warning class:list={['product-warning', 'display-mobile-none']}>
                 Внимание! В каждой коллекции собственный размерный ряд. Используйте калькулятор ниже для подбора размера.
             </Warning>
             <FittingRoom sku={sku} client:only="react">
+                <Warning slot="sizeWarning">Внимание! Выбранный размер не совпадает с рекомендованным</Warning>
                 <UnderlineClickable
                     as="button"
                     type="button"
@@ -108,21 +110,26 @@ const productOptions = productOptMap[sku];
         width: 50%;
     }
 
-    .product-layout__pictures {
+    .product-layout__gallery,
+    .product-layout__measurements {
         width: 50%;
         height: 100vh;
+    }
 
-        &[data-product-pictures-section='photos'] {
-            background-color: var(--color-white);
-        }
+    .product-layout__gallery {
+        background-color: var(--color-white);
+    }
 
-        &[data-product-pictures-section='measurements'] {
-            background-color: var(--color-bg-black);
-        }
+    .product-layout__measurements {
+        background-color: var(--color-bg-black);
     }
 
     .backButton.backButton {
         margin-top: 0;
+    }
+
+    .product-warning {
+        margin: var(--30px) 0;
     }
 
     .how-to-button {
@@ -150,14 +157,23 @@ const productOptions = productOptMap[sku];
                 max-height: none;
             }
 
-            &__pictures {
+            &__gallery,
+            &__measurements {
                 width: 100%;
                 height: calc(var(--1px) * 485);
                 flex-shrink: 0;
             }
         }
 
-        .warning {
+        [data-product-gallery] {
+            display: block !important;
+        }
+
+        [data-product-measurements] {
+            display: none !important;
+        }
+
+        .product-warning {
             margin: var(--30px) calc(var(--1px) * 20);
         }
 
@@ -173,13 +189,11 @@ const productOptions = productOptMap[sku];
     import { $selectedProduct } from '../../stores/fittingProductStore';
 
     document.addEventListener('DOMContentLoaded', () => {
-        const picturesSection = document.querySelector('[data-product-pictures-section]');
-        const gallery = picturesSection?.querySelector<HTMLDivElement>('[data-shop-photo-gallery]');
-        const illustration = picturesSection?.querySelector<HTMLDivElement>('[data-shop-illustration]');
+        const gallery = document.querySelector<HTMLDivElement>('[data-product-gallery]');
+        const illustration = document.querySelector<HTMLDivElement>('[data-product-measurements]');
 
         $selectedProduct.listen((_product, _oldProduct, changed) => {
             const isColorChanged = changed === 'color';
-            picturesSection?.setAttribute('data-product-pictures-section', isColorChanged ? 'photos' : 'measurements');
             gallery.hidden = !isColorChanged;
             illustration.hidden = isColorChanged;
         });
