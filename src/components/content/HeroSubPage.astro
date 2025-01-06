@@ -7,6 +7,10 @@ import BackgroundText from "../ui/BackgroundText.astro";
 import BackButton from "../ui/BackButton.astro";
 import Parametrs from "./Parametrs.astro";
 import { Image } from "astro:assets";
+import { getLangFromUrl, useTranslatedPath } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
 
 const {
   backgroundImage,
@@ -29,7 +33,7 @@ const optimizedBackgroundImage = backgroundImageMobile
   <BackgroundText class="background-text">Primego</BackgroundText>
   <div class="hero__wrap">
     <div class="hero">
-      <BackButton href="./../" />
+      <BackButton href={translatePath('/', lang)} />
       <StarTrekText as="h1" class="page-title">{title}</StarTrekText>
       <div>
         <p class="hero__lead">{lead}</p>

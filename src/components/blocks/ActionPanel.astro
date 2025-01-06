@@ -1,6 +1,10 @@
 ---
 import Dialog from "../ui/Dialog.astro";
 import ShopCart from "./ShopCart.vue";
+import { getLangFromUrl, useTranslatedPath } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
 
 interface Props {
     variant?: 'default' | 'modest';
@@ -25,7 +29,7 @@ const { variant = 'default' } = Astro.props;
 		<LoginForm client:only />
 	</Dialog> -->
 	<a
-		href="./order"
+		href={translatePath('/order', lang)}
 		class:list={["button-shopcart", variant]}
 		type="button"
 		onclick={`event.preventDefault(); window["dialog-shopcart"]?.showModal()`}

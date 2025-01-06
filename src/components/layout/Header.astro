@@ -3,6 +3,11 @@ import Section from "../ui/Section.astro";
 import SocialList from "../ui/SocialList.astro";
 import Logo from "../ui/Logo.astro";
 import ActionPanel from "../blocks/ActionPanel.astro";
+import LanguagePicker from "../ui/LanguagePicker.astro";
+import { getLangFromUrl, useTranslatedPath } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
 
 interface Props {
     variant?: 'default' | 'modest';
@@ -11,7 +16,13 @@ interface Props {
     backTo?: string;
     class?: string;
 }
-const { variant = 'default', as: tag = 'header', isHome = false, backTo = '/', class: className } = Astro.props;
+const { 
+	variant = 'default', 
+	as: tag = 'header', 
+	isHome = false, 
+	backTo = translatePath('/', lang), 
+	class: className 
+} = Astro.props;
 ---
 
 <Section as={tag} class:list={["header", variant, className]}>
@@ -26,11 +37,12 @@ const { variant = 'default', as: tag = 'header', isHome = false, backTo = '/', c
 			<SocialList class="display-mobile-none"/>
 		</div>
 		<div class="top-bar__cell top-bar__cell_2">
-			<a href="/" aria-label="На главную">
+			<a href={translatePath('/', lang)} aria-label="На главную">
 				<Logo />
 			</a>
 		</div>
 		<div class="top-bar__cell top-bar__cell_3">
+			<LanguagePicker />
 			<ActionPanel variant={variant} />
 		</div>
 	</div>

@@ -1,9 +1,14 @@
 ---
 import StarTrekText from "../ui/StarTrekText.astro";
 import Button from "../ui/Button.astro";
+import ProductPriceFromApi from "../blocks/ProductPriceFromApi.astro";
+import { productOptMap } from "../../utils/product-list";
+import { getLangFromUrl, useTranslatedPath } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
 
 const { sku } = Astro.props;
-import { productOptMap } from "../../utils/product-list";
 
 const productOptions = productOptMap[sku];
 ---
@@ -47,7 +52,8 @@ const productOptions = productOptMap[sku];
 		</ul>
 	</div>
 	<div class="params__footer">
-        <Button as="a" href={`/fitting/${productOptions?.altName}`}>Виртуальная примерочная</Button>
+		<div class="params__price"><ProductPriceFromApi sku={sku} /></div>
+        <Button as="a" aria-label="Заказать" href={translatePath(`/fitting/${productOptions?.altName}`, lang)}>Заказать</Button>
 	</div>
 </div>
 

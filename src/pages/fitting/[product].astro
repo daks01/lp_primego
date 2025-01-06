@@ -11,6 +11,10 @@ import Layout from '../../layouts/Layout.astro';
 import BackButton from '../../components/ui/BackButton.astro';
 import Header from '../../components/layout/Header.astro';
 import MeasurementsIllustration from '../../components/content/react/MeasurementsIllustration';
+import { getLangFromUrl, useTranslatedPath } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
 
 export function getStaticPaths() {
     return [
@@ -26,7 +30,11 @@ export function getStaticPaths() {
 }
 
 const { sku } = Astro.props;
-const backTo = sku === 'EM24' ? '/empire' : sku === 'RL24' ? '/royal' : '/';
+const backTo = sku === 'EM24' 
+    ? translatePath('/empire', lang) 
+    : sku === 'RL24' 
+        ? translatePath('/royal', lang) 
+        : translatePath('/', lang);
 ---
 
 <style is:global>
