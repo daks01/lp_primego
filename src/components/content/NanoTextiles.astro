@@ -2,6 +2,10 @@
 import { Image } from 'astro:assets';
 import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const { backgroundImage, mainImage, invert = false, class: className  } = Astro.props;
 
@@ -9,7 +13,7 @@ const { backgroundImage, mainImage, invert = false, class: className  } = Astro.
 <Section backgroundImage={backgroundImage} invert={invert} class:list={["section", className]}>
 	<header>
 		<StarTrekText as="h2" class="h1 title">
-			НАНО <br />ТЕКСТИЛЬ
+			<Fragment set:html={t("nano.НАНО<br /> ТЕКСТИЛЬ")} />
 		</StarTrekText>
 	</header>
 	<Image
@@ -21,9 +25,9 @@ const { backgroundImage, mainImage, invert = false, class: className  } = Astro.
 		class="bg-img"
 	/>
 	<blockquote class="blockquote">
-		<p>Гидрофобная структура нити, не&nbsp;задерживает влагу, предотвращая развитие бактерий</p>
-		<p>Из&nbsp;натуральных волокон, антибактериальные и&nbsp;гидрофобные свойства, идеально для&nbsp;кроссовок</p>
-		<p>Технологичный и&nbsp;инновационный для&nbsp;спортивной обуви</p>
+		<p set:html={t("nano.Гидрофобная структура нити, не&nbsp;задерживает влагу, предотвращая развитие бактерий")}></p>
+		<p set:html={t("nano.Из&nbsp;натуральных волокон, антибактериальные и&nbsp;гидрофобные свойства, идеально для&nbsp;кроссовок")}></p>
+		<p set:html={t("nano.Технологичный и&nbsp;инновационный для&nbsp;спортивной обуви")}></p>
 	</blockquote>
 </Section>
 

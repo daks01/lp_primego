@@ -3,6 +3,10 @@ import type { HTMLAttributes } from "astro/types";
 import { Image } from "astro:assets";
 import imgInstagram from "/src/assets/img/social/instagram.png";
 import imgVk from "/src/assets/img/social/vk.png";
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 interface Props extends HTMLAttributes<"a"> {
   variant?: "iconList" | "imgList";
@@ -15,7 +19,7 @@ const {
 ---
 <div class:list={["social-list-wrap", className]}>
 	{ variant === "iconList" && 
-		<span class="social-list-label">Мы в соцсетях</span>
+		<span class="social-list-label">{t("social.Мы в соцсетях")}</span>
 	}
 	<ul class:list={[
 		"social-list",

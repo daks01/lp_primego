@@ -29,6 +29,10 @@ import backgroundShape from "/src/assets/img/bg/FFCD01/4.jpg";
 import backgroundMadeIn from "/src/assets/img/bg/FFCD01/8.jpg";
 import backgroundFooter from "/src/assets/img/bg/FFCD01/10.jpg";
 import { productOptMap } from "../utils/product-list";
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const productSKU = productOptMap.EM24.sku;
 ---
@@ -43,15 +47,15 @@ const productSKU = productOptMap.EM24.sku;
 	}
 </style>
 
-<Layout title="Primego | Империум">
+<Layout title={t("common.Primego") | t("common.Империум")}>
 	<Header/>
 	<main class="main">
 		<HeroSubPage 
 			backgroundImage={backgroundHero}
 			backgroundImageMobile={backgroundHeroMobile}
 			imageSneakers={imageSneakers}
-			title="ИМПЕРИУМ" 
-			lead="Герб Российской Империи"
+			title={t("common.Империум")}
+			lead={t("subpage.Герб Российской Империи")}
 			sku={productSKU} 
 		/>
 		<Gallery sku={productSKU} />

@@ -5,6 +5,10 @@ import StarTrekText from "../ui/StarTrekText.astro";
 import imageScheme1 from '../../assets/img/foot-shape/scheme1.svg';
 import imageScheme2 from '../../assets/img/foot-shape/scheme2.svg';
 import imageScheme3 from '../../assets/img/foot-shape/scheme3.svg';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const { backgroundImage } = Astro.props;
 
@@ -13,7 +17,7 @@ const { backgroundImage } = Astro.props;
 	<div class="layout">
 		<header>
 			<StarTrekText as="h2" class="h1 title">
-				Форма стопы
+				{t("footshape.Форма стопы")}
 			</StarTrekText>
 		</header>
 		<ul class="list">
@@ -25,8 +29,12 @@ const { backgroundImage } = Astro.props;
 					alt=""
 					loading="lazy"
 				/>
-				<span class="list-item__title">Типичная<br> форма обуви</span>
-				<span class="list-item__desc">Нога в дискомфорте</span>
+				<span class="list-item__title">
+					<Fragment set:html={t("footshape.Типичная<br /> форма обуви")} />
+				</span>
+				<span class="list-item__desc">
+					{t("footshape.Нога в дискомфорте")}
+				</span>
 			</li>
 			<li class="list-item">
 				<Image
@@ -36,8 +44,10 @@ const { backgroundImage } = Astro.props;
 					alt=""
 					loading="lazy"
 				/>
-				<span class="list-item__title">Оригинальная форма Primego,<br> модель Империум</span>
-				<span class="list-item__desc">Широкая нога</span>
+				<span class="list-item__title">
+					<Fragment set:html={t("footshape.Оригинальная форма Primego,<br /> модель Империум")} />
+				</span>
+				<span class="list-item__desc">{t("footshape.Широкая нога")}</span>
 			</li>
 			<li class="list-item">
 				<Image
@@ -47,8 +57,10 @@ const { backgroundImage } = Astro.props;
 					alt=""
 					loading="lazy"
 				/>
-				<span class="list-item__title">Оригинальная форма Primego,<br> модель Рояль</span>
-				<span class="list-item__desc">Стандартная нога</span>
+				<span class="list-item__title">
+					<Fragment set:html={t("footshape.Оригинальная форма Primego,<br /> модель Рояль")} />
+				</span>
+				<span class="list-item__desc">{t("footshape.Стандартная нога")}</span>
 			</li>
 		</ul>
 	</div>

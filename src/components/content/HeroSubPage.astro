@@ -7,7 +7,7 @@ import BackgroundText from "../ui/BackgroundText.astro";
 import BackButton from "../ui/BackButton.astro";
 import Parametrs from "./Parametrs.astro";
 import { Image } from "astro:assets";
-import { getLangFromUrl, useTranslatedPath } from '../../i18n/utils';
+import { getLangFromUrl, useTranslatedPath } from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
@@ -33,7 +33,7 @@ const optimizedBackgroundImage = backgroundImageMobile
   <BackgroundText class="background-text">Primego</BackgroundText>
   <div class="hero__wrap">
     <div class="hero">
-      <BackButton href={translatePath('/', lang)} />
+      <BackButton href={translatePath("/", lang)} />
       <StarTrekText as="h1" class="page-title">{title}</StarTrekText>
       <div>
         <p class="hero__lead">{lead}</p>
@@ -45,7 +45,9 @@ const optimizedBackgroundImage = backgroundImageMobile
           loading="lazy"
         />
       </div>
-      <SocialList class="display-none display-mobile-flex justify-content-center" />
+      <SocialList
+        class="display-none display-mobile-flex justify-content-center"
+      />
     </div>
   </div>
 
@@ -87,7 +89,7 @@ const optimizedBackgroundImage = backgroundImageMobile
     .section {
       background-image: var(--bg-url-mobile) !important;
       background-size: contain;
-			order: -1;
+      order: -1;
     }
     .hero {
       margin-bottom: var(--60px);
@@ -103,7 +105,7 @@ const optimizedBackgroundImage = backgroundImageMobile
     .hero__lead {
       font-size: calc(var(--1px) * 36);
       line-height: 1.05;
-	    margin-bottom: calc(var(--1px)* 300);
+      margin-bottom: calc(var(--1px) * 300);
     }
     .hero__image {
       display: none;

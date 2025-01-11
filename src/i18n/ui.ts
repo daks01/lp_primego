@@ -1,20 +1,16 @@
-export const languages = {
-    en: 'En',
-    ru: 'Ru',
-};
+import en from './locales/en.js';
+import ru from './locales/ru.js';
 
 export const defaultLang = 'ru';
 
 export const showDefaultLang = false;
 
+export const languages = {
+    'en': 'En',
+    'ru': 'Ru',
+};
+
 export const ui = {
-    en: {
-        'nav.home': 'Home',
-        'nav.about': 'About',
-        'nav.twitter': 'Twitter',
-    },
-    ru: {
-        'nav.home': 'Accueil',
-        'nav.about': 'À propos',
-    },
+    'en': en,
+    'ru': ru,
 } as const;
