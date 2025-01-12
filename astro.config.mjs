@@ -17,9 +17,14 @@ export default defineConfig({
   base: baseUrl,
   integrations: [
     sitemap({
-        filter: (page) =>
-          !page.includes('/shopcart/')
-          && !page.includes('/profile/')
+      i18n: {
+        defaultLocale: 'ru',
+        locales: {
+          ru: 'ru', 
+          en: 'en-US', 
+        }
+      },
+      filter: (page) => !page.includes('/order/'),
     }),
     vue({ include: ['**/CustomizatorApp.vue', '**/LoginForm.vue', '**/ShopCart.vue'] }),
     react({ include: ['**/react/**'] }),
