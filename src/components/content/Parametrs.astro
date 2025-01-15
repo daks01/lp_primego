@@ -48,8 +48,7 @@ const productOptions = productOptMap[sku];
 		</ul>
 	</div>
 	<div class="params__footer">
-		<div class="params__price"><ProductPriceFromApi sku={sku} /></div>
-        <Button as="a" aria-label="Заказать" href={`/fitting/${productOptions?.altName}`}>Заказать</Button>
+        <Button as="a" href={`/fitting/${productOptions?.altName}`}>Вирутальная примерочная</Button>
 	</div>
 </div>
 
@@ -90,11 +89,6 @@ const productOptions = productOptMap[sku];
 			gap: var(--30px);
 			margin: var(--45px) 0 var(--90px);
 		}
-		&__price {
-			color: var(--text-color);
-			font-size: var(--heading-2);
-			font-weight: 600;
-		}
 	}
 
 
@@ -120,17 +114,6 @@ const productOptions = productOptMap[sku];
 			&__footer {
 				gap: var(--15px);
 				margin-bottom: var(--60px);
-			}
-			&__price {
-				font-size: var(--heading-4);
-				background-color: var(--button-main-style-secondary-bg-default);
-				display: flex;
-				padding: calc(var(--1px)* 12);
-				align-items: center;
-				justify-content: center;
-				width: 100%;
-				border-radius: var(--4px);
-				white-space: nowrap;
 			}	
 		}
 	}
