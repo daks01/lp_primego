@@ -1,7 +1,6 @@
 ---
 import StarTrekText from "../ui/StarTrekText.astro";
 import Button from "../ui/Button.astro";
-import ProductPriceFromApi from "../blocks/ProductPriceFromApi.astro";
 
 const { sku } = Astro.props;
 import { productOptMap } from "../../utils/product-list";
@@ -48,7 +47,7 @@ const productOptions = productOptMap[sku];
 		</ul>
 	</div>
 	<div class="params__footer">
-        <Button as="a" href={`/fitting/${productOptions?.altName}`}>Вирутальная примерочная</Button>
+        <Button as="a" href={`/fitting/${productOptions?.altName}`}>Виртуальная примерочная</Button>
 	</div>
 </div>
 
