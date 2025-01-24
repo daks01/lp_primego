@@ -107,13 +107,13 @@ export default {
     "fitting.Примерочная": "Fitting room",
     "fitting.Предыдущая обувь": "Prev",
     "fitting.Следующая обувь": "Next",
-    "fitting.Внимание! В каждой коллекции собственный размерный ряд. Используйте калькулятор ниже для подбора размера.": " Notice! Each collection has its own size range. Use the calculator below to select the size.",
+    "fitting.Внимание! В каждой моделе собственный размерный ряд. Используйте калькулятор ниже для подбора размера.": " Notice! Each model has its own size range. Use the calculator below to select the size.",
     "fitting.Ваш рекомендованный размер": "Your recommended size:",
-    "fitting.Внимание! Выбранный размер не совпадает с рекомендованным": " Notice! The selected size does not match the recommended size",
-    "fitting.Внимание! Выбранный размер не совпадает с рекомендованным, продолжить?": " Notice! The selected size does not match the recommended size",
+    "fitting.Внимание! Выбранный размер не совпадает с рекомендованным": " Warning! The selected size does not match the recommended size",
+    "fitting.Внимание! Выбранный размер не совпадает с рекомендованным, продолжить?": " Warning! The selected size does not match the recommended size",
     "fitting.Оформить заказ": "Order",
     // modal howToMeasure
-    "howToMeasure.Как снять мерку?": "How to take measurements?",
+    "howToMeasure.Как снять мерку?": "How to measure your foot?",
     "howToMeasure.Шаг 1.": "Step 1.",
     "howToMeasure.Наденьте чулки или носки, которые вы обычно носите с таким видом обуви.": "Put on the stockings or socks you usually wear with this type of footwear.",
     "howToMeasure.Шаг 2.": "Step 2.",
@@ -121,7 +121,7 @@ export default {
     "howToMeasure.Шаг 3.": "Step 3.",
     "howToMeasure.Прижав пятки к стене, измерьте длину стопы от основания пятки до крайней точки самого длинного пальца.": "With your heels against the wall, measure the length of your foot from the base of the heel to the tip of the longest toe.",
     "howToMeasure.Шаг 4.": "Step 4.",
-    "howToMeasure.Аналогичным образом измерьте ширину самой широкой части. Измерьте обе стопы и используйте наибольшую величину для определения размера.": "Similarly, measure the width of the widest part. Measure both feet and use the larger measurement to determine the size.",
+    "howToMeasure.Аналогичным образом измерьте ширину самой широкой части. Измерьте обе стопы и используйте наибольшую величину для определения размера.": "Measure the width of the widest part same way. Measure both feet and use the larger measurement to determine the size.",
     // order page
     "order.Оформление заказа": "Checkout",
 };
