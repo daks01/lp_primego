@@ -55,9 +55,7 @@ const backTo =
     <SwappableHeader sku={sku} />
     <Warning class="product-warning">
       {
-        t(
-          "fitting.Внимание! В каждой коллекции собственный размерный ряд. Используйте калькулятор ниже для подбора размера."
-        )
+        t("fitting.Внимание! В каждой моделе собственный размерный ряд. Используйте калькулятор ниже для подбора размера.")
       }
     </Warning>
   </div>
@@ -73,9 +71,7 @@ const backTo =
       <MeasurementsIllustration showOn="desktop" client:only="react">
         <Warning slot="warning"
           >{
-            t(
-              "fitting.Внимание! Выбранный размер не совпадает с рекомендованным"
-            )
+            t("fitting.Внимание! Выбранный размер не совпадает с рекомендованным")
           }</Warning
         >
       </MeasurementsIllustration>
@@ -88,17 +84,13 @@ const backTo =
       <SwappableHeader sku={sku} class="display-mobile-none" />
       <Warning class:list={["product-warning", "display-mobile-none"]}>
         {
-          t(
-            "fitting.Внимание! В каждой коллекции собственный размерный ряд. Используйте калькулятор ниже для подбора размера."
-          )
+          t("fitting.Внимание! В каждой моделе собственный размерный ряд. Используйте калькулятор ниже для подбора размера.")
         }
       </Warning>
       <FittingRoom sku={sku} client:only="react">
         <Warning slot="sizeWarning"
           >{
-            t(
-              "fitting.Внимание! Выбранный размер не совпадает с рекомендованным"
-            )
+            t("fitting.Внимание! Выбранный размер не совпадает с рекомендованным")
           }</Warning
         >
         <UnderlineClickable

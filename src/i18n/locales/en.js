@@ -5,7 +5,7 @@ export default {
     "common.Рояль": "Royal",
     "common.Империум": "Imperium",
     "common.Купить": "Buy",
-    "common.Заказать": "Order",
+    "common.Виртуальная примерочная": "Virtual fitting room",
     "common.Назад": "Back",
     "common.Закрыть": "Close",
     // header
