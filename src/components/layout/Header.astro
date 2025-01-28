@@ -2,6 +2,7 @@
 import Section from "../ui/Section.astro";
 import SocialList from "../ui/SocialList.astro";
 import Logo from "../ui/Logo.astro";
+import LogoMobile from "../ui/LogoMobile.astro";
 import ActionPanel from "../blocks/ActionPanel.astro";
 import LanguagePicker from "../ui/LanguagePicker.astro";
 import {
@@ -65,7 +66,8 @@ const {
     </div>
     <div class="top-bar__cell top-bar__cell_2">
       <a href={translatePath("/", lang)} aria-label={t("home.На главную")}>
-        <Logo />
+        <div class="show-on-desktop"><Logo/></div>
+        <div class="show-on-mobile"><LogoMobile/></div>
       </a>
     </div>
     <div class="top-bar__cell top-bar__cell_3">
@@ -125,7 +127,19 @@ const {
       display: none;
     }
   }
+  .show-on-desktop {
+    display: block;
+  }
+  .show-on-mobile {
+    display: none;
+  }
   @media screen and (max-width: 1023px) {
+    .show-on-desktop {
+      display: none;
+    }
+    .show-on-mobile {
+      display: block;
+    }
     .back-button {
       display: block;
       margin-right: var(--15px);
