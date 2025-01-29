@@ -4,6 +4,10 @@ import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
 import imageScheme1 from '../../assets/img/convection/scheme1.png';
 import imageScheme2 from '../../assets/img/convection/scheme2.png';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const { backgroundImage, mainImage, class: className } = Astro.props;
 
@@ -13,10 +17,11 @@ const { backgroundImage, mainImage, class: className } = Astro.props;
 		<ul class="list">
 			<li class="list-item">
 				<span class="h5 list-item__title">
-					Обычная<br>
-					подкладка
+					<Fragment set:html={t("convection.Обычная<br /> подкладка")} />
 				</span>
-				<span>воздух НЕ&nbsp;проходит</span>
+				<span>
+					<Fragment set:html={t("convection.воздух НЕ&nbsp;проходит")} />
+				</span>
 				<Image
 					width="180"
 					height="180"
@@ -27,10 +32,9 @@ const { backgroundImage, mainImage, class: className } = Astro.props;
 			</li>
 			<li class="list-item">
 				<span class="h5 list-item__title ">
-					Капиллярная<br>
-					мембрана
+					<Fragment set:html={t("convection.Капиллярная<br /> мембрана")} />
 				</span>
-				<span>воздух циркулирует</span>
+				<span>{t("convection.воздух циркулирует")}</span>
 				<Image
 					width="180"
 					height="180"
@@ -49,12 +53,12 @@ const { backgroundImage, mainImage, class: className } = Astro.props;
 			class="bg-img"
 		/>
 		<header>
-			<StarTrekText as="h2" class="h1 title">Конвекция</StarTrekText>
+			<StarTrekText as="h2" class="h1 title">{t("convection.Конвекция")}</StarTrekText>
 		</header>
 		<blockquote class="blockquote">
-			<p>Капилярная конвекция для&nbsp;максимального<br> комфорта</p>
-			<p>Проницаемая трехмерная капиллярная мембрана, естественная терморегуляция</p>
-			<p>Теплорегулирующая подкладка, обеспечивает вентиляцию, предотвращает перегрев</p>
+			<p set:html={t("convection.Капилярная конвекция для&nbsp;максимального<br> комфорта")}></p>
+			<p>{t("convection.Проницаемая трехмерная капиллярная мембрана, естественная терморегуляция")}</p>
+			<p>{t("convection.Теплорегулирующая подкладка, обеспечивает вентиляцию, предотвращает перегрев")}</p>
 		</blockquote>
 	</div>
 </Section>

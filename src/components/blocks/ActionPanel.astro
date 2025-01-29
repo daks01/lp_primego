@@ -1,15 +1,24 @@
 ---
 import Dialog from "../ui/Dialog.astro";
 import ShopCart from "./ShopCart.vue";
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const t = useTranslations(lang);
 
 interface Props {
-    variant?: 'default' | 'modest';
+  variant?: "default" | "modest";
 }
-const { variant = 'default' } = Astro.props;
+const { variant = "default" } = Astro.props;
 ---
 
 <div class="action-panel">
-	<!-- <button
+  <!-- <button
 		class="button-login"
 		type="button"
 		aria-describedby="profile-btn-title"
@@ -24,160 +33,183 @@ const { variant = 'default' } = Astro.props;
 	<Dialog id="dialog-login" title="Войти или зарегистрироваться" width={800}>
 		<LoginForm client:only />
 	</Dialog> -->
-	<a
-		href="./order"
-		class:list={["button-shopcart", variant]}
-		type="button"
-		onclick={`event.preventDefault(); window["dialog-shopcart"]?.showModal()`}
-		aria-label="Корзина"
-		data-cart-button
-	>
-		<span class="button-shopcart__title">КОРЗИНА</span>
-		<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-			<path d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-			<path d="M3 6H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-			<path d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-		</svg>
-		<span class="button-shopcart__counter" data-cart-counter>0</span>
-	</a>
-	<Dialog id="dialog-shopcart" title="Оформление заказа">
-		<ShopCart client:only />
-	</Dialog>
+  <a
+    href={translatePath("/order", lang)}
+    class:list={["button-shopcart", variant]}
+    type="button"
+    onclick={`event.preventDefault(); window["dialog-shopcart"]?.showModal()`}
+    aria-label={t("header.КОРЗИНА")}
+    data-cart-button
+  >
+    <span class="button-shopcart__title">
+      {t("header.КОРЗИНА")}
+    </span>
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6 2L3 6V20C3 20.5304 3.21071 21.0391 3.58579 21.4142C3.96086 21.7893 4.46957 22 5 22H19C19.5304 22 20.0391 21.7893 20.4142 21.4142C20.7893 21.0391 21 20.5304 21 20V6L18 2H6Z"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+      <path
+        d="M3 6H21"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+      <path
+        d="M16 10C16 11.0609 15.5786 12.0783 14.8284 12.8284C14.0783 13.5786 13.0609 14 12 14C10.9391 14 9.92172 13.5786 9.17157 12.8284C8.42143 12.0783 8 11.0609 8 10"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+    <span class="button-shopcart__counter" data-cart-counter>0</span>
+  </a>
+  <Dialog id="dialog-shopcart" title={t("order.Оформление заказа")}>
+    <ShopCart client:only />
+  </Dialog>
 </div>
 
 <script>
-	import { counter } from '../../stores/shopCartStore';
+  import { counter } from "../../stores/shopCartStore";
 
-	function updateCartCounter() {
-		const cartCounterEl = document.querySelector('[data-cart-counter]');
-		const cartButtonEl = document.querySelector('[data-cart-button]');
-		counter.subscribe((value) => {
-			if(document.body.contains(cartCounterEl)) {
-				cartCounterEl.innerText = value;
-			}
-			if(document.body.contains(cartButtonEl)) {
-				cartButtonEl.disabled = !value;
-			}
-		})
-	}
+  function updateCartCounter() {
+    const cartCounterEl = document.querySelector("[data-cart-counter]");
+    const cartButtonEl = document.querySelector("[data-cart-button]");
+    counter.subscribe((value) => {
+      if (document.body.contains(cartCounterEl)) {
+        cartCounterEl.innerText = value;
+      }
+      if (document.body.contains(cartButtonEl)) {
+        cartButtonEl.disabled = !value;
+      }
+    });
+  }
 
-	updateCartCounter();
+  updateCartCounter();
 </script>
 
 <style lang="scss">
-	.action-panel {
-		display: flex;
-		gap: var(--15px);
-		border-radius: 0 0 var(--4px) var(--4px);
-		transition: transform 0.5s ease;
-		position: relative;
+  .action-panel {
+    display: flex;
+    gap: var(--15px);
+    border-radius: 0 0 var(--4px) var(--4px);
+    transition: transform 0.5s ease;
+    position: relative;
 
-		&:before {
-			content: '';
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			width: 100%;
-			height: calc(100% + var(--8px));
-			background-color: var(--color-bg-disabled);
-			border-radius: 0 0 var(--4px) var(--4px);
-			transition: transform 0.5s ease;
-			z-index: -1;
-		}
-
-		& > * {
-			transition: transform 0.5s ease;
-		}
-
-		&:focus-within,
-		&:hover {
-			&:before {
-				background-color: var(--color-product);
-				color: var(--color-black);
-				transform: translate(0, var(--8px));
-			}
-			& > * {
-				transform: translate(0, var(--4px));
-			}
-		}
-	}
-
-	// ToDo :hover
-	// .button-login {
-	// 	color: currentColor;
-	// 	padding: var(--8px) calc(var(--1px) * 24);
-	// 	border: none;
-	// 	background-color: rgba(#AFAFAF, .13);
-	// 	border-radius: var(--4px);
-	// 	cursor: pointer;
-    //     font-family: inherit;
-	// 	font-size: var(--extra-small-font-size);
-	// 	&:hover {
-	// 		background: rgba(0, 0, 0, .2);
-	// 	}
-	// 	svg {
-	// 		display: none;
-	// 		width: calc(var(--1px) * 16);
-	// 		height: calc(var(--1px) * 16);
-	// 	}
-	// }
-	.button-shopcart {
-		color: var(--color-white);
-		font-size: calc(var(--1px) * 20);
-		font-weight: 600;
-		line-height: 1;
-		background-color: transparent;
-		border: none;
-		display: flex;
-		align-items: center;
-		gap: calc(var(--1px) * 10);
-		padding: var(--15px) calc(var(--1px) * 20);
-		min-width: var(--45px);
-		text-decoration: none;
-		svg {
-			width: calc(var(--1px) * 24);
-			height: calc(var(--1px) * 24);
-		}
-		.action-panel:hover & {
-			color: var(--color-black)
-		}
-	}
-	.button-shopcart__title {
-		font-size: calc(var(--1px) * 20);
-		padding-right: var(--15px);
-	}
-
-    .button-shopcart.modest .button-shopcart__title {
-            display: none;
+    &:before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: calc(100% + var(--8px));
+      background-color: var(--color-bg-disabled);
+      border-radius: 0 0 var(--4px) var(--4px);
+      transition: transform 0.5s ease;
+      z-index: -1;
     }
 
-	@media screen and (max-width: 1023px) {
-		.action-panel {
-			&:focus-within,
-			&:hover {
-				&:before {
-					transform: none;
-				}
-				& > * {
-					transform: none;
-				}
-			}
-		}
-		// .button-login {
-		// 	background-color: var(--color-bg-black);
-		// 	span {
-		// 		display: none;
-		// 	}
-		// 	svg {
-		// 		display: block;
-		// 	}
-		// }
-		.button-shopcart {
-			gap: calc(var(--1px) * 5);
-			padding: calc(var(--1px) * 12) var(--15px);
-		}
-		.button-shopcart__title {
-			display: none;
-		}
-	}
+    & > * {
+      transition: transform 0.5s ease;
+    }
+
+    &:focus-within,
+    &:hover {
+      &:before {
+        background-color: var(--color-product);
+        color: var(--color-black);
+        transform: translate(0, var(--8px));
+      }
+      & > * {
+        transform: translate(0, var(--4px));
+      }
+    }
+  }
+
+  // ToDo :hover
+  // .button-login {
+  // 	color: currentColor;
+  // 	padding: var(--8px) calc(var(--1px) * 24);
+  // 	border: none;
+  // 	background-color: rgba(#AFAFAF, .13);
+  // 	border-radius: var(--4px);
+  // 	cursor: pointer;
+  //     font-family: inherit;
+  // 	font-size: var(--extra-small-font-size);
+  // 	&:hover {
+  // 		background: rgba(0, 0, 0, .2);
+  // 	}
+  // 	svg {
+  // 		display: none;
+  // 		width: calc(var(--1px) * 16);
+  // 		height: calc(var(--1px) * 16);
+  // 	}
+  // }
+  .button-shopcart {
+    color: var(--color-white);
+    font-size: calc(var(--1px) * 20);
+    font-weight: 600;
+    line-height: 1;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: calc(var(--1px) * 10);
+    padding: var(--15px) calc(var(--1px) * 20);
+    min-width: var(--45px);
+    text-decoration: none;
+    svg {
+      width: calc(var(--1px) * 24);
+      height: calc(var(--1px) * 24);
+    }
+    .action-panel:hover & {
+      color: var(--color-black);
+    }
+  }
+  .button-shopcart__title {
+    font-size: calc(var(--1px) * 20);
+    padding-right: var(--15px);
+  }
+
+  .button-shopcart.modest .button-shopcart__title {
+    display: none;
+  }
+
+  @media screen and (max-width: 1023px) {
+    .action-panel {
+      &:focus-within,
+      &:hover {
+        &:before {
+          transform: none;
+        }
+        & > * {
+          transform: none;
+        }
+      }
+    }
+    // .button-login {
+    // 	background-color: var(--color-bg-black);
+    // 	span {
+    // 		display: none;
+    // 	}
+    // 	svg {
+    // 		display: block;
+    // 	}
+    // }
+    .button-shopcart {
+      gap: calc(var(--1px) * 5);
+      padding: calc(var(--1px) * 12) var(--15px);
+    }
+    .button-shopcart__title {
+      display: none;
+    }
+  }
 </style>

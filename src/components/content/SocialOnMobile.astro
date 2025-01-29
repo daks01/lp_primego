@@ -2,12 +2,16 @@
 import StarTrekText from "../ui/StarTrekText.astro";
 import Section from "../ui/Section.astro";
 import SocialList from "../ui/SocialList.astro";
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <Section class="section">
     <header>
       <StarTrekText as="h2" class="h1 title">
-        Мы в соцсетях
+        {t("social.Мы в соцсетях")}
       </StarTrekText>
     </header>
 		<SocialList variant="imgList"/>

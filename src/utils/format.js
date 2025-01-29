@@ -1,6 +1,9 @@
 export function priceWithRouble(number) {
     return `${separateThousands(number)} ₽`
 }
+export function priceWithDollar(number) {
+    return `$${separateThousands(Math.ceil(number))}`
+}
 
 export function separateThousands(number) {
     if (isNumber(number)) {

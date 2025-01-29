@@ -28,7 +28,11 @@ import backgroundShape from "/src/assets/img/bg/FFFFFF/4.jpg";
 // import backgroundInnovation from "/src/assets/img/bg/FFFFFF/7.jpg";
 import backgroundMadeIn from "/src/assets/img/bg/FFFFFF/8.jpg";
 import backgroundFooter from "/src/assets/img/bg/FFFFFF/10.jpg";
-import { productOptMap } from "../utils/product-list"
+import { productOptMap } from "../utils/product-list";
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const productSKU = productOptMap.RL24.sku;
 ---
@@ -43,15 +47,15 @@ const productSKU = productOptMap.RL24.sku;
 	}
 </style>
 
-<Layout title="Primego | Рояль">
+<Layout title={t("common.Primego") | t("common.Рояль")}>
 	<Header/>
 	<main class="main">
 		<HeroSubPage 
 			backgroundImage={backgroundHero}
 			backgroundImageMobile={backgroundHeroMobile}
 			imageSneakers={imageSneakers}
-			title="Рояль" 
-			lead="Твой элегантный стиль"
+			title={t("common.Рояль")} 
+			lead={t("subpage.Твой элегантный стиль")}
 			sku={productSKU} 
 		/>
 		<Gallery sku={productSKU} />

@@ -26,7 +26,7 @@ export const productOptMap = {
     },
     EM24: {
         ...defaultOptions,
-        name: 'ИМПЕРИУМ',
+        name: 'Империум',
         altName: 'empire',
         sku: 'EM24',
         color: 'черный / желтый',

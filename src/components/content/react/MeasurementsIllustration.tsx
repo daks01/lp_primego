@@ -3,6 +3,10 @@ import { useStore } from '@nanostores/react';
 import { $selectedOrOnlyRecommendedSize, $selectedProduct } from '../../../stores/fittingProductStore.ts';
 import styles from './MeasurementsIllustration.module.scss';
 import cn from 'classnames';
+import { useTranslations } from '../../../i18n/utils';
+
+const lang = document.documentElement.lang;
+const t = useTranslations(lang);
 
 interface Props {
     showOn?: 'mobile' | 'desktop';
@@ -90,7 +94,7 @@ function MeasurementsIllustration({ showOn, withoutSole, className, warning }: P
                                         fill="currentColor"
                                     ></path>
                                 </mask>
-                                <g mask="url(#a)" fill="currentColor" fill-opacity=".4">
+                                <g mask="url(#a)" fill="currentColor" fillOpacity=".4">
                                     <rect height="576" width="244"></rect>
                                     <path
                                         opacity=".15"
@@ -159,7 +163,7 @@ function MeasurementsIllustration({ showOn, withoutSole, className, warning }: P
             {withoutSole ? null : (
                 <>
                     <div className={styles.recommendedSize}>
-                        Ваш рекомендованный размер: <span>{store.recommended ?? '-'}</span>
+                        {t("fitting.Ваш рекомендованный размер")}: <span>{store.recommended ?? '-'}</span>
                     </div>
                     {isWarning ? <div className={styles.warning}>{warning}</div> : null}
                 </>

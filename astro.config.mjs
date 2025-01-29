@@ -3,23 +3,34 @@ import sitemap from '@astrojs/sitemap';
 import vue from "@astrojs/vue";
 import react from '@astrojs/react';
 
-const siteUrlMap = {
+const siteMapUrlMap = {
   production: 'https://primego.online',
   staging: 'https://daks01.github.io/lp_primego',
   development: 'http://localhost:4321',
 };
-const siteUrl = siteUrlMap[process?.env?.NODE_ENV];
+const siteUrl = siteMapUrlMap[process?.env?.NODE_ENV];
+const baseUrl = process?.env?.NODE_ENV === 'staging' ? 'lp_primego' : '';
 
 // https://astro.build/config
 export default defineConfig({
   site: siteUrl,
+  base: baseUrl,
   integrations: [
     sitemap({
-        filter: (page) =>
-          !page.includes('/shopcart/')
-          && !page.includes('/profile/')
+      i18n: {
+        defaultLocale: 'ru',
+        locales: {
+          ru: 'ru', 
+          en: 'en-US', 
+        }
+      },
+      filter: (page) => !page.includes('/order/'),
     }),
     vue({ include: ['**/CustomizatorApp.vue', '**/LoginForm.vue', '**/ShopCart.vue'] }),
     react({ include: ['**/react/**'] }),
-  ]
+  ],
+  i18n: {
+    defaultLocale: 'ru',
+    locales: ['ru', 'en'],
+  }
 });

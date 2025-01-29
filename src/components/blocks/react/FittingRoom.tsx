@@ -4,11 +4,14 @@ import styles from './FittingRoom.module.scss';
 import cn from 'classnames';
 import { $availableSizesByColor, $colors, $prices, $sizes, type Sizes } from '../../../stores/productListStore';
 import { colorMap, productOptMap } from '../../../utils/product-list';
-import { priceWithRouble } from '../../../utils/format';
 import { useStore } from '@nanostores/react';
 import { $selectedProduct, updateProduct } from '../../../stores/fittingProductStore';
 import { addCartItem } from '../../../stores/shopCartStore';
 import MeasurementsIllustration from '../../content/react/MeasurementsIllustration.tsx';
+import { useTranslations } from '../../../i18n/utils';
+
+const lang = document.documentElement.lang;
+const t = useTranslations(lang);
 
 export default function FittingRoom({ sku, howToMeasureButton, sizeWarning }) {
     const { colors, sizes, available, lengths, widths, price } = useAvailableProperties(sku);
@@ -188,14 +191,14 @@ export default function FittingRoom({ sku, howToMeasureButton, sizeWarning }) {
                 {store.recommended && store.size && store.recommended !== store.size ? (
                     <label className={styles.productFieldset__approval}>
                         <input type="checkbox" checked={store.selectedSizeApproval} onChange={onSizeApprove} />
-                        Внимание! Выбранный размер не совпадает с рекомендованным, продолжить?
+                        {t("fitting.Внимание! Выбранный размер не совпадает с рекомендованным, продолжить?")}
                     </label>
                 ) : null}
             </fieldset>
             <div className={styles.productForm__footer}>
-                <div className={styles.productPrice}>{price ? priceWithRouble(price) : '-'}</div>
+                {/* <div className={styles.productPrice}>{price ? priceWithRouble(price) : '-'}</div> */}
                 <button type="submit" className={cn('button', styles.buyProductButton)} disabled={!isSubmitEnabled}>
-                    Оформить заказ
+                    {t("fitting.Оформить заказ")}
                 </button>
             </div>
         </form>

@@ -3,6 +3,10 @@ import Section from "../ui/Section.astro";
 import FooterForm from "../blocks/FooterForm.astro";
 import SocialList from "../ui/SocialList.astro";
 import Logo from "../ui/Logo.astro";
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const { backgroundImage, isHome = false } = Astro.props;
 
@@ -35,7 +39,7 @@ const currentYear = today.getFullYear();
 					<p class="footer__address-col">
 						ОГРНИП&nbsp;312343518600025
 						<br />
-						Тел:&nbsp;
+						{t("footer.Тел")}:&nbsp;
 						<a
 							href="tel:+7(936)2306655"
 							class="footer__phone-link"
@@ -48,7 +52,7 @@ const currentYear = today.getFullYear();
 		</div>
 		<div class="footer__copyright">
 			<span>
-				©&nbsp;Все права защищены | PRIMEGO&nbsp;{currentYear}
+				<Fragment set:html={t("footer.©&nbsp;Все права защищены | PRIMEGO")} />&nbsp;{currentYear}
 			</span>
 		</div>
 	</Fragment>

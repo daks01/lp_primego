@@ -8,6 +8,10 @@ import StarTrekText from "../ui/StarTrekText.astro";
 import poster from "/src/assets/img/hero-slider/video-poster.png";
 import BackgroundText from "../ui/BackgroundText.astro";
 import SocialList from "../ui/SocialList.astro";
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const optimizedPoster = poster
   ? await getImage({ src: poster, quality: "80" })
@@ -15,18 +19,18 @@ const optimizedPoster = poster
 
 // const imageList = [imgSlide1, imgSlide2, imgSlide3, imgSlide2];
 const { backgroundImage } = Astro.props;
+
+const baseUrl = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL;
 ---
 
 <Section backgroundImage={backgroundImage}>
   <BackgroundText>Primego</BackgroundText>
   <div class="hero-layout">
     <div class="hero">
-      <StarTrekText as="h1" class="page-title">Primego</StarTrekText>
+      <StarTrekText as="h1" class="page-title">{t("common.Primego")}</StarTrekText>
       <div>
         <p class="hero__lead">
-          кроссовки <br />
-          премиум <br />
-          твои
+          <Fragment set:html={t("main.кроссовки<br /> премиум<br /> твои")}>
         </p>
       </div>
     </div>
@@ -81,8 +85,8 @@ const { backgroundImage } = Astro.props;
           muted
           poster={optimizedPoster.src}
         >
-          <source src="./video/hevc.mov" type="video/mp4; codecs=hvc1" />
-          <source src="./video/vp9.webm" type="video/webm" />
+          <source src={`${baseUrl}/video/hevc.mov`} type="video/mp4; codecs=hvc1" />
+          <source src={`${baseUrl}/video/vp9.webm`} type="video/webm" />
         </video>
         <div class="view-3d__container dragscroll" data-container>
           <div class="view-3d__timeline" data-timeline></div>

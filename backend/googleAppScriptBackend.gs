@@ -43,6 +43,14 @@ function doGet(e) {
       .createTextOutput(JSON.stringify(data))
       .setMimeType(ContentService.MimeType.JSON)
   }
+  // ПОЛУЧЕНИЕ КУРСА ВАЛЮТ
+  if (e.queryString === 'type=currency') {
+    const data = getCurrency();
+
+    return ContentService
+      .createTextOutput(JSON.stringify(data))
+      .setMimeType(ContentService.MimeType.JSON)
+  }
   return ContentService
       .createTextOutput(JSON.stringify({result: 'success'}))
       .setMimeType(ContentService.MimeType.JSON)
@@ -52,7 +60,7 @@ function getProductsAvailability() {
   const thead = ['Артикул',	'Название',	'Тип',	'Утеплитель', 'Цвета', 'Цена',	'Размер', 'Резерв', 'Длина',	'Ширина',	'dark side', 'light side',	'white',	'black',	'gold',	'classic',	'choco',	'fif'];
   const sheet = getOrCreateSheet("Наличие", thead);
   const data = sheet.getDataRange().getValues();
-  Logger.log(convertProductsToGroup(data));
+  //Logger.log(convertProductsToGroup(data));
 
   return convertProductsToGroup(data);
 }
@@ -152,6 +160,23 @@ function convertProductsToGroup(data) {
   return result;
 }
 
+function getCurrency(){
+  const url = 'http://www.cbr.ru/scripts/XML_daily.asp';
+  const responseXml = UrlFetchApp.fetch(url).getContentText();
+  const document = XmlService.parse(responseXml);
+  const root = document.getRootElement();
+  const result = {};
+
+  root.getChildren('Valute').forEach((child) =>{
+    const key = child.getChild('CharCode').getText();
+    const value = child.getChild('Value').getText();
+
+    result[key] = value;
+  });
+ 
+  return result;
+}
+
 function addNewQuestion(postData) {
   const SHEET_NAME = "Обратная связь";
   const thead = ['статус','дата','имя','email','текст', 'откуда'];
@@ -181,7 +206,7 @@ function addNewQuestion(postData) {
 
 function addNewOrder(postData) {
   const SHEET_NAME = "Заказы";
-  const thead = ['статус','дата','имя', 'фамилия', 'email','телефон','адрес', 'доставка', 'итого','заказ'];
+  const thead = ['статус', 'дата', 'имя', 'фамилия', 'email', 'телефон', 'адрес', 'доставка', 'итого', 'заказ'];
   const sheet = getOrCreateSheet(SHEET_NAME, thead);
   const itemsPropMap = {
       name: 'Название',
@@ -193,19 +218,25 @@ function addNewOrder(postData) {
       size: 'Размер',
       price: 'Цена',
   };
-  const {name, surname, email, phone, address, items, totalPrice} = postData;
-  const { items: _, ...postDataWithoutItems } = postData;
-  const dataArrWithoutItems = Object.values(postDataWithoutItems);
+  const {name, surname, email, phone, address, items, totalPrice, usd} = postData;
+  const { items: i, usd: u, ...cleanedPostData } = postData;
+  const dataArrWithoutItems = Object.values(cleanedPostData);
   const getArrWithItems = () => {
     const result = [];
     for (var key in items) {
       const item = items[key];
       const stringWithItemProps = Object.keys(item).map((property) => {
-        if (property === 'id' || property === 'img') { return }
+        // ignore property
+        if (property === 'id' || property === 'img') { 
+          return;
+        }
         return [itemsPropMap[property] || property, item[property]].join(': ');
       }).join('\n')
 
       result.push(stringWithItemProps);
+    }
+    if (usd !== "") {
+      result.push(`Курс доллара: ${usd}`);
     }
     return result;
   };
