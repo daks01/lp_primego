@@ -1,119 +1,168 @@
 ---
 import StarTrekText from "../ui/StarTrekText.astro";
 import Button from "../ui/Button.astro";
+import { productOptMap } from "../../utils/product-list";
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const t = useTranslations(lang);
 
 const { sku } = Astro.props;
-import { productOptMap } from "../../utils/product-list";
 
 const productOptions = productOptMap[sku];
 ---
 
 <div class="params">
-	<StarTrekText as="h2" class="params__title">Параметры модели</StarTrekText>
-	<div class="params__aria">
-		<ul class="params__list">
-			<li class="params__list-item">
-				Цвет: 
-				<span class="params__value">{productOptions.color}</span>
-			</li>
-			<li class="params__list-item">
-				Сезон: 
-				<span class="params__value">{productOptions.season}</span>
-			</li>
-			<li class="params__list-item">
-				Вид застежки: 
-				<span class="params__value">{productOptions.typeOfClasp}</span>
-			</li>
-			<li class="params__list-item">
-				Состав верх:
-				<span class="params__value" set:html={productOptions.upperComposition}></span>
-			</li>
-			<li class="params__list-item">
-				Состав подкладка: 
-				<span class="params__value" set:html={productOptions.liningComposition}></span>
-			</li>
-			<li class="params__list-item">
-				Состав подошва: <span class="params__value" set:html={productOptions.soleComposition}></span>
-			</li>
-			<li class="params__list-item">
-				Высота подошвы: <span class="params__value" set:html={productOptions.soleHeight}></span>
-			</li>
-			<li class="params__list-item">
-				Полнота обуви: <span class="params__value" set:html={productOptions.fullnessOfShoes}></span>
-			</li>
-			<li class="params__list-item">
-				Страна производства: <span class="params__value">{productOptions.madeIn}</span>
-			</li>
-		</ul>
-	</div>
-	<div class="params__footer">
-        <Button as="a" href={`/fitting/${productOptions?.altName}`}>Виртуальная примерочная</Button>
-	</div>
+  <StarTrekText as="h2" class="params__title"
+    >{t("parameters.Параметры модели")}</StarTrekText
+  >
+  <div class="params__aria">
+    <ul class="params__list">
+      <li class="params__list-item">
+        {t("parameters.Цвет")}:
+        <span class="params__value">{productOptions.color}</span>
+      </li>
+      <li class="params__list-item">
+        {t("parameters.Сезон")}:
+        <span class="params__value">{productOptions.season}</span>
+      </li>
+      <li class="params__list-item">
+        {t("parameters.Вид застежки")}:
+        <span class="params__value">{productOptions.typeOfClasp}</span>
+      </li>
+      <li class="params__list-item">
+        {t("parameters.Состав верх")}:
+        <span
+          class="params__value"
+          set:html={productOptions.upperComposition}
+        />
+      </li>
+      <li class="params__list-item">
+        {t("parameters.Состав подкладка")}:
+        <span
+          class="params__value"
+          set:html={productOptions.liningComposition}
+        />
+      </li>
+      <li class="params__list-item">
+        {t("parameters.Состав подошва")}: <span
+          class="params__value"
+          set:html={productOptions.soleComposition}
+        />
+      </li>
+      <li class="params__list-item">
+        {t("parameters.Высота подошвы")}: <span
+          class="params__value"
+          set:html={productOptions.soleHeight}
+        />
+      </li>
+      <li class="params__list-item">
+        {t("parameters.Полнота обуви")}: <span
+          class="params__value"
+          set:html={productOptions.fullnessOfShoes}
+        />
+      </li>
+      <li class="params__list-item">
+        {t("parameters.Страна производства")}: <span class="params__value"
+          >{productOptions.madeIn}</span
+        >
+      </li>
+    </ul>
+  </div>
+  <div class="params__footer">
+    <!--div class="params__price"><ProductPriceFromApi sku={sku} /></div-->
+    <Button
+      as="a"
+      href={translatePath(`/fitting/${productOptions?.altName}`, lang)}
+    >
+      {t("common.Виртуальная примерочная")}
+    </Button>
+  </div>
 </div>
 
 <style lang="scss">
-	.params {
-		&__title {
-			font-size: calc(var(--1px) * 80);
-			margin: 0 0 var(--60px);
-			text-align: center;
-		}
-		&__aria {
-			background-color: var(--color-bg-disabled);
-			border-radius: var(--4px);     
-			padding: var(--30px);
-            border-left: var(--2px) solid var(--color-product);
-		}
-		&__list {
-			margin: 0;
-			padding: 0;
-			columns: 3;
-		}
-		&__list-item {
-			list-style-type: none;
-			padding: 0;
-			margin: 0;
-			line-height: 2;
-			font-size: var(--heading-5);
-			font-weight: 600;
-		}
-		&__value {
-			padding-left: var(--8px);
-			color: var(--color-gray);
-		}
-		&__footer {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: var(--30px);
-			margin: var(--45px) 0 var(--90px);
-		}
-	}
+  .params {
+    &__title {
+      font-size: calc(var(--1px) * 80);
+      margin: 0 0 var(--60px);
+      text-align: center;
+    }
+    &__aria {
+      background-color: var(--color-bg-disabled);
+      border-radius: var(--4px);
+      padding: var(--30px);
+      border-left: var(--2px) solid var(--color-product);
+    }
+    &__list {
+      margin: 0;
+      padding: 0;
+      columns: 3;
+    }
+    &__list-item {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+      line-height: 2;
+      font-size: var(--heading-5);
+      font-weight: 600;
+    }
+    &__value {
+      padding-left: var(--8px);
+      color: var(--color-gray);
+    }
+    &__footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--30px);
+      margin: var(--45px) 0 var(--90px);
+    }
+    &__price {
+      color: var(--text-color);
+      font-size: var(--heading-2);
+      font-weight: 600;
+    }
+  }
 
-
-	@media screen and (max-width: 1023px) {
-		.params {
-			&__title {
-				font-size: calc(var(--1px)* 74);
-				margin: 0 0 var(--30px);
-			}
-			&__aria {
-				padding-right: var(--8px);
-			}
-			&__list {
-				columns: auto;
-			}
-			&__list-item {
-				font-size: var(--extra-small-font-size);
-				line-height: normal;
-				& + & {
-					margin-top: var(--8px);
-				}
-			}
-			&__footer {
-				gap: var(--15px);
-				margin-bottom: var(--60px);
-			}	
-		}
-	}
+  @media screen and (max-width: 1023px) {
+    .params {
+      &__title {
+        font-size: calc(var(--1px) * 74);
+        margin: 0 0 var(--30px);
+      }
+      &__aria {
+        padding-right: var(--8px);
+      }
+      &__list {
+        columns: auto;
+      }
+      &__list-item {
+        font-size: var(--extra-small-font-size);
+        line-height: normal;
+        & + & {
+          margin-top: var(--8px);
+        }
+      }
+      &__footer {
+        gap: var(--15px);
+        margin-bottom: var(--60px);
+      }
+      &__price {
+        font-size: var(--heading-4);
+        background-color: var(--button-main-style-secondary-bg-default);
+        display: flex;
+        padding: calc(var(--1px) * 12);
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        border-radius: var(--4px);
+        white-space: nowrap;
+      }
+    }
+  }
 </style>

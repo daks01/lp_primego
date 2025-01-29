@@ -29,6 +29,10 @@ import backgroundMadeIn from "/src/assets/img/bg/FC1447/8.jpg";
 // import backgroundCustomizer from "/src/assets/img/bg/FC1447/9.jpg";
 import backgroundFooter from "/src/assets/img/bg/FC1447/10.jpg";
 import SocialOnMobile from "../components/content/SocialOnMobile.astro";
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <style is:global>
@@ -40,7 +44,7 @@ import SocialOnMobile from "../components/content/SocialOnMobile.astro";
 	}
 </style>
 
-<Layout title="Primego">
+<Layout title={t("common.Primego")}>
 	<Header isHome={true}/>
 	<main class="main">
 		<Hero backgroundImage={backgroundHero}/>

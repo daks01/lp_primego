@@ -2,6 +2,9 @@
 import { getImage } from "astro:assets"
 import Head from './Head.astro';
 import { optimizedImagesMap } from '../utils/shopCartImages';
+import { getLangFromUrl} from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
 
 const { backgroundImage, title } = Astro.props;
 
@@ -14,7 +17,7 @@ const optimizedImages = await optimizedImagesMap();
 ---
 
 <!doctype html>
-<html lang="ru">
+<html lang={lang}>
 	<head>
 		<Head title={title} />
 		<slot name="head" />

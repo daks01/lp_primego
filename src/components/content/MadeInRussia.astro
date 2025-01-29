@@ -4,18 +4,22 @@ import Section from "../ui/Section.astro";
 import StarTrekText from "../ui/StarTrekText.astro";
 import bg2Image from '../../assets/img/made-in-russia/bg.svg';
 import bg2MobileImage from '../../assets/img/made-in-russia/bg_mobile.svg';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const { backgroundImage, class: className } = Astro.props;
 
 ---
 <Section backgroundImage={backgroundImage} class:list={["section", className]}>
 	<header>
-		<StarTrekText as="h2" class="h1 title">Сделано в России</StarTrekText>
+		<StarTrekText as="h2" class="h1 title">{t("madeInRussa.Сделано в России")}</StarTrekText>
 	</header>
 	<blockquote class="blockquote">
-		<p>Произведено в&nbsp;России</p>
-		<p>Разработано в&nbsp;России</p>
-		<p>Из российских материалов<br> и&nbsp;технологий</p>
+		<p set:html={t("madeInRussa.Произведено в&nbsp;России")}></p>
+		<p set:html={t("madeInRussa.Разработано в&nbsp;России")}></p>
+		<p set:html={t("madeInRussa.Из российских материалов<br /> и&nbsp;технологий")}></p>
 	</blockquote>
 	<picture class="bg-img">
 		<source media="(min-width: 768px)" srcset={bg2Image.src}>

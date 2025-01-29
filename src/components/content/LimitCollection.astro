@@ -4,80 +4,88 @@ import { Image } from "astro:assets";
 import imgImperial from "/src/assets/img/limit-collection/imperial.png";
 import imgRoyal from "/src/assets/img/limit-collection/royal.png";
 import Section from "../ui/Section.astro";
-import { productOptMap } from "../../utils/product-list";
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+} from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const t = useTranslations(lang);
 ---
 
 <Section class="section">
-	<div class="limit">
-		<div class="limit-header">
+  <div class="limit">
+    <div class="limit-header">
       <StarTrekText as="h4" class="limit-header__title" id="nav-title">
-        лимитированные коллекции
+        {t("main.лимитированные коллекции")}
       </StarTrekText>
-      <p>Уникальный стиль под уникальных людей</p>
-		</div>
-		<nav aria-labeledby="nav-title">
-			<ul class="menu">
-				<li class="menu__item">
-					<a href="empire" class="menu__link card">
-						<div class="card__left">
-							<span class="card__subtitle">Непобедимый стиль</span>
-							<StarTrekText
-								title={productOptMap.EM24.name}
-								class="card__title card__title_scale"
-								as="span"
-								style="color: var(--color-product-empire)"
-							>
-								{productOptMap.EM24.name}
-							</StarTrekText>
-							<div>
-								<span class="read-more">
-									Посмотреть
-								</span>
-							</div>
-						</div>
-						<div class="card__right">
-							<Image
-								src={imgImperial}
-								alt=""
-								role="presentation"
-								loading="lazy"
-								class="card__img"
-							/>
-						</div>
-					</a>
-				</li>
-				<li class="menu__item">
-					<a href="royal" class="menu__link card">
-						<div class="card__left">
-							<span class="card__subtitle">Уникальный стиль</span>
-							<StarTrekText
-								title={productOptMap.RL24.name}
-								class="card__title"
-								as="span"
-								style="color: var(--color-product-royal)"
-							>
-								{productOptMap.RL24.name}
-							</StarTrekText>
-							<div>
-								<span class="read-more">
-									Посмотреть
-								</span>
-							</div>
-						</div>
-						<div class="card__right">
-							<Image
-								src={imgRoyal}
-								alt=""
-								role="presentation"
-								loading="lazy"
-								class="card__img"
-							/>
-						</div>
-					</a>
-				</li>
-			</ul>
-		</nav>
-	</div>
+      <p>{t("main.Уникальный стиль под уникальных людей")}</p>
+    </div>
+    <nav aria-labeledby="nav-title">
+      <ul class="menu">
+        <li class="menu__item">
+          <a href={translatePath("/empire", lang)} class="menu__link card">
+            <div class="card__left">
+              <span class="card__subtitle">{t("main.Непобедимый стиль")}</span>
+              <StarTrekText
+                title={t("common.Империум")}
+                class="card__title card__title_scale"
+                as="span"
+                style="color: var(--color-product-empire)"
+              >
+                {t("common.Империум")}
+              </StarTrekText>
+              <div>
+                <span class="read-more">
+                  {t("main.Посмотреть")}
+                </span>
+              </div>
+            </div>
+            <div class="card__right">
+              <Image
+                src={imgImperial}
+                alt=""
+                role="presentation"
+                loading="lazy"
+                class="card__img"
+              />
+            </div>
+          </a>
+        </li>
+        <li class="menu__item">
+          <a href={translatePath("/royal", lang)} class="menu__link card">
+            <div class="card__left">
+              <span class="card__subtitle">{t("main.Уникальный стиль")}</span>
+              <StarTrekText
+                title={t("common.Рояль")}
+                class="card__title"
+                as="span"
+                style="color: var(--color-product-royal)"
+              >
+                {t("common.Рояль")}
+              </StarTrekText>
+              <div>
+                <span class="read-more">
+                  {t("main.Посмотреть")}
+                </span>
+              </div>
+            </div>
+            <div class="card__right">
+              <Image
+                src={imgRoyal}
+                alt=""
+                role="presentation"
+                loading="lazy"
+                class="card__img"
+              />
+            </div>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </Section>
 
 <style>
@@ -148,7 +156,7 @@ import { productOptMap } from "../../utils/product-list";
     }
   }
 
-  @media(hover: hover) {
+  @media (hover: hover) {
     .card {
       &:hover {
         .card__img {

@@ -4,6 +4,10 @@ import Button from "../ui/Button.astro";
 import Dialog from "../ui/Dialog.astro";
 import DeliveryText from "../content/DeliveryText.astro";
 import UnderlineClickable from "../ui/UnderlineClickable.astro";
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <!-- 
@@ -12,10 +16,11 @@ import UnderlineClickable from "../ui/UnderlineClickable.astro";
 -->
 <div data-animate id="order">
   <StarTrekText as="h2" class="h1 title" id="form-title">
-    Связаться с нами
+    {t("contactUs.Связаться с нами")}
   </StarTrekText>
   <p class="subtitle" id="form-subtitle">
-    Мы можем вам помочь с&nbsp;выбором модели и&nbsp;оформлением заказа
+    {t("contactUs.Мы можем вам помочь с выбором модели и оформлением заказа")}
+    
     <br />
     <br />
     <UnderlineClickable
@@ -23,16 +28,16 @@ import UnderlineClickable from "../ui/UnderlineClickable.astro";
       type="button"
       onclick={`window["dialog-delivery"]?.showModal()`}
     >
-      Условия доставки и оплаты
+      {t("contactUs.Условия доставки и оплаты")}
     </UnderlineClickable>
   </p>
-  <Dialog id="dialog-delivery" title="Условия доставки и оплаты" width={985}>
+  <Dialog id="dialog-delivery" title={t("contactUs.Условия доставки и оплаты")} width={985}>
     <DeliveryText />
     <Button 
-		class="button_type-secondary button_fullwidth" 
-		onclick={`window["dialog-delivery"]?.close()`}
+      class="button_type-secondary button_fullwidth" 
+      onclick={`window["dialog-delivery"]?.close()`}
     >
-		Назад
+		{t("common.Назад")}
 	</Button>
   </Dialog>
   <form
@@ -46,37 +51,37 @@ import UnderlineClickable from "../ui/UnderlineClickable.astro";
     <input type="hidden" name="email" />
     <div class="form__layout">
       <div class="form__row form__row_half">
-        <label for="form-name" class="sr-only">Имя</label>
+        <label for="form-name" class="sr-only">{t("contactUs.Имя")}</label>
         <input
           id="form-name"
           name="name"
           type="text"
-          placeholder="Имя"
+          placeholder={t("contactUs.Имя")}
           class="form-field"
         />
         <span class="form-field__error" data-field-error></span>
       </div>
       <div class="form__row form__row_half">
-        <label for="form-name" class="sr-only">Почта</label>
+        <label for="form-name" class="sr-only">{t("contactUs.Почта")}</label>
         <input
           id="form-email"
           name="liame"
           type="email"
-          placeholder="Почта"
+          placeholder={t("contactUs.Почта")}
           class="form-field"
           required
         />
         <span class="form-field__error" data-field-error></span>
       </div>
       <div class="form__row">
-        <label for="form-question" class="sr-only">Текст сообщения</label>
+        <label for="form-question" class="sr-only">{t("contactUs.Текст сообщения")}</label>
         <textarea
           id="form-question"
           name="message"
           minlength="0"
           maxlength="100"
           data-textarea
-          placeholder="Текст сообщения"
+          placeholder={t("contactUs.Текст сообщения")}
           class="form-field"
           rows="5"
           required></textarea>
@@ -84,7 +89,7 @@ import UnderlineClickable from "../ui/UnderlineClickable.astro";
         <span class="form-field__description" data-textarea-counter>1/100</span>
       </div>
       <div class="form__row form__row_submit">
-        <Button type="submit" data-animate>Отправить</Button>
+        <Button type="submit" data-animate>{t("contactUs.Отправить")}</Button>
         <p
           role="alert"
           aria-live="polite"
@@ -99,6 +104,10 @@ import UnderlineClickable from "../ui/UnderlineClickable.astro";
 
 <script>
   import { apiUrl } from "../../utils/routes";
+  import { useTranslations } from '../../i18n/utils';
+
+  const lang = document.documentElement.lang;
+  const t = useTranslations(lang);
 
   document.addEventListener("DOMContentLoaded", () => {
     sendContactForm();
@@ -139,30 +148,22 @@ import UnderlineClickable from "../ui/UnderlineClickable.astro";
       })
         .then((response) => {
           if (!response.ok) {
-            actionMessage.innerHTML = `
-						❗ При отправке возникли проблемы.<br> Попробуйте позже
-					`;
+            actionMessage.innerHTML = t("contactUs.❗ При отправке возникли проблемы.<br> Попробуйте позже");
             throw new Error("Network error");
           }
           return response.json();
         })
         .then((response) => {
           if (response.result === "success") {
-            actionMessage.innerHTML = `
-						✅ Отправлено.
-					`;
+            actionMessage.innerHTML = t("contactUs.✅ Отправлено.");
             formEl.reset();
           } else if (response.result === "error") {
-            actionMessage.innerHTML = `
-						❗ При отправке возникли проблемы.<br> Попробуйте позже
-					`;
+            actionMessage.innerHTML = t("contactUs.❗ При отправке возникли проблемы.<br> Попробуйте позже");
             throw new Error(response.error);
           }
         })
         .catch((error) => {
-          actionMessage.innerHTML = `
-					❗ При отправке возникли проблемы.<br> Попробуйте позже
-				`;
+          actionMessage.innerHTML = t("contactUs.❗ При отправке возникли проблемы.<br> Попробуйте позже");
           console.error(error);
         });
     });

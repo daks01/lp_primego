@@ -41,7 +41,14 @@
                         <div class="font_star-trek product-title display-none display-mobile-block">
                             {{cartItem.name}}
                         </div>
-                        <span class="product-price">{{ priceWithRouble(cartItem.price) }}</span>
+                        <span class="product-price">
+                            <template v-if="isEnglishVersion && $usdExchangeRate > 0">
+                                {{ priceWithDollar(cartItem.price / $usdExchangeRate) }}
+                            </template>
+                            <template v-else>
+                                {{ priceWithRouble(cartItem.price) }}
+                            </template> 
+                        </span>
                     </div>
                     <div class="col col_4 col_align-center">
                         <button type="button" class="button button_type-icon" aria-label="Удалить"
@@ -62,7 +69,14 @@
             </ul>
             <div class="total">
                 Всего<br>
-                <span class="total-price">{{ priceWithRouble($totalPrice) }}</span>
+                <span class="total-price">
+                    <template v-if="isEnglishVersion && $usdExchangeRate > 0">
+                       {{ priceWithDollar($totalPrice / $usdExchangeRate) }}
+                    </template>
+                    <template v-else>
+                        {{ priceWithRouble($totalPrice) }}
+                    </template> 
+                </span>
             </div>
         </template>
         <p v-else>Корзина пуста</p>
@@ -149,14 +163,19 @@
 <script setup>
 import { ref, toRaw } from 'vue';
 import { useStore } from '@nanostores/vue';
-import { cartItems, totalPrice } from './../../stores/shopCartStore';
+import { cartItems, totalPrice, usdExchangeRate } from './../../stores/shopCartStore';
 import { apiUrl } from './../../utils/routes';
-import { priceWithRouble } from './../../utils/format';
+import { priceWithRouble, priceWithDollar } from './../../utils/format';
 import { colorMap } from './../../utils/product-list';
 import { productOptMap } from "../../utils/product-list";
+import { getLangFromUrl } from "../../i18n/utils";
+
+const lang = getLangFromUrl(window.location);
+const isEnglishVersion = lang === 'en';
 
 const $cartItems = useStore(cartItems);
 const $totalPrice = useStore(totalPrice);
+const $usdExchangeRate = useStore(usdExchangeRate);
 let status = ref('idle');
 
 const formData = ref({
@@ -167,6 +186,7 @@ const formData = ref({
     address: '',
     delivery: '',
     totalPrice: `${toRaw($totalPrice.value)}₽`,
+    usd: `${$usdExchangeRate}₽`,
 });
 
 function removeItem(id) {
@@ -193,7 +213,7 @@ function buy() {
             [key]: {
                 sku: item.sku,
                 name: item.name,
-                price: item.price,
+                price: `${toRaw(item.price)}₽`,
                 size: item.size,
                 color: item.color,
             }

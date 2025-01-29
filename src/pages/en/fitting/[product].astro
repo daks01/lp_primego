@@ -1,0 +1,20 @@
+---
+import Page from "../../fitting/[product].astro";
+
+export function getStaticPaths() {
+    return [
+        {
+            params: { product: 'empire' },
+            props: { sku: 'EM24' },
+        },
+        {
+            params: { product: 'royal' },
+            props: { sku: 'RL24' },
+        },
+    ];
+}
+
+const { sku } = Astro.props;
+---
+
+<Page sku={sku}/>
