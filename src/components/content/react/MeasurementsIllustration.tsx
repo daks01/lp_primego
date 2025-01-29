@@ -94,7 +94,7 @@ function MeasurementsIllustration({ showOn, withoutSole, className, warning }: P
                                         fill="currentColor"
                                     ></path>
                                 </mask>
-                                <g mask="url(#a)" fill="currentColor" fill-opacity=".4">
+                                <g mask="url(#a)" fill="currentColor" fillOpacity=".4">
                                     <rect height="576" width="244"></rect>
                                     <path
                                         opacity=".15"

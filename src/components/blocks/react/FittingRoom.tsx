@@ -4,7 +4,6 @@ import styles from './FittingRoom.module.scss';
 import cn from 'classnames';
 import { $availableSizesByColor, $colors, $prices, $sizes, type Sizes } from '../../../stores/productListStore';
 import { colorMap, productOptMap } from '../../../utils/product-list';
-import { priceWithRouble } from '../../../utils/format';
 import { useStore } from '@nanostores/react';
 import { $selectedProduct, updateProduct } from '../../../stores/fittingProductStore';
 import { addCartItem } from '../../../stores/shopCartStore';
@@ -197,7 +196,7 @@ export default function FittingRoom({ sku, howToMeasureButton, sizeWarning }) {
                 ) : null}
             </fieldset>
             <div className={styles.productForm__footer}>
-                <div className={styles.productPrice}>{price ? priceWithRouble(price) : '-'}</div>
+                {/* <div className={styles.productPrice}>{price ? priceWithRouble(price) : '-'}</div> */}
                 <button type="submit" className={cn('button', styles.buyProductButton)} disabled={!isSubmitEnabled}>
                     {t("fitting.Оформить заказ")}
                 </button>

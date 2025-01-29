@@ -206,7 +206,7 @@ function addNewQuestion(postData) {
 
 function addNewOrder(postData) {
   const SHEET_NAME = "Заказы";
-  const thead = ['статус','дата','имя', 'фамилия', 'email','телефон','адрес', 'доставка', 'итого','заказ'];
+  const thead = ['статус', 'дата', 'имя', 'фамилия', 'email', 'телефон', 'адрес', 'доставка', 'итого', 'заказ'];
   const sheet = getOrCreateSheet(SHEET_NAME, thead);
   const itemsPropMap = {
       name: 'Название',
@@ -218,19 +218,25 @@ function addNewOrder(postData) {
       size: 'Размер',
       price: 'Цена',
   };
-  const {name, surname, email, phone, address, items, totalPrice} = postData;
-  const { items: _, ...postDataWithoutItems } = postData;
-  const dataArrWithoutItems = Object.values(postDataWithoutItems);
+  const {name, surname, email, phone, address, items, totalPrice, usd} = postData;
+  const { items: i, usd: u, ...cleanedPostData } = postData;
+  const dataArrWithoutItems = Object.values(cleanedPostData);
   const getArrWithItems = () => {
     const result = [];
     for (var key in items) {
       const item = items[key];
       const stringWithItemProps = Object.keys(item).map((property) => {
-        if (property === 'id' || property === 'img') { return }
+        // ignore property
+        if (property === 'id' || property === 'img') { 
+          return;
+        }
         return [itemsPropMap[property] || property, item[property]].join(': ');
       }).join('\n')
 
       result.push(stringWithItemProps);
+    }
+    if (usd !== "") {
+      result.push(`Курс доллара: ${usd}`);
     }
     return result;
   };

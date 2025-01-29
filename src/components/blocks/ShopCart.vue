@@ -168,9 +168,11 @@ import { apiUrl } from './../../utils/routes';
 import { priceWithRouble, priceWithDollar } from './../../utils/format';
 import { colorMap } from './../../utils/product-list';
 import { productOptMap } from "../../utils/product-list";
-import { getLangFromUrl } from "../../i18n/utils";
+import { getLangFromUrl, useTranslatedPath } from "../../i18n/utils";
 
 const lang = getLangFromUrl(window.location);
+const translatePath = useTranslatedPath(lang);
+
 const isEnglishVersion = lang === 'en';
 
 const $cartItems = useStore(cartItems);
@@ -185,8 +187,6 @@ const formData = ref({
     phone: '',
     address: '',
     delivery: '',
-    totalPrice: `${toRaw($totalPrice.value)}₽`,
-    usd: `${$usdExchangeRate}₽`,
 });
 
 function removeItem(id) {
@@ -229,6 +229,7 @@ function buy() {
         delivery,
         items,
         totalPrice: `${toRaw($totalPrice.value)}₽`,
+        usd: isEnglishVersion ? `${$usdExchangeRate.value}₽` : "",
     }
 
     fetch(apiUrl.buy, {
@@ -249,7 +250,8 @@ function buy() {
         if (response.result === 'success') {
             status.value = 'success';
             setTimeout(() => {
-                window["dialog-shopcart"]?.close();
+                // window["dialog-shopcart"]?.close();
+                window.location = translatePath(productOptMap[Object.values($cartItems.value)[0].sku].altName, lang);
                 cartItems.set({});
                 status.value = 'idle';
             }, 2500);
