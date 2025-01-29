@@ -13,4 +13,5 @@ export const apiUrl = {
     buy: `https://script.google.com/macros/s/${id}/exec?type=buy`,
     contact: `https://script.google.com/macros/s/${id}/exec?type=contact`,
     availability: `https://script.google.com/macros/s/${id}/exec?type=availability`,
+    currency: `https://script.google.com/macros/s/${id}/exec?type=currency`,
 };
