@@ -88,6 +88,15 @@ const backTo =
         }
       </Warning>
       <FittingRoom sku={sku} client:only="react">
+        <Warning slot="widthWarning"
+          >{
+            t(
+                sku === 'EM24'
+                    ? 'fitting.Данная модель предназначена для широкой стопы'
+                    : 'fitting.Данная модель предназначена для узкой стопы',
+            )
+          }</Warning
+          >
         <Warning slot="sizeWarning"
           >{
             t("fitting.Внимание! Выбранный размер не совпадает с рекомендованным")

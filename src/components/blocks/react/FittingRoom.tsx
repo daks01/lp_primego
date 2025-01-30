@@ -10,12 +10,24 @@ import { addCartItem } from '../../../stores/shopCartStore';
 import MeasurementsIllustration from '../../content/react/MeasurementsIllustration.tsx';
 import { useTranslations } from '../../../i18n/utils';
 
-const lang = document.documentElement.lang;
+const lang = document.documentElement.lang as 'en' | 'ru';
 const t = useTranslations(lang);
 
-export default function FittingRoom({ sku, howToMeasureButton, sizeWarning }) {
+const getShoeWidthFor = (sku: string) => {
+    switch (sku) {
+        case 'EM24':
+            return 'wide';
+        case 'RL24':
+            return 'narrow';
+        default:
+            return null;
+    }
+};
+
+export default function FittingRoom({ sku, howToMeasureButton, widthWarning, sizeWarning }) {
     const { colors, sizes, available, lengths, widths, price } = useAvailableProperties(sku);
     const [measurementsApproval, setMeasurementsApproval] = useState<boolean>(false);
+    const [showWidthWarning, setShowWidthWarning] = useState<boolean>(false);
     const store = useStore($selectedProduct);
     useEffect(() => updateProduct({ sku }), []);
 
@@ -45,12 +57,17 @@ export default function FittingRoom({ sku, howToMeasureButton, sizeWarning }) {
         updateProduct({ length, recommended: undefined, size: undefined });
         setMeasurementsApproval(false);
     };
+    const widthFor = getShoeWidthFor(sku);
     const onMeasurementsApprove: React.ChangeEventHandler<HTMLInputElement> = (e) => {
         const checked = e.target.checked;
-        const recommended =
-            checked && sizes ? getRecommendedSize(sizes, { width: store.width, length: store.length }) : undefined;
+        const recommendations = sizes
+            ? getRecommendations(sizes, widthFor, { width: store.width, length: store.length })
+            : undefined;
+        const recommendedSize = recommendations?.size;
+        const recommended = checked ? recommendedSize : undefined;
         const size = checked ? (recommended && isAvailableSize(recommended) ? recommended : undefined) : undefined;
         updateProduct({ recommended, size });
+        setShowWidthWarning(Boolean(recommendations?.warning));
         setMeasurementsApproval(checked);
     };
     const onSizeSelect = (size: string) => updateProduct({ size, selectedSizeApproval: false });
@@ -130,10 +147,15 @@ export default function FittingRoom({ sku, howToMeasureButton, sizeWarning }) {
                     </label>
                 </div>
                 {store.length && store.width ? (
-                    <label className={styles.productFieldset__approval}>
-                        <input type="checkbox" checked={measurementsApproval} onChange={onMeasurementsApprove} />
-                        Подтвердите указанные размеры
-                    </label>
+                    <>
+                        <label className={styles.productFieldset__approval}>
+                            <input type="checkbox" checked={measurementsApproval} onChange={onMeasurementsApprove} />
+                            Подтвердите указанные размеры
+                        </label>
+                        {measurementsApproval && showWidthWarning ? (
+                            <div className={styles.productFieldset__warning}>{widthWarning}</div>
+                        ) : null}
+                    </>
                 ) : null}
             </fieldset>
             <MeasurementsIllustration showOn="mobile" className={styles.measurementsDemo} warning={sizeWarning} />
@@ -210,24 +232,51 @@ const useAvailableProperties = (sku: string) => {
     const colors = useStore($colors)?.[sku];
     const price = useStore($prices)?.[sku];
     const available = useStore($availableSizesByColor)?.[sku];
-    const widths = useMemo(() => (sizes ? Array.from(getRange(Object.values(sizes), 'width')) : undefined), [sizes]);
-    const lengths = useMemo(() => (sizes ? Array.from(getRange(Object.values(sizes), 'length', 5)) : undefined), [sizes]);
+    const widths = useMemo(
+        () => (sizes ? Array.from(getRange(Object.values(sizes), 'width', 1, { left: 3 })) : undefined),
+        [sizes],
+    );
+    const lengths = useMemo(
+        () => (sizes ? Array.from(getRange(Object.values(sizes), 'length', 5, { left: 10, right: -5 })) : undefined),
+        [sizes],
+    );
     return { colors, sizes, available, widths, lengths, price };
 };
 
-function* getRange(sizes: Array<Sizes[keyof Sizes]>, measure: 'width' | 'length', step = 1) {
+function* getRange(
+    sizes: Array<Sizes[keyof Sizes]>,
+    measure: 'width' | 'length',
+    step = 1,
+    margins?: { left?: number; right?: number },
+) {
     const values = sizes.map((s) => s[measure]);
-    const min = Math.min(...values);
-    const max = Math.max(...values);
+    const min = Math.min(...values) - (margins?.left ?? 0);
+    const max = Math.max(...values) + (margins?.right ?? 0);
     for (let i = min; i <= max; i = i + step) {
         yield i;
     }
 }
 
-const getRecommendedSize = (sizes: Sizes, { width, length }: { width?: number; length?: number }) => {
+const getRecommendations = (
+    sizes: Sizes,
+    widthShoe: ReturnType<typeof getShoeWidthFor>,
+    { width, length }: { width?: number; length?: number },
+): { size?: string; warning?: 'narrower' | 'wider' } | undefined => {
     if (!width || !length) return undefined;
-    for (const [size, params] of Object.entries(sizes)) {
-        if (params.length >= length && params.width >= width) return size;
+    const minLength = length + 3;
+    const maxLength = length + 12;
+    const minWidth = width;
+    const maxWidth = width + 5;
+    for (const [size, { width, length }] of Object.entries(sizes).reverse()) {
+        if (minLength <= length && length <= maxLength) {
+            if (minWidth <= width && width <= maxWidth) {
+                return { size };
+            } else if (minWidth < width && widthShoe === 'wide') {
+                return { warning: 'narrower' };
+            } else if (width < maxWidth && widthShoe === 'narrow') {
+                return { warning: 'wider' };
+            }
+        }
     }
 };
 
