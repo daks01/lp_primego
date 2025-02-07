@@ -20,7 +20,7 @@ const { backgroundImage, mainImage, class: className } = Astro.props;
 					<Fragment set:html={t("convection.Обычная<br /> подкладка")} />
 				</span>
 				<span>
-					<Fragment set:html={t("convection.воздух НЕ&nbsp;проходит")} />
+					{t("convection.воздух НЕ проходит")}
 				</span>
 				<Image
 					width="180"
@@ -56,7 +56,7 @@ const { backgroundImage, mainImage, class: className } = Astro.props;
 			<StarTrekText as="h2" class="h1 title">{t("convection.Конвекция")}</StarTrekText>
 		</header>
 		<blockquote class="blockquote">
-			<p set:html={t("convection.Капилярная конвекция для&nbsp;максимального<br> комфорта")}></p>
+			<p set:html={t("convection.Капилярная конвекция для максимального<br> комфорта")}></p>
 			<p>{t("convection.Проницаемая трехмерная капиллярная мембрана, естественная терморегуляция")}</p>
 			<p>{t("convection.Теплорегулирующая подкладка, обеспечивает вентиляцию, предотвращает перегрев")}</p>
 		</blockquote>

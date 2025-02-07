@@ -17,9 +17,9 @@ const { backgroundImage, class: className } = Astro.props;
 		<StarTrekText as="h2" class="h1 title">{t("madeInRussa.Сделано в России")}</StarTrekText>
 	</header>
 	<blockquote class="blockquote">
-		<p set:html={t("madeInRussa.Произведено в&nbsp;России")}></p>
-		<p set:html={t("madeInRussa.Разработано в&nbsp;России")}></p>
-		<p set:html={t("madeInRussa.Из российских материалов<br /> и&nbsp;технологий")}></p>
+		<p>{t("madeInRussa.Произведено в России")}</p>
+		<p>{t("madeInRussa.Разработано в России")}</p>
+		<p set:html={t("madeInRussa.Из российских материалов<br /> и технологий")}></p>
 	</blockquote>
 	<picture class="bg-img">
 		<source media="(min-width: 768px)" srcset={bg2Image.src}>

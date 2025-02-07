@@ -76,7 +76,8 @@ export default function FittingRoom({ sku, howToMeasureButton, sizeWarning }) {
     return (
         <form className={cn(styles.productForm, styles[productOptMap[sku].altName])} onSubmit={onFormSubmit}>
             <fieldset className={styles.productFieldset}>
-                <legend className={styles.productFieldset__legend}>Выбери цвет модели</legend>
+                <legend className={styles.productFieldset__legend}>
+                    {t("fitting.Выбери цвет модели")}</legend>
                 <div className={styles.colourSelect}>
                     {colors?.map((color) => (
                         <label
@@ -98,14 +99,16 @@ export default function FittingRoom({ sku, howToMeasureButton, sizeWarning }) {
             </fieldset>
             <MeasurementsIllustration withoutSole showOn="mobile" className={styles.measurementsDemo} warning={sizeWarning} />
             <fieldset className={cn([styles.productFieldset, styles.measureStep])}>
-                <legend className={styles.productFieldset__legend}>Определи свой размер</legend>
+                <legend className={styles.productFieldset__legend}>
+                    {t("fitting.Определи свой размер")}</legend>
                 <>{howToMeasureButton}</>
-                <span className={styles.productFieldset__description}>Параметры стопы</span>
+                <span className={styles.productFieldset__description}>
+                    {t("fitting.Параметры стопы")}</span>
                 <div className={styles.measuring}>
                     <label className={styles.measuring__label}>
-                        Длина (см):
+                        {t("fitting.Длина (см)")}:
                         <select
-                            aria-label="Выбрать длину"
+                            aria-label={t("fitting.Выбрать длину")}
                             className={styles.measuring__select}
                             onChange={onLengthSelect}
                             value={store.length ? store.length / 10 : undefined}
@@ -115,11 +118,9 @@ export default function FittingRoom({ sku, howToMeasureButton, sizeWarning }) {
                         </select>
                     </label>
                     <label className={styles.measuring__label}>
-                        Ширина
-                        <br />
-                        в широкой части (см):
+                        <span dangerouslySetInnerHTML={{ __html: t("fitting.Ширина <br /> в широкой части (см)")}}></span>
                         <select
-                            aria-label="Выбрать ширину"
+                            aria-label={t("fitting.Выбрать ширину")}
                             className={styles.measuring__select}
                             onChange={onWidthSelect}
                             value={store.width ? store.width / 10 : undefined}
@@ -132,13 +133,15 @@ export default function FittingRoom({ sku, howToMeasureButton, sizeWarning }) {
                 {store.length && store.width ? (
                     <label className={styles.productFieldset__approval}>
                         <input type="checkbox" checked={measurementsApproval} onChange={onMeasurementsApprove} />
-                        Подтвердите указанные размеры
+                        {t("fitting.Подтвердите указанные размеры")}
                     </label>
                 ) : null}
             </fieldset>
             <MeasurementsIllustration showOn="mobile" className={styles.measurementsDemo} warning={sizeWarning} />
             <fieldset className={styles.productFieldset} disabled={!store.length || !store.width || !measurementsApproval}>
-                <legend className={styles.productFieldset__legend}>Выбери размер</legend>
+                <legend className={styles.productFieldset__legend}>
+                    {t("fitting.Выбери размер")}
+                </legend>
                 {!sizes ? null : (
                     <div className={styles.sizes}>
                         {Object.keys(sizes)?.map((size) => {
@@ -171,18 +174,18 @@ export default function FittingRoom({ sku, howToMeasureButton, sizeWarning }) {
                         })}
                     </div>
                 )}
-                <span className={styles.productFieldset__description}>Параметры модели</span>
+                <span className={styles.productFieldset__description}>
+                    {t("fitting.Параметры модели")}
+                </span>
                 <div className={styles.measuring}>
                     <span className={styles.measuring__label}>
-                        Длина по стельке (см):
+                        {t("fitting.Длина по стельке (см)")}:
                         <span className={styles.measuring__value}>
                             {store.size && sizes ? sizes[store.size].length / 10 : '-'}
                         </span>
                     </span>
                     <span className={styles.measuring__label}>
-                        Ширина по стельке
-                        <br />
-                        в широкой части (см):
+                        <span dangerouslySetInnerHTML={{ __html: t("fitting.Ширина по стельке <br /> в широкой части (см)")}}></span>:
                         <span className={styles.measuring__value}>
                             {store.size && sizes ? sizes[store.size].width / 10 : '-'}
                         </span>
@@ -255,8 +258,8 @@ const getTooltipContent = ({
     disabled,
     recommended,
 }: Pick<SizeButtonProps, 'recommended' | 'disabled' | 'checked'>) => {
-    if (checked) return 'Выбранный размер';
-    if (recommended) return 'Ваш рекомендованный размер';
-    if (disabled) return 'Размер временно отсутствует';
+    if (checked) return t("fitting.Выбранный размер");
+    if (recommended) return t("fitting.Ваш рекомендованный размер");
+    if (disabled) return t("fitting.Размер временно отсутствует");
     return null;
 };

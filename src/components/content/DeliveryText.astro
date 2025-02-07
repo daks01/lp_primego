@@ -1,148 +1,250 @@
 ---
+import { getLangFromUrl } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
 
 ---
 
 <article class="article">
-  <ol class="list-with-rounded-numbers">
-    <li>
-      <h5 class="h5">Выездная примерка</h5>
-      <p>
-        Примерьте любую понравившуюся пару в&nbsp;нескольких размерах там, где
-        вам удобно. Это абсолютно бесплатно. На&nbsp;примерку отводится
-        15&nbsp;минут. После примерки вы&nbsp;сможете выкупить заказ полностью,
-        частично или&nbsp;же отказаться от&nbsp;покупки вовсе.
-      </p>
-      <p>
-        В&nbsp;Москве<br />
-        Услуга предоставляется бесплатно в&nbsp;рамках МКАД.<br />
-        Для получения услуги, выберите пункт &laquo;Доставка с&nbsp;примеркой (курьером
-        домой или в&nbsp;офис)&raquo; при оформлении заказа в&nbsp;корзине.
-      </p>
-      <ul>
-        <li>
-          Менеджер свяжется с&nbsp;вами в&nbsp;WhatsApp для согласования
-          удобного времени доставки.
-        </li>
-        <li>
-          Понравившийся товар вы&nbsp;сможете оплатить прямо после примерки.
-        </li>
-        <li>
-          Товар, от&nbsp;которого вы&nbsp;откажетесь, курьер вернёт обратно
-          к&nbsp;нам на склад.
-        </li>
-      </ul>
-      <p>
-        В&nbsp;других регионах РФ<br />
-        Услуга предоставляется бесплатно во&nbsp;всех пунктах выдачи заказов СДЭК.<br
-        />
-        Для получения услуги, выберите пункт &laquo;Оплата после примерки (в&nbsp;СДЭК
-        или курьеру)&raquo; при оформлении заказа в&nbsp;корзине.
-      </p>
-      <ul>
-        <li>
-          Понравившийся товар вы&nbsp;сможете оплатить прямо на&nbsp;кассе
-          пункта СДЭК.
-        </li>
-        <li>
-          Товар, от&nbsp;которого вы&nbsp;откажетесь, СДЭК вернёт обратно
-          к&nbsp;нам на&nbsp;склад.
-        </li>
-      </ul>
-      <p>Пожалуйста, будьте аккуратны, примеряя обувь.</p>
-    </li>
-    <li>
-      <h5 class="h5">Доставка</h5>
-      <p>
-        Мы&nbsp;передаем заказы в&nbsp;курьерские службы по&nbsp;будним дням.
-        Если ваш заказ оформлен в&nbsp;пятницу после 14:00, мы&nbsp;отправим его
-        в&nbsp;понедельник.
-      </p>
-      <p>
-        Сроки и&nbsp;цена доставки рассчитываются автоматически при оформлении
-        заказа и&nbsp;зависят от&nbsp;веса посылки и&nbsp;точного адреса
-        получателя. Например, в Нижний Новгород СДЭК доставляет
-        за&nbsp;1-2&nbsp;дня, а&nbsp;во&nbsp;Владивосток&nbsp;&mdash;
-        за&nbsp;10-13 дней.
-      </p>
-    </li>
-    <li>
-      <h5 class="h5">Как обменять или вернуть товар</h5>
-      <p>
-        Вы&nbsp;можете вернуть неподошедший товар в&nbsp;течение 14&nbsp;дней
-        с&nbsp;момента получения заказа. Мы&nbsp;принимаем к&nbsp;возврату
-        только неиспользованные вещи с бирками, наклейками и&nbsp;упаковкой.
-        Пожалуйста, будьте аккуратны, примеряя вещь.
-      </p>
-      <p>
-        Возврат по&nbsp;желанию покупателяВы можете вернуть товар
-        по&nbsp;собственному желанию, если вам, например, не&nbsp;подошел
-        размер, цвет, модель и&nbsp;т.п. В этом случае стоимость обратной
-        доставки оплачиваете&nbsp;вы.
-      </p>
-      <p>
-        Возврат по&nbsp;вине продавца<br />
-        Ошибки со&nbsp;стороны магазина тоже случаются. Если вы&nbsp;получили не&nbsp;то,
-        что заказывали, или вещь оказалась с&nbsp;дефектом, стоимость обратной доставки
-        Почтой России оплачиваем&nbsp;мы. Деньги вернутся к&nbsp;вам в&nbsp;течение
-        5-7 рабочих дней с&nbsp;того момента, как мы&nbsp;получим вашу посылку с&nbsp;возвратом
-        в&nbsp;Москве.
-      </p>
-    </li>
-    <li>
-      <h5 class="h5">Процедура возврата</h5>
-      <p>
-        Если вы&nbsp;обнаружили в&nbsp;своем заказе изделие
-        с&nbsp;производственным браком или содержание заказа отличается
-        от&nbsp;заявленного, то&nbsp;алгоритм действий следующий:
-      </p>
-      <ol>
-        <li>
-          Свяжитесь с&nbsp;нами по&nbsp;электронной почте <a
-            href="mailto:hi@hoverover.ru"
-            target="_blank">hi@hoverover.ru</a
-          ><br />
-          Для объективной оценки приложите фотографии изделий с&nbsp;нескольких ракурсов,
-          с&nbsp;помощью которых можно будет сделать вывод о&nbsp;том, что изделие
-          обладает производственным браком или отличается от&nbsp;заявленного.
-        </li>
-        <li>
-          После того, как наш менеджер ответит вам, распечатайте
-          и&nbsp;заполните заявление на&nbsp;возврат. Образец заявления вам
-          отправит менеджер.
-        </li>
-        <li>
-          Приложите к&nbsp;товару заявление на&nbsp;возврат и&nbsp;распечатайте
-          транспортную накладную, которую мы&nbsp;вам отправим. Упакуйте
-          заявление, накладную и изделие в&nbsp;пакет или коробку.
-        </li>
-        <li>
-          Передайте заказ курьеру транспортной компании СДЭК или отнесете его в
-          пункт приема и&nbsp;выдачи посылок. Для передачи возврата у&nbsp;вас
-          есть 14 календарных дней.
-        </li>
-        <li>
-          Курьерская компания доставит возврат на&nbsp;склад за&nbsp;1&minus;5
-          рабочих дней по РФ.
-        </li>
-        <li>
-          После получения изделия, проведения экспертизы и&nbsp;одобрения
-          возврата мы перечислим денежные средства на&nbsp;карту или банковский
-          счет в&nbsp;срок до&nbsp;7 рабочих дней. Возврат денежных средств
-          осуществляется исключительно тем способом
-          и&nbsp;на&nbsp;те&nbsp;реквизиты, с&nbsp;которых был оформлен заказ.
-        </li>
-        <li>
-          Обращаем ваше внимание, что возврат денежных средств зависит от
-          скорости обработки операции вашим Банком и&nbsp;может достигать 30
-          банковских дней.
-        </li>
-        <li>
-          Обмен или возврат товара ненадлежащего качества&nbsp;&mdash;
-          бесплатный.
-        </li>
-      </ol>
-    </li>
-  </ol>
+  { lang === "ru" &&
+    <ol class="list-with-rounded-numbers">
+      <li>
+        <h5 class="h5">Выездная примерка</h5>
+        <p>
+          Примерьте любую понравившуюся пару в&nbsp;нескольких размерах там, где
+          вам удобно. Это абсолютно бесплатно. На&nbsp;примерку отводится
+          15&nbsp;минут. После примерки вы&nbsp;сможете выкупить заказ полностью,
+          частично или&nbsp;же отказаться от&nbsp;покупки вовсе.
+        </p>
+        <p>
+          В&nbsp;Москве<br />
+          Услуга предоставляется бесплатно в&nbsp;рамках МКАД.<br />
+          Для получения услуги, выберите пункт &laquo;Доставка с&nbsp;примеркой (курьером
+          домой или в&nbsp;офис)&raquo; при оформлении заказа в&nbsp;корзине.
+        </p>
+        <ul>
+          <li>
+            Менеджер свяжется с&nbsp;вами в&nbsp;WhatsApp для согласования
+            удобного времени доставки.
+          </li>
+          <li>
+            Понравившийся товар вы&nbsp;сможете оплатить прямо после примерки.
+          </li>
+          <li>
+            Товар, от&nbsp;которого вы&nbsp;откажетесь, курьер вернёт обратно
+            к&nbsp;нам на склад.
+          </li>
+        </ul>
+        <p>
+          В&nbsp;других регионах РФ<br />
+          Услуга предоставляется бесплатно во&nbsp;всех пунктах выдачи заказов СДЭК.<br
+          />
+          Для получения услуги, выберите пункт &laquo;Оплата после примерки (в&nbsp;СДЭК
+          или курьеру)&raquo; при оформлении заказа в&nbsp;корзине.
+        </p>
+        <ul>
+          <li>
+            Понравившийся товар вы&nbsp;сможете оплатить прямо на&nbsp;кассе
+            пункта СДЭК.
+          </li>
+          <li>
+            Товар, от&nbsp;которого вы&nbsp;откажетесь, СДЭК вернёт обратно
+            к&nbsp;нам на&nbsp;склад.
+          </li>
+        </ul>
+        <p>Пожалуйста, будьте аккуратны, примеряя обувь.</p>
+      </li>
+      <li>
+        <h5 class="h5">Доставка</h5>
+        <p>
+          Мы&nbsp;передаем заказы в&nbsp;курьерские службы по&nbsp;будним дням.
+          Если ваш заказ оформлен в&nbsp;пятницу после 14:00, мы&nbsp;отправим его
+          в&nbsp;понедельник.
+        </p>
+        <p>
+          Сроки и&nbsp;цена доставки рассчитываются автоматически при оформлении
+          заказа и&nbsp;зависят от&nbsp;веса посылки и&nbsp;точного адреса
+          получателя. Например, в Нижний Новгород СДЭК доставляет
+          за&nbsp;1-2&nbsp;дня, а&nbsp;во&nbsp;Владивосток&nbsp;&mdash;
+          за&nbsp;10-13 дней.
+        </p>
+      </li>
+      <li>
+        <h5 class="h5">Как обменять или вернуть товар</h5>
+        <p>
+          Вы&nbsp;можете вернуть неподошедший товар в&nbsp;течение 14&nbsp;дней
+          с&nbsp;момента получения заказа. Мы&nbsp;принимаем к&nbsp;возврату
+          только неиспользованные вещи с бирками, наклейками и&nbsp;упаковкой.
+          Пожалуйста, будьте аккуратны, примеряя вещь.
+        </p>
+        <p>
+          Возврат по&nbsp;желанию покупателяВы можете вернуть товар
+          по&nbsp;собственному желанию, если вам, например, не&nbsp;подошел
+          размер, цвет, модель и&nbsp;т.п. В этом случае стоимость обратной
+          доставки оплачиваете&nbsp;вы.
+        </p>
+        <p>
+          Возврат по&nbsp;вине продавца<br />
+          Ошибки со&nbsp;стороны магазина тоже случаются. Если вы&nbsp;получили не&nbsp;то,
+          что заказывали, или вещь оказалась с&nbsp;дефектом, стоимость обратной доставки
+          Почтой России оплачиваем&nbsp;мы. Деньги вернутся к&nbsp;вам в&nbsp;течение
+          5-7 рабочих дней с&nbsp;того момента, как мы&nbsp;получим вашу посылку с&nbsp;возвратом
+          в&nbsp;Москве.
+        </p>
+      </li>
+      <li>
+        <h5 class="h5">Процедура возврата</h5>
+        <p>
+          Если вы&nbsp;обнаружили в&nbsp;своем заказе изделие
+          с&nbsp;производственным браком или содержание заказа отличается
+          от&nbsp;заявленного, то&nbsp;алгоритм действий следующий:
+        </p>
+        <ol>
+          <li>
+            Свяжитесь с&nbsp;нами по&nbsp;электронной почте 
+            <a href="mailto:hi@hoverover.ru" target="_blank">hi@hoverover.ru</a>
+            <br />
+            Для объективной оценки приложите фотографии изделий с&nbsp;нескольких ракурсов,
+            с&nbsp;помощью которых можно будет сделать вывод о&nbsp;том, что изделие
+            обладает производственным браком или отличается от&nbsp;заявленного.
+          </li>
+          <li>
+            После того, как наш менеджер ответит вам, распечатайте
+            и&nbsp;заполните заявление на&nbsp;возврат. Образец заявления вам
+            отправит менеджер.
+          </li>
+          <li>
+            Приложите к&nbsp;товару заявление на&nbsp;возврат и&nbsp;распечатайте
+            транспортную накладную, которую мы&nbsp;вам отправим. Упакуйте
+            заявление, накладную и изделие в&nbsp;пакет или коробку.
+          </li>
+          <li>
+            Передайте заказ курьеру транспортной компании СДЭК или отнесете его в
+            пункт приема и&nbsp;выдачи посылок. Для передачи возврата у&nbsp;вас
+            есть 14 календарных дней.
+          </li>
+          <li>
+            Курьерская компания доставит возврат на&nbsp;склад за&nbsp;1&minus;5
+            рабочих дней по РФ.
+          </li>
+          <li>
+            После получения изделия, проведения экспертизы и&nbsp;одобрения
+            возврата мы перечислим денежные средства на&nbsp;карту или банковский
+            счет в&nbsp;срок до&nbsp;7 рабочих дней. Возврат денежных средств
+            осуществляется исключительно тем способом
+            и&nbsp;на&nbsp;те&nbsp;реквизиты, с&nbsp;которых был оформлен заказ.
+          </li>
+          <li>
+            Обращаем ваше внимание, что возврат денежных средств зависит от
+            скорости обработки операции вашим Банком и&nbsp;может достигать 30
+            банковских дней.
+          </li>
+          <li>
+            Обмен или возврат товара ненадлежащего качества&nbsp;&mdash;
+            бесплатный.
+          </li>
+        </ol>
+      </li>
+    </ol>
+  }
+  { lang === "en" &&
+    <ol class="list-with-rounded-numbers">
+      <li>
+        <h5 class="h5">Home Fitting Service</h5>
+        <p>
+          Try on any pair you like in several sizes wherever it is convenient for you. This is absolutely free. The fitting session lasts 15 minutes. After the fitting, you can purchase the entire order, part of it, or decline the purchase altogether.
+        </p>
+        <p>
+          In Moscow<br />
+          The service is provided free of charge within the Moscow Ring Road.<br />
+          To use the service, select "Delivery with fitting (courier to home or office)" when placing your order in the cart.
+        </p>
+        <ul>
+          <li>
+            A manager will contact you via WhatsApp to arrange a convenient delivery time.
+          </li>
+          <li>
+            You can pay for the items you like right after the fitting.
+          </li>
+          <li>
+            Items you decline will be returned to our warehouse by the courier.
+          </li>
+        </ul>
+        <p>
+          In other regions of Russia<br />
+          The service is provided free of charge at all SDEK pickup points.<br />
+          To use the service, select "Payment after fitting (at SDEK or to the courier)" when placing your order in the cart.
+        </p>
+        <ul>
+          <li>
+            You can pay for the items you like directly at the SDEK checkout.
+          </li>
+          <li>
+            Items you decline will be returned to our warehouse by SDEK.
+          </li>
+        </ul>
+        <p>Please be careful when trying on shoes.</p>
+      </li>
+      <li>
+        <h5 class="h5">Delivery</h5>
+        <p>
+          We hand over orders to courier services on weekdays. If your order is placed on Friday after 2:00 PM, we will ship it on Monday.
+        </p>
+        <p>
+          Delivery times and costs are calculated automatically during checkout and depend on the package weight and the exact delivery address. For example, SDEK delivers to Nizhny Novgorod in 1-2 days, while delivery to Vladivostok takes 10-13 days.
+        </p>
+      </li>
+      <li>
+        <h5 class="h5">How to Exchange or Return an Item</h5>
+        <p>
+          You can return an unsuitable item within 14 days of receiving your order. We only accept returns of unused items with tags, stickers, and packaging. Please be careful when trying on items.
+        </p>
+        <p>
+          Return at the Buyer's Request<br />
+          You can return an item at your own discretion, for example, if the size, color, or model does not suit you. In this case, you will cover the cost of return shipping.
+        </p>
+        <p>
+          Return Due to Seller's Fault<br />
+          Mistakes on the part of the store also happen. If you received the wrong item or the item is defective, we will cover the cost of return shipping via Russian Post. The refund will be processed within 5-7 business days after we receive your return package in Moscow.
+        </p>
+      </li>
+      <li>
+        <h5 class="h5">Return Procedure</h5>
+        <p>
+          If you find an item with a manufacturing defect in your order or the contents of the order differ from what was stated, follow these steps:
+        </p>
+        <ol>
+          <li>
+            Contact us via email at 
+            <a href="mailto:hi@hoverover.ru" target="_blank">hi@hoverover.ru</a>
+            <br />
+            For an objective assessment, attach photos of the item from multiple angles to help determine if the item has a manufacturing defect or differs from what was stated.
+          </li>
+          <li>
+            After our manager responds, print and fill out a return request form. The manager will send you a sample form.
+          </li>
+          <li>
+            Attach the return request to the item and print the shipping label we send you. Pack the request, label, and item in a bag or box.
+          </li>
+          <li>
+            Hand the package to the SDEK courier or take it to an SDEK pickup point. You have 14 calendar days to return the item.
+          </li>
+          <li>
+            The courier company will deliver the return to the warehouse within 1-5 business days across Russia.
+          </li>
+          <li>
+            After receiving the item, conducting an inspection, and approving the return, we will transfer the funds to your card or bank account within 7 business days. Refunds are processed exclusively using the payment method and details used to place the order.
+          </li>
+          <li>
+            Please note that the refund processing time depends on your bank and may take up to 30 banking days.
+          </li>
+          <li>
+            Exchanges or returns of defective items are free of charge.
+          </li>
+        </ol>
+      </li>
+    </ol>
+  }
 </article>
 
 <script></script>

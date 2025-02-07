@@ -24,15 +24,15 @@
                         </div>
                         <div class="product-desc">
                             <div class="product-desc__item">
-                                Размер:
+                                {{t("order.Размер")}}:
                                 {{cartItem.size}}
                             </div>
                             <div class="product-desc__item">
-                                Модель:
+                                {{t("order.Модель")}}:
                                 {{cartItem.sku}}
                             </div>
                             <div class="product-desc__item">
-                                Цвет:
+                                {{t("order.Цвет")}}:
                                 {{colorMap[cartItem.color]}}
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                         </span>
                     </div>
                     <div class="col col_4 col_align-center">
-                        <button type="button" class="button button_type-icon" aria-label="Удалить"
+                        <button type="button" class="button button_type-icon" :aria-label='t("order.Удалить")'
                             @click="removeItem(cartItem.id)">
                             <svg role="presentation" width="24" height="25" viewBox="0 0 24 25" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -68,7 +68,7 @@
                 </li>
             </ul>
             <div class="total">
-                Всего<br>
+                {{t("order.Всего")}}<br>
                 <span class="total-price">
                     <template v-if="isEnglishVersion && $usdExchangeRate > 0">
                        {{ priceWithDollar($totalPrice / $usdExchangeRate) }}
@@ -79,7 +79,7 @@
                 </span>
             </div>
         </template>
-        <p v-else>Корзина пуста</p>
+        <p v-else>{{t("order.Корзина пуста")}}</p>
 
         <form action="" @submit.prevent="buy()">
             <fieldset>
@@ -88,14 +88,14 @@
                         <rect x="1" y="1" width="62" height="62" rx="31" stroke="#C9C8D3" stroke-width="2"/>
                         <path d="M30.744 40.5V24.9L32.112 26.316H27.192V23.7H33.864V40.5H30.744Z" fill="#C9C8D3"/>
                     </svg>
-                    Получатель
+                    {{t("order.Получатель")}}
                 </legend>
-                <input type="phone" aria-label="Номер телефона" placeholder="Номер телефона*" v-model="formData.phone"
-                    class="input" required>
-                <input type="text" aria-label="Имя" placeholder="Имя" v-model="formData.name" class="input">
-                <input type="text" aria-label="Фамилия" placeholder="Фамилия" v-model="formData.surname" class="input">
-                <input type="email" aria-label="E-mail" placeholder="E-mail" v-model="formData.email" class="input">
-                <input type="text" aria-label="Почтовый адрес" placeholder="Почтовый адрес" v-model="formData.address"
+                <input type="phone" :aria-label='t("order.Номер телефона")' :placeholder='t("order.Номер телефона*")' v-model="formData.phone"
+                    class="input" required aria-required="true">
+                <input type="text" :aria-label='t("order.Имя")' :placeholder='t("order.Имя")' v-model="formData.name" class="input">
+                <input type="text" :aria-label='t("order.Фамилия")' :placeholder='t("order.Фамилия")' v-model="formData.surname" class="input">
+                <input type="email" :aria-label='t("order.E-mail")' :placeholder='t("order.E-mail")' v-model="formData.email" class="input">
+                <input type="text" :aria-label='t("order.Почтовый адрес")' :placeholder='t("order.Почтовый адрес")' v-model="formData.address"
                     class="input">
             </fieldset>
             <fieldset>
@@ -104,7 +104,7 @@
                         <rect x="1" y="1" width="62" height="62" rx="31" stroke="#C9C8D3" stroke-width="2"/>
                         <path d="M25.84 40.5V38.412L32.512 32.076C33.072 31.548 33.488 31.084 33.76 30.684C34.032 30.284 34.208 29.916 34.288 29.58C34.384 29.228 34.432 28.9 34.432 28.596C34.432 27.828 34.168 27.236 33.64 26.82C33.112 26.388 32.336 26.172 31.312 26.172C30.496 26.172 29.752 26.316 29.08 26.604C28.424 26.892 27.856 27.332 27.376 27.924L25.192 26.244C25.848 25.364 26.728 24.684 27.832 24.204C28.952 23.708 30.2 23.46 31.576 23.46C32.792 23.46 33.848 23.66 34.744 24.06C35.656 24.444 36.352 24.996 36.832 25.716C37.328 26.436 37.576 27.292 37.576 28.284C37.576 28.828 37.504 29.372 37.36 29.916C37.216 30.444 36.944 31.004 36.544 31.596C36.144 32.188 35.56 32.852 34.792 33.588L29.056 39.036L28.408 37.86H38.224V40.5H25.84Z" fill="#C9C8D3"/>
                     </svg>
-                    Тип доставки
+                    {{t("order.Тип доставки")}}
                 </legend>
                 <label class="inputCheckbox">
                     <input
@@ -116,7 +116,9 @@
                         value="Курьерская доставка до двери (Москва и Санкт Петербург)" 
                     />
                     <span class="inputCheckbox__radio-box"></span>
-                    <span class="inputCheckbox__label">Курьерская доставка до&nbsp;двери (Москва и&nbsp;Санкт&nbsp;Петербург)</span>
+                    <span class="inputCheckbox__label">
+                        {{t("order.Курьерская доставка до двери (Москва и Санкт Петербург)")}}
+                    </span>
                 </label>
                 <label class="inputCheckbox">
                     <input 
@@ -124,10 +126,12 @@
                         type="radio" 
                         id="radio-2" 
                         v-model="formData.delivery"
-                        value="СДЭК (доставка по России)" 
+                        value="СДЭК (доставка по России)"
                     />
                     <span class="inputCheckbox__radio-box"></span>
-                    <span class="inputCheckbox__label">СДЭК (доставка по&nbsp;России)</span>
+                    <span class="inputCheckbox__label">
+                        {{t("order.СДЭК (доставка по России)")}}
+                    </span>
                 </label>
                 <label class="inputCheckbox">
                     <input 
@@ -135,10 +139,12 @@
                         type="radio" 
                         id="radio-3" 
                         v-model="formData.delivery"
-                        value="БОКСБЕРРИ (Доставка по России)" 
+                        value="БОКСБЕРРИ (Доставка по России)"
                     />
                     <span class="inputCheckbox__radio-box"></span>
-                    <span class="inputCheckbox__label">БОКСБЕРРИ (Доставка по&nbsp;России)</span>
+                    <span class="inputCheckbox__label">
+                        {{t("order.БОКСБЕРРИ (Доставка по России)")}}
+                    </span>
                 </label>
             </fieldset>
             <div class="form__footer">
@@ -147,13 +153,13 @@
                     class="button button_size-large button_fullwidth"
                     :disabled="status === 'sending' || Object.values($cartItems).length === 0"
                 >
-                    Заказать
+                    {{t("order.Заказать")}}
                 </button>
                 <p v-if="status === 'error'" class="submit-message">
-                    ❗ При отправке заказа возникли проблемы. Попробуйте позже
+                    {{t("order.❗ При отправке заказа возникли проблемы. Попробуйте позже")}}
                 </p>
                 <p v-if="status === 'success'" class="submit-message">
-                    ✅ Заказ отправлен. Ожидайте звонка
+                    {{t("order.✅ Заказ отправлен. Ожидайте звонка")}}
                 </p>
             </div>
         </form>
@@ -168,10 +174,11 @@ import { apiUrl } from './../../utils/routes';
 import { priceWithRouble, priceWithDollar } from './../../utils/format';
 import { colorMap } from './../../utils/product-list';
 import { productOptMap } from "../../utils/product-list";
-import { getLangFromUrl, useTranslatedPath } from "../../i18n/utils";
+import { getLangFromUrl, useTranslatedPath, useTranslations } from "../../i18n/utils";
 
 const lang = getLangFromUrl(window.location);
 const translatePath = useTranslatedPath(lang);
+const t = useTranslations(lang);
 
 const isEnglishVersion = lang === 'en';
 
