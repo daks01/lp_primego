@@ -67,7 +67,7 @@ export default {
     "faq.Где сделаны кроссовки Primego?": "Where are Primego sneakers made?",
     "faq.Все наши кроссовки разработаны и произведены в России.": "All our sneakers are designed and manufactured in Russia.",
     // section Рarameters
-    "parameters.Параметры модели": "Model specifications",
+    "parameters.Параметры модели": "Sneakers specifications",
     "parameters.Цвет": "Color",
     "parameters.черный / белый": "black / white",
     "parameters.черный / желтый": "black / yellow",
