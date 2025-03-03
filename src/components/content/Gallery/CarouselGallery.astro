@@ -173,6 +173,10 @@ const hasImages =
       scroll-snap-type: x mandatory;
       position: relative;
       z-index: 3;
+      cursor: grab;
+      &:active {
+        cursor: grabbing !important;
+      }
     }
     &__list-item {
       list-style-type: none;
