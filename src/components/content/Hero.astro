@@ -198,6 +198,10 @@ const baseUrl = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL
     overflow: auto;
     scrollbar-width: none;
     z-index: 1;
+    cursor: grab;
+    &:active {
+      cursor: grabbing !important;
+    }
   }
   .view-3d__timeline {
     width: 300%;
