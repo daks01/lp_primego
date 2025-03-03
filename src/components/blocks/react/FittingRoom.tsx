@@ -18,7 +18,7 @@ const getShoeWidthFor = (sku: string) => {
         case 'EM24':
             return 'wide';
         case 'RL24':
-            return 'narrow';
+            return 'standard';
         default:
             return null;
     }
@@ -276,7 +276,7 @@ const getRecommendations = (
                 return { size };
             } else if (minWidth < width && widthShoe === 'wide') {
                 return { warning: 'narrower' };
-            } else if (width < maxWidth && widthShoe === 'narrow') {
+            } else if (width < maxWidth && widthShoe === 'standard') {
                 return { warning: 'wider' };
             }
         }
