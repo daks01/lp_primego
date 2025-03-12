@@ -39,10 +39,10 @@
 
 .measurements__preview__shoeSole {
     position: absolute;
-    bottom: calc(calc(var(--1mm) * -10));
-    left: calc(calc(var(--1mm) * -10));
-    width: calc(var(--1mm) * var(--width) + var(--1mm) * 10 * 2);
-    height: calc(var(--1mm) * var(--length) + var(--1mm) * 10 * 2);
+    bottom: calc(calc(var(--1mm) * -5));
+    left: calc(calc(var(--1mm) * -3));
+    width: calc(var(--1mm) * var(--width) + var(--1mm) * 3 * 2);
+    height: calc(var(--1mm) * var(--length) + var(--1mm) * 3 * 2);
     color: var(--color-product-primego);
     transition:
         height 0.2s,

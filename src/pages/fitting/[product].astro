@@ -68,7 +68,7 @@ const backTo =
       data-product-measurements
       hidden
     >
-      <MeasurementsIllustration showOn="desktop" client:only="react">
+      <MeasurementsIllustration sku={sku} showOn="desktop" client:only="react">
         <Warning slot="warning"
           >{
             t("fitting.Внимание! Выбранный размер не совпадает с рекомендованным")

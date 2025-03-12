@@ -117,7 +117,13 @@ export default function FittingRoom({ sku, howToMeasureButton, widthWarning, siz
                     ))}
                 </div>
             </fieldset>
-            <MeasurementsIllustration withoutSole showOn="mobile" className={styles.measurementsDemo} warning={sizeWarning} />
+            <MeasurementsIllustration
+                sku={sku}
+                withoutSole
+                showOn="mobile"
+                className={styles.measurementsDemo}
+                warning={sizeWarning}
+            />
             <fieldset className={cn([styles.productFieldset, styles.measureStep])}>
                 <legend className={styles.productFieldset__legend}>
                     {t("fitting.Определи свой размер")}</legend>
@@ -162,7 +168,7 @@ export default function FittingRoom({ sku, howToMeasureButton, widthWarning, siz
                     </>
                 ) : null}
             </fieldset>
-            <MeasurementsIllustration showOn="mobile" className={styles.measurementsDemo} warning={sizeWarning} />
+            <MeasurementsIllustration sku={sku} showOn="mobile" className={styles.measurementsDemo} warning={sizeWarning} />
             <fieldset className={styles.productFieldset} disabled={!store.length || !store.width || !measurementsApproval}>
                 <legend className={styles.productFieldset__legend}>
                     {t("fitting.Выбери размер")}
