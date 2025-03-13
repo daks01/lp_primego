@@ -390,13 +390,12 @@
     flex-flow: column nowrap;
     font-size: var(--lead-font-size);
     font-weight: 600;
+}
 
-    &:before {
-        content: 'Цена';
-        color: var(--color-gray);
-        font-size: var(--text-font-size);
-        font-weight: 400;
-    }
+.productPrice__title {
+    color: var(--color-gray);
+    font-size: var(--text-font-size);
+    font-weight: 400;
 }
 
 .buyProductButton {

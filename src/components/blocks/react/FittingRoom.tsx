@@ -6,17 +6,21 @@ import { $availableSizesByColor, $colors, $prices, $sizes, type Sizes } from '..
 import { colorMap, productOptMap } from '../../../utils/product-list';
 import { useStore } from '@nanostores/react';
 import { $selectedProduct, updateProduct } from '../../../stores/fittingProductStore';
-import { addCartItem } from '../../../stores/shopCartStore';
+import { addCartItem, usdExchangeRate } from '../../../stores/shopCartStore';
 import MeasurementsIllustration from '../../content/react/MeasurementsIllustration.tsx';
 import { useTranslations } from '../../../i18n/utils';
+import { priceWithRouble, priceWithDollar } from '../../../utils/format.js';
+
 
 const lang = document.documentElement.lang;
+const isEnglishVersion = lang === 'en';
 const t = useTranslations(lang);
 
 export default function FittingRoom({ sku, howToMeasureButton, sizeWarning }) {
     const { colors, sizes, available, lengths, widths, price } = useAvailableProperties(sku);
     const [measurementsApproval, setMeasurementsApproval] = useState<boolean>(false);
     const store = useStore($selectedProduct);
+    const usdExchangeValue = useStore(usdExchangeRate);
     useEffect(() => updateProduct({ sku }), []);
 
     const isAvailableSize = (size: string) => !store.color || available?.[store.color].has(size);
@@ -199,9 +203,16 @@ export default function FittingRoom({ sku, howToMeasureButton, sizeWarning }) {
                 ) : null}
             </fieldset>
             <div className={styles.productForm__footer}>
-                {/* <div className={styles.productPrice}>{price ? priceWithRouble(price) : '-'}</div> */}
+                <div className={styles.productPrice}>
+                    <div className={styles.productPrice__title}>
+                        {t("fitting.Цена")}
+                    </div>
+                    { (isEnglishVersion && usdExchangeValue > 1) && priceWithDollar(price / usdExchangeValue)}
+                    { (isEnglishVersion && usdExchangeValue === 1) && "$"}
+                    { !isEnglishVersion && priceWithRouble(price) }
+                </div>
                 <button type="submit" className={cn('button', styles.buyProductButton)} disabled={!isSubmitEnabled}>
-                    {t("fitting.Оформить заказ")}
+                    {t("fitting.Заказать")}
                 </button>
             </div>
         </form>

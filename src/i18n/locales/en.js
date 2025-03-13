@@ -5,7 +5,7 @@ export default {
     "common.Рояль": "Royal",
     "common.Империум": "Imperium",
     "common.Купить": "Buy",
-    "common.Виртуальная примерочная": "Virtual fitting room",
+    "common.Заказать": "Order",
     "common.Назад": "Back",
     "common.Закрыть": "Close",
     // header
@@ -127,7 +127,8 @@ export default {
     "fitting.Ширина по стельке <br /> в широкой части (см)": "Insole width at the widest part (cm)",
     "fitting.Выбранный размер": "Selected size",
     "fitting.Размер временно отсутствует": "Size temporarily unavailable",
-    "fitting.Оформить заказ": "Order",
+    "fitting.Цена": "Price",
+    "fitting.Заказать": "Order",
     // modal howToMeasure
     "howToMeasure.Как снять мерку?": "How to measure your foot?",
     "howToMeasure.Шаг 1.": "Step 1.",

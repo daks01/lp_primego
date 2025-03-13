@@ -42,8 +42,13 @@
                             {{cartItem.name}}
                         </div>
                         <span class="product-price">
-                            <template v-if="isEnglishVersion && $usdExchangeRate > 0">
-                                {{ priceWithDollar(cartItem.price / $usdExchangeRate) }}
+                            <template v-if="isEnglishVersion">
+                                <template v-if="$usdExchangeRate > 1">
+                                    {{ priceWithDollar(cartItem.price / $usdExchangeRate) }}
+                                </template>
+                                <template v-else>
+                                    $
+                                </template>
                             </template>
                             <template v-else>
                                 {{ priceWithRouble(cartItem.price) }}
@@ -70,8 +75,13 @@
             <div class="total">
                 {{t("order.Всего")}}<br>
                 <span class="total-price">
-                    <template v-if="isEnglishVersion && $usdExchangeRate > 0">
-                       {{ priceWithDollar($totalPrice / $usdExchangeRate) }}
+                    <template v-if="isEnglishVersion">
+                        <template v-if="$usdExchangeRate > 1">
+                            {{ priceWithDollar($totalPrice / $usdExchangeRate) }}
+                        </template>
+                        <template v-else>
+                            $
+                        </template>
                     </template>
                     <template v-else>
                         {{ priceWithRouble($totalPrice) }}

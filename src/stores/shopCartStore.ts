@@ -36,7 +36,7 @@ daylyCurrencyList.subscribe((data) => {
     usdExchangeRate.set(parseFloat(usd.replace(/,/, '.')));
 });
 
-export const usdExchangeRate = atom(0);
+export const usdExchangeRate = atom(1);
 
 const storedCartItems = JSON.parse(localStorage.getItem('shoppingCart')) || {};
 
