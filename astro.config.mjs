@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import vue from "@astrojs/vue";
 import react from '@astrojs/react';
+import global from 'astro-global';
 
 const siteMapUrlMap = {
   production: 'https://primego.online',
@@ -28,6 +29,7 @@ export default defineConfig({
     }),
     vue({ include: ['**/CustomizatorApp.vue', '**/LoginForm.vue', '**/ShopCart.vue'] }),
     react({ include: ['**/react/**'] }),
+    global(),
   ],
   i18n: {
     defaultLocale: 'ru',

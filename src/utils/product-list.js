@@ -1,12 +1,19 @@
+import Astro from "astro:global"
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const path = typeof window !== 'undefined' ? window.location : Astro.url.pathname;
+const lang = getLangFromUrl(path);
+const t = useTranslations(lang);
+
 const defaultOptions = {
-    season: 'демисезон',
-    typeOfClasp: 'шнуровка',
-    upperComposition: '100%&nbsp;кожа',
-    liningComposition: '100%&nbsp;хлопок',
-    soleComposition: 'Vibram (ЭВА)',
-    soleHeight: '2.5&thinsp;см',
-    fullnessOfShoes: 'F&thinsp;(6)',
-    madeIn: 'Россия',
+    season: t("parameters.демисезон"),
+    typeOfClasp: t("parameters.шнуровка"),
+    upperComposition: t("parameters.100% кожа"),
+    liningComposition: t("parameters.100% хлопок"),
+    soleComposition: t("parameters.Vibram (ЭВА)"),
+    soleHeight: t("parameters.2.5 см"),
+    fullnessOfShoes: t("parameters.F (6)"),
+    madeIn: t("parameters.Россия"),
 }
 
 export const productOptMap = {
@@ -15,8 +22,8 @@ export const productOptMap = {
         name: 'Рояль',
         altName: 'royal',
         sku: 'RL24',
-        color: 'черный / белый',
-        soleComposition: 'ЭВА',
+        color: t("parameters.черный / белый"),
+        soleComposition: t("parameters.ЭВА"),
         images: {
             'dark side': import('/src/assets/img/shop/RL24/darkside/01.jpg'),
             'light side': import('/src/assets/img/shop/RL24/lightside/01.jpg'),
@@ -29,7 +36,7 @@ export const productOptMap = {
         name: 'Империум',
         altName: 'empire',
         sku: 'EM24',
-        color: 'черный / желтый',
+        color: t("parameters.черный / желтый"),
         images: {
             black: import('/src/assets/img/shop/EM24/black/01.jpg'),
             classic: import('/src/assets/img/shop/EM24/classic/01.jpg'),
@@ -40,13 +47,13 @@ export const productOptMap = {
 };
 
 export const colorMap = {
-    'dark side': 'дарк сайд',
-    'light side': 'лайт сайд',
-    white: 'тотал вайт',
-    black: 'тотал блэк',
-    gold: 'аурум',
-    classic: 'классик',
-    black: 'тотал блэк',
-    choco: 'шоко',
-    rif: 'риф',
+    'dark side': t("order.дарк сайд"),
+    'light side': t("order.лайт сайд"),
+    white: t("order.тотал вайт"),
+    black: t("order.тотал блэк"),
+    gold: t("order.аурум"),
+    classic: t("order.классик"),
+    black: t("order.тотал блэк"),
+    choco: t("order.шоко"),
+    rif: t("order.риф"),
 };
