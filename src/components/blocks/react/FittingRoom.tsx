@@ -283,15 +283,18 @@ const getRecommendations = (
 ): { size?: string; warning?: 'narrower' | 'wider' } | undefined => {
     if (!width || !length) return undefined;
     const { minLength, maxLength, minWidth, maxWidth } = getSuitableInsoleSizes({ width, length });
-    for (const [size, { width, length }] of Object.entries(sizes).reverse()) {
-        if (minLength <= length && length <= maxLength) {
-            if (minWidth <= width && width <= maxWidth) {
-                return { size };
-            } else if (minWidth < width && widthShoe === 'wide') {
+    for (const [size, { width, length }] of Object.entries(sizes)) {
+        const fitByLength = minLength <= length && length <= maxLength;
+        const fitByWidth = minWidth <= width && width <= maxWidth;
+        if (fitByLength && !fitByWidth) {
+            if (minWidth < width && widthShoe === 'wide') {
                 return { warning: 'narrower' };
             } else if (width < maxWidth && widthShoe === 'standard') {
                 return { warning: 'wider' };
             }
+        }
+        if (minLength <= length && minWidth <= width) {
+            return { size };
         }
     }
 };
