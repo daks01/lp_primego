@@ -128,6 +128,10 @@
             box-shadow: 0 0 0 var(--1px) var(--color-product-primego);
         }
     }
+
+    &__warning {
+        margin-top: var(--15px);
+    }
 }
 .measurementsDemo {
     margin: 0 calc(var(--1px) * -20);
@@ -264,9 +268,13 @@
         }
     }
 
+    input + &__pic {
+        box-shadow: 0 0 0 var(--2px) var(--text-light-grey);
+    }
+
     input:hover + &__pic,
     input:focus + &__pic {
-        box-shadow: 0 0 0 var(--2px) var(--text-light-grey);
+        box-shadow: 0 0 0 var(--2px) var(--color-product-primego);
     }
 
     input:checked + &__pic {

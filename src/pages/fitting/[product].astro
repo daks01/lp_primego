@@ -68,7 +68,7 @@ const backTo =
       data-product-measurements
       hidden
     >
-      <MeasurementsIllustration showOn="desktop" client:only="react">
+      <MeasurementsIllustration sku={sku} showOn="desktop" client:only="react">
         <Warning slot="warning"
           >{
             t("fitting.Внимание! Выбранный размер не совпадает с рекомендованным")
@@ -88,6 +88,15 @@ const backTo =
         }
       </Warning>
       <FittingRoom sku={sku} client:only="react">
+        <Warning slot="widthWarning"
+          >{
+            t(
+                sku === 'EM24'
+                    ? 'fitting.Данная модель предназначена для широкой стопы'
+                    : 'fitting.Данная модель предназначена для стандартной стопы',
+            )
+          }</Warning
+          >
         <Warning slot="sizeWarning"
           >{
             t("fitting.Внимание! Выбранный размер не совпадает с рекомендованным")

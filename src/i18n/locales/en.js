@@ -103,7 +103,7 @@ export default {
     "contactUs.Отправить": "Send",
     "contactUs.❗ При отправке возникли проблемы.<br> Попробуйте позже": "❗ Error",
     "contactUs.✅ Отправлено.": "✅ Success",
-    // fitting page 
+    // fitting page
     "fitting.Примерочная": "Fitting room",
     "fitting.Предыдущая обувь": "Prev",
     "fitting.Следующая обувь": "Next",
@@ -118,6 +118,8 @@ export default {
     "fitting.Ширина по стельке в широкой части (см)": "Insole width at the widest part (cm)",
     "fitting.Внимание! В каждой моделе собственный размерный ряд. Используйте калькулятор ниже для подбора размера.": " Notice! Each model has its own size range. Use the calculator below to select the size.",
     "fitting.Ваш рекомендованный размер": "Your recommended size",
+    "fitting.Данная модель предназначена для широкой стопы": "This model is designed for a wide foot",
+    "fitting.Данная модель предназначена для стандартной стопы": "This model is designed for a standard foot",
     "fitting.Внимание! Выбранный размер не совпадает с рекомендованным": " Warning! The selected size does not match the recommended size",
     "fitting.Внимание! Выбранный размер не совпадает с рекомендованным, продолжить?": " Warning! The selected size does not match the recommended size",
     "fitting.Выбрать длину": "Choose length",

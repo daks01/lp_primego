@@ -22,7 +22,18 @@ export const $selectedOrOnlyRecommendedSize = computed([$selectedProduct, $sizes
     const size = product.size ?? product.recommended;
     if (!sizes || !product.sku || !size) return;
     const sizeWithParameters = sizes[product.sku][size];
-    const isLengthFit = product.length && product.length <= sizeWithParameters.length;
-    const isWidthFit = product.width && product.width <= sizeWithParameters.width;
-    return { size: sizeWithParameters, isFit: isLengthFit && isWidthFit };
+    if (!product.length || !product.width) return { size: sizeWithParameters, isFit: false };
+
+    const { minLength, maxLength, minWidth, maxWidth } = getSuitableInsoleSizes(product as { width: number; length: number });
+    const fitByLength = minLength <= sizeWithParameters.length && sizeWithParameters.length <= maxLength;
+    const fitByWidth = minWidth <= sizeWithParameters.width && sizeWithParameters.width <= maxWidth;
+    return { size: sizeWithParameters, isFit: fitByLength && fitByWidth };
 });
+
+export const getSuitableInsoleSizes = (foot: { width: number; length: number }) => {
+    const minLength = foot.length + 3;
+    const maxLength = foot.length + 12;
+    const minWidth = foot.width - 2;
+    const maxWidth = foot.width + 5;
+    return { minLength, maxLength, minWidth, maxWidth };
+};
