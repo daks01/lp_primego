@@ -93,6 +93,7 @@ export default function FittingRoom({ sku, howToMeasureButton, widthWarning, siz
         });
         window['dialog-shopcart']?.showModal();
     };
+    const isStep2Completed = store.length && store.width && measurementsApproval;
     return (
         <form className={cn(styles.productForm, styles[productOptMap[sku].altName])} onSubmit={onFormSubmit}>
             <fieldset className={styles.productFieldset}>
@@ -169,7 +170,7 @@ export default function FittingRoom({ sku, howToMeasureButton, widthWarning, siz
                 ) : null}
             </fieldset>
             <MeasurementsIllustration sku={sku} showOn="mobile" className={styles.measurementsDemo} warning={sizeWarning} />
-            <fieldset className={styles.productFieldset} disabled={!store.length || !store.width || !measurementsApproval}>
+            <fieldset className={styles.productFieldset} disabled={!isStep2Completed}>
                 <legend className={styles.productFieldset__legend}>
                     {t("fitting.Выбери размер")}
                 </legend>
@@ -229,6 +230,41 @@ export default function FittingRoom({ sku, howToMeasureButton, widthWarning, siz
                     </label>
                 ) : null}
             </fieldset>
+            {!isSubmitEnabled ? null : (
+                <div className={styles.productFieldset}>
+                    <span className={styles.productFieldset__description}>{t('fitting.Ваша стопа')}</span>
+                    <div className={styles.measuring}>
+                        <span className={styles.measuring__label}>
+                            {t('fitting.Длина (см)')}:
+                            <span className={styles.measuring__value}>{store.length ? store.length / 10 : undefined}</span>
+                        </span>
+                        <span className={styles.measuring__label}>
+                            <span dangerouslySetInnerHTML={{ __html: t('fitting.Ширина <br /> в широкой части (см)') }}></span>:
+                            <span className={styles.measuring__value}>
+                                <span className={styles.measuring__value}>{store.width ? store.width / 10 : undefined}</span>
+                            </span>
+                        </span>
+                    </div>
+                    <span className={styles.productFieldset__description}>{t('fitting.Выбранная модель (размеры по стельке)')}</span>
+                    <div className={styles.measuring}>
+                        <span className={styles.measuring__label}>
+                            {t('fitting.Длина (см)')}:
+                            <span className={styles.measuring__value}>
+                                {store.size && sizes ? sizes[store.size].length / 10 : '-'}
+                            </span>
+                        </span>
+                        <span className={styles.measuring__label}>
+                            <span
+                                dangerouslySetInnerHTML={{ __html: t('fitting.Ширина <br /> в широкой части (см)') }}
+                            />
+                            :
+                            <span className={styles.measuring__value}>
+                                {store.size && sizes ? sizes[store.size].width / 10 : '-'}
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            )}
             <div className={styles.productForm__footer}>
                 <div className={styles.productPrice}>
                     <div className={styles.productPrice__title}>
