@@ -271,7 +271,7 @@ function getSheetUrl(postData) {
 }
 
 function getTimestamp() {
-  return Utilities.formatDate(new Date(), "IST", "yyyy-MM-dd HH:mm");
+  return Utilities.formatDate(new Date(), "GMT+03", "yyyy-MM-dd HH:mm");
 }
 
 function getAdminEmail() {
