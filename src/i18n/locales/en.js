@@ -160,4 +160,6 @@ export default {
     "order.СДЭК (доставка по России)": "SDEK (delivery across Russia)",
     "order.БОКСБЕРРИ (Доставка по России)": "BOXBERRI (Delivery across Russia)",
     "order.Заказать": "Order",
+    "order.❗ При отправке заказа возникли проблемы. Попробуйте позже": "❗ Error",
+    "order.✅ Заказ отправлен. Ожидайте звонка": "✅ Success. Wait for a call",
 };
