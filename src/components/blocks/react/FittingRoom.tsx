@@ -316,21 +316,22 @@ const getRecommendations = (
     sizes: Sizes,
     widthShoe: ReturnType<typeof getShoeWidthFor>,
     { width, length }: { width?: number; length?: number },
-): { size?: string; warning?: 'narrower' | 'wider' } | undefined => {
+): { size: string; warning?: 'narrower' | 'wider' } | undefined => {
     if (!width || !length) return undefined;
     const { minLength, maxLength, minWidth, maxWidth } = getSuitableInsoleSizes({ width, length });
+    let warning: 'narrower' | 'wider' | undefined = undefined;
     for (const [size, { width, length }] of Object.entries(sizes)) {
         const fitByLength = minLength <= length && length <= maxLength;
         const fitByWidth = minWidth <= width && width <= maxWidth;
         if (fitByLength && !fitByWidth) {
             if (minWidth < width && widthShoe === 'wide') {
-                return { warning: 'narrower' };
+                warning = 'narrower';
             } else if (width < maxWidth && widthShoe === 'standard') {
-                return { warning: 'wider' };
+                warning = 'wider';
             }
         }
         if (minLength <= length && minWidth <= width) {
-            return { size };
+            return { size, warning };
         }
     }
 };
