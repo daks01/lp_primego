@@ -24,10 +24,8 @@ export const $selectedOrOnlyRecommendedSize = computed([$selectedProduct, $sizes
     const sizeWithParameters = sizes[product.sku][size];
     if (!product.length || !product.width) return { size: sizeWithParameters, isFit: false };
 
-    const { minLength, maxLength, minWidth, maxWidth } = getSuitableInsoleSizes(product as { width: number; length: number });
-    const fitByLength = minLength <= sizeWithParameters.length && sizeWithParameters.length <= maxLength;
-    const fitByWidth = minWidth <= sizeWithParameters.width && sizeWithParameters.width <= maxWidth;
-    return { size: sizeWithParameters, isFit: fitByLength && fitByWidth };
+    const isFit = isSuitableSize(sizeWithParameters, product as { width: number; length: number });
+    return { size: sizeWithParameters, isFit };
 });
 
 export const getSuitableInsoleSizes = (foot: { width: number; length: number }) => {
@@ -36,4 +34,11 @@ export const getSuitableInsoleSizes = (foot: { width: number; length: number }) 
     const minWidth = foot.width - 2;
     const maxWidth = foot.width + 5;
     return { minLength, maxLength, minWidth, maxWidth };
+};
+
+export const isSuitableSize = (size: { width: number; length: number }, foot: { width: number; length: number }) => {
+    const { minLength, maxLength, minWidth, maxWidth } = getSuitableInsoleSizes(foot);
+    const fitByLength = minLength <= size.length && size.length <= maxLength;
+    const fitByWidth = minWidth <= size.width && size.width <= maxWidth;
+    return fitByLength && fitByWidth;
 };
