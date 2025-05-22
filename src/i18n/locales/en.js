@@ -131,6 +131,8 @@ export default {
     "fitting.Размер временно отсутствует": "Size temporarily unavailable",
     "fitting.Цена": "Price",
     "fitting.Заказать": "Order",
+    "fitting.Ваша стопа": "Your foot",
+    "fitting.Выбранная модель (размеры по стельке)": "Selected model (the insole dimensions)",
     // modal howToMeasure
     "howToMeasure.Как снять мерку?": "How to measure your foot?",
     "howToMeasure.Шаг 1.": "Step 1.",
