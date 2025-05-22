@@ -79,9 +79,6 @@ export default function FittingRoom({ sku, howToMeasureButton, widthWarning, siz
     useEffect(() => {
         if (colors && !store.color) onColorSelect(colors[0]);
     }, [colors]);
-    const isSubmitEnabled =
-        (store.recommended && store.recommended === store.size) ||
-        (store.recommended && store.recommended !== store.size && store.selectedSizeApproval);
     const onFormSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
         const { color, size } = store;
@@ -94,6 +91,9 @@ export default function FittingRoom({ sku, howToMeasureButton, widthWarning, siz
         window['dialog-shopcart']?.showModal();
     };
     const isStep2Completed = store.length && store.width && measurementsApproval;
+    const isStep3Completed =
+        (store.recommended && store.recommended === store.size) ||
+        (store.recommended && store.recommended !== store.size && store.selectedSizeApproval);
     return (
         <form className={cn(styles.productForm, styles[productOptMap[sku].altName])} onSubmit={onFormSubmit}>
             <fieldset className={styles.productFieldset}>
@@ -230,7 +230,7 @@ export default function FittingRoom({ sku, howToMeasureButton, widthWarning, siz
                     </label>
                 ) : null}
             </fieldset>
-            {!isSubmitEnabled ? null : (
+            {!isStep3Completed ? null : (
                 <div className={styles.productFieldset}>
                     <span className={styles.productFieldset__description}>{t('fitting.Ваша стопа')}</span>
                     <div className={styles.measuring}>
@@ -274,7 +274,7 @@ export default function FittingRoom({ sku, howToMeasureButton, widthWarning, siz
                     { (isEnglishVersion && usdExchangeValue === 1) && "$"}
                     { !isEnglishVersion && priceWithRouble(price) }
                 </div>
-                <button type="submit" className={cn('button', styles.buyProductButton)} disabled={!isSubmitEnabled}>
+                <button type="submit" className={cn('button', styles.buyProductButton)} disabled={!isStep3Completed}>
                     {t("fitting.Заказать")}
                 </button>
             </div>
