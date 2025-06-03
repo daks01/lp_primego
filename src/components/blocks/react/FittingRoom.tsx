@@ -79,9 +79,6 @@ export default function FittingRoom({ sku, howToMeasureButton, widthWarning, siz
     useEffect(() => {
         if (colors && !store.color) onColorSelect(colors[0]);
     }, [colors]);
-    const isSubmitEnabled =
-        (store.recommended && store.recommended === store.size) ||
-        (store.recommended && store.recommended !== store.size && store.selectedSizeApproval);
     const onFormSubmit: React.FormEventHandler<HTMLFormElement> = (e) => {
         e.preventDefault();
         const { color, size } = store;
@@ -93,6 +90,10 @@ export default function FittingRoom({ sku, howToMeasureButton, widthWarning, siz
         });
         window['dialog-shopcart']?.showModal();
     };
+    const isStep2Completed = store.length && store.width && measurementsApproval;
+    const isStep3Completed =
+        (store.recommended && store.recommended === store.size) ||
+        (store.recommended && store.recommended !== store.size && store.selectedSizeApproval);
     return (
         <form className={cn(styles.productForm, styles[productOptMap[sku].altName])} onSubmit={onFormSubmit}>
             <fieldset className={styles.productFieldset}>
@@ -169,7 +170,7 @@ export default function FittingRoom({ sku, howToMeasureButton, widthWarning, siz
                 ) : null}
             </fieldset>
             <MeasurementsIllustration sku={sku} showOn="mobile" className={styles.measurementsDemo} warning={sizeWarning} />
-            <fieldset className={styles.productFieldset} disabled={!store.length || !store.width || !measurementsApproval}>
+            <fieldset className={styles.productFieldset} disabled={!isStep2Completed}>
                 <legend className={styles.productFieldset__legend}>
                     {t("fitting.Выбери размер")}
                 </legend>
@@ -229,6 +230,41 @@ export default function FittingRoom({ sku, howToMeasureButton, widthWarning, siz
                     </label>
                 ) : null}
             </fieldset>
+            {!isStep3Completed ? null : (
+                <div className={styles.productFieldset}>
+                    <span className={styles.productFieldset__description}>{t('fitting.Ваша стопа')}</span>
+                    <div className={styles.measuring}>
+                        <span className={styles.measuring__label}>
+                            {t('fitting.Длина (см)')}:
+                            <span className={styles.measuring__value}>{store.length ? store.length / 10 : undefined}</span>
+                        </span>
+                        <span className={styles.measuring__label}>
+                            <span dangerouslySetInnerHTML={{ __html: t('fitting.Ширина <br /> в широкой части (см)') }}></span>:
+                            <span className={styles.measuring__value}>
+                                <span className={styles.measuring__value}>{store.width ? store.width / 10 : undefined}</span>
+                            </span>
+                        </span>
+                    </div>
+                    <span className={styles.productFieldset__description}>{t('fitting.Выбранная модель (размеры по стельке)')}</span>
+                    <div className={styles.measuring}>
+                        <span className={styles.measuring__label}>
+                            {t('fitting.Длина (см)')}:
+                            <span className={styles.measuring__value}>
+                                {store.size && sizes ? sizes[store.size].length / 10 : '-'}
+                            </span>
+                        </span>
+                        <span className={styles.measuring__label}>
+                            <span
+                                dangerouslySetInnerHTML={{ __html: t('fitting.Ширина <br /> в широкой части (см)') }}
+                            />
+                            :
+                            <span className={styles.measuring__value}>
+                                {store.size && sizes ? sizes[store.size].width / 10 : '-'}
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            )}
             <div className={styles.productForm__footer}>
                 <div className={styles.productPrice}>
                     <div className={styles.productPrice__title}>
@@ -238,7 +274,7 @@ export default function FittingRoom({ sku, howToMeasureButton, widthWarning, siz
                     { (isEnglishVersion && usdExchangeValue === 1) && "$"}
                     { !isEnglishVersion && priceWithRouble(price) }
                 </div>
-                <button type="submit" className={cn('button', styles.buyProductButton)} disabled={!isSubmitEnabled}>
+                <button type="submit" className={cn('button', styles.buyProductButton)} disabled={!isStep3Completed}>
                     {t("fitting.Заказать")}
                 </button>
             </div>
@@ -280,21 +316,22 @@ const getRecommendations = (
     sizes: Sizes,
     widthShoe: ReturnType<typeof getShoeWidthFor>,
     { width, length }: { width?: number; length?: number },
-): { size?: string; warning?: 'narrower' | 'wider' } | undefined => {
+): { size: string; warning?: 'narrower' | 'wider' } | undefined => {
     if (!width || !length) return undefined;
     const { minLength, maxLength, minWidth, maxWidth } = getSuitableInsoleSizes({ width, length });
+    let warning: 'narrower' | 'wider' | undefined = undefined;
     for (const [size, { width, length }] of Object.entries(sizes)) {
         const fitByLength = minLength <= length && length <= maxLength;
         const fitByWidth = minWidth <= width && width <= maxWidth;
         if (fitByLength && !fitByWidth) {
             if (minWidth < width && widthShoe === 'wide') {
-                return { warning: 'narrower' };
+                warning = 'narrower';
             } else if (width < maxWidth && widthShoe === 'standard') {
-                return { warning: 'wider' };
+                warning = 'wider';
             }
         }
         if (minLength <= length && minWidth <= width) {
-            return { size };
+            return { size, warning };
         }
     }
 };
